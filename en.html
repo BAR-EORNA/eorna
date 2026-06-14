@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F4JBQ8GK16"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-F4JBQ8GK16');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BAR EORNA | Shinjuku 3-chome British Bar</title>
@@ -212,6 +220,14 @@
       letter-spacing: 0.15em;
     }
     .tel-btn span { display: block; font-size: 0.65rem; opacity: 0.7; margin-top: 0.3rem; }
+    .line-btn {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.5rem; margin-top: 0.8rem;
+      padding: 1rem; background: #06C755;
+      color: #fff; text-align: center;
+      text-decoration: none; font-size: 0.9rem;
+      letter-spacing: 0.1em;
+    }
     .map-wrap { width: 100%; height: 280px; border: 1px solid rgba(201,168,76,0.2); overflow: hidden; }
     .map-wrap iframe { width: 100%; height: 100%; border: none; }
 
@@ -245,6 +261,7 @@
       transition: opacity 0.2s;
     }
     .fixed-btn-tel { background: var(--red); color: #fff; }
+    .fixed-btn-line { background: #06C755; color: #fff; }
     .fixed-btn-map { background: #fff; color: #333; }
 
     /* RESPONSIVE */
@@ -343,6 +360,9 @@
         03-6820-7456
         <span>Tap to call</span>
       </a>
+      <a class="line-btn" href="https://line.me/R/ti/p/@186cgsog" target="_blank">
+        💬 Reserve via LINE
+      </a>
     </div>
     <div class="info-block">
       <h3>ACCESS</h3>
@@ -377,7 +397,8 @@
 
 <!-- FIXED BOTTOM -->
 <div class="fixed-bottom">
-  <a class="fixed-btn fixed-btn-tel" href="tel:0368207456">📞 Call Now</a>
+  <a class="fixed-btn fixed-btn-tel" href="tel:0368207456">📞 Call</a>
+  <a class="fixed-btn fixed-btn-line" href="https://line.me/R/ti/p/@186cgsog" target="_blank">💬 LINE</a>
   <a class="fixed-btn fixed-btn-map" href="https://maps.app.goo.gl/2kQ74VHM5rHyLmtz6" target="_blank">📍 Map</a>
 </div>
 
