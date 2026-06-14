@@ -3,18 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BAR EORNA | 新宿</title>
+  <title>BAR EORNA | 新宿三丁目のバー・ウイスキー・ビール</title>
+  <meta name="description" content="新宿三丁目の地下BAR。チャージなし、ドリンク¥900〜。ウイスキー・ビール豊富。18:00〜03:00年中無休。今井ビルB1。">
+  <meta name="keywords" content="BAR EORNA,新宿バー,新宿三丁目バー,ウイスキー,ビール,チャージなし,深夜バー">
+  <meta property="og:title" content="BAR EORNA | 新宿三丁目">
+  <meta property="og:description" content="チャージなし・ドリンク¥900〜。新宿三丁目の地下BAR。18:00〜03:00年中無休。">
+  <meta property="og:type" content="website">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --red:    #9B1C1C;
-      --gold:   #C9A84C;
-      --dark:   #0D0A08;
-      --smoke:  #1A1410;
-      --cream:  #E8DEC8;
-      --muted:  #7A6A52;
+      --red:   #9B1C1C;
+      --gold:  #C9A84C;
+      --dark:  #0D0A08;
+      --smoke: #1A1410;
+      --cream: #E8DEC8;
+      --muted: #7A6A52;
     }
 
     html { scroll-behavior: smooth; }
@@ -65,7 +70,13 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      background: #ffffff;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(13,10,8,0.6) 0%, rgba(13,10,8,0.3) 40%, rgba(13,10,8,0.8) 100%),
+        url('IMG_1103.jpeg') center/cover no-repeat;
     }
     .hero-content {
       position: relative;
@@ -73,12 +84,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
+      gap: 1.2rem;
     }
     .hero-logo {
-      width: 240px;
-      height: 240px;
+      width: 140px;
+      height: 140px;
       object-fit: contain;
+      filter: drop-shadow(0 0 20px rgba(0,0,0,0.8));
     }
     .hero-rule {
       width: 60px;
@@ -91,15 +103,44 @@
       font-size: clamp(2.8rem, 7vw, 5rem);
       font-weight: 300;
       letter-spacing: 0.45em;
-      color: var(--dark);
+      color: var(--cream);
       line-height: 1;
     }
     .hero-sub {
       font-size: 0.72rem;
       letter-spacing: 0.3em;
-      color: var(--red);
+      color: var(--gold);
       opacity: 0.85;
     }
+    .hero-cta {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      background: var(--red);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      transition: background 0.3s;
+    }
+    .btn-primary:hover { background: #7a1515; }
+    .btn-secondary {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      transition: all 0.3s;
+    }
+    .btn-secondary:hover { background: var(--gold); color: var(--dark); }
     .hero-scroll {
       position: absolute;
       bottom: 2rem;
@@ -112,7 +153,7 @@
       opacity: 0.4;
       font-size: 0.6rem;
       letter-spacing: 0.25em;
-      color: var(--dark);
+      color: var(--cream);
       animation: pulse 2.5s ease-in-out infinite;
     }
     .hero-scroll::after {
@@ -120,7 +161,7 @@
       display: block;
       width: 1px;
       height: 36px;
-      background: var(--dark);
+      background: var(--cream);
     }
     @keyframes pulse { 0%,100%{opacity:0.2} 50%{opacity:0.6} }
 
@@ -142,25 +183,11 @@
       color: var(--cream);
       margin-bottom: 1.5rem;
     }
-    .divider {
-      width: 40px;
-      height: 1px;
-      background: var(--red);
-      margin: 2rem 0;
-    }
+    .divider { width: 40px; height: 1px; background: var(--red); margin: 2rem 0; }
 
     /* CONCEPT */
-    .concept {
-      max-width: 680px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .concept p {
-      font-size: 0.9rem;
-      line-height: 2.2;
-      color: var(--cream);
-      opacity: 0.8;
-    }
+    .concept { max-width: 680px; margin: 0 auto; text-align: center; }
+    .concept p { font-size: 0.9rem; line-height: 2.2; color: var(--cream); opacity: 0.8; }
     .concept .divider { margin: 2rem auto; }
 
     /* GALLERY */
@@ -173,10 +200,8 @@
       margin-top: 3rem;
     }
     .gallery-grid img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
       filter: brightness(0.88) sepia(0.1);
       transition: filter 0.4s;
     }
@@ -187,54 +212,48 @@
     /* INFO */
     .info { background: var(--dark); }
     .info-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
+      max-width: 900px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start;
     }
     .info-block h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 300;
-      letter-spacing: 0.15em;
-      color: var(--gold);
+      font-size: 1.5rem; font-weight: 300;
+      letter-spacing: 0.15em; color: var(--gold);
       margin-bottom: 2rem;
     }
     .info-row {
-      display: flex;
-      gap: 1.5rem;
+      display: flex; gap: 1.5rem;
       margin-bottom: 1.2rem;
-      font-size: 0.82rem;
-      line-height: 1.8;
+      font-size: 0.82rem; line-height: 1.8;
     }
-    .info-row dt {
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      min-width: 80px;
-      flex-shrink: 0;
-    }
+    .info-row dt { color: var(--muted); letter-spacing: 0.1em; min-width: 80px; flex-shrink: 0; }
     .info-row dd { color: var(--cream); opacity: 0.85; }
-    .info-row dd a {
-      color: var(--cream);
-      opacity: 0.85;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+    .info-row dd a { color: var(--cream); opacity: 0.85; text-decoration: none; transition: color 0.3s; }
     .info-row dd a:hover { color: var(--gold); }
 
+    /* 電話CTAボタン */
+    .tel-btn {
+      display: block;
+      margin-top: 2rem;
+      padding: 1rem;
+      background: var(--red);
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      transition: background 0.3s;
+    }
+    .tel-btn:hover { background: #7a1515; }
+    .tel-btn span { display: block; font-size: 0.65rem; opacity: 0.7; margin-top: 0.3rem; letter-spacing: 0.2em; }
+
     .map-wrap {
-      width: 100%;
-      height: 280px;
+      width: 100%; height: 300px;
       border: 1px solid rgba(201,168,76,0.2);
       overflow: hidden;
     }
-    .map-wrap iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
+    .map-wrap iframe { width: 100%; height: 100%; border: none; }
 
     /* FOOTER */
     footer {
@@ -245,17 +264,10 @@
     }
     footer .f-logo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      letter-spacing: 0.4em;
-      color: var(--gold);
-      opacity: 0.7;
-      margin-bottom: 1rem;
+      font-size: 1.3rem; letter-spacing: 0.4em;
+      color: var(--gold); opacity: 0.7; margin-bottom: 1rem;
     }
-    footer p {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      color: var(--muted);
-    }
+    footer p { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted); }
 
     /* RESPONSIVE */
     @media (max-width: 700px) {
@@ -282,11 +294,16 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg"></div>
   <div class="hero-content">
     <img class="hero-logo" src="BAR%20EORNA.png" alt="EORNA logo">
     <div class="hero-rule"></div>
     <h1 class="hero-name">BAR EORNA</h1>
-    <p class="hero-sub">SHINJUKU · NO CHARGE</p>
+    <p class="hero-sub">SHINJUKU · NO CHARGE · ¥900〜</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="tel:0368207456">📞 今すぐ電話</a>
+      <a class="btn-secondary" href="#info">アクセスを見る</a>
+    </div>
   </div>
   <div class="hero-scroll">SCROLL</div>
 </section>
@@ -322,10 +339,7 @@
     <div class="info-block">
       <h3>INFORMATION</h3>
       <dl>
-        <div class="info-row">
-          <dt>店名</dt>
-          <dd>BAR EORNA</dd>
-        </div>
+        <div class="info-row"><dt>店名</dt><dd>BAR EORNA</dd></div>
         <div class="info-row">
           <dt>住所</dt>
           <dd>〒160-0022<br>東京都新宿区新宿３丁目１１−１<br>今井ビル B1</dd>
@@ -334,31 +348,22 @@
           <dt>営業時間</dt>
           <dd>18:00 〜 03:00<br><span style="opacity:0.5;font-size:0.75em;">年中無休</span></dd>
         </div>
-        <div class="info-row">
-          <dt>TEL</dt>
-          <dd><a href="tel:0368207456">03-6820-7456</a></dd>
-        </div>
-        <div class="info-row">
-          <dt>MAIL</dt>
-          <dd><a href="mailto:nagata@eorna.info">nagata@eorna.info</a></dd>
-        </div>
-        <div class="info-row">
-          <dt>チャージ</dt>
-          <dd>なし</dd>
-        </div>
-        <div class="info-row">
-          <dt>ドリンク</dt>
-          <dd>¥900〜</dd>
-        </div>
+        <div class="info-row"><dt>TEL</dt><dd><a href="tel:0368207456">03-6820-7456</a></dd></div>
+        <div class="info-row"><dt>MAIL</dt><dd><a href="mailto:nagata@eorna.info">nagata@eorna.info</a></dd></div>
+        <div class="info-row"><dt>チャージ</dt><dd>なし</dd></div>
+        <div class="info-row"><dt>ドリンク</dt><dd>¥900〜</dd></div>
       </dl>
+      <a class="tel-btn" href="tel:0368207456">
+        03-6820-7456
+        <span>タップして電話する</span>
+      </a>
     </div>
     <div class="info-block">
       <h3>ACCESS</h3>
       <div class="map-wrap">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.8!2d139.7034!3d35.6894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d5f9b03d1b3%3A0x5e3e7e3e3e3e3e3e!2z5p2x5Lqs6YO95paw5a6_5Yy65paw5a6_77yT5LiB55uu77yR77yR4oiS77yR!5e0!3m2!1sja!2sjp!4v1!5m2!1sja!2sjp"
-          allowfullscreen
-          loading="lazy">
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.828379186!2d139.70163!3d35.68942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d5f16c09f03%3A0x7e0e0e0e0e0e0e0e!2z5p2x5Lqs6YO95paw5a6_5Yy65paw5a6_77yT5LiB55uu77yR77yR4oiS77yR!5e0!3m2!1sja!2sjp!4v1"
+          allowfullscreen loading="lazy">
         </iframe>
       </div>
       <p style="margin-top:1rem;font-size:0.75rem;opacity:0.5;line-height:1.8;">
