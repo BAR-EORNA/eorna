@@ -259,6 +259,48 @@
     }
     footer p { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted); }
 
+
+    /* MENU */
+    .menu { background: var(--smoke); }
+    .menu-inner { max-width: 1000px; margin: 0 auto; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .menu-category {
+      border-top: 1px solid rgba(201,168,76,0.3);
+      padding-top: 1.5rem;
+    }
+    .menu-category h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+    }
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.78rem;
+    }
+    .menu-item .name { color: var(--cream); opacity: 0.85; }
+    .menu-item .name span { display: block; font-size: 0.65rem; color: var(--muted); }
+    .menu-item .price { color: var(--gold); font-size: 0.75rem; white-space: nowrap; margin-left: 1rem; }
+    .menu-note {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.8;
+      font-style: italic;
+    }
+    @media (max-width: 700px) {
+      .menu-grid { grid-template-columns: 1fr; }
+    }
     /* RESPONSIVE */
     @media (max-width: 700px) {
       nav { padding: 1rem 1.2rem; }
@@ -277,6 +319,7 @@
   <a class="nav-logo" href="#">EORNA</a>
   <ul class="nav-links">
     <li><a href="#concept">CONCEPT</a></li>
+    <li><a href="#menu">MENU</a></li>
     <li><a href="#gallery">GALLERY</a></li>
     <li><a href="#info">ACCESS</a></li>
   </ul>
@@ -310,11 +353,113 @@
   <h2 class="section-title">みんなで楽しく、一杯。</h2>
   <div class="divider"></div>
   <p>
-    新宿三丁目の地下に灯る、賑やかなBAR。<br>
+    新宿三丁目の地下に灯る、賑やかなBAR。<br><br>
     ビールとウイスキー、そして笑い声。<br>
     チャージなし。気負いなし。<br>
     ただ、良い酒と良い仲間と。
   </p>
+</section>
+
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="menu-inner">
+    <span class="section-label">— MENU —</span>
+    <div class="menu-grid">
+
+      <!-- ウイスキー1 -->
+      <div>
+        <div class="menu-category">
+          <h4>SINGLE MALT SCOTCH · Lowland</h4>
+          <div class="menu-item"><span class="name">Auchentochen<span>オーヘントッシャン</span></span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Glenkinchie 12y<span>グレンキンチー</span></span><span class="price">¥1,200</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>SINGLE MALT SCOTCH · Highland</h4>
+          <div class="menu-item"><span class="name">Oban 14y<span>オーバン</span></span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Glengoyne 10y<span>グレンゴイン</span></span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Dalmore 12y<span>ダルモア</span></span><span class="price">¥2,000</span></div>
+          <div class="menu-item"><span class="name">Royal Lochnagar 12y<span>ロイヤルロッホナガー</span></span><span class="price">¥1,200</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>SINGLE MALT SCOTCH · Speyside</h4>
+          <div class="menu-item"><span class="name">Glenlivet 12y<span>ザ・グレンリベット</span></span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Glenfarclas 12y<span>グレンファークラス</span></span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Aberlour 10y<span>アベラワー</span></span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Macallan 12y<span>マッカラン</span></span><span class="price">¥2,000</span></div>
+        </div>
+      </div>
+
+      <!-- ウイスキー2 -->
+      <div>
+        <div class="menu-category">
+          <h4>SINGLE MALT SCOTCH · Islands</h4>
+          <div class="menu-item"><span class="name">Talisker 10y<span>タリスカー</span></span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Arran 10y<span>アラン</span></span><span class="price">¥1,200</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>SINGLE MALT SCOTCH · Islay</h4>
+          <div class="menu-item"><span class="name">Laphroaig 10y<span>ラフロイグ</span></span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Bowmore 18y<span>ボウモア</span></span><span class="price">¥2,500</span></div>
+          <div class="menu-item"><span class="name">Ardbeg 10y<span>アードベッグ</span></span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Bruichladdich<span>ブリックラディ</span></span><span class="price">¥1,200</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>BLENDED SCOTCH</h4>
+          <div class="menu-item"><span class="name">Johnnie Walker Black<span>ジョニーウォーカーブラック</span></span><span class="price">¥900</span></div>
+          <div class="menu-item"><span class="name">Dewar's 12y<span>デュワーズ12年</span></span><span class="price">¥1,000</span></div>
+          <div class="menu-item"><span class="name">Old Parr<span>オールドパー</span></span><span class="price">¥1,000</span></div>
+        </div>
+        <p class="menu-note">その他ウイスキー・ブランデー・ラム・テキーラなど多数ご用意。お気軽にお尋ねください。</p>
+      </div>
+
+      <!-- カクテル -->
+      <div>
+        <div class="menu-category">
+          <h4>COCKTAIL · Gin Base</h4>
+          <div class="menu-item"><span class="name">Gin Tonic / ジントニック</span><span class="price">¥900〜</span></div>
+          <div class="menu-item"><span class="name">Martini / マティーニ</span><span class="price">¥900〜</span></div>
+          <div class="menu-item"><span class="name">Gimlet / ギムレット</span><span class="price">¥900〜</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>COCKTAIL · Vodka Base</h4>
+          <div class="menu-item"><span class="name">Moscow Mule / モスコミュール</span><span class="price">¥900〜</span></div>
+          <div class="menu-item"><span class="name">Salty Dog / ソルティドッグ</span><span class="price">¥900〜</span></div>
+          <div class="menu-item"><span class="name">Balalaika / バラライカ</span><span class="price">¥900〜</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>COCKTAIL · Rum Base</h4>
+          <div class="menu-item"><span class="name">Cuba Libre / キューバリバー</span><span class="price">¥900〜</span></div>
+          <div class="menu-item"><span class="name">Sol Cubano / ソル・クバーノ</span><span class="price">¥900〜</span></div>
+          <div class="menu-item"><span class="name">Daiquiri / ダイキリ</span><span class="price">¥900〜</span></div>
+        </div>
+      </div>
+
+      <!-- カクテル2 -->
+      <div>
+        <div class="menu-category">
+          <h4>COCKTAIL · Tequila Base</h4>
+          <div class="menu-item"><span class="name">Tequila Sunrise / テキーラサンライズ</span><span class="price">¥900〜</span></div>
+          <div class="menu-item"><span class="name">Margarita / マルガリータ</span><span class="price">¥900〜</span></div>
+          <div class="menu-item"><span class="name">El Diablo / エル・ディアブロ</span><span class="price">¥900〜</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>COCKTAIL · Whisky Base</h4>
+          <div class="menu-item"><span class="name">Old Pal / オールドパル</span><span class="price">¥900〜</span></div>
+          <div class="menu-item"><span class="name">God Father / ゴッドファーザー</span><span class="price">¥900〜</span></div>
+          <div class="menu-item"><span class="name">Manhattan / マンハッタン</span><span class="price">¥900〜</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>COCKTAIL · Other Base</h4>
+          <div class="menu-item"><span class="name">Cassis Soda / カシスソーダ</span><span class="price">¥900〜</span></div>
+          <div class="menu-item"><span class="name">Spumoni / スプモーニ</span><span class="price">¥900〜</span></div>
+          <div class="menu-item"><span class="name">Fuzzy Navel / ファジーネーブル</span><span class="price">¥900〜</span></div>
+        </div>
+        <p class="menu-note">この他にもご希望に合わせてお作りします。お気軽にお尋ねください。</p>
+      </div>
+
+    </div>
+  </div>
 </section>
 
 <!-- GALLERY -->
