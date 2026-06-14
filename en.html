@@ -34,10 +34,11 @@
       top: 0; left: 0; right: 0;
       z-index: 100;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-      padding: 1.2rem 2.5rem;
+      padding: 0.6rem 1.2rem;
       background: rgba(13,10,8,0.95);
+      gap: 0.4rem;
     }
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
@@ -46,23 +47,21 @@
       color: var(--gold);
       text-decoration: none;
     }
-    .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+    .nav-links { display: flex; gap: 1.2rem; list-style: none; align-items: center; }
     .nav-links a {
       color: var(--cream);
       text-decoration: none;
-      font-size: 0.72rem;
+      font-size: 0.65rem;
       letter-spacing: 0.15em;
       opacity: 0.75;
       transition: opacity 0.3s;
     }
     .nav-links a:hover { opacity: 1; color: var(--gold); }
     .lang-switch {
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: var(--gold);
+      font-size: 1.2rem;
       text-decoration: none;
       border: 1px solid rgba(201,168,76,0.4);
-      padding: 0.3rem 0.7rem;
+      padding: 0.2rem 0.5rem;
     }
 
     /* HERO */
@@ -266,7 +265,7 @@
     <li><a href="#concept">CONCEPT</a></li>
     <li><a href="#features">FEATURES</a></li>
     <li><a href="#info">ACCESS</a></li>
-    <li><a class="lang-switch" href="index.html">日本語</a></li>
+    <li><a class="lang-switch" href="index.html">🇯🇵</a></li>
   </ul>
 </nav>
 
@@ -369,7 +368,7 @@
 <footer>
   <p class="f-logo">BAR EORNA</p>
   <div style="display:flex;gap:1.5rem;justify-content:center;margin-bottom:1rem;">
-    <a href="index.html" style="color:var(--muted);font-size:0.7rem;letter-spacing:0.15em;text-decoration:none;">日本語</a>
+    <a href="index.html" style="color:var(--muted);font-size:0.7rem;letter-spacing:0.15em;text-decoration:none;">🇯🇵</a>
     <a href="https://maps.app.goo.gl/4dGM2nc1jLM7DGse6" target="_blank" style="color:var(--muted);font-size:0.7rem;letter-spacing:0.15em;text-decoration:none;">Google Maps</a>
     <a href="https://www.instagram.com/bar_eorna" target="_blank" style="color:var(--muted);font-size:0.7rem;letter-spacing:0.15em;text-decoration:none;">Instagram</a>
   </div>
