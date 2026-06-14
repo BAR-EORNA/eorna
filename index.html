@@ -365,6 +365,49 @@
     .privacy-inner .pp-block {
       margin-bottom: 1.5rem;
     }
+
+    /* FIRST TIME */
+    .firsttime {
+      background: var(--dark);
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+    .firsttime-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .firsttime-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .firsttime-card {
+      padding: 1.5rem 1rem;
+      border: 1px solid rgba(201,168,76,0.2);
+      text-align: center;
+    }
+    .firsttime-card .icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+    .firsttime-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .firsttime-card p {
+      font-size: 0.72rem;
+      color: var(--cream);
+      opacity: 0.7;
+      line-height: 1.8;
+    }
+    @media (max-width: 700px) {
+      .firsttime-cards { grid-template-columns: 1fr; }
+    }
     /* FOOTER */
     footer {
       background: #080604; text-align: center;
@@ -420,6 +463,40 @@
     @media (max-width: 700px) {
       .menu-grid { grid-template-columns: 1fr; }
     }
+
+    /* FIXED BOTTOM BUTTONS */
+    .fixed-bottom {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      height: 56px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    }
+    .fixed-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      font-family: 'Noto Serif JP', serif;
+      transition: opacity 0.2s;
+    }
+    .fixed-btn:active { opacity: 0.8; }
+    .fixed-btn-tel {
+      background: var(--red);
+      color: #fff;
+    }
+    .fixed-btn-map {
+      background: #fff;
+      color: #333;
+      border-top: 1px solid #ddd;
+    }
+    /* フッターの下にスペース確保 */
+    footer { padding-bottom: calc(3rem + 56px); }
     /* RESPONSIVE */
     @media (max-width: 700px) {
       nav { padding: 1rem 1.2rem; }
@@ -595,6 +672,32 @@
 </section>
 
 
+
+<!-- FIRST TIME -->
+<section class="firsttime" id="firsttime">
+  <div class="firsttime-inner">
+    <span class="section-label">— 初めての方へ —</span>
+    <h2 class="section-title">おひとりでも、お気軽にどうぞ。</h2>
+    <div class="firsttime-cards">
+      <div class="firsttime-card">
+        <span class="icon">🚪</span>
+        <h4>お気軽にどうぞ</h4>
+        <p>チャージなし。予約不要。おひとり様も大歓迎です。</p>
+      </div>
+      <div class="firsttime-card">
+        <span class="icon">🥃</span>
+        <h4>迷ったら相談を</h4>
+        <p>ウイスキー300種。お好みをお伝えいただければ、マスターがお選びいたします。</p>
+      </div>
+      <div class="firsttime-card">
+        <span class="icon">🕐</span>
+        <h4>深夜まで営業</h4>
+        <p>18:00〜03:00。2軒目・3軒目にもお気軽にお立ち寄りください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- OWNER -->
 <section class="owner" id="owner">
   <div class="owner-inner">
@@ -701,6 +804,17 @@
   <a href="#" onclick="document.querySelector('.privacy').scrollIntoView({behavior:'smooth'});return false;" style="display:block;margin-bottom:1rem;color:var(--muted);font-size:0.65rem;letter-spacing:0.2em;text-decoration:none;">プライバシーポリシー</a>
   <p>© 2026 BAR EORNA. All rights reserved.</p>
 </footer>
+
+
+<!-- FIXED BOTTOM -->
+<div class="fixed-bottom">
+  <a class="fixed-btn fixed-btn-tel" href="tel:0368207456">
+    📞 今すぐ電話
+  </a>
+  <a class="fixed-btn fixed-btn-map" href="https://maps.app.goo.gl/4dGM2nc1jLM7DGse6" target="_blank">
+    📍 地図を開く
+  </a>
+</div>
 
 </body>
 </html>
