@@ -277,6 +277,62 @@
       color: #fff;
     }
     .sns-btn-instagram:hover { opacity: 0.9; }
+
+    /* OWNER */
+    .owner {
+      background: var(--dark);
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+    .owner-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .owner-inner blockquote {
+      font-size: 0.88rem;
+      line-height: 2.2;
+      color: var(--cream);
+      opacity: 0.8;
+      font-style: italic;
+      margin: 2rem 0;
+    }
+    .owner-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-top: 1.5rem;
+    }
+
+    /* PRIVACY */
+    .privacy {
+      background: var(--smoke);
+      padding: 4rem 2rem;
+    }
+    .privacy-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .privacy-inner h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      margin-bottom: 1.5rem;
+    }
+    .privacy-inner p, .privacy-inner li {
+      font-size: 0.78rem;
+      line-height: 2;
+      color: var(--cream);
+      opacity: 0.7;
+    }
+    .privacy-inner ul {
+      padding-left: 1.2rem;
+      margin: 0.8rem 0;
+    }
+    .privacy-inner .pp-block {
+      margin-bottom: 1.5rem;
+    }
     /* FOOTER */
     footer {
       background: #080604; text-align: center;
@@ -506,6 +562,19 @@
   </div>
 </section>
 
+
+<!-- OWNER -->
+<section class="owner" id="owner">
+  <div class="owner-inner">
+    <span class="section-label">— OWNER —</span>
+    <img src="IMG_1003.jpeg" alt="オーナー 永田孔一" style="width:200px;height:200px;object-fit:cover;border-radius:50%;border:2px solid rgba(201,168,76,0.4);margin:2rem auto;display:block;">
+    <blockquote>
+      「新宿三丁目に、誰もが気軽に立ち寄れるBARを作りたいという木村氏の想いに共感し、EORNA（オルナ）を継がせて頂きました。ウイスキー300種、生ビール3種。難しく考えず、ただ良い酒と良い仲間と過ごす時間を楽しんでください。皆さんのご来店をお待ちしています。」
+    </blockquote>
+    <p class="owner-name">オーナー 永田孔一</p>
+  </div>
+</section>
+
 <!-- INFO -->
 <section class="info" id="info">
   <div class="info-inner">
@@ -557,6 +626,39 @@
   </div>
 </section>
 
+
+<!-- PRIVACY -->
+<section class="privacy">
+  <div class="privacy-inner">
+    <span class="section-label">— PRIVACY POLICY —</span>
+    <div class="pp-block">
+      <h3>プライバシーポリシー</h3>
+      <p>BAR EORNA（以下「当店」）は、お客様の個人情報の保護を重要と考え、以下の方針に基づき適切に取り扱います。</p>
+    </div>
+    <div class="pp-block">
+      <p><strong style="color:var(--gold);">個人情報の収集</strong></p>
+      <p>当店では、お問い合わせ等の際に氏名・メールアドレス・電話番号等の個人情報をご提供いただく場合があります。</p>
+    </div>
+    <div class="pp-block">
+      <p><strong style="color:var(--gold);">利用目的</strong></p>
+      <ul>
+        <li>お問い合わせへの回答</li>
+        <li>ご予約の確認・連絡</li>
+        <li>サービスに関するご案内</li>
+      </ul>
+    </div>
+    <div class="pp-block">
+      <p><strong style="color:var(--gold);">第三者への提供</strong></p>
+      <p>法令に基づく場合を除き、お客様の同意なく第三者へ個人情報を提供することはありません。</p>
+    </div>
+    <div class="pp-block">
+      <p><strong style="color:var(--gold);">お問い合わせ</strong></p>
+      <p>個人情報の取り扱いに関するお問い合わせは <a href="mailto:nagata@eorna.info" style="color:var(--gold);">nagata@eorna.info</a> までご連絡ください。</p>
+    </div>
+    <p style="margin-top:2rem;font-size:0.7rem;opacity:0.4;">制定日：2026年6月</p>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <p class="f-logo">BAR EORNA</p>
@@ -564,6 +666,7 @@
     <a href="https://share.google/Wb7U2K2Lbf6WBdIEB" target="_blank" style="color:var(--muted);font-size:0.7rem;letter-spacing:0.15em;text-decoration:none;">Google Maps</a>
     <a href="https://www.instagram.com/bar_eorna?igsh=MXRlYjZ0bDlrcnZreQ==" target="_blank" style="color:var(--muted);font-size:0.7rem;letter-spacing:0.15em;text-decoration:none;">Instagram</a>
   </div>
+  <a href="#" onclick="document.querySelector('.privacy').scrollIntoView({behavior:'smooth'});return false;" style="display:block;margin-bottom:1rem;color:var(--muted);font-size:0.65rem;letter-spacing:0.2em;text-decoration:none;">プライバシーポリシー</a>
   <p>© 2026 BAR EORNA. All rights reserved.</p>
 </footer>
 
