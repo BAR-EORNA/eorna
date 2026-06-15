@@ -16,6 +16,11 @@
   <meta name="keywords" content="BAR EORNA, Shinjuku bar, Tokyo bar, whisky bar, British bar, no cover charge, late night bar">
   <meta property="og:title" content="BAR EORNA | Shinjuku British Bar">
   <meta property="og:description" content="300+ whiskies, 3 draft beers. No cover charge. Open until 3AM. Shinjuku 3-chome, Tokyo.">
+  <meta property="og:type" content="restaurant">
+  <meta property="og:url" content="https://eorna.info/en.html">
+  <meta property="og:image" content="https://eorna.info/IMG_3185.jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -231,6 +236,22 @@
     .map-wrap { width: 100%; height: 280px; border: 1px solid rgba(201,168,76,0.2); overflow: hidden; }
     .map-wrap iframe { width: 100%; height: 100%; border: none; }
 
+    /* LOGO VIDEO */
+    .logo-video-section {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      overflow: hidden;
+    }
+    .logo-video {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     /* FOOTER */
     footer {
       background: #080604; text-align: center;
@@ -382,6 +403,17 @@
       </div>
     </div>
   </div>
+</section>
+
+<!-- LOGO VIDEO -->
+<section class="logo-video-section">
+  <video
+    src="Video.mp4"
+    autoplay
+    muted
+    playsinline
+    class="logo-video"
+  ></video>
 </section>
 
 <!-- FOOTER -->

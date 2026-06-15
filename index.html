@@ -27,6 +27,9 @@
   <meta property="og:description" content="新宿三丁目の地下ブリティッシュBAR。ウイスキー300種・生ビール3種。チャージなし・ドリンク¥1,000〜。18:00〜03:00年中無休。">
   <meta property="og:type" content="restaurant">
   <meta property="og:url" content="https://eorna.info">
+  <meta property="og:image" content="https://eorna.info/IMG_3185.jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ja_JP">
   <script type="application/ld+json">
   {
@@ -425,6 +428,22 @@
     @media (max-width: 700px) {
       .firsttime-cards { grid-template-columns: 1fr; }
     }
+    /* LOGO VIDEO */
+    .logo-video-section {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      overflow: hidden;
+    }
+    .logo-video {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     /* FOOTER */
     footer {
       background: #080604; text-align: center;
@@ -823,6 +842,17 @@
     </div>
     <p style="margin-top:2rem;font-size:0.7rem;opacity:0.4;">制定日：2026年6月</p>
   </div>
+</section>
+
+<!-- LOGO VIDEO -->
+<section class="logo-video-section">
+  <video
+    src="Video.mp4"
+    autoplay
+    muted
+    playsinline
+    class="logo-video"
+  ></video>
 </section>
 
 <!-- FOOTER -->
