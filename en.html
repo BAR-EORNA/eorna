@@ -238,6 +238,24 @@
     .map-wrap { width: 100%; height: 280px; border: 1px solid rgba(201,168,76,0.2); overflow: hidden; }
     .map-wrap iframe { width: 100%; height: 100%; border: none; }
 
+    /* GALLERY */
+    .gallery { background: var(--smoke); padding: 6rem 0 0; }
+    .gallery-inner { max-width: 100%; margin: 0; padding: 0 2rem; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4px; margin-top: 3rem;
+      margin-left: -2rem;
+      margin-right: -2rem;
+    }
+    .gallery-grid img {
+      width: 100%; height: auto;
+      object-fit: contain; display: block;
+      filter: brightness(0.88) sepia(0.1);
+      transition: filter 0.4s;
+    }
+    .gallery-grid img:hover { filter: brightness(1) sepia(0); }
+
     /* FOOTER */
     footer {
       background: #080604; text-align: center;
@@ -341,6 +359,19 @@
         <h4>No Cover Charge</h4>
         <p>Walk in anytime. No reservation required. From ¥1,000 per drink.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="gallery-inner">
+    <span class="section-label">— GALLERY —</span>
+    <div class="gallery-grid">
+      <img src="IMG_1103.jpeg" alt="Bar interior">
+      <img src="IMG_1104.jpeg" alt="Bar counter">
+      <img src="IMG_1102.jpeg" alt="Bar exterior">
+      <img src="IMG_1105.jpeg" alt="Bar entrance">
     </div>
   </div>
 </section>
