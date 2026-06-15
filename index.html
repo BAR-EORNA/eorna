@@ -236,8 +236,8 @@
     .concept .divider { margin: 2rem auto; }
 
     /* GALLERY */
-    .gallery { background: var(--smoke); padding: 6rem 0 0; }
-    .gallery-inner { max-width: 100%; margin: 0; padding: 0; }
+    .gallery { background: var(--smoke); padding: 6rem 0 3rem; }
+    .gallery-inner { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
     .gallery-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -245,8 +245,7 @@
     }
     .gallery-grid img {
       width: 100%; height: auto;
-      max-width: 100%;
-      object-fit: contain; display: block;
+      display: block;
       filter: brightness(0.88) sepia(0.1);
       transition: filter 0.4s;
     }
