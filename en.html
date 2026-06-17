@@ -238,6 +238,147 @@
     .map-wrap { width: 100%; height: 280px; border: 1px solid rgba(201,168,76,0.2); overflow: hidden; }
     .map-wrap iframe { width: 100%; height: 100%; border: none; }
 
+    /* MENU */
+    .menu { background: var(--smoke); }
+    .menu-inner { max-width: 1000px; margin: 0 auto; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .menu-category {
+      border-top: 1px solid rgba(201,168,76,0.3);
+      padding-top: 1.5rem;
+    }
+    .menu-category h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+    }
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.78rem;
+    }
+    .menu-item .name { color: var(--cream); opacity: 0.85; }
+    .menu-item .name span { display: block; font-size: 0.65rem; color: var(--muted); }
+    .menu-item .price { color: var(--gold); font-size: 0.75rem; white-space: nowrap; margin-left: 1rem; }
+    .menu-note {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.8;
+      font-style: italic;
+    }
+    @media (max-width: 700px) {
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+
+    /* FIRST TIME */
+    .firsttime {
+      background: var(--dark);
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+    .firsttime-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .firsttime-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .firsttime-card {
+      padding: 1.5rem 1rem;
+      border: 1px solid rgba(201,168,76,0.2);
+      text-align: center;
+    }
+    .firsttime-card .icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+    .firsttime-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .firsttime-card p {
+      font-size: 0.72rem;
+      color: var(--cream);
+      opacity: 0.7;
+      line-height: 1.8;
+    }
+    @media (max-width: 700px) {
+      .firsttime-cards { grid-template-columns: 1fr; }
+    }
+
+    /* OWNER */
+    .owner {
+      background: var(--dark);
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+    .owner-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .owner-inner blockquote {
+      font-size: 0.88rem;
+      line-height: 2.2;
+      color: var(--cream);
+      opacity: 0.8;
+      font-style: italic;
+      margin: 2rem 0;
+    }
+    .owner-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-top: 1.5rem;
+    }
+
+    /* PRIVACY */
+    .privacy {
+      background: var(--smoke);
+      padding: 4rem 2rem;
+    }
+    .privacy-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .privacy-inner h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      margin-bottom: 1.5rem;
+    }
+    .privacy-inner p, .privacy-inner li {
+      font-size: 0.78rem;
+      line-height: 2;
+      color: var(--cream);
+      opacity: 0.7;
+    }
+    .privacy-inner ul {
+      padding-left: 1.2rem;
+      margin: 0.8rem 0;
+    }
+    .privacy-inner .pp-block {
+      margin-bottom: 1.5rem;
+    }
+
     /* GALLERY */
     .gallery { background: var(--smoke); padding: 6rem 0 3rem; }
     .gallery-inner { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
@@ -300,12 +441,13 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="en.html">EORNA</a>
+  <a class="nav-logo" href="#">EORNA</a>
   <ul class="nav-links">
     <li><a href="#concept">CONCEPT</a></li>
-    <li><a href="#features">FEATURES</a></li>
+    <li><a href="#menu">MENU</a></li>
+    <li><a href="#gallery">GALLERY</a></li>
     <li><a href="#info">ACCESS</a></li>
-    <li><a class="lang-switch" href="index.html">🇯🇵</a></li>
+    <li><a href="index.html" style="font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);text-decoration:none;border:1px solid rgba(201,168,76,0.4);padding:0.3rem 0.7rem;">🇯🇵</a></li>
   </ul>
 </nav>
 
@@ -335,6 +477,103 @@
     No cover charge. No reservations needed.<br>
     Solo visitors, couples, and groups all welcome.
   </p>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="menu-inner">
+    <span class="section-label">— MENU —</span>
+    <div class="menu-grid">
+
+      <div>
+        <div class="menu-category">
+          <h4>SINGLE MALT SCOTCH · Lowland</h4>
+          <div class="menu-item"><span class="name">Auchentoshan</span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Glenkinchie 12y</span><span class="price">¥1,200</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>SINGLE MALT SCOTCH · Highland</h4>
+          <div class="menu-item"><span class="name">Oban 14y</span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Glengoyne 10y</span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Dalmore 12y</span><span class="price">¥2,000</span></div>
+          <div class="menu-item"><span class="name">Royal Lochnagar 12y</span><span class="price">¥1,200</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>SINGLE MALT SCOTCH · Speyside</h4>
+          <div class="menu-item"><span class="name">Glenlivet 12y</span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Glenfarclas 12y</span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Aberlour 10y</span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Macallan 12y</span><span class="price">¥2,000</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="menu-category">
+          <h4>SINGLE MALT SCOTCH · Islands</h4>
+          <div class="menu-item"><span class="name">Talisker 10y</span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Arran 10y</span><span class="price">¥1,200</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>SINGLE MALT SCOTCH · Islay</h4>
+          <div class="menu-item"><span class="name">Laphroaig 10y</span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Bowmore 18y</span><span class="price">¥2,500</span></div>
+          <div class="menu-item"><span class="name">Ardbeg 10y</span><span class="price">¥1,200</span></div>
+          <div class="menu-item"><span class="name">Bruichladdich</span><span class="price">¥1,200</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>BLENDED SCOTCH</h4>
+          <div class="menu-item"><span class="name">Johnnie Walker Black</span><span class="price">¥1,000</span></div>
+          <div class="menu-item"><span class="name">Dewar's 12y</span><span class="price">¥1,000</span></div>
+          <div class="menu-item"><span class="name">Old Parr</span><span class="price">¥1,000</span></div>
+        </div>
+        <p class="menu-note">Many more whiskies, brandies, rums, and tequilas available. Feel free to ask.</p>
+      </div>
+
+      <div>
+        <div class="menu-category">
+          <h4>COCKTAIL · Gin Base</h4>
+          <div class="menu-item"><span class="name">Gin Tonic</span><span class="price">¥1,000〜</span></div>
+          <div class="menu-item"><span class="name">Martini</span><span class="price">¥1,000〜</span></div>
+          <div class="menu-item"><span class="name">Gimlet</span><span class="price">¥1,000〜</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>COCKTAIL · Vodka Base</h4>
+          <div class="menu-item"><span class="name">Moscow Mule</span><span class="price">¥1,000〜</span></div>
+          <div class="menu-item"><span class="name">Salty Dog</span><span class="price">¥1,000〜</span></div>
+          <div class="menu-item"><span class="name">Balalaika</span><span class="price">¥1,000〜</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>COCKTAIL · Rum Base</h4>
+          <div class="menu-item"><span class="name">Cuba Libre</span><span class="price">¥1,000〜</span></div>
+          <div class="menu-item"><span class="name">Sol Cubano</span><span class="price">¥1,000〜</span></div>
+          <div class="menu-item"><span class="name">Daiquiri</span><span class="price">¥1,000〜</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="menu-category">
+          <h4>COCKTAIL · Tequila Base</h4>
+          <div class="menu-item"><span class="name">Tequila Sunrise</span><span class="price">¥1,000〜</span></div>
+          <div class="menu-item"><span class="name">Margarita</span><span class="price">¥1,000〜</span></div>
+          <div class="menu-item"><span class="name">El Diablo</span><span class="price">¥1,000〜</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>COCKTAIL · Whisky Base</h4>
+          <div class="menu-item"><span class="name">Old Pal</span><span class="price">¥1,000〜</span></div>
+          <div class="menu-item"><span class="name">God Father</span><span class="price">¥1,000〜</span></div>
+          <div class="menu-item"><span class="name">Manhattan</span><span class="price">¥1,000〜</span></div>
+        </div>
+        <div class="menu-category">
+          <h4>COCKTAIL · Other Base</h4>
+          <div class="menu-item"><span class="name">Cassis Soda</span><span class="price">¥1,000〜</span></div>
+          <div class="menu-item"><span class="name">Spumoni</span><span class="price">¥1,000〜</span></div>
+          <div class="menu-item"><span class="name">Fuzzy Navel</span><span class="price">¥1,000〜</span></div>
+        </div>
+        <p class="menu-note">We're happy to make other drinks to your liking. Just ask.</p>
+      </div>
+
+    </div>
+  </div>
 </section>
 
 <!-- FEATURES -->
@@ -374,6 +613,43 @@
   </div>
 </section>
 
+<!-- FIRST TIME -->
+<section class="firsttime" id="firsttime">
+  <div class="firsttime-inner">
+    <span class="section-label">— FOR FIRST-TIME GUESTS —</span>
+    <h2 class="section-title">Solo visitors always welcome.</h2>
+    <div class="firsttime-cards">
+      <div class="firsttime-card">
+        <span class="icon">🚪</span>
+        <h4>Walk Right In</h4>
+        <p>No cover charge. No reservation needed. Solo visitors always welcome.</p>
+      </div>
+      <div class="firsttime-card">
+        <span class="icon">🥃</span>
+        <h4>Not Sure What to Order?</h4>
+        <p>300+ whiskies. Tell us your taste and the master will pick one for you.</p>
+      </div>
+      <div class="firsttime-card">
+        <span class="icon">🕐</span>
+        <h4>Open Late</h4>
+        <p>18:00–03:00. Perfect for a second or third stop of the night.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OWNER -->
+<section class="owner" id="owner">
+  <div class="owner-inner">
+    <span class="section-label">— OWNER —</span>
+    <img src="IMG_3178.jpeg" alt="Owner Koichi Nagata" style="width:300px;height:300px;object-fit:cover;object-position:center 20%;border-radius:50%;border:2px solid rgba(201,168,76,0.4);margin:2rem auto;display:block;">
+    <blockquote>
+      "Inspired by Mr. Kimura's vision of creating a bar in Shinjuku 3-chome that anyone could comfortably drop into, I took over EORNA with that same spirit. EORNA aims to be a hideaway bar where even solo guests feel at ease. Whether it's your first visit or your hundredth, please enjoy whisky and cocktails at your own pace. We look forward to welcoming you in Shinjuku 3-chome."
+    </blockquote>
+    <p class="owner-name">Owner: Koichi Nagata</p>
+  </div>
+</section>
+
 <!-- INFO -->
 <section class="info" id="info">
   <div class="info-inner">
@@ -387,7 +663,7 @@
         </div>
         <div class="info-row"><dt>Hours</dt><dd>18:00 〜 03:00<br><span style="opacity:0.5;font-size:0.75em;">Open 365 days</span></dd></div>
         <div class="info-row"><dt>TEL</dt><dd><a href="tel:0368207456">03-6820-7456</a></dd></div>
-        <div class="info-row"><dt>EMAIL</dt><dd><a href="mailto:BAR@eorna.info">BAR@eorna.info</a></dd></div>
+        <div class="info-row"><dt>EMAIL</dt><dd><a href="mailto:nagata@eorna.info">nagata@eorna.info</a></dd></div>
         <div class="info-row"><dt>Cover</dt><dd>None</dd></div>
         <div class="info-row"><dt>Drinks</dt><dd>From ¥1,000</dd></div>
         <div class="info-row"><dt>Access</dt><dd>2 min walk from Shinjuku-sanchome Station<br>5 min walk from Shinjuku Station (East Exit)</dd></div>
@@ -412,11 +688,43 @@
         <a href="https://maps.app.goo.gl/2kQ74VHM5rHyLmtz6" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.9rem;background:#fff;color:#333;text-decoration:none;font-size:0.78rem;letter-spacing:0.1em;">
           📍 Open in Google Maps
         </a>
-        <a href="https://www.instagram.com/bar_eorna" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.9rem;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;text-decoration:none;font-size:0.78rem;letter-spacing:0.1em;">
+        <a href="https://www.instagram.com/bar_eorna/" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.9rem;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;text-decoration:none;font-size:0.78rem;letter-spacing:0.1em;">
           📷 Follow on Instagram
         </a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="privacy">
+  <div class="privacy-inner">
+    <span class="section-label">— PRIVACY POLICY —</span>
+    <div class="pp-block">
+      <h3>Privacy Policy</h3>
+      <p>BAR EORNA (hereinafter "we") considers the protection of customers' personal information important and handles it appropriately based on the following policy.</p>
+    </div>
+    <div class="pp-block">
+      <p><strong style="color:var(--gold);">Collection of Personal Information</strong></p>
+      <p>We may collect personal information such as your name, email address, and phone number when you make an inquiry or reservation.</p>
+    </div>
+    <div class="pp-block">
+      <p><strong style="color:var(--gold);">Purpose of Use</strong></p>
+      <ul>
+        <li>Responding to inquiries</li>
+        <li>Confirming and contacting you about reservations</li>
+        <li>Providing information about our services</li>
+      </ul>
+    </div>
+    <div class="pp-block">
+      <p><strong style="color:var(--gold);">Disclosure to Third Parties</strong></p>
+      <p>We will not disclose your personal information to third parties without your consent, except as required by law.</p>
+    </div>
+    <div class="pp-block">
+      <p><strong style="color:var(--gold);">Contact</strong></p>
+      <p>For inquiries regarding the handling of personal information, please contact us at <a href="mailto:BAR@eorna.info" style="color:var(--gold);">BAR@eorna.info</a>.</p>
+    </div>
+    <p style="margin-top:2rem;font-size:0.7rem;opacity:0.4;">Effective: June 2026</p>
   </div>
 </section>
 
