@@ -977,7 +977,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p class="f-logo">BAR EORNA</p>
+  <p class="f-logo" id="footerLogo" style="-webkit-user-select:none;user-select:none;cursor:default;">BAR EORNA</p>
   <div style="display:flex;gap:1.5rem;justify-content:center;margin-bottom:1.5rem;">
     <a href="https://maps.app.goo.gl/2kQ74VHM5rHyLmtz6" target="_blank" style="color:var(--muted);font-size:0.7rem;letter-spacing:0.15em;text-decoration:none;">Google Maps</a>
     <a href="https://www.instagram.com/bar_eorna/" target="_blank" style="color:var(--muted);font-size:0.7rem;letter-spacing:0.15em;text-decoration:none;">Instagram</a>
@@ -1012,6 +1012,24 @@
 </div>
 
 <script>
+// フッターBAR EORNAダブルタップ → kimura.html
+(function(){
+  const logo = document.getElementById('footerLogo');
+  if(!logo) return;
+  let lastTap = 0;
+  logo.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    const now = Date.now();
+    if(now - lastTap < 400) {
+      window.location.href = 'kimura.html';
+    }
+    lastTap = now;
+  });
+  logo.addEventListener('dblclick', () => {
+    window.location.href = 'kimura.html';
+  });
+})();
+
 // ③ スマホ横向き検知
 (function(){
   const msg = document.getElementById('landscapeMsg');
