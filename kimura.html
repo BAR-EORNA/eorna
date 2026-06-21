@@ -101,7 +101,12 @@
 </head>
 <body>
 
-<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div class="progress-bar">
+  <div style="position:fixed;top:0;left:0;right:0;z-index:201;display:flex;align-items:center;justify-content:space-between;padding:0.6rem 1.2rem;background:rgba(8,6,4,0.95);border-bottom:1px solid rgba(201,168,76,0.1);">
+    <span onclick="goHome()" style="font-family:'Cormorant Garamond',serif;font-size:0.9rem;letter-spacing:0.35em;color:var(--gold);cursor:pointer;">EORNA</span>
+    <div class="progress-fill" id="progressFill" style="width:0%;height:2px;background:var(--gold);flex:1;margin:0 1rem;transition:width 0.5s;"></div>
+  </div>
+</div>
 
 <!-- TITLE -->
 <div id="titleScreen">
@@ -291,6 +296,17 @@ let isTyping = false;
 let typeTimeout = null;
 let currentQuestion = null;
 let retryIndex = null;
+
+function goHome() {
+  const isEnding = document.getElementById('endingScreen') && document.getElementById('endingScreen').style.display !== 'none';
+  if(isEnding) {
+    window.location.href = 'index.html';
+  } else {
+    if(confirm('途中ですが辞めて戻りますか？')) {
+      window.location.href = 'index.html';
+    }
+  }
+}
 
 function startGame() {
   document.getElementById('titleScreen').style.display = 'none';

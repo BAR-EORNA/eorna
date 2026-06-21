@@ -419,7 +419,7 @@
 
   <!-- PROGRESS -->
   <div class="progress-wrap">
-    <span class="progress-logo">EORNA</span>
+    <span class="progress-logo" id="backToHome" style="cursor:pointer;" onclick="goHome()">EORNA</span>
     <div class="progress-steps">
       <div class="step-dot active" id="dot0"></div>
       <div class="step-dot" id="dot1"></div>
@@ -608,6 +608,17 @@
   let currentChapter = 0;
 
   // LOCK
+  function goHome() {
+    const isEnding = document.getElementById('ending') && document.getElementById('ending').style.display === 'block';
+    if(isEnding) {
+      window.location.href = 'index.html';
+    } else {
+      if(confirm('途中ですが辞めて戻りますか？')) {
+        window.location.href = 'index.html';
+      }
+    }
+  }
+
   function checkLock() {
     const val = document.getElementById('lockInput').value.trim();
     const valLower = val.toLowerCase();
