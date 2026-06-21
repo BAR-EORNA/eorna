@@ -395,10 +395,9 @@
 
     /* ENDING FADE */
     .ending-slide {
-      opacity: 0;
+      opacity: 1;
       transition: opacity 1.2s ease-in;
     }
-    .ending-slide.visible { opacity: 1; }
 
     @media (max-width: 480px) {
       .ch-photo-grid img { height: 140px; }
@@ -490,12 +489,6 @@
       ボトルの名前を抜けると、<br>
       数字だけが書かれた紙が残っていました。
     </p>
-    <div class="ch-riddle">
-      <div class="riddle-numbers">
-        <span class="riddle-num">2007</span>
-        <span class="riddle-num">18</span>
-        <span class="riddle-num">2023</span>
-      </div>
     <div class="ch-riddle">
       EORNAがオープンした月と日を<br>
       4桁で入力してください。<br><br>
@@ -683,20 +676,22 @@
     document.getElementById('ending').style.display = 'block';
     window.scrollTo(0, 0);
 
-    // スライドを順番にフェードイン
+    // スライドを順番にスクロール
     const slides = ['es0','es1','es2','es3','es4','es5'];
     slides.forEach((id, i) => {
       setTimeout(() => {
         const el = document.getElementById(id);
-        if (el) el.classList.add('visible');
-        window.scrollTo({ top: document.getElementById(id).offsetTop - 60, behavior: 'smooth' });
+        if (el) window.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
       }, i * 3500);
     });
 
     // 最後に「ありがとう」をフェードイン
     setTimeout(() => {
       const thanks = document.getElementById('es6');
-      if (thanks) thanks.style.opacity = '1';
+      if (thanks) {
+        thanks.style.opacity = '1';
+        window.scrollTo({ top: thanks.offsetTop - 60, behavior: 'smooth' });
+      }
     }, slides.length * 3500 + 1500);
   }
 
