@@ -189,25 +189,25 @@ const scenario = [
   {type:'evidence', text:'【証拠①】\n木村が厨房にいた時間：午前1時15分〜1時45分\nこの間、田中のそばにいたのはわかめと佐々木のみ'},
 
   // 問題1
-  {type:'question', chapter:'CHAPTER 1 · 謎1', location:'BAR EORNA · カウンター', bg:'IMG_3186.jpeg',
-   question:'田中が死亡した可能性がある時間帯は\n何時から何時の間か？\n「〇時〇〇分〜〇時〇〇分」の形式で答えよ。',
-   hint:'木村が厨房にいた時間を考えよ。',
-   answers:['1時15分〜1時45分','午前1時15分〜1時45分','1:15〜1:45'],
-   correct:'りーくん「午前1時15分から1時45分の間。犯行はこの30分の中で起きた。」\n木村「…そうなる。」'},
+  {type:'choice', chapter:'CHAPTER 1 · 謎1', location:'BAR EORNA · カウンター', bg:'IMG_3186.jpeg',
+   question:'田中が死亡した可能性がある時間帯はいつか？',
+   choices:['午前0時00分〜0時30分', '午前1時15分〜1時45分', '午前2時00分〜2時30分', '午前3時00分〜3時30分'],
+   correct:1,
+   correctText:'りーくん「午前1時15分から1時45分の間。犯行はこの30分の中で起きた。」\n木村「…そうなる。」'},
 
   // CHAPTER 2: カクテルの謎
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'田中さんが飲んでいたものは？', bg:'IMG_3183.jpeg', location:'BAR EORNA · バックバー', chapter:'CHAPTER 2'},
-  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'ボムだ。うちの名物でな。ビールにウイスキーを落として飲む。', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 2'},
+  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'ボムだ。うちの名物でな。ギネスにジェイムソンとベイリーズをショットグラスに入れて落として飲む。', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 2'},
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'（グラスを調べる）…液体の色が少し変だ。ボムにしては濃すぎる。', bg:'IMG_3183.jpeg', location:'BAR EORNA · バックバー', chapter:'CHAPTER 2'},
   {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'！…確かに。誰かが何かを混ぜたのか？', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 2'},
   {type:'evidence', text:'【証拠②】\n田中のグラスに不審な液体の混入を確認\nボムに使用するウイスキーはバランタイン ファイネスト\n→ しかしグラスの液体は通常より濃い色'},
 
   // 問題2
-  {type:'question', chapter:'CHAPTER 2 · 謎2', location:'BAR EORNA · バックバー', bg:'IMG_3183.jpeg',
+  {type:'choice', chapter:'CHAPTER 2 · 謎2', location:'BAR EORNA · バックバー', bg:'IMG_3183.jpeg',
    question:'EORNAの名物カクテル「ボム」に\n通常使用するウイスキーの銘柄は？',
-   hint:'木村バーテンダーが愛する定番スコッチブレンデッド。',
-   answers:['バランタイン','バランタインファイネスト','ballantine','BALLANTINE'],
-   correct:'りーくん「バランタイン ファイネスト。しかしグラスの色はもっと濃い。別の何かが混入されている。」'},
+   choices:['ジャックダニエル', 'バランタイン ファイネスト', 'ジョニーウォーカー', 'シーバスリーガル'],
+   correct:1,
+   correctText:'りーくん「バランタイン ファイネスト。しかしグラスの色はもっと濃い。別の何かが混入されている。」'},
 
   // CHAPTER 3: 容疑者尋問・わかめ
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'わかめ。お前はどこにいた？', bg:'IMG_3186.jpeg', location:'BAR EORNA · 尋問', chapter:'CHAPTER 3'},
@@ -219,11 +219,11 @@ const scenario = [
   {type:'evidence', text:'【証拠③】\nわかめの証言に矛盾あり\n「ずっとカウンターにいた」→ しかし佐々木の証言では\nわかめが5分間席を外していたと証言している'},
 
   // 問題3
-  {type:'question', chapter:'CHAPTER 3 · 謎3', location:'BAR EORNA · 尋問', bg:'IMG_3186.jpeg',
-   question:'わかめの証言の矛盾点は何か？\n「〇〇にいたと言ったが、実際は〇〇していた」\nの形式で答えよ。',
-   hint:'佐々木の証言とわかめの証言を比較せよ。',
-   answers:['カウンターにいたと言ったが実際は席を外していた','カウンターにいたが席を外した','ずっといたが席を外した'],
-   correct:'りーくん「カウンターにずっといたと言ったが、佐々木によれば5分間席を外している。どこへ行った？」\nわかめ「…」'},
+  {type:'choice', chapter:'CHAPTER 3 · 謎3', location:'BAR EORNA · 尋問', bg:'IMG_3186.jpeg',
+   question:'わかめの証言の矛盾点は何か？',
+   choices:['田中と面識がないと言った', 'カウンターにいたと言ったが席を外していた', 'ボムを作っていないと言った', '佐々木とずっと話していたと言った'],
+   correct:1,
+   correctText:'りーくん「カウンターにずっといたと言ったが、佐々木によれば5分間席を外している。どこへ行った？」\nわかめ「…」'},
 
   // CHAPTER 4: 佐々木の証言
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'佐々木さん。わかめが席を外した5分間、何を見ましたか？', bg:'IMG_3185.jpeg', location:'BAR EORNA · 証言', chapter:'CHAPTER 4'},
@@ -233,11 +233,11 @@ const scenario = [
   {type:'evidence', text:'【証拠④】\n佐々木の目撃証言：\nわかめがバックバーから何かを取り出し\n田中のグラスに近づいた\n（照明が暗いため100%の確証なし）'},
 
   // 問題4
-  {type:'question', chapter:'CHAPTER 4 · 謎4', location:'BAR EORNA · バックバー', bg:'IMG_3183.jpeg',
-   question:'犯行に使われたとされる「何か」は\nバックバーのどこから取り出されたか？\nEORNAのバックバーに並んでいるものは何か？',
-   hint:'棚に300種以上並んでいる。',
-   answers:['ウイスキー','ウィスキー','whisky','whiskey','WHISKY','ボトル','酒'],
-   correct:'りーくん「ウイスキーボトル。…しかし毒を仕込むなら、事前に準備が必要だ。」'},
+  {type:'choice', chapter:'CHAPTER 4 · 謎4', location:'BAR EORNA · バックバー', bg:'IMG_3183.jpeg',
+   question:'犯行に使われた「何か」は\nバックバーのどこから取り出されたか？',
+   choices:['冷蔵庫の中', 'ウイスキーボトル', 'カウンターの引き出し', 'グラス洗浄機の中'],
+   correct:1,
+   correctText:'りーくん「ウイスキーボトル。…しかし毒を仕込むなら、事前に準備が必要だ。」'},
 
   // CHAPTER 5: 動機
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'木村さん。わかめと田中さんの間に何かあったか？', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 5'},
@@ -248,11 +248,11 @@ const scenario = [
   {type:'evidence', text:'【証拠⑤】\nわかめの動機：\n田中は過去にわかめが前職で起こした不正を知っており\n口止め料を要求していた\n→ 消すしかなかった'},
 
   // 問題5
-  {type:'question', chapter:'CHAPTER 5 · 謎5', location:'BAR EORNA · カウンター', bg:'IMG_3186.jpeg',
-   question:'わかめが田中を消したかった理由は？\n一言で答えよ。',
-   hint:'田中はわかめの過去を使って何をしていたか。',
-   answers:['ゆすり','恐喝','脅迫','口止め','秘密を知られていた','過去を知られていた'],
-   correct:'りーくん「ゆすり。田中はわかめの弱みを握って金を要求していた。それが動機だ。」'},
+  {type:'choice', chapter:'CHAPTER 5 · 謎5', location:'BAR EORNA · カウンター', bg:'IMG_3186.jpeg',
+   question:'わかめが田中を消したかった理由は？',
+   choices:['売上横領がバレそうだった', 'ゆすりをされていた', '昔の恋人を奪われた', 'EORNAのレシピを盗まれた'],
+   correct:1,
+   correctText:'りーくん「ゆすり。田中はわかめの弱みを握って金を要求していた。それが動機だ。」'},
 
   // CHAPTER 6: 密室の謎
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'しかし問題は密室だ。閉店後、誰も出入りしていない。どうやって毒を？', bg:'IMG_3186.jpeg', location:'BAR EORNA · 現場', chapter:'CHAPTER 6'},
@@ -263,11 +263,11 @@ const scenario = [
   {type:'evidence', text:'【証拠⑥】\n密室の真相：\n外部からの侵入は不可能\n→ 犯行は内部者によるもの\nバーテンダーのわかめのみが\n田中のグラスに近づける立場にいた'},
 
   // 問題6
-  {type:'question', chapter:'CHAPTER 6 · 謎6', location:'BAR EORNA · 現場', bg:'IMG_3186.jpeg',
-   question:'密室殺人が成立した理由は何か？\n「外部からではなく〇〇〇の犯行だったから」\nの形式で答えよ。',
-   hint:'犯人はどこにいた人物か。',
-   answers:['内部','内部者','店内','バーの中','はじめからいた'],
-   correct:'りーくん「密室なのは当然だ。犯人は最初から中にいた。外から入る必要がなかったんだ。」'},
+  {type:'choice', chapter:'CHAPTER 6 · 謎6', location:'BAR EORNA · 現場', bg:'IMG_3186.jpeg',
+   question:'密室殺人が成立した理由は何か？',
+   choices:['犯人が窓から逃げたから', '犯人は最初から店内にいたから', '合鍵を持っていたから', '田中が自殺したから'],
+   correct:1,
+   correctText:'りーくん「密室なのは当然だ。犯人は最初から中にいた。外から入る必要がなかったんだ。」'},
 
   // CHAPTER 7: 最終対決
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'わかめ。最後に聞く。EORNAのもう一つの名物カクテルの名前は？', bg:'IMG_3186.jpeg', location:'BAR EORNA · 最終対決', chapter:'FINAL CHAPTER'},
@@ -278,11 +278,11 @@ const scenario = [
   {type:'dialog', speaker:'わかめ', speakerClass:'suspect', text:'…（黙り込む）', bg:'IMG_3186.jpeg', location:'BAR EORNA · 最終対決', chapter:'FINAL CHAPTER'},
 
   // 問題7: 最終
-  {type:'question', chapter:'FINAL · 最終問', location:'BAR EORNA · 最終対決', bg:'IMG_3186.jpeg',
-   question:'犯人の名前は誰か？\nフルネームで答えよ。',
-   hint:'バーテンダーとして雇われていた人物。愛称は「わかめ」。',
-   answers:['わかめ','永田','永田わかめ','永田くん'],
-   correct:'りーくん「犯人はお前だ、わかめ。」\n\nわかめは静かに両手をテーブルに置いた。\n\n木村「…りーくん。よくやった。」\nりーくん「木村さん。この店は守られた。」\n木村「EORNAは続く。」',
+  {type:'choice', chapter:'FINAL · 最終問', location:'BAR EORNA · 最終対決', bg:'IMG_3186.jpeg',
+   question:'犯人は誰か？',
+   choices:['木村（バーテンダー）', '佐々木（常連客）', 'わかめ（バーテンダー）', 'りーくん（探偵）'],
+   correct:2,
+   correctText:'りーくん「犯人はお前だ、わかめ。」\n\nわかめは静かに両手をテーブルに置いた。\n\n木村「…りーくん。よくやった。」\nりーくん「木村さん。この店は守られた。」\n木村「EORNAは続く。」',
    isFinal:true},
 ];
 
@@ -359,30 +359,36 @@ function nextDialog() {
 }
 
 function showQuestion(scene) {
-  currentQuestion = scene;
-  retryIndex = currentIndex;
-  document.getElementById('inputArea').style.display = 'block';
-  document.getElementById('inputLabel').textContent = scene.question;
-  document.getElementById('mysteryInput').value = '';
-  document.getElementById('answerMsg').textContent = '';
-  document.getElementById('hintBox').style.display = 'none';
-  document.getElementById('hintBox').textContent = scene.hint;
+  showChoice(scene);
 }
 
-function checkAnswer() {
-  const val = document.getElementById('mysteryInput').value.trim();
-  const correct = currentQuestion.answers.map(a => a.toLowerCase());
-  const msg = document.getElementById('answerMsg');
-  if(correct.includes(val.toLowerCase())) {
-    msg.textContent = '— 正解 —';
-    msg.className = 'msg-box msg-ok';
-    document.getElementById('inputArea').style.display = 'none';
+function showChoice(scene) {
+  currentQuestion = scene;
+  retryIndex = currentIndex;
+  document.getElementById('inputArea').style.display = 'none';
+
+  const area = document.getElementById('choicesArea');
+  area.style.display = 'block';
+  area.innerHTML = `
+    <p style="font-size:0.78rem;line-height:2;color:var(--cream);opacity:0.85;margin-bottom:1.5rem;white-space:pre-line;">${scene.question}</p>
+    ${scene.choices.map((c, i) => `
+      <button class="choice-btn" onclick="selectChoice(${i})">${c}</button>
+    `).join('')}
+    <p class="msg-box" id="choiceMsg"></p>
+  `;
+}
+
+function selectChoice(index) {
+  const scene = currentQuestion;
+  const msg = document.getElementById('choiceMsg');
+  if(index === scene.correct) {
+    document.getElementById('choicesArea').style.display = 'none';
     document.getElementById('dialogBox').style.display = 'block';
     document.getElementById('tapHint').style.display = 'block';
     document.getElementById('speakerName').textContent = '';
     document.getElementById('speakerName').className = 'speaker-name';
-    typeText(currentQuestion.correct);
-    if(currentQuestion.isFinal) {
+    typeText(scene.correctText);
+    if(scene.isFinal) {
       document.getElementById('dialogBox').onclick = showEnding;
     } else {
       document.getElementById('dialogBox').onclick = () => {
@@ -391,9 +397,26 @@ function checkAnswer() {
       };
     }
   } else {
-    msg.textContent = '— 違う。もう一度考えろ。—';
-    msg.className = 'msg-box msg-ng';
+    if(msg) {
+      msg.textContent = '— 違う。もう一度考えろ。—';
+      msg.className = 'msg-box msg-ng';
+    }
+    // ボタンを赤くして間違いを示す
+    const btns = document.querySelectorAll('.choice-btn');
+    if(btns[index]) {
+      btns[index].style.borderColor = 'rgba(155,28,28,0.8)';
+      btns[index].style.color = '#c0392b';
+      setTimeout(() => {
+        btns[index].style.borderColor = '';
+        btns[index].style.color = '';
+        if(msg) msg.textContent = '';
+      }, 1200);
+    }
   }
+}
+
+function checkAnswer() {
+  // 4択モードでは使わない
 }
 
 function toggleHint() {
