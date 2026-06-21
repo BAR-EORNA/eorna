@@ -556,8 +556,8 @@
 
 <!-- 隠し要素：地図メッセージ -->
 <div id="mapMsg" style="display:none;position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:300;background:rgba(10,8,6,0.95);border:1px solid rgba(201,168,76,0.4);padding:1rem 2rem;text-align:center;white-space:nowrap;">
-  <p style="font-size:0.72rem;letter-spacing:0.2em;color:var(--cream);">迷ったら電話してください。</p>
-  <a href="tel:0368207456" style="display:block;margin-top:0.5rem;font-size:0.8rem;color:var(--gold);letter-spacing:0.15em;text-decoration:none;">03-6820-7456</a>
+  <p style="font-size:0.72rem;letter-spacing:0.2em;color:var(--cream);margin-bottom:0.8rem;">迷ったら電話してください。</p>
+  <a href="tel:0368207456" style="display:inline-block;padding:0.6rem 1.5rem;background:var(--red);color:#fff;text-decoration:none;font-size:0.78rem;letter-spacing:0.15em;">📞 03-6820-7456</a>
 </div>
 
 <script>
@@ -654,16 +654,16 @@
     mapTimer = setTimeout(() => {
       mapMsg.style.display = 'block';
       setTimeout(() => mapMsg.style.display = 'none', 4000);
-    }, 10000);
+    }, 3000);
   });
   mapWrap.addEventListener('mouseleave', () => clearTimeout(mapTimer));
 
-  // スマホ：タップして10秒後
+  // スマホ：タップして3秒後
   mapWrap.addEventListener('touchstart', () => {
     mapTimer = setTimeout(() => {
       mapMsg.style.display = 'block';
       setTimeout(() => mapMsg.style.display = 'none', 4000);
-    }, 10000);
+    }, 3000);
   });
   mapWrap.addEventListener('touchend', () => clearTimeout(mapTimer));
 })();
