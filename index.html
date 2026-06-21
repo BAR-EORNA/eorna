@@ -534,7 +534,7 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#" id="navLogo">EORNA</a>
+  <a class="nav-logo" id="navLogo" style="-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;">EORNA</a>
   <ul class="nav-links">
     <li><a href="#concept">CONCEPT</a></li>
     <li><a href="#menu">MENU</a></li>
@@ -564,10 +564,9 @@
   }
 })();
 
-// ② ロゴ5秒長押しで音声
+// ② ロゴタップで音声
 (function(){
   const logo = document.getElementById('navLogo');
-  let logoTimer;
 
   function speakEorna() {
     const utterance = new SpeechSynthesisUtterance('バー　オルナ');
@@ -576,7 +575,6 @@
     utterance.rate = 1.1;
     utterance.volume = 1;
 
-    // 女性音声を選択
     const voices = window.speechSynthesis.getVoices();
     const femaleVoice = voices.find(v =>
       v.lang === 'ja-JP' && (v.name.includes('Female') || v.name.includes('Kyoko') || v.name.includes('O-ren') || v.name.includes('女'))
@@ -586,15 +584,13 @@
     window.speechSynthesis.speak(utterance);
   }
 
-  logo.addEventListener('touchstart', () => {
-    logoTimer = setTimeout(speakEorna, 5000);
-  });
-  logo.addEventListener('touchend', () => clearTimeout(logoTimer));
-  logo.addEventListener('mousedown', () => {
-    logoTimer = setTimeout(speakEorna, 5000);
-  });
-  logo.addEventListener('mouseup', () => clearTimeout(logoTimer));
-  logo.addEventListener('mouseleave', () => clearTimeout(logoTimer));
+  if(logo) {
+    logo.addEventListener('click', speakEorna);
+    logo.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      speakEorna();
+    });
+  }
 })();
 
 // ③ GALLERYボトル発見
