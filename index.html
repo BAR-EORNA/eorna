@@ -646,15 +646,21 @@
   let tapCount = 0;
   let tapTimer;
 
-  accessText.addEventListener('click', () => {
+  function handleTap() {
     tapCount++;
     clearTimeout(tapTimer);
-    tapTimer = setTimeout(() => tapCount = 0, 1500);
+    tapTimer = setTimeout(() => tapCount = 0, 2000);
     if(tapCount >= 3) {
       tapCount = 0;
       mapMsg.style.display = 'block';
       setTimeout(() => mapMsg.style.display = 'none', 4000);
     }
+  }
+
+  accessText.addEventListener('click', handleTap);
+  accessText.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    handleTap();
   });
 })();
 </script>
@@ -929,7 +935,7 @@
           allowfullscreen loading="lazy">
         </iframe>
       </div>
-      <p id="accessText" style="margin-top:1rem;font-size:0.75rem;opacity:0.5;line-height:1.8;cursor:default;">
+      <p id="accessText" style="margin-top:1rem;font-size:0.75rem;opacity:0.5;line-height:1.8;cursor:pointer;padding:1rem 0;-webkit-user-select:none;user-select:none;">
         新宿三丁目駅 徒歩約2分（E1出口すぐ）<br>
         新宿駅 東口 徒歩約5分
       </p>
