@@ -997,5 +997,50 @@
   <a class="fixed-btn fixed-btn-map" href="https://maps.app.goo.gl/2kQ74VHM5rHyLmtz6" target="_blank">📍 地図</a>
 </div>
 
+<!-- 横向き特別画面 -->
+<div id="landscapeMsg" style="display:none;position:fixed;inset:0;z-index:500;background:#0A0806;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:3rem;">
+  <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,5vw,2.5rem);color:#C9A84C;letter-spacing:0.3em;margin-bottom:1.5rem;">BAR EORNA</p>
+  <div style="width:60px;height:1px;background:#C9A84C;opacity:0.4;margin:0 auto 1.5rem;"></div>
+  <p style="font-size:0.8rem;letter-spacing:0.25em;color:#E8DEC8;opacity:0.7;line-height:2;">バーカウンターへようこそ。<br>今夜も一杯、どうぞ。</p>
+  <p style="margin-top:3rem;font-size:0.6rem;letter-spacing:0.3em;color:#6A5A42;">画面を縦に戻すと続きをご覧いただけます</p>
+</div>
+
+<!-- 常連メッセージ -->
+<div id="regularMsg" style="display:none;position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:400;background:rgba(10,8,6,0.95);border:1px solid rgba(201,168,76,0.4);padding:1rem 2rem;text-align:center;white-space:nowrap;">
+  <p style="font-size:0.7rem;letter-spacing:0.25em;color:#C9A84C;font-family:'Cormorant Garamond',serif;">常連さんですね。</p>
+  <p style="font-size:0.65rem;letter-spacing:0.15em;color:#E8DEC8;opacity:0.7;margin-top:0.3rem;">いつもありがとうございます。</p>
+</div>
+
+<script>
+// ③ スマホ横向き検知
+(function(){
+  const msg = document.getElementById('landscapeMsg');
+  function checkOrientation() {
+    if(window.innerWidth > window.innerHeight && window.innerWidth < 1024) {
+      msg.style.display = 'flex';
+    } else {
+      msg.style.display = 'none';
+    }
+  }
+  window.addEventListener('orientationchange', () => setTimeout(checkOrientation, 300));
+  window.addEventListener('resize', checkOrientation);
+})();
+
+// ⑤ 3回アクセスで常連メッセージ
+(function(){
+  let count = parseInt(localStorage.getItem('eornaVisits') || '0') + 1;
+  localStorage.setItem('eornaVisits', count);
+  if(count === 3 || count === 10 || count === 20) {
+    setTimeout(() => {
+      const msg = document.getElementById('regularMsg');
+      if(msg) {
+        msg.style.display = 'block';
+        setTimeout(() => msg.style.display = 'none', 4000);
+      }
+    }, 2000);
+  }
+})();
+</script>
+
 </body>
 </html>
