@@ -721,7 +721,28 @@
 <section class="owner" id="owner">
   <div class="owner-inner">
     <span class="section-label">— OWNER —</span>
-    <img src="IMG_3178.jpeg" alt="オーナー 永田孔一" style="width:300px;height:300px;object-fit:cover;object-position:center 20%;border-radius:50%;border:2px solid rgba(201,168,76,0.4);margin:2rem auto;display:block;">
+    <img src="IMG_3178.jpeg" alt="オーナー 永田孔一" id="ownerImg" style="width:300px;height:300px;object-fit:cover;object-position:center 20%;border-radius:50%;border:2px solid rgba(201,168,76,0.4);margin:2rem auto;display:block;cursor:pointer;">
+    <div id="kimuraReveal" style="display:none;text-align:center;margin:2rem auto;">
+      <img src="2E33375C-740E-4FE5-B592-3CDE02125486.jpeg" alt="木村さん" style="width:300px;height:300px;object-fit:cover;object-position:center 20%;border-radius:50%;border:2px solid rgba(201,168,76,0.6);margin:0 auto 2rem;display:block;">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,4vw,1.8rem);color:var(--gold);letter-spacing:0.2em;line-height:2;">16年間、ありがとうございました。</p>
+      <p style="margin-top:0.8rem;font-size:0.75rem;letter-spacing:0.3em;color:var(--muted);">2007 — 2023</p>
+    </div>
+    <script>
+      (function(){
+        let count = 0;
+        const img = document.getElementById('ownerImg');
+        const reveal = document.getElementById('kimuraReveal');
+        if(img) {
+          img.addEventListener('click', function(){
+            count++;
+            if(count === 11) {
+              img.style.display = 'none';
+              reveal.style.display = 'block';
+            }
+          });
+        }
+      })();
+    </script>
     <blockquote>
       「新宿三丁目に、誰もが気軽に立ち寄れるBARを作りたいという木村氏の想いに共感し、EORNA（オルナ）を継がせて頂きました。EORNAは、お一人でも気軽に立ち寄れる隠れ家のようなバーを目指しています。初めての方も、常連の方も、ウイスキーやカクテルを楽しみながら、自分のペースで過ごしてください。新宿三丁目で皆さんのお越しをお待ちしています。」
     </blockquote>
