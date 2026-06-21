@@ -649,7 +649,7 @@
     tapCount++;
     clearTimeout(tapTimer);
     tapTimer = setTimeout(() => tapCount = 0, 2000);
-    if(tapCount >= 3) {
+    if(tapCount >= 1) {
       tapCount = 0;
       mapMsg.style.display = 'block';
       setTimeout(() => mapMsg.style.display = 'none', 4000);
@@ -688,7 +688,7 @@
       // ボタンのクリックは除外
       if(e.target.closest('a')) return;
       heroCount++;
-      if(heroCount === 8) {
+      if(heroCount === 1) {
         window.location.href = 'story.html';
       }
     });
@@ -872,7 +872,7 @@
         if(img) {
           img.addEventListener('click', function(){
             count++;
-            if(count === 11) {
+            if(count === 1) {
               img.style.display = 'none';
               reveal.style.display = 'block';
             }
