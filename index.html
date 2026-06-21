@@ -564,34 +564,37 @@
   }
 })();
 
-// ② ロゴ5秒長押しで音
+// ② ロゴ5秒長押しで音声
 (function(){
   const logo = document.getElementById('navLogo');
   let logoTimer;
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
 
-  function playGlassSound() {
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(880, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.8);
-    gain.gain.setValueAtTime(0.3, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
-    osc.start(ctx.currentTime);
-    osc.stop(ctx.currentTime + 1.2);
+  function speakEorna() {
+    const utterance = new SpeechSynthesisUtterance('バー　オルナ');
+    utterance.lang = 'ja-JP';
+    utterance.pitch = 1.4;
+    utterance.rate = 1.1;
+    utterance.volume = 1;
+
+    // 女性音声を選択
+    const voices = window.speechSynthesis.getVoices();
+    const femaleVoice = voices.find(v =>
+      v.lang === 'ja-JP' && (v.name.includes('Female') || v.name.includes('Kyoko') || v.name.includes('O-ren') || v.name.includes('女'))
+    );
+    if(femaleVoice) utterance.voice = femaleVoice;
+
+    window.speechSynthesis.speak(utterance);
   }
 
   logo.addEventListener('touchstart', () => {
-    logoTimer = setTimeout(playGlassSound, 5000);
+    logoTimer = setTimeout(speakEorna, 5000);
   });
   logo.addEventListener('touchend', () => clearTimeout(logoTimer));
   logo.addEventListener('mousedown', () => {
-    logoTimer = setTimeout(playGlassSound, 5000);
+    logoTimer = setTimeout(speakEorna, 5000);
   });
   logo.addEventListener('mouseup', () => clearTimeout(logoTimer));
+  logo.addEventListener('mouseleave', () => clearTimeout(logoTimer));
 })();
 
 // ③ GALLERYボトル発見
