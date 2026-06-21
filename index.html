@@ -528,13 +528,122 @@
       text-decoration: none; font-size: 0.78rem; letter-spacing: 0.1em;
     }
     .fixed-btn-line { background: #06C755; color: #fff; }
+
+
+    /* EORNA ARCHIVE MYSTERY */
+    .archive-game {
+      background: radial-gradient(circle at top, rgba(201,168,76,0.08), transparent 38%), #080604;
+      border-top: 1px solid rgba(201,168,76,0.18);
+      border-bottom: 1px solid rgba(201,168,76,0.18);
+    }
+    .archive-inner { max-width: 920px; margin: 0 auto; }
+    .archive-lead { max-width: 680px; line-height: 2.2; opacity: 0.82; font-size: 0.9rem; }
+    .archive-card {
+      margin-top: 2rem;
+      padding: 2rem;
+      border: 1px solid rgba(201,168,76,0.25);
+      background: rgba(26,20,16,0.72);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+    .archive-small { font-size: 0.72rem; line-height: 2; opacity: 0.58; letter-spacing: 0.08em; }
+    .archive-chapter { display:none; animation: archiveFade 0.7s ease forwards; }
+    .archive-chapter.active { display:block; }
+    .archive-chapter h3 {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--gold); font-size: 1.8rem; font-weight: 300;
+      letter-spacing: 0.12em; margin-bottom: 1rem;
+    }
+    .archive-chapter p { line-height: 2.1; font-size: 0.9rem; opacity: 0.84; margin: 1rem 0; }
+    .archive-riddle {
+      margin: 1.6rem 0; padding: 1.5rem;
+      border-left: 2px solid var(--red);
+      background: rgba(0,0,0,0.24);
+      line-height: 2.2; font-size: 0.9rem;
+    }
+    .archive-input {
+      width: 100%; max-width: 420px; padding: 0.9rem 1rem;
+      background: #0D0A08; color: var(--cream);
+      border: 1px solid rgba(201,168,76,0.45);
+      font-family: 'Noto Serif JP', serif; letter-spacing: 0.08em;
+      margin: 0.4rem 0 1rem;
+    }
+    .archive-btn {
+      display:inline-block; padding: 0.85rem 1.4rem; margin: 0.25rem 0.4rem 0.25rem 0;
+      border: 1px solid rgba(201,168,76,0.45); background: transparent;
+      color: var(--cream); cursor: pointer; font-family: 'Noto Serif JP', serif;
+      letter-spacing: 0.12em; transition: all 0.25s;
+    }
+    .archive-btn:hover { color:#fff; border-color:var(--gold); background:rgba(201,168,76,0.08); }
+    .archive-btn.primary { background: var(--red); border-color: var(--red); color: #fff; }
+    .archive-msg { min-height: 1.6rem; color: var(--gold); font-size: 0.78rem; letter-spacing: 0.08em; margin-top:0.6rem; }
+    .archive-hint { display:none; margin-top:1rem; color: var(--muted); font-size:0.78rem; line-height:2; }
+    .archive-photo-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin:1.5rem 0; }
+    .archive-photo-grid img, .archive-ending img { width:100%; display:block; border:1px solid rgba(201,168,76,0.18); filter: brightness(0.86) sepia(0.08); }
+    .archive-ending { display:none; text-align:center; }
+    .archive-ending.show { display:block; animation: archiveFade 1.2s ease forwards; }
+    .ending-slide { margin: 2rem 0 3rem; opacity:0; transform: translateY(12px); animation: archiveFadeUp 1.4s ease forwards; }
+    .ending-slide:nth-child(2){animation-delay:.3s}.ending-slide:nth-child(3){animation-delay:.6s}.ending-slide:nth-child(4){animation-delay:.9s}.ending-slide:nth-child(5){animation-delay:1.2s}.ending-slide:nth-child(6){animation-delay:1.5s}
+    .ending-slide p { font-size:0.95rem; line-height:2.2; opacity:.86; }
+    .ending-thanks { font-family:'Cormorant Garamond', serif; font-size: clamp(2.8rem, 9vw, 5rem); letter-spacing:0.25em; color:var(--gold); margin:3rem 0 1rem; }
+    .secret-word { margin:2rem auto; max-width:520px; padding:1.3rem; border:1px solid rgba(201,168,76,0.3); background:rgba(0,0,0,0.3); }
+    @keyframes archiveFade { from {opacity:0} to {opacity:1} }
+    @keyframes archiveFadeUp { to {opacity:1; transform:none;} }
+    @media(max-width:700px){ .archive-card{padding:1.2rem}.archive-photo-grid{grid-template-columns:1fr}.archive-btn{width:100%;} }
+
+
+    /* STRONG HIDDEN ARCHIVE LAYER */
+    .archive-game.archive-locked { display: none; }
+    .archive-unlock-toast {
+      position: fixed; left: 50%; bottom: 72px; transform: translateX(-50%);
+      z-index: 999; padding: 0.9rem 1.2rem; border: 1px solid rgba(201,168,76,0.45);
+      background: rgba(8,6,4,0.96); color: var(--gold); font-size: 0.78rem;
+      letter-spacing: 0.12em; opacity: 0; pointer-events: none; transition: opacity .4s ease;
+      box-shadow: 0 10px 40px rgba(0,0,0,.45); text-align:center;
+    }
+    .archive-unlock-toast.show { opacity: 1; }
+    .archive-hidden-dot {
+      position: absolute; width: 12px; height: 12px; border-radius: 50%;
+      background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.08);
+      right: 1.4rem; bottom: 1.4rem; cursor: pointer;
+    }
+    .archive-hidden-dot:hover { background: rgba(201,168,76,0.35); }
+    .archive-ghost-text {
+      display:block; margin-top:1.2rem; font-size:.62rem; letter-spacing:.18em;
+      color: rgba(232,222,200,0.12); user-select: text;
+    }
+    .archive-ghost-text::selection { color: var(--gold); background: rgba(155,28,28,.55); }
+    .archive-progress {
+      display:flex; gap:.45rem; flex-wrap:wrap; margin:1.2rem 0 0; opacity:.72;
+    }
+    .archive-progress span {
+      border:1px solid rgba(201,168,76,.25); padding:.35rem .55rem; font-size:.62rem;
+      letter-spacing:.12em; color:var(--muted);
+    }
+    .archive-progress span.done { color:var(--gold); border-color:rgba(201,168,76,.6); }
+    .archive-side-note {
+      writing-mode: vertical-rl; position:absolute; right:-1.4rem; top:1.2rem;
+      color:rgba(201,168,76,.22); font-size:.65rem; letter-spacing:.18em;
+    }
+    .archive-card { position: relative; }
+    .archive-hotspot-wrap { position:relative; }
+    .archive-hotspot {
+      position:absolute; width:34px; height:34px; border-radius:50%; cursor:pointer;
+      border:1px solid rgba(201,168,76,0); background:rgba(201,168,76,0);
+    }
+    .archive-hotspot:hover { border-color:rgba(201,168,76,.45); background:rgba(201,168,76,.08); }
+    .archive-found-note { display:none; color:var(--gold); font-size:.76rem; line-height:2; margin-top:.8rem; }
+    .archive-found-note.show { display:block; }
+    @media(max-width:700px){ .archive-side-note{display:none}.archive-hidden-dot{right:.8rem;bottom:.8rem;} }
+
   </style>
 </head>
 <body>
+<!-- EORNA ARCHIVE: 入口は看板を7回。もうひとつは eorna0713。見つけた人だけ、奥へどうぞ。 -->
+<div class="archive-unlock-toast" id="archiveUnlockToast">奥の扉が開きました。EORNA ARCHIVEへ進めます。</div>
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#">EORNA</a>
+  <a class="nav-logo" href="#" id="archiveLogoTrigger" title="EORNA">EORNA</a>
   <ul class="nav-links">
     <li><a href="#concept">CONCEPT</a></li>
     <li><a href="#menu">MENU</a></li>
@@ -563,7 +672,7 @@
 
 <!-- LOGO -->
 <!-- CONCEPT -->
-<section class="concept" id="concept">
+<section class="concept" id="concept" style="position:relative;">
   <span class="section-label">— CONCEPT —</span>
   <h2 class="section-title">GROUP THERAPY HERE<br><span style="font-size:0.55em;letter-spacing:0.3em;opacity:0.75;">BRITISH BAR EORNA</span></h2>
   <div class="divider"></div>
@@ -573,6 +682,8 @@
     チャージなし。気負いなし。<br>
     ただ、良い酒と良い仲間と。
   </p>
+  <button class="archive-hidden-dot" onclick="unlockArchive()" aria-label="hidden archive entrance"></button>
+  <span class="archive-ghost-text">since 2007 / 07 13 / 18th memory</span>
 </section>
 
 
@@ -785,6 +896,151 @@
 </section>
 
 
+
+
+<!-- EORNA ARCHIVE MYSTERY -->
+<section class="archive-game archive-locked" id="archive">
+  <div class="archive-inner">
+    <span class="section-label">— EORNA ARCHIVE —</span>
+    <h2 class="section-title">18年目の忘れ物</h2>
+    <p class="archive-lead">
+      これは、BAR EORNAの記憶をたどる小さな謎解きです。<br>
+      想定時間は約3時間。急がず、写真を見て、言葉を拾い、店の時間をゆっくり進んでください。
+    </p>
+    <p class="archive-small">※ この企画は店内で楽しむためのWEBイベントです。周囲のお客様のご迷惑にならない範囲でお楽しみください。</p>
+    <div class="archive-progress" id="archiveProgress"><span>ENTRY</span><span>BARLEY</span><span>SHELF</span><span>DATE</span><span>LINK</span><span>THANKS</span></div>
+
+    <div class="archive-card" id="archiveStart"><div class="archive-side-note">LOOK CLOSER</div>
+      <div class="archive-chapter active" data-chapter="0">
+        <h3>入口：古い記録</h3>
+        <p>ある夜、EORNAの古い記録の中から、短いメモが見つかりました。</p>
+        <div class="archive-riddle">
+          18年目の忘れ物を探すなら、<br>
+          まずはこの店の名前を知ること。<br><br>
+          EORNAとは、ゲール語で何を意味する言葉でしょう？<br>
+          英語で入力してください。
+        </div>
+        <input class="archive-input" id="answer0" placeholder="答えを入力">
+        <button class="archive-btn primary" onclick="checkArchiveAnswer(0)">答える</button>
+        <button class="archive-btn" onclick="showArchiveHint(0)">ヒントを見る</button>
+        <div class="archive-hint" id="hint0">CONCEPTの英文に答えがあります。大文字・小文字は問いません。</div>
+        <div class="archive-msg" id="msg0"></div>
+      </div>
+
+      <div class="archive-chapter" data-chapter="1">
+        <h3>第1章：棚の中の合図</h3>
+        <p>名前の扉が開くと、次に現れたのはバックバーの写真でした。</p>
+        <div class="archive-photo-grid archive-hotspot-wrap">
+          <div class="archive-hotspot-wrap"><img src="576D2DF9-430F-4E3A-8864-546A0766C9C5.jpeg" alt="EORNAのバックバー"><button class="archive-hotspot" style="left:62%;top:34%;" onclick="revealArchiveNote('foundShelf')" aria-label="hidden bottle clue"></button></div>
+          <div class="archive-hotspot-wrap"><img src="A3CD7751-AFBD-4ABB-B525-45B314D41FAA.jpeg" alt="EORNAのボトル棚"><button class="archive-hotspot" style="left:78%;top:58%;" onclick="revealArchiveNote('foundShelf')" aria-label="hidden bottle clue"></button></div>
+        </div>
+        <div class="archive-found-note" id="foundShelf">小さな札に、Jから始まる名が残っている。</div>
+        <div class="archive-riddle">
+          棚にはたくさんの名前が並んでいる。<br>
+          その中で、EORNAの今のサイトにも載っているアイリッシュウイスキーを探してください。<br><br>
+          答えは、緑のボトルでもおなじみの名前。<br>
+          アルファベットで入力してください。
+        </div>
+        <input class="archive-input" id="answer1" placeholder="答えを入力">
+        <button class="archive-btn primary" onclick="checkArchiveAnswer(1)">答える</button>
+        <button class="archive-btn" onclick="showArchiveHint(1)">ヒントを見る</button>
+        <div class="archive-hint" id="hint1">MENU内、Irish系として知られる定番銘柄。写真にも現在の棚にも残る名前です。</div>
+        <div class="archive-msg" id="msg1"></div>
+      </div>
+
+      <div class="archive-chapter" data-chapter="2">
+        <h3>第2章：日付の鍵</h3>
+        <p>ボトルの名前を抜けると、数字だけが書かれたカードが残されていました。</p>
+        <div class="archive-riddle">
+          2007　18　2023<br><br>
+          その中に、忘れてはいけない日付がある。<br>
+          4桁で入力してください。<br><br>
+          形式：月日。例：1月1日なら0101
+          <span class="archive-ghost-text">07 / 13</span>
+        </div>
+        <input class="archive-input" id="answer2" placeholder="答えを入力">
+        <button class="archive-btn primary" onclick="checkArchiveAnswer(2)">答える</button>
+        <button class="archive-btn" onclick="showArchiveHint(2)">ヒントを見る</button>
+        <div class="archive-hint" id="hint2">初代オーナーに関する、忘れてはいけない日です。</div>
+        <div class="archive-msg" id="msg2"></div>
+      </div>
+
+      <div class="archive-chapter" data-chapter="3">
+        <h3>第3章：受け継ぐ順番</h3>
+        <p>日付の扉の先には、3つの時代がありました。</p>
+        <div class="archive-photo-grid">
+          <img src="2E33375C-740E-4FE5-B592-3CDE02125486.jpeg" alt="かつてのカウンター">
+          <img src="A747CFC3-F879-4204-AF3A-CF5BF5D3F4D3.jpeg" alt="15年前のEORNA">
+          <img src="481B12ED-4DC7-4A48-9F0E-7A8DC54D555D.jpeg" alt="現在のEORNA">
+          <img src="FF16E128-1DCF-456C-BDF8-AFE4280C59D7.jpeg" alt="現在のカウンター">
+        </div>
+        <div class="archive-riddle">
+          作った人。<br>
+          支えた人。<br>
+          受け継いだ人。<br><br>
+          EORNAの物語は、一人ではなく、人から人へ渡ってきました。<br>
+          この言葉をローマ字で入力してください。<br><br>
+          「つなぐ」
+        </div>
+        <input class="archive-input" id="answer3" placeholder="答えを入力">
+        <button class="archive-btn primary" onclick="checkArchiveAnswer(3)">答える</button>
+        <button class="archive-btn" onclick="showArchiveHint(3)">ヒントを見る</button>
+        <div class="archive-hint" id="hint3">答えは5文字。TSUから始まります。</div>
+        <div class="archive-msg" id="msg3"></div>
+      </div>
+
+      <div class="archive-chapter" data-chapter="4">
+        <h3>最終章：この店の答え</h3>
+        <p>最後の扉には、文章はほとんどありません。ひとつだけ、手書きのような言葉が残っています。</p>
+        <div class="archive-riddle">
+          酒ではなく、建物でもなく、ボトルでもない。<br>
+          この店に来てくれたすべての人へ。<br><br>
+          最後に伝えたい言葉を、ひらがなで入力してください。
+        </div>
+        <input class="archive-input" id="answer4" placeholder="答えを入力">
+        <button class="archive-btn primary" onclick="checkArchiveAnswer(4)">エンディングへ</button>
+        <button class="archive-btn" onclick="showArchiveHint(4)">ヒントを見る</button>
+        <div class="archive-hint" id="hint4">最後の合言葉です。5文字。</div>
+        <div class="archive-msg" id="msg4"></div>
+      </div>
+
+      <div class="archive-ending" id="archiveEnding">
+        <div class="ending-slide">
+          <img src="E89860F0-8E6B-42B4-9BB9-23CDDF054C0C.jpeg" alt="EORNAの席">
+          <p>ここには、数え切れない会話がありました。</p>
+        </div>
+        <div class="ending-slide">
+          <img src="576D2DF9-430F-4E3A-8864-546A0766C9C5.jpeg" alt="EORNAのカウンター">
+          <p>数え切れない乾杯がありました。</p>
+        </div>
+        <div class="ending-slide">
+          <img src="2E33375C-740E-4FE5-B592-3CDE02125486.jpeg" alt="かつてのEORNA">
+          <p>この場所に、人が集まる理由を作った人がいました。</p>
+        </div>
+        <div class="ending-slide">
+          <img src="A747CFC3-F879-4204-AF3A-CF5BF5D3F4D3.jpeg" alt="15年前のEORNA">
+          <p>支えてくれた人がいました。</p>
+        </div>
+        <div class="ending-slide">
+          <img src="481B12ED-4DC7-4A48-9F0E-7A8DC54D555D.jpeg" alt="現在のEORNA">
+          <p>受け継いだ人がいました。</p>
+        </div>
+        <div class="ending-slide">
+          <img src="FF16E128-1DCF-456C-BDF8-AFE4280C59D7.jpeg" alt="無人のカウンター">
+          <p>そして今も、あなたがいることで、この物語は続いています。</p>
+        </div>
+        <div class="ending-thanks">ありがとう</div>
+        <p style="letter-spacing:0.2em;opacity:0.7;">BAR EORNA<br>Since 2007</p>
+        <div class="secret-word">
+          <p style="color:var(--gold);letter-spacing:0.15em;">CLEAR WORD</p>
+          <p>合言葉「ありがとう」をスタッフにお伝えください。<br>ハーフパイント1杯サービスいたします。</p>
+        </div>
+        <button class="archive-btn" onclick="resetArchiveGame()">最初から見る</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PRIVACY -->
 <section class="privacy">
   <div class="privacy-inner">
@@ -826,7 +1082,6 @@
   </div>
   <a href="#" onclick="document.querySelector('.privacy').scrollIntoView({behavior:'smooth'});return false;" style="display:block;margin-bottom:1rem;color:var(--muted);font-size:0.65rem;letter-spacing:0.2em;text-decoration:none;">プライバシーポリシー</a>
   <p>© 2026 BAR EORNA. All rights reserved.</p>
-  <a href="archive.html" style="display:block;margin-top:2rem;color:rgba(201,168,76,0.25);font-size:0.55rem;letter-spacing:0.3em;text-decoration:none;font-family:'Cormorant Garamond',serif;">Since 2007 · 18年目の忘れ物を探す</a>
 </footer>
 
 
@@ -838,6 +1093,92 @@
   </a>
   <a class="fixed-btn fixed-btn-map" href="https://maps.app.goo.gl/2kQ74VHM5rHyLmtz6" target="_blank">📍 地図</a>
 </div>
+
+
+
+<script>
+  const archiveAnswers = [
+    ['barley','BARLEY','Barley','大麦','おおむぎ'],
+    ['jameson','JAMESON','Jameson'],
+    ['0713','713','7/13','07/13'],
+    ['tsunagu','TSUNAGU','Tsunagu','つなぐ','継ぐ'],
+    ['ありがとう','有難う','ありがと']
+  ];
+  let archiveLogoTapCount = 0;
+  let archiveTyped = '';
+
+  function normalizeArchiveAnswer(v){ return (v || '').trim().replace(/\s+/g,'').toLowerCase(); }
+  function showArchiveToast(text){
+    const toast = document.getElementById('archiveUnlockToast');
+    if(!toast) return;
+    toast.textContent = text;
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 2600);
+  }
+  function unlockArchive(){
+    const section = document.getElementById('archive');
+    if(!section) return;
+    section.classList.remove('archive-locked');
+    showArchiveToast('奥の扉が開きました。EORNA ARCHIVEへ進めます。');
+    setTimeout(()=>section.scrollIntoView({behavior:'smooth', block:'start'}), 450);
+  }
+  function updateArchiveProgress(n){
+    const items = document.querySelectorAll('#archiveProgress span');
+    items.forEach((item, i)=> item.classList.toggle('done', i <= n + 1));
+  }
+  function revealArchiveNote(id){
+    const el = document.getElementById(id);
+    if(el) el.classList.add('show');
+  }
+  function checkArchiveAnswer(n){
+    const input = document.getElementById('answer'+n);
+    const msg = document.getElementById('msg'+n);
+    const val = normalizeArchiveAnswer(input.value);
+    const ok = archiveAnswers[n].some(a => normalizeArchiveAnswer(a) === val);
+    if(!ok){ msg.textContent = 'まだ違うようです。店の記憶をもう少し辿ってみてください。'; return; }
+    msg.textContent = '扉が開きました。';
+    updateArchiveProgress(n);
+    setTimeout(() => {
+      document.querySelector('[data-chapter="'+n+'"]').classList.remove('active');
+      if(n < 4){
+        document.querySelector('[data-chapter="'+(n+1)+'"]').classList.add('active');
+        document.getElementById('archiveStart').scrollIntoView({behavior:'smooth', block:'start'});
+      } else {
+        document.getElementById('archiveEnding').classList.add('show');
+        document.getElementById('archiveEnding').scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    }, 600);
+  }
+  function showArchiveHint(n){ document.getElementById('hint'+n).style.display='block'; }
+  function resetArchiveGame(){
+    document.querySelectorAll('.archive-chapter').forEach(c=>c.classList.remove('active'));
+    document.querySelector('[data-chapter="0"]').classList.add('active');
+    document.querySelectorAll('.archive-input').forEach(i=>i.value='');
+    document.querySelectorAll('.archive-msg').forEach(m=>m.textContent='');
+    document.querySelectorAll('.archive-hint').forEach(h=>h.style.display='none');
+    document.querySelectorAll('.archive-found-note').forEach(h=>h.classList.remove('show'));
+    document.querySelectorAll('#archiveProgress span').forEach(s=>s.classList.remove('done'));
+    document.getElementById('archiveEnding').classList.remove('show');
+    document.getElementById('archive').scrollIntoView({behavior:'smooth'});
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const logo = document.getElementById('archiveLogoTrigger');
+    if(logo){
+      logo.addEventListener('click', (e) => {
+        e.preventDefault();
+        archiveLogoTapCount++;
+        if(archiveLogoTapCount === 4) showArchiveToast('看板の奥で、何かが鳴った。');
+        if(archiveLogoTapCount >= 7){ unlockArchive(); archiveLogoTapCount = 0; }
+        setTimeout(()=>{ archiveLogoTapCount = 0; }, 5000);
+      });
+    }
+    document.addEventListener('keydown', (e)=>{
+      archiveTyped = (archiveTyped + e.key.toLowerCase()).slice(-16);
+      if(archiveTyped.includes('eorna0713')) unlockArchive();
+    });
+  });
+</script>
 
 </body>
 </html>
