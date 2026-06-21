@@ -362,6 +362,21 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    @keyframes fadeInSlow {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes goldPulse {
+      0% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+      50% { box-shadow: 0 0 30px 10px rgba(201,168,76,0.3); }
+      100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+    }
+
+    .chapter { animation: fadeInSlow 0.8s ease-in; }
+
+    .correct-flash {
+      animation: goldPulse 1s ease-out;
+    }
 
     /* NUMBERS in riddle */
     .riddle-numbers {
@@ -377,6 +392,13 @@
       color: var(--gold);
       letter-spacing: 0.1em;
     }
+
+    /* ENDING FADE */
+    .ending-slide {
+      opacity: 0;
+      transition: opacity 1.2s ease-in;
+    }
+    .ending-slide.visible { opacity: 1; }
 
     @media (max-width: 480px) {
       .ch-photo-grid img { height: 140px; }
@@ -431,7 +453,7 @@
       <button class="btn-answer" onclick="check(0)">答える</button>
       <button class="btn-hint" onclick="toggleHint(0)">ヒント</button>
     </div>
-    <div class="hint-text" id="hint0">サイトのCONCEPTページに答えがあります。</div>
+    <div class="hint-text" id="hint0">この店の名前は、麦畑の言葉から来ています。</div>
     <p class="msg" id="msg0"></p>
   </div>
 
@@ -455,7 +477,7 @@
       <button class="btn-answer" onclick="check(1)">答える</button>
       <button class="btn-hint" onclick="toggleHint(1)">ヒント</button>
     </div>
-    <div class="hint-text" id="hint1">緑のボトルでおなじみの、アイリッシュウイスキーの定番銘柄です。</div>
+    <div class="hint-text" id="hint1">黒いビールと、緑のボトル。あの夜の乾杯を思い出して。</div>
     <p class="msg" id="msg1"></p>
   </div>
 
@@ -483,7 +505,7 @@
       <button class="btn-answer" onclick="check(2)">答える</button>
       <button class="btn-hint" onclick="toggleHint(2)">ヒント</button>
     </div>
-    <div class="hint-text" id="hint2">初代オーナーに関する、忘れてはならない日です。</div>
+    <div class="hint-text" id="hint2">2007年、木枯らしの季節。扉が初めて開いた日。</div>
     <p class="msg" id="msg2"></p>
   </div>
 
@@ -511,7 +533,7 @@
       <button class="btn-answer" onclick="check(3)">答える</button>
       <button class="btn-hint" onclick="toggleHint(3)">ヒント</button>
     </div>
-    <div class="hint-text" id="hint3">TSUから始まる5文字です。</div>
+    <div class="hint-text" id="hint3">バトンは、走り続けることで意味を持つ。TSUから始まる言葉。</div>
     <p class="msg" id="msg3"></p>
   </div>
 
@@ -525,43 +547,48 @@
       ただひとつだけ、問いが残されていました。
     </p>
     <div class="ch-riddle">
-      酒ではなく、建物でもなく、ボトルでもない。<br><br>
-      この店に来てくれたすべての人へ、<br>
-      最後に伝えたい言葉は何か。<br><br>
-      ひらがなで答えてください。
+      木村さんが18年間、<br>
+      お客様に伝え続けた言葉。<br><br>
+      来てくれた人へ、<br>
+      帰り際にかけるあの一言。<br><br>
+      ひらがな5文字で答えてください。
     </div>
     <input class="ch-input" id="ans4" placeholder="ひらがなで入力" autocomplete="off">
     <div class="btn-row">
       <button class="btn-answer" onclick="check(4)">エンディングへ</button>
       <button class="btn-hint" onclick="toggleHint(4)">ヒント</button>
     </div>
-    <div class="hint-text" id="hint4">5文字。木村さんが遺したものを思ってください。</div>
+    <div class="hint-text" id="hint4">グラスを傾けるとき、誰かに伝えたいあの言葉。5文字。</div>
     <p class="msg" id="msg4"></p>
   </div>
 
   <!-- ENDING -->
   <div id="ending">
-    <div class="ending-slide">
+    <div class="ending-slide" id="es0">
       <img src="IMG_3186.jpeg" alt="EORNAのカウンター">
       <p class="ending-caption">ここには、数え切れない会話がありました。</p>
     </div>
-    <div class="ending-slide">
+    <div class="ending-slide" id="es1">
       <img src="IMG_3185.jpeg" alt="EORNAの店内">
       <p class="ending-caption">数え切れない乾杯がありました。</p>
     </div>
-    <div class="ending-slide">
+    <div class="ending-slide" id="es2">
       <img src="A747CFC3-F879-4204-AF3A-CF5BF5D3F4D3.jpeg" alt="15年前の津守さん">
       <p class="ending-caption">この場所を支えた人がいました。</p>
     </div>
-    <div class="ending-slide">
+    <div class="ending-slide" id="es3">
       <img src="481B12ED-4DC7-4A48-9F0E-7A8DC54D555D.jpeg" alt="永田さん" style="object-position: center 15%;">
       <p class="ending-caption">受け継いだ人がいました。</p>
     </div>
-    <div class="ending-slide">
+    <div class="ending-slide" id="es4">
       <img src="2E33375C-740E-4FE5-B592-3CDE02125486.jpeg" alt="木村さん">
       <p class="ending-caption">この店を作った人がいました。</p>
     </div>
-    <div class="ending-thanks">
+    <div class="ending-slide" id="es5">
+      <img src="IMG_2359.png" alt="木村さんとボム" style="object-position: center 30%;">
+      <p class="ending-caption">そして、一番笑っていた人がいました。</p>
+    </div>
+    <div class="ending-thanks" id="es6" style="opacity:0;transition:opacity 1.5s ease-in;">
       <span class="ending-thanks-word">ありがとう</span>
       <p class="ending-since">BAR EORNA · Since 2007</p>
       <div class="ending-secret">
@@ -581,7 +608,7 @@
   const ANSWERS = [
     ['barley'],
     ['jameson'],
-    ['0713'],
+    ['1125'],
     ['tsugu', 'つぐ', 'TSUGU', 'tsunagu', 'TSUNAGU', 'つなぐ'],
     ['ありがとう', 'ありがとう']
   ];
@@ -603,7 +630,6 @@
     if (e.key === 'Enter') checkLock();
   });
 
-  // CHAPTER CHECK
   function check(n) {
     const val = document.getElementById('ans' + n).value.trim().toUpperCase();
     const correct = ANSWERS[n].map(a => a.toUpperCase());
@@ -611,8 +637,9 @@
     if (correct.includes(val)) {
       msg.textContent = '— 正解 —';
       msg.className = 'msg ok';
+      document.getElementById('ch' + n).classList.add('correct-flash');
       updateDot(n);
-      setTimeout(() => nextChapter(n), 1200);
+      setTimeout(() => nextChapter(n), 1400);
     } else {
       msg.textContent = '— もう一度考えてみてください —';
       msg.className = 'msg ng';
@@ -651,6 +678,22 @@
     }
     document.getElementById('ending').style.display = 'block';
     window.scrollTo(0, 0);
+
+    // スライドを順番にフェードイン
+    const slides = ['es0','es1','es2','es3','es4','es5'];
+    slides.forEach((id, i) => {
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('visible');
+        window.scrollTo({ top: document.getElementById(id).offsetTop - 60, behavior: 'smooth' });
+      }, i * 1800);
+    });
+
+    // 最後に「ありがとう」をフェードイン
+    setTimeout(() => {
+      const thanks = document.getElementById('es6');
+      if (thanks) thanks.style.opacity = '1';
+    }, slides.length * 1800 + 800);
   }
 
   function restart() {
