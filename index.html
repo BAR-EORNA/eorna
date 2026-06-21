@@ -534,7 +534,7 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#">EORNA</a>
+  <a class="nav-logo" href="#" id="navLogo">EORNA</a>
   <ul class="nav-links">
     <li><a href="#concept">CONCEPT</a></li>
     <li><a href="#menu">MENU</a></li>
@@ -543,6 +543,131 @@
     <li><a href="en.html" style="font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);text-decoration:none;border:1px solid rgba(201,168,76,0.4);padding:0.3rem 0.7rem;">🇬🇧</a></li>
   </ul>
 </nav>
+
+<!-- 隠し要素：深夜メッセージ -->
+<div id="nightMsg" style="display:none;position:fixed;top:70px;left:0;right:0;z-index:150;text-align:center;padding:0.6rem;background:rgba(155,28,28,0.9);font-size:0.7rem;letter-spacing:0.25em;color:#fff;">
+  まだ飲んでますよ。お待ちしています。
+</div>
+
+<!-- 隠し要素：ボトル発見トースト -->
+<div id="bottleToast" style="display:none;position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:300;background:rgba(10,8,6,0.95);border:1px solid rgba(201,168,76,0.4);padding:0.8rem 2rem;text-align:center;white-space:nowrap;transition:opacity 0.5s;">
+  <p style="font-size:0.65rem;letter-spacing:0.3em;color:var(--gold);font-family:'Cormorant Garamond',serif;" id="bottleToastText"></p>
+</div>
+
+<!-- 隠し要素：地図メッセージ -->
+<div id="mapMsg" style="display:none;position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:300;background:rgba(10,8,6,0.95);border:1px solid rgba(201,168,76,0.4);padding:1rem 2rem;text-align:center;white-space:nowrap;">
+  <p style="font-size:0.72rem;letter-spacing:0.2em;color:var(--cream);">迷ったら電話してください。</p>
+  <a href="tel:0368207456" style="display:block;margin-top:0.5rem;font-size:0.8rem;color:var(--gold);letter-spacing:0.15em;text-decoration:none;">03-6820-7456</a>
+</div>
+
+<script>
+// ① 深夜限定（01:00〜03:00）メッセージ
+(function(){
+  const h = new Date().getHours();
+  if(h >= 1 && h < 3) {
+    document.getElementById('nightMsg').style.display = 'block';
+  }
+})();
+
+// ② ロゴ5秒長押しで音
+(function(){
+  const logo = document.getElementById('navLogo');
+  let logoTimer;
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+  function playGlassSound() {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.8);
+    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 1.2);
+  }
+
+  logo.addEventListener('touchstart', () => {
+    logoTimer = setTimeout(playGlassSound, 5000);
+  });
+  logo.addEventListener('touchend', () => clearTimeout(logoTimer));
+  logo.addEventListener('mousedown', () => {
+    logoTimer = setTimeout(playGlassSound, 5000);
+  });
+  logo.addEventListener('mouseup', () => clearTimeout(logoTimer));
+})();
+
+// ③ GALLERYボトル発見
+(function(){
+  const bottles = [
+    { src: 'IMG_1103.jpeg', name: 'BOWMORE を発見しました 🥃' },
+    { src: 'IMG_1104.jpeg', name: 'JAMESON を発見しました 🥃' },
+    { src: 'IMG_1102.jpeg', name: 'OLD PARR を発見しました 🥃' },
+    { src: 'IMG_1105.jpeg', name: 'TALISKER を発見しました 🥃' },
+  ];
+  const toast = document.getElementById('bottleToast');
+  const toastText = document.getElementById('bottleToastText');
+  let toastTimer;
+
+  bottles.forEach(b => {
+    const imgs = document.querySelectorAll(`img[src="${b.src}"]`);
+    imgs.forEach(img => {
+      img.addEventListener('click', () => {
+        toastText.textContent = b.name;
+        toast.style.display = 'block';
+        toast.style.opacity = '1';
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.style.opacity = '0';
+          setTimeout(() => toast.style.display = 'none', 500);
+        }, 2500);
+      });
+    });
+  });
+})();
+
+// ④ CONCEPTテキスト隠し文字（特定文字をゴールドに）
+(function(){
+  const concept = document.querySelector('.concept p');
+  if(!concept) return;
+  const text = concept.innerHTML;
+  // 「ありがとう」の各文字を隠し文字として特定の場所に埋め込み
+  // あ→「賑」い→「灯」り→「良」が→「仲」と→「酒」う→「笑」
+  const map = {'賑':'あ','灯':'い','良':'り','仲':'が','酒':'と','笑':'う'};
+  let result = text;
+  Object.entries(map).forEach(([char, hidden]) => {
+    result = result.replace(char, `<span style="color:rgba(201,168,76,0.6);cursor:default;" title="${hidden}">${char}</span>`);
+  });
+  concept.innerHTML = result;
+})();
+
+// ⑤ 地図を10秒見続けると
+(function(){
+  const mapWrap = document.querySelector('.map-wrap');
+  const mapMsg = document.getElementById('mapMsg');
+  if(!mapWrap || !mapMsg) return;
+  let mapTimer;
+
+  mapWrap.addEventListener('mouseenter', () => {
+    mapTimer = setTimeout(() => {
+      mapMsg.style.display = 'block';
+      setTimeout(() => mapMsg.style.display = 'none', 4000);
+    }, 10000);
+  });
+  mapWrap.addEventListener('mouseleave', () => clearTimeout(mapTimer));
+
+  // スマホ：タップして10秒後
+  mapWrap.addEventListener('touchstart', () => {
+    mapTimer = setTimeout(() => {
+      mapMsg.style.display = 'block';
+      setTimeout(() => mapMsg.style.display = 'none', 4000);
+    }, 10000);
+  });
+  mapWrap.addEventListener('touchend', () => clearTimeout(mapTimer));
+})();
+</script>
 
 <!-- HERO：写真＋文字のみ -->
 <section class="hero" id="heroSection">
