@@ -389,7 +389,7 @@
   <h1 class="lock-title">18年目の<br>忘れ物</h1>
   <p class="lock-sub">SINCE 2007</p>
   <div class="lock-rule"></div>
-  <p class="lock-hint">この扉には、合言葉が必要です。</p>
+  <p class="lock-hint">EORNAといえば、あのカクテル。</p>
   <input class="lock-input" id="lockInput" type="text" placeholder="合言葉を入力" autocomplete="off">
   <button class="lock-btn" onclick="checkLock()">扉を開く</button>
   <p class="lock-err" id="lockErr"></p>
@@ -575,6 +575,7 @@
 
 <script>
   const LOCK_PASSWORD = 'eorna0713';
+  const LOCK_ALTS = ['bomb', 'ボム', 'BOMB'];
   const ANSWERS = [
     ['barley'],
     ['jameson'],
@@ -586,8 +587,9 @@
 
   // LOCK
   function checkLock() {
-    const val = document.getElementById('lockInput').value.trim().toLowerCase();
-    if (val === LOCK_PASSWORD || val === 'eorna0713') {
+    const val = document.getElementById('lockInput').value.trim();
+    const valLower = val.toLowerCase();
+    if (valLower === LOCK_PASSWORD || LOCK_ALTS.map(a => a.toLowerCase()).includes(valLower)) {
       document.getElementById('lockScreen').style.display = 'none';
       document.getElementById('mainContent').style.display = 'block';
     } else {
