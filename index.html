@@ -230,41 +230,6 @@
       object-fit: contain;
     }
 
-    /* STORY */
-    .story {
-      background: var(--dark);
-      padding: 8rem 2rem;
-      border-top: 1px solid rgba(201,168,76,0.1);
-    }
-    .story-inner {
-      max-width: 600px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .story-lines {
-      margin-top: 3rem;
-    }
-    .story-line {
-      font-family: 'Noto Serif JP', serif;
-      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-      line-height: 1;
-      color: var(--cream);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-      margin-bottom: 2rem;
-      letter-spacing: 0.1em;
-    }
-    .story-line.visible {
-      opacity: 0.85;
-      transform: translateY(0);
-    }
-    .story-line.highlight {
-      color: var(--gold);
-      opacity: 1;
-      font-size: clamp(1rem, 3vw, 1.3rem);
-    }
-
     /* CONCEPT */
     .concept { max-width: 680px; margin: 0 auto; text-align: center; }
     .concept p { font-size: 0.9rem; line-height: 2.2; color: var(--cream); opacity: 0.8; }
@@ -628,31 +593,6 @@
 </section>
 
 
-<!-- STORY -->
-<section class="story" id="story">
-  <div class="story-inner">
-    <span class="section-label">— STORY —</span>
-    <div class="story-lines">
-      <p class="story-line">2007年11月25日。</p>
-      <p class="story-line">新宿三丁目の地下に、一軒のバーが生まれた。</p>
-      <p class="story-line">店主の名は、木村。</p>
-      <p class="story-line">誰もが気軽に立ち寄れる場所を作りたい。</p>
-      <p class="story-line">その想いひとつで、扉を開けた。</p>
-      <p class="story-line">ウイスキー、ビール、そして笑い声。</p>
-      <p class="story-line">16年間、その灯は消えなかった。</p>
-      <p class="story-line">2023年7月13日。</p>
-      <p class="story-line">木村は、静かにこの世を去った。</p>
-      <p class="story-line">しかしEORNAの扉は、閉まらなかった。</p>
-      <p class="story-line">りーくんが、その場所を守った。</p>
-      <p class="story-line">2024年4月1日。</p>
-      <p class="story-line">永田が、バトンを受け取った。</p>
-      <p class="story-line">今日も、新宿三丁目の地下に灯がともる。</p>
-      <p class="story-line">あの日と変わらぬ、EORNAの灯が。</p>
-      <p class="story-line"><a href="archive.html" style="color:rgba(201,168,76,0.5);text-decoration:none;font-size:0.75rem;letter-spacing:0.3em;font-family:'Cormorant Garamond',serif;">— この続きを知りたい人へ —</a></p>
-    </div>
-  </div>
-</section>
-
 <!-- MENU -->
 <section class="menu" id="menu">
   <div class="menu-inner">
@@ -936,26 +876,6 @@
   </a>
   <a class="fixed-btn fixed-btn-map" href="https://maps.app.goo.gl/2kQ74VHM5rHyLmtz6" target="_blank">📍 地図</a>
 </div>
-
-<script>
-// STORYスクロールアニメーション
-const storyLines = document.querySelectorAll('.story-line');
-const highlights = [0, 7, 8, 11, 12, 14]; // ゴールド強調する行
-
-highlights.forEach(i => {
-  if (storyLines[i]) storyLines[i].classList.add('highlight');
-});
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.3 });
-
-storyLines.forEach(line => observer.observe(line));
-</script>
 
 </body>
 </html>
