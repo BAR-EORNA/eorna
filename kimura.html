@@ -204,10 +204,10 @@ const scenario = [
 
   // 問題2
   {type:'choice', chapter:'CHAPTER 2 · 謎2', location:'BAR EORNA · バックバー', bg:'IMG_3183.jpeg',
-   question:'EORNAの名物カクテル「ボム」に\n通常使用するウイスキーの銘柄は？',
-   choices:['ジャックダニエル', 'バランタイン ファイネスト', 'ジョニーウォーカー', 'シーバスリーガル'],
+   question:'EORNAの名物カクテル「ボム」に\n使用するウイスキーの銘柄は？',
+   choices:['バランタイン ファイネスト', 'ジェイムソン', 'ジャックダニエル', 'シーバスリーガル'],
    correct:1,
-   correctText:'りーくん「バランタイン ファイネスト。しかしグラスの色はもっと濃い。別の何かが混入されている。」'},
+   correctText:'りーくん「ジェイムソン。しかしグラスの色はもっと濃い。別の何かが混入されている。」'},
 
   // CHAPTER 3: 容疑者尋問・わかめ
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'わかめ。お前はどこにいた？', bg:'IMG_3186.jpeg', location:'BAR EORNA · 尋問', chapter:'CHAPTER 3'},
@@ -339,6 +339,7 @@ function typeText(text) {
   el.textContent = '';
   isTyping = true;
   let i = 0;
+  clearTimeout(typeTimeout);
   function type() {
     if(i < text.length) {
       el.textContent += text[i]; i++;
