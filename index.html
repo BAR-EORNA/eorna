@@ -78,7 +78,7 @@
 
     /* HERO */
     .hero{ padding:30vh var(--pad) 13vh; cursor:pointer; }
-    .crest{ width:150px; background:#F2EAD9; padding:14px 14px 9px; margin-bottom:clamp(2rem,6vw,3.4rem); }
+    .crest{ width:clamp(96px,26vw,132px); background:#F2EAD9; padding:12px 12px 8px; margin-bottom:clamp(2rem,6vw,3.4rem); }
     .crest img{ width:100%; }
     .word{ font-family:var(--mono); font-weight:700; font-size:clamp(2.8rem,14vw,7.5rem); line-height:.95; letter-spacing:.01em; text-transform:uppercase; margin-top:1.2rem; }
     .word .d{ color:var(--gold); }
@@ -201,7 +201,7 @@
 
 <!-- HERO (tap → story.html) -->
 <section class="hero" id="heroSection" style="border-bottom:1px solid var(--line);">
-  <div class="crest"><img src="BAR_EORNA.png" alt="EORNA crest"></div>
+  <div class="crest"><img src="BAR_EORNA.png" alt="" onerror="this.closest('.crest').remove()"></div>
   <div class="kick">British Bar — Shinjuku 3-Chome</div>
   <h1 class="word">BAR<br>EORNA<span class="d">.</span></h1>
   <p class="tag">Group Therapy Here. 肩肘張らず、一杯から。</p>
@@ -263,9 +263,9 @@
   <div class="story-inner">
     <div class="pf">
       <div class="psq" id="ownerImg">
-        <div class="ph ph-owner"><img src="IMG_3178.jpeg" alt="永田 孔一 — Owner" style="object-position:center 32%;"></div>
+        <div class="ph ph-owner"><img src="IMG_3178.jpeg" alt="" style="object-position:center 32%;" onerror="this.style.display='none'"></div>
         <div class="ph ph-kimura">
-          <img src="IMG_9183_Original.jpeg" alt="木村 — Founder" style="object-position:center 40%;">
+          <img src="IMG_9183_Original.jpeg" alt="" style="object-position:center 40%;" onerror="this.style.display='none'">
           <div class="ptrib"><div class="a">16年間、ありがとうございました。</div><div class="b">2007 — 2023</div></div>
         </div>
       </div>
