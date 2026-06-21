@@ -1012,20 +1012,15 @@
 </div>
 
 <script>
-// フッターBAR EORNAダブルタップ → kimura.html
+// フッターBAR EORNAタップ → kimura.html
 (function(){
   const logo = document.getElementById('footerLogo');
   if(!logo) return;
-  let lastTap = 0;
+  logo.addEventListener('click', () => {
+    window.location.href = 'kimura.html';
+  });
   logo.addEventListener('touchend', (e) => {
     e.preventDefault();
-    const now = Date.now();
-    if(now - lastTap < 400) {
-      window.location.href = 'kimura.html';
-    }
-    lastTap = now;
-  });
-  logo.addEventListener('dblclick', () => {
     window.location.href = 'kimura.html';
   });
 })();
