@@ -550,11 +550,6 @@
 </div>
 
 <!-- 隠し要素：地図メッセージ -->
-<div id="mapMsg" style="display:none;position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:300;background:rgba(10,8,6,0.95);border:1px solid rgba(201,168,76,0.4);padding:1rem 2rem;text-align:center;white-space:nowrap;">
-  <p style="font-size:0.72rem;letter-spacing:0.2em;color:var(--cream);margin-bottom:0.8rem;">迷ったら電話してください。</p>
-  <a href="tel:0368207456" style="display:inline-block;padding:0.6rem 1.5rem;background:var(--red);color:#fff;text-decoration:none;font-size:0.78rem;letter-spacing:0.15em;">📞 03-6820-7456</a>
-</div>
-
 <script>
 // ① 深夜限定（01:00〜03:00）メッセージ
 (function(){
@@ -808,6 +803,29 @@
           <div class="menu-item"><span class="name">Fuzzy Navel / ファジーネーブル</span><span class="price">¥1,000〜</span></div>
         </div>
         <p class="menu-note">この他にもご希望に合わせてお作りします。お気軽にお尋ねください。</p>
+      </div>
+
+      <!-- 名物動画 -->
+      <div style="grid-column:1/-1;margin-top:2rem;">
+        <div class="menu-category">
+          <h4 style="text-align:center;margin-bottom:2rem;">— 名物カクテル —</h4>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+            <div style="text-align:center;">
+              <p style="font-size:0.7rem;letter-spacing:0.3em;color:var(--gold);margin-bottom:1rem;">BOMB</p>
+              <div style="position:relative;padding-bottom:177%;height:0;overflow:hidden;border:1px solid rgba(201,168,76,0.2);">
+                <iframe src="https://www.youtube.com/embed/XqkFHYS_plM" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen loading="lazy"></iframe>
+              </div>
+              <p style="font-size:0.68rem;color:var(--muted);margin-top:0.8rem;line-height:1.8;">ギネス×ジェイムソン×ベイリーズ<br>¥1,800</p>
+            </div>
+            <div style="text-align:center;">
+              <p style="font-size:0.7rem;letter-spacing:0.3em;color:var(--gold);margin-bottom:1rem;">YOROKOBASHIKA</p>
+              <div style="position:relative;padding-bottom:177%;height:0;overflow:hidden;border:1px solid rgba(201,168,76,0.2);">
+                <iframe src="https://www.youtube.com/embed/lFwc0kiubL4" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen loading="lazy"></iframe>
+              </div>
+              <p style="font-size:0.68rem;color:var(--muted);margin-top:0.8rem;line-height:1.8;">ニコラシカ（木村流）<br>¥1,300</p>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
