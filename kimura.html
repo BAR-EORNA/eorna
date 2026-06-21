@@ -175,17 +175,17 @@ const scenario = [
   // PROLOGUE
   {type:'dialog', speaker:'ナレーター', speakerClass:'', text:'2024年、秋の深夜。BAR EORNAに警察から連絡が入った。', bg:'IMG_3186.jpeg', location:'BAR EORNA · 深夜', chapter:'PROLOGUE'},
   {type:'dialog', speaker:'ナレーター', speakerClass:'', text:'閉店後のBAR内で、常連客の男・田中が死亡していた。死因は不明。現場は密室。', bg:'IMG_3186.jpeg', location:'BAR EORNA · 現場', chapter:'PROLOGUE'},
-  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'りーくん、来てくれてよかった。俺じゃどうにもならん。', bg:'IMG_9183_Original.jpeg', location:'BAR EORNA · カウンター', chapter:'PROLOGUE'},
-  {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'状況を教えてくれ、木村さん。', bg:'IMG_9183_Original.jpeg', location:'BAR EORNA · カウンター', chapter:'PROLOGUE'},
-  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'今夜の閉店後、残っていたのは俺とわかめ、それから常連の田中さんと佐々木さんの4人だった。', bg:'IMG_9183_Original.jpeg', location:'BAR EORNA · カウンター', chapter:'PROLOGUE'},
+  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'りーくん、来てくれてよかった。俺じゃどうにもならん。', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'PROLOGUE'},
+  {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'状況を教えてくれ、木村さん。', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'PROLOGUE'},
+  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'今夜の閉店後、残っていたのは俺とわかめ、それから常連の田中さんと佐々木さんの4人だった。', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'PROLOGUE'},
   {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'俺が席を外した隙に、田中さんが倒れてた。入口は施錠済み。誰も出入りしていない。', bg:'IMG_3186.jpeg', location:'BAR EORNA · 現場', chapter:'PROLOGUE'},
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'（容疑者は3人。わかめ、佐々木、そして…木村さん自身か。）', bg:'IMG_3186.jpeg', location:'BAR EORNA · 現場', chapter:'PROLOGUE'},
 
   // CHAPTER 1: 死亡時刻
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'まず死亡推定時刻を絞る。木村さん、席を外したのは何時頃だ？', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 1'},
-  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'午前1時15分から30分間、仕込みのために厨房にいた。', bg:'IMG_9183_Original.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 1'},
+  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'午前1時15分から30分間、仕込みのために厨房にいた。', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 1'},
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'その間、田中さんのそばにいたのは？', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 1'},
-  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'わかめと佐々木さんだ。', bg:'IMG_9183_Original.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 1'},
+  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'わかめと佐々木さんだ。', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 1'},
   {type:'evidence', text:'【証拠①】\n木村が厨房にいた時間：午前1時15分〜1時45分\nこの間、田中のそばにいたのはわかめと佐々木のみ'},
 
   // 問題1
@@ -197,9 +197,9 @@ const scenario = [
 
   // CHAPTER 2: カクテルの謎
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'田中さんが飲んでいたものは？', bg:'IMG_3183.jpeg', location:'BAR EORNA · バックバー', chapter:'CHAPTER 2'},
-  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'ボムだ。うちの名物でな。ビールにウイスキーを落として飲む。', bg:'IMG_9183_Original.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 2'},
+  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'ボムだ。うちの名物でな。ビールにウイスキーを落として飲む。', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 2'},
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'（グラスを調べる）…液体の色が少し変だ。ボムにしては濃すぎる。', bg:'IMG_3183.jpeg', location:'BAR EORNA · バックバー', chapter:'CHAPTER 2'},
-  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'！…確かに。誰かが何かを混ぜたのか？', bg:'IMG_9183_Original.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 2'},
+  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'！…確かに。誰かが何かを混ぜたのか？', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 2'},
   {type:'evidence', text:'【証拠②】\n田中のグラスに不審な液体の混入を確認\nボムに使用するウイスキーはバランタイン ファイネスト\n→ しかしグラスの液体は通常より濃い色'},
 
   // 問題2
@@ -240,10 +240,10 @@ const scenario = [
    correct:'りーくん「ウイスキーボトル。…しかし毒を仕込むなら、事前に準備が必要だ。」'},
 
   // CHAPTER 5: 動機
-  {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'木村さん。わかめと田中さんの間に何かあったか？', bg:'IMG_9183_Original.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 5'},
-  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'…実は。田中さんはわかめの昔の知り合いだったんだ。', bg:'IMG_9183_Original.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 5'},
-  {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'昔の？', bg:'IMG_9183_Original.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 5'},
-  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'わかめが前の職場でやらかしたことを、田中さんは知っていた。最近それをネタにゆすっていたらしい。', bg:'IMG_9183_Original.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 5'},
+  {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'木村さん。わかめと田中さんの間に何かあったか？', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 5'},
+  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'…実は。田中さんはわかめの昔の知り合いだったんだ。', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 5'},
+  {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'昔の？', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 5'},
+  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'わかめが前の職場でやらかしたことを、田中さんは知っていた。最近それをネタにゆすっていたらしい。', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 5'},
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'（核心に近づいた。）犯行動機はそれか。', bg:'IMG_3186.jpeg', location:'BAR EORNA · 現場', chapter:'CHAPTER 5'},
   {type:'evidence', text:'【証拠⑤】\nわかめの動機：\n田中は過去にわかめが前職で起こした不正を知っており\n口止め料を要求していた\n→ 消すしかなかった'},
 
@@ -256,9 +256,9 @@ const scenario = [
 
   // CHAPTER 6: 密室の謎
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'しかし問題は密室だ。閉店後、誰も出入りしていない。どうやって毒を？', bg:'IMG_3186.jpeg', location:'BAR EORNA · 現場', chapter:'CHAPTER 6'},
-  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'うちはカクテルを作るとき、バーテンダー以外はバックバーに入れない決まりだ。', bg:'IMG_9183_Original.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 6'},
-  {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'つまり…客のグラスに何かを入れられるのはバーテンダーだけ。', bg:'IMG_9183_Original.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 6'},
-  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'俺は厨房にいた。わかめが一人で対応していた時間がある。', bg:'IMG_9183_Original.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 6'},
+  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'うちはカクテルを作るとき、バーテンダー以外はバックバーに入れない決まりだ。', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 6'},
+  {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'つまり…客のグラスに何かを入れられるのはバーテンダーだけ。', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 6'},
+  {type:'dialog', speaker:'木村', speakerClass:'bartender', text:'俺は厨房にいた。わかめが一人で対応していた時間がある。', bg:'IMG_3186.jpeg', location:'BAR EORNA · カウンター', chapter:'CHAPTER 6'},
   {type:'dialog', speaker:'りーくん', speakerClass:'detective', text:'わかめが田中のグラスに毒を混入した。密室は関係ない。最初から内部の犯行だ。', bg:'IMG_3186.jpeg', location:'BAR EORNA · 現場', chapter:'CHAPTER 6'},
   {type:'evidence', text:'【証拠⑥】\n密室の真相：\n外部からの侵入は不可能\n→ 犯行は内部者によるもの\nバーテンダーのわかめのみが\n田中のグラスに近づける立場にいた'},
 
