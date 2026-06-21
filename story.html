@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STORY | BAR EORNA</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --dark:  #0A0806;
+      --gold:  #C9A84C;
+      --cream: #E8DEC8;
+      --muted: #6A5A42;
+      --red:   #9B1C1C;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(10,8,6,0.95);
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .nav-back {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    /* STORY */
+    .story-wrap {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 10rem 2rem 8rem;
+      text-align: center;
+    }
+    .story-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.5em;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      display: block;
+    }
+    .story-line {
+      font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+      line-height: 1;
+      color: var(--cream);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+      margin-bottom: 2.2rem;
+      letter-spacing: 0.12em;
+    }
+    .story-line.visible {
+      opacity: 0.85;
+      transform: translateY(0);
+    }
+    .story-line.highlight {
+      color: var(--gold);
+      opacity: 0;
+      font-size: clamp(1.05rem, 3vw, 1.35rem);
+    }
+    .story-line.highlight.visible {
+      opacity: 1;
+    }
+
+    /* FOOTER LINK */
+    .story-footer {
+      margin-top: 5rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+    .story-footer.visible { opacity: 1; }
+    .story-footer a {
+      color: rgba(201,168,76,0.5);
+      text-decoration: none;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .story-footer a:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">EORNA</a>
+  <a class="nav-back" href="index.html">← 戻る</a>
+</nav>
+
+<div class="story-wrap">
+  <span class="story-label">— STORY —</span>
+
+  <p class="story-line highlight">2007年11月25日。</p>
+  <p class="story-line">新宿三丁目の地下に、一軒のバーが生まれた。</p>
+  <p class="story-line">店主の名は、木村。</p>
+  <p class="story-line">誰もが気軽に立ち寄れる場所を作りたい。</p>
+  <p class="story-line">その想いひとつで、扉を開けた。</p>
+  <p class="story-line">ウイスキー、ビール、そして笑い声。</p>
+  <p class="story-line">16年間、その灯は消えなかった。</p>
+  <p class="story-line highlight">2023年7月13日。</p>
+  <p class="story-line">木村は、静かにこの世を去った。</p>
+  <p class="story-line">しかしEORNAの扉は、閉まらなかった。</p>
+  <p class="story-line">りーくんが、その場所を守った。</p>
+  <p class="story-line highlight">2024年4月1日。</p>
+  <p class="story-line">永田が、バトンを受け取った。</p>
+  <p class="story-line">今日も、新宿三丁目の地下に灯がともる。</p>
+  <p class="story-line">あの日と変わらぬ、EORNAの灯が。</p>
+
+  <div class="story-footer" id="storyFooter">
+    <a href="archive.html">— この続きを知りたい人へ —</a>
+  </div>
+</div>
+
+<script>
+  const lines = document.querySelectorAll('.story-line');
+  const footer = document.getElementById('storyFooter');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  lines.forEach(line => observer.observe(line));
+
+  // 最後の行が見えたらフッターも表示
+  const lastLine = lines[lines.length - 1];
+  const footerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => footer.classList.add('visible'), 1000);
+      }
+    });
+  }, { threshold: 0.5 });
+  footerObserver.observe(lastLine);
+</script>
+
+</body>
+</html>
