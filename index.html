@@ -643,29 +643,26 @@
   concept.innerHTML = result;
 })();
 
-// ⑤ 地図を10秒見続けると
+// ⑤ 地図を3秒見続けると
 (function(){
-  const mapWrap = document.querySelector('.map-wrap');
+  const mapOverlay = document.getElementById('mapOverlay');
   const mapMsg = document.getElementById('mapMsg');
-  if(!mapWrap || !mapMsg) return;
+  if(!mapOverlay || !mapMsg) return;
   let mapTimer;
 
-  mapWrap.addEventListener('mouseenter', () => {
-    mapTimer = setTimeout(() => {
-      mapMsg.style.display = 'block';
-      setTimeout(() => mapMsg.style.display = 'none', 4000);
-    }, 3000);
-  });
-  mapWrap.addEventListener('mouseleave', () => clearTimeout(mapTimer));
+  function showMsg() {
+    mapMsg.style.display = 'block';
+    setTimeout(() => mapMsg.style.display = 'none', 4000);
+  }
 
-  // スマホ：タップして3秒後
-  mapWrap.addEventListener('touchstart', () => {
-    mapTimer = setTimeout(() => {
-      mapMsg.style.display = 'block';
-      setTimeout(() => mapMsg.style.display = 'none', 4000);
-    }, 3000);
+  mapOverlay.addEventListener('mousedown', () => {
+    mapTimer = setTimeout(showMsg, 3000);
   });
-  mapWrap.addEventListener('touchend', () => clearTimeout(mapTimer));
+  mapOverlay.addEventListener('mouseup', () => clearTimeout(mapTimer));
+  mapOverlay.addEventListener('touchstart', () => {
+    mapTimer = setTimeout(showMsg, 3000);
+  });
+  mapOverlay.addEventListener('touchend', () => clearTimeout(mapTimer));
 })();
 </script>
 
@@ -933,11 +930,12 @@
     </div>
     <div class="info-block">
       <h3>ACCESS</h3>
-      <div class="map-wrap">
+      <div class="map-wrap" style="position:relative;">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d811.9!2d139.7065674!3d35.691508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d20423a97d3%3A0xa2dc43b2c084e003!2sBAR%20EORNA!5e0!3m2!1sja!2sjp!4v1"
           allowfullscreen loading="lazy">
         </iframe>
+        <div id="mapOverlay" style="position:absolute;inset:0;z-index:10;cursor:pointer;"></div>
       </div>
       <p style="margin-top:1rem;font-size:0.75rem;opacity:0.5;line-height:1.8;">
         新宿三丁目駅 徒歩約2分（E1出口すぐ）<br>
