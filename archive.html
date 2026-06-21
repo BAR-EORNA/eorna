@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>18年目の忘れ物 | BAR EORNA ARCHIVE</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --dark:  #0A0806;
+      --smoke: #141008;
+      --gold:  #C9A84C;
+      --cream: #E8DEC8;
+      --muted: #6A5A42;
+      --red:   #9B1C1C;
+      --amber: #8B5E0A;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* LOCK SCREEN */
+    #lockScreen {
+      position: fixed;
+      inset: 0;
+      background: var(--dark);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    .lock-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.5em;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .lock-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 6vw, 3rem);
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    .lock-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      margin-bottom: 3rem;
+    }
+    .lock-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.4;
+      margin: 0 auto 3rem;
+    }
+    .lock-hint {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      margin-bottom: 1.5rem;
+      opacity: 0.7;
+    }
+    .lock-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(201,168,76,0.4);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.3em;
+      text-align: center;
+      padding: 0.8rem 1rem;
+      width: min(280px, 80vw);
+      outline: none;
+      margin-bottom: 1.5rem;
+    }
+    .lock-input::placeholder { color: var(--muted); opacity: 0.5; }
+    .lock-btn {
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold);
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      padding: 0.8rem 2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .lock-btn:hover { background: rgba(201,168,76,0.1); }
+    .lock-err {
+      margin-top: 1rem;
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 0.2em;
+      min-height: 1.2em;
+    }
+
+    /* MAIN */
+    #mainContent { display: none; }
+
+    /* PROGRESS */
+    .progress-wrap {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,8,6,0.95);
+      padding: 0.8rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .progress-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+    .progress-steps {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .step-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--muted);
+      opacity: 0.3;
+      transition: all 0.4s;
+    }
+    .step-dot.active { background: var(--gold); opacity: 1; }
+    .step-dot.done { background: var(--gold); opacity: 0.5; }
+
+    /* CHAPTERS */
+    .chapter {
+      display: none;
+      min-height: 100vh;
+      padding: 8rem 2rem 4rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .chapter.active { display: block; }
+
+    .ch-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.5em;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .ch-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .ch-rule {
+      width: 30px;
+      height: 1px;
+      background: var(--red);
+      margin: 1.5rem 0;
+    }
+    .ch-lead {
+      font-size: 0.85rem;
+      line-height: 2.2;
+      color: var(--cream);
+      opacity: 0.75;
+      margin-bottom: 2rem;
+    }
+    .ch-riddle {
+      background: rgba(201,168,76,0.05);
+      border-left: 2px solid rgba(201,168,76,0.3);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      font-size: 0.88rem;
+      line-height: 2.2;
+      color: var(--cream);
+      opacity: 0.9;
+    }
+    .ch-photo {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 2rem 0;
+      filter: brightness(0.85) sepia(0.1);
+    }
+    .ch-photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin: 2rem 0;
+    }
+    .ch-photo-grid img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      filter: brightness(0.85);
+    }
+    .ch-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(201,168,76,0.4);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      padding: 0.8rem 0;
+      width: 100%;
+      outline: none;
+      margin: 1.5rem 0 1rem;
+    }
+    .ch-input::placeholder { color: var(--muted); opacity: 0.5; }
+    .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+    .btn-answer {
+      background: var(--red);
+      color: #fff;
+      border: none;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      padding: 0.9rem 2rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn-answer:hover { background: #7a1515; }
+    .btn-hint {
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--muted);
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      padding: 0.9rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-hint:hover { color: var(--gold); border-color: rgba(201,168,76,0.6); }
+    .hint-text {
+      display: none;
+      font-size: 0.75rem;
+      color: var(--amber);
+      letter-spacing: 0.1em;
+      line-height: 1.8;
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px dashed rgba(201,168,76,0.2);
+    }
+    .msg {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      min-height: 1.5em;
+    }
+    .msg.ok { color: var(--gold); }
+    .msg.ng { color: var(--red); }
+
+    /* ENDING */
+    #ending {
+      display: none;
+      min-height: 100vh;
+      padding: 8rem 0 4rem;
+    }
+    .ending-slide {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    .ending-slide img {
+      width: 100%;
+      height: 70vw;
+      max-height: 500px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.7);
+    }
+    .ending-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 2rem;
+      background: linear-gradient(to top, rgba(10,8,6,0.9), transparent);
+      font-size: 0.85rem;
+      line-height: 1.9;
+      letter-spacing: 0.1em;
+      color: var(--cream);
+    }
+    .ending-thanks {
+      text-align: center;
+      padding: 6rem 2rem;
+      background: var(--dark);
+    }
+    .ending-thanks-word {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 12vw, 6rem);
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 2rem;
+      animation: fadeIn 2s ease-in;
+    }
+    .ending-since {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+    .ending-secret {
+      display: inline-block;
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 2rem;
+      max-width: 400px;
+      text-align: center;
+    }
+    .ending-secret p:first-child {
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .ending-secret p:last-child {
+      font-size: 0.78rem;
+      line-height: 2;
+      color: var(--cream);
+      opacity: 0.8;
+    }
+    .btn-restart {
+      display: inline-block;
+      margin-top: 3rem;
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--muted);
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      padding: 0.8rem 2rem;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* NUMBERS in riddle */
+    .riddle-numbers {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+    .riddle-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 480px) {
+      .ch-photo-grid img { height: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOCK SCREEN -->
+<div id="lockScreen">
+  <p class="lock-label">— BAR EORNA ARCHIVE —</p>
+  <h1 class="lock-title">18年目の<br>忘れ物</h1>
+  <p class="lock-sub">SINCE 2007</p>
+  <div class="lock-rule"></div>
+  <p class="lock-hint">この扉には、合言葉が必要です。</p>
+  <input class="lock-input" id="lockInput" type="text" placeholder="合言葉を入力" autocomplete="off">
+  <button class="lock-btn" onclick="checkLock()">扉を開く</button>
+  <p class="lock-err" id="lockErr"></p>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="mainContent">
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <span class="progress-logo">EORNA</span>
+    <div class="progress-steps">
+      <div class="step-dot active" id="dot0"></div>
+      <div class="step-dot" id="dot1"></div>
+      <div class="step-dot" id="dot2"></div>
+      <div class="step-dot" id="dot3"></div>
+      <div class="step-dot" id="dot4"></div>
+    </div>
+  </div>
+
+  <!-- CHAPTER 0: 入口 -->
+  <div class="chapter active" id="ch0">
+    <span class="ch-label">— 入口 —</span>
+    <h2 class="ch-title">古い記録</h2>
+    <div class="ch-rule"></div>
+    <p class="ch-lead">
+      ある夜、EORNAの古い棚の奥から、<br>
+      色褪せたメモが見つかりました。<br><br>
+      そこには、ひとつの問いだけが書かれていた。
+    </p>
+    <div class="ch-riddle">
+      EORNAとは、ゲール語で何を意味する言葉か。<br><br>
+      英語で答えてください。
+    </div>
+    <input class="ch-input" id="ans0" placeholder="答えを入力" autocomplete="off">
+    <div class="btn-row">
+      <button class="btn-answer" onclick="check(0)">答える</button>
+      <button class="btn-hint" onclick="toggleHint(0)">ヒント</button>
+    </div>
+    <div class="hint-text" id="hint0">サイトのCONCEPTページに答えがあります。</div>
+    <p class="msg" id="msg0"></p>
+  </div>
+
+  <!-- CHAPTER 1: 棚の中の合図 -->
+  <div class="chapter" id="ch1">
+    <span class="ch-label">— 第1問 —</span>
+    <h2 class="ch-title">棚の中の合図</h2>
+    <div class="ch-rule"></div>
+    <p class="ch-lead">
+      扉が開くと、バックバーが現れました。<br>
+      何百ものボトルが並ぶ棚の中に、<br>
+      ある人物が手にしていた一本がある。
+    </p>
+    <img class="ch-photo" src="kimura.jpeg" alt="木村さんとJAMESON">
+    <div class="ch-riddle">
+      写真の中で、木村さんが注いでいるウイスキーの名前は？<br><br>
+      アルファベットで答えてください。
+    </div>
+    <input class="ch-input" id="ans1" placeholder="答えを入力" autocomplete="off">
+    <div class="btn-row">
+      <button class="btn-answer" onclick="check(1)">答える</button>
+      <button class="btn-hint" onclick="toggleHint(1)">ヒント</button>
+    </div>
+    <div class="hint-text" id="hint1">緑のボトルでおなじみの、アイリッシュウイスキーの定番銘柄です。</div>
+    <p class="msg" id="msg1"></p>
+  </div>
+
+  <!-- CHAPTER 2: 日付の鍵 -->
+  <div class="chapter" id="ch2">
+    <span class="ch-label">— 第2問 —</span>
+    <h2 class="ch-title">日付の鍵</h2>
+    <div class="ch-rule"></div>
+    <p class="ch-lead">
+      ボトルの名前を抜けると、<br>
+      数字だけが書かれた紙が残っていました。
+    </p>
+    <div class="ch-riddle">
+      <div class="riddle-numbers">
+        <span class="riddle-num">2007</span>
+        <span class="riddle-num">18</span>
+        <span class="riddle-num">2023</span>
+      </div>
+      この中に、忘れてはいけない日付が隠れています。<br><br>
+      4桁で入力してください。<br>
+      <span style="font-size:0.75em;opacity:0.5;">形式：月日。例）1月1日なら 0101</span>
+    </div>
+    <input class="ch-input" id="ans2" placeholder="例：0713" autocomplete="off" maxlength="4">
+    <div class="btn-row">
+      <button class="btn-answer" onclick="check(2)">答える</button>
+      <button class="btn-hint" onclick="toggleHint(2)">ヒント</button>
+    </div>
+    <div class="hint-text" id="hint2">初代オーナーに関する、忘れてはならない日です。</div>
+    <p class="msg" id="msg2"></p>
+  </div>
+
+  <!-- CHAPTER 3: 受け継ぐ順番 -->
+  <div class="chapter" id="ch3">
+    <span class="ch-label">— 第3問 —</span>
+    <h2 class="ch-title">受け継ぐ順番</h2>
+    <div class="ch-rule"></div>
+    <p class="ch-lead">
+      日付の先には、3人の時代がありました。
+    </p>
+    <div class="ch-photo-grid">
+      <img src="kimura.jpeg" alt="木村さん">
+      <img src="tsumori_old.jpeg" alt="15年前の津守さん">
+      <img src="nagata.jpeg" alt="永田さん" style="grid-column: 1 / -1; height:260px;">
+    </div>
+    <div class="ch-riddle">
+      作った人。支えた人。受け継いだ人。<br><br>
+      EORNAの物語は、人から人へ渡ってきました。<br><br>
+      この一言を、ローマ字で入力してください。<br><br>
+      「継ぐ」
+    </div>
+    <input class="ch-input" id="ans3" placeholder="ローマ字で入力" autocomplete="off">
+    <div class="btn-row">
+      <button class="btn-answer" onclick="check(3)">答える</button>
+      <button class="btn-hint" onclick="toggleHint(3)">ヒント</button>
+    </div>
+    <div class="hint-text" id="hint3">TSUから始まる5文字です。</div>
+    <p class="msg" id="msg3"></p>
+  </div>
+
+  <!-- CHAPTER 4: 最終問 -->
+  <div class="chapter" id="ch4">
+    <span class="ch-label">— 最終問 —</span>
+    <h2 class="ch-title">この店の答え</h2>
+    <div class="ch-rule"></div>
+    <p class="ch-lead">
+      最後の扉には、文章はほとんどありません。<br>
+      ただひとつだけ、問いが残されていました。
+    </p>
+    <div class="ch-riddle">
+      酒ではなく、建物でもなく、ボトルでもない。<br><br>
+      この店に来てくれたすべての人へ、<br>
+      最後に伝えたい言葉は何か。<br><br>
+      ひらがなで答えてください。
+    </div>
+    <input class="ch-input" id="ans4" placeholder="ひらがなで入力" autocomplete="off">
+    <div class="btn-row">
+      <button class="btn-answer" onclick="check(4)">エンディングへ</button>
+      <button class="btn-hint" onclick="toggleHint(4)">ヒント</button>
+    </div>
+    <div class="hint-text" id="hint4">5文字。木村さんが遺したものを思ってください。</div>
+    <p class="msg" id="msg4"></p>
+  </div>
+
+  <!-- ENDING -->
+  <div id="ending">
+    <div class="ending-slide">
+      <img src="IMG_3186.jpeg" alt="EORNAのカウンター">
+      <p class="ending-caption">ここには、数え切れない会話がありました。</p>
+    </div>
+    <div class="ending-slide">
+      <img src="IMG_3185.jpeg" alt="EORNAの店内">
+      <p class="ending-caption">数え切れない乾杯がありました。</p>
+    </div>
+    <div class="ending-slide">
+      <img src="tsumori_old.jpeg" alt="15年前の津守さん">
+      <p class="ending-caption">この場所を支えた人がいました。</p>
+    </div>
+    <div class="ending-slide">
+      <img src="nagata.jpeg" alt="永田さん">
+      <p class="ending-caption">受け継いだ人がいました。</p>
+    </div>
+    <div class="ending-slide">
+      <img src="kimura.jpeg" alt="木村さん">
+      <p class="ending-caption">この店を作った人がいました。</p>
+    </div>
+    <div class="ending-thanks">
+      <span class="ending-thanks-word">ありがとう</span>
+      <p class="ending-since">BAR EORNA · Since 2007</p>
+      <div class="ending-secret">
+        <p>— CLEAR WORD —</p>
+        <p>合言葉「ありがとう」をスタッフにお伝えください。<br>ハーフパイント1杯サービスいたします。</p>
+      </div>
+      <br>
+      <button class="btn-restart" onclick="restart()">最初から</button>
+    </div>
+  </div>
+
+</div><!-- /mainContent -->
+
+<script>
+  const LOCK_PASSWORD = 'eorna0713';
+  const ANSWERS = [
+    ['barley'],
+    ['jameson'],
+    ['0713'],
+    ['tsugu', 'つぐ', 'TSUGU'],
+    ['ありがとう', 'ありがとう']
+  ];
+  let currentChapter = 0;
+
+  // LOCK
+  function checkLock() {
+    const val = document.getElementById('lockInput').value.trim().toLowerCase();
+    if (val === LOCK_PASSWORD || val === 'eorna0713') {
+      document.getElementById('lockScreen').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+    } else {
+      document.getElementById('lockErr').textContent = '— 合言葉が違います —';
+      setTimeout(() => document.getElementById('lockErr').textContent = '', 2000);
+    }
+  }
+  document.getElementById('lockInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkLock();
+  });
+
+  // CHAPTER CHECK
+  function check(n) {
+    const val = document.getElementById('ans' + n).value.trim().toUpperCase();
+    const correct = ANSWERS[n].map(a => a.toUpperCase());
+    const msg = document.getElementById('msg' + n);
+    if (correct.includes(val)) {
+      msg.textContent = '— 正解 —';
+      msg.className = 'msg ok';
+      updateDot(n);
+      setTimeout(() => nextChapter(n), 1200);
+    } else {
+      msg.textContent = '— もう一度考えてみてください —';
+      msg.className = 'msg ng';
+    }
+  }
+
+  function nextChapter(n) {
+    document.getElementById('ch' + n).classList.remove('active');
+    currentChapter = n + 1;
+    if (currentChapter <= 4) {
+      document.getElementById('ch' + currentChapter).classList.add('active');
+      updateDot(currentChapter);
+      window.scrollTo(0, 0);
+    } else {
+      showEnding();
+    }
+  }
+
+  function updateDot(n) {
+    for (let i = 0; i <= 4; i++) {
+      const dot = document.getElementById('dot' + i);
+      if (i < n) dot.className = 'step-dot done';
+      else if (i === n) dot.className = 'step-dot active';
+      else dot.className = 'step-dot';
+    }
+  }
+
+  function toggleHint(n) {
+    const h = document.getElementById('hint' + n);
+    h.style.display = h.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function showEnding() {
+    for (let i = 0; i <= 4; i++) {
+      document.getElementById('ch' + i).classList.remove('active');
+    }
+    document.getElementById('ending').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+
+  function restart() {
+    document.getElementById('ending').style.display = 'none';
+    for (let i = 0; i <= 4; i++) {
+      document.getElementById('ans' + i).value = '';
+      document.getElementById('msg' + i).textContent = '';
+      document.getElementById('hint' + i).style.display = 'none';
+      document.getElementById('ch' + i).classList.remove('active');
+    }
+    currentChapter = 0;
+    document.getElementById('ch0').classList.add('active');
+    updateDot(0);
+    window.scrollTo(0, 0);
+  }
+</script>
+
+</body>
+</html>
