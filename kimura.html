@@ -5,99 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BAR EORNA 密室殺人事件 | 木村探偵事務所</title>
   <meta name="robots" content="noindex, nofollow">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --dark: #080604;
-      --smoke: #0F0B08;
-      --gold: #C9A84C;
-      --cream: #E8DEC8;
-      --muted: #6A5A42;
-      --red: #9B1C1C;
-      --amber: #8B5E0A;
-      --blue: #1a3a5c;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--dark);
-      color: var(--cream);
-      font-family: 'Noto Serif JP', serif;
-      font-weight: 300;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
 
-    /* PROGRESS */
-    .progress-bar { position:fixed; top:0; left:0; right:0; height:2px; background:rgba(201,168,76,0.1); z-index:200; }
-    .progress-fill { height:100%; background:var(--gold); transition:width 0.5s ease; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+ --ground:#0E0B09;--dark:#0E0B09;--smoke:#16110D;
+ --ink:#E7DECB;--cream:#E7DECB;
+ --dim:#8C8372;--muted:#8C8372;--faint:#565045;
+ --line:rgba(231,222,203,.13);
+ --gold:#C9A84C;--red:#b5564a;
+ --mono:'Space Mono',ui-monospace,monospace;
+ --jp:'Noto Sans JP',sans-serif;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ground);color:var(--ink);font-family:var(--jp);font-weight:300;line-height:1.8;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block}
+::selection{background:rgba(201,168,76,.3);color:#fff}
+body::after{content:"";position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:.04;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem clamp(1.2rem,5vw,2.5rem);background:linear-gradient(to bottom,rgba(14,11,9,.96),rgba(14,11,9,.4))}
+.nav-logo{font-family:var(--mono);font-weight:700;font-size:.85rem;letter-spacing:.3em;color:var(--ink)}
+.nav-back{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;color:var(--dim);text-transform:uppercase}
 
-    /* TITLE */
-    #titleScreen {
-      position:fixed; inset:0; background:var(--dark); z-index:1000;
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      padding:2rem; text-align:center;
-    }
-    .title-label { font-size:0.55rem; letter-spacing:0.5em; color:var(--muted); margin-bottom:2rem; }
-    .title-main { font-family:'Cormorant Garamond',serif; font-size:clamp(1.6rem,5vw,2.8rem); font-weight:300; letter-spacing:0.15em; color:var(--gold); line-height:1.6; margin-bottom:0.5rem; }
-    .title-sub { font-size:0.65rem; letter-spacing:0.4em; color:var(--muted); margin-bottom:2.5rem; }
-    .title-rule { width:40px; height:1px; background:var(--gold); opacity:0.3; margin:0 auto 2.5rem; }
-    .title-desc { font-size:0.78rem; line-height:2.2; color:var(--cream); opacity:0.6; max-width:320px; margin-bottom:3rem; }
-    .btn-start { background:transparent; border:1px solid rgba(201,168,76,0.5); color:var(--gold); font-family:'Noto Serif JP',serif; font-size:0.75rem; letter-spacing:0.35em; padding:1rem 3rem; cursor:pointer; transition:all 0.3s; }
-    .btn-start:hover { background:rgba(201,168,76,0.1); }
+#titleScreen{position:fixed;inset:0;z-index:200;background:var(--ground);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem}
+.title-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.4em;color:var(--dim);text-transform:uppercase}
+.title-main{font-family:var(--mono);font-weight:700;font-size:clamp(1.6rem,7vw,2.6rem);letter-spacing:.03em;line-height:1.35;margin-top:1.4rem}
+.title-rule{width:54px;height:1px;background:var(--gold);opacity:.5;margin:1.6rem auto}
+.title-sub{font-family:var(--mono);font-size:.7rem;letter-spacing:.3em;color:var(--faint);text-transform:uppercase}
+.title-desc{font-size:clamp(.92rem,2.6vw,1.05rem);line-height:2.1;opacity:.85;max-width:34em;margin:1.8rem auto 2.4rem}
+.btn-start{font-family:var(--mono);font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid rgba(201,168,76,.45);padding:1rem 2.2rem;cursor:pointer;transition:all .25s}
+.btn-start:hover{border-color:var(--gold);color:var(--gold)}
+#gameScreen{min-height:100vh;max-width:680px;margin:0 auto;padding:0 clamp(1.2rem,5vw,2rem) 6rem}
+.progress-bar{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(231,222,203,.08);z-index:100}
+.progress-fill{height:100%;background:var(--gold);width:0;transition:width .5s ease}
+.scene-bg{width:100%;height:45vw;max-height:280px;position:relative;overflow:hidden;margin-top:2.6rem;border:1px solid var(--line)}
+.scene-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.4) saturate(.85)}
+.scene-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(14,11,9,.65),transparent 60%)}
+.scene-chapter{font-family:var(--mono);font-size:.65rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-top:2rem}
+.scene-location{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;margin-top:.5rem}
+.dialog-box{margin-top:1.6rem}
+.speaker-name{font-family:var(--mono);font-size:.8rem;letter-spacing:.12em;color:var(--ink);margin-bottom:.7rem}
+.speaker-name.detective{color:var(--gold)}
+.speaker-name.bartender{color:var(--cream)}
+.speaker-name.suspect{color:var(--red)}
+.dialog-text{font-size:clamp(1rem,2.7vw,1.15rem);line-height:2;opacity:.92}
+.tap-hint{font-family:var(--mono);font-size:.62rem;letter-spacing:.25em;color:var(--faint);text-transform:uppercase;margin-top:1.6rem}
+.evidence-box{border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.04);padding:1.2rem 1.4rem;margin-top:1.6rem}
+.evidence-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:.6rem}
+.evidence-text{font-size:.92rem;line-height:1.9;opacity:.85;white-space:pre-line}
+.choices{display:flex;flex-direction:column;gap:.7rem;margin-top:1.8rem}
+.choice-btn{font-family:var(--jp);text-align:left;font-size:.98rem;color:var(--ink);background:rgba(14,11,9,.5);border:1px solid var(--line);padding:1rem 1.2rem;cursor:pointer;transition:all .25s}
+.choice-btn:hover,.choice-btn:active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06)}
+.input-wrap{margin-top:1.8rem}
+.input-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:.8rem}
+.mystery-input{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(201,168,76,.5);color:var(--ink);font-family:var(--mono);font-size:1.1rem;letter-spacing:.1em;padding:.7rem .2rem;outline:none}
+.mystery-input::placeholder{color:var(--faint)}
+.btn-answer{margin-top:1.4rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ground);background:var(--gold);border:1px solid var(--gold);padding:.9rem 1.8rem;cursor:pointer}
+.btn-hint-small{margin-top:1rem;margin-left:.6rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);background:transparent;border:1px solid var(--line);padding:.9rem 1.2rem;cursor:pointer}
+.hint-box{font-size:.9rem;color:var(--dim);line-height:1.9;margin-top:1rem;padding-left:1rem;border-left:1px solid var(--line)}
+.msg-box{font-family:var(--mono);font-size:.78rem;letter-spacing:.05em;margin-top:1.2rem;min-height:1.4em}
+.msg-ok{color:var(--gold)}
+.msg-ng{color:var(--red)}
+#endingScreen{display:none;position:fixed;inset:0;z-index:150;overflow-y:auto;background:var(--ground);padding:14vh clamp(1.4rem,6vw,2rem) 6rem;text-align:center}
+.ending-title{font-family:var(--mono);font-weight:700;font-size:clamp(1.6rem,7vw,2.4rem);letter-spacing:.1em;text-transform:uppercase}
+.ending-msg{font-size:clamp(.98rem,2.6vw,1.12rem);line-height:2.1;opacity:.9;max-width:40em;margin:2rem auto;text-align:left;white-space:pre-line}
+.coupon-box{border:1px solid rgba(201,168,76,.35);padding:2rem 1.6rem;margin:2.4rem auto;max-width:420px}
+.coupon-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;color:var(--dim);text-transform:uppercase}
+.coupon-title{font-family:var(--mono);font-weight:700;font-size:clamp(1.4rem,5vw,1.8rem);letter-spacing:.05em;color:var(--gold);margin-top:.8rem}
+.coupon-code{font-family:var(--mono);font-size:1rem;letter-spacing:.2em;color:var(--gold);margin-top:.8rem}
+.coupon-desc{font-size:.9rem;opacity:.85;line-height:1.9;margin-top:1rem}
+.btn-line{display:inline-flex;align-items:center;gap:.5rem;padding:1rem 2rem;background:#06C755;color:#fff;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;margin-top:1.6rem}
+.btn-retry{margin-top:1.8rem;background:transparent;border:1px solid var(--line);color:var(--faint);font-family:var(--mono);font-size:.66rem;letter-spacing:.25em;text-transform:uppercase;padding:1rem 2rem;cursor:pointer;display:inline-block}
 
-    /* GAME */
-    #gameScreen { display:none; min-height:100vh; padding-bottom:3rem; }
-    .scene-bg { width:100%; height:45vw; max-height:280px; background:var(--smoke); position:relative; overflow:hidden; }
-    .scene-bg img { width:100%; height:100%; object-fit:cover; filter:brightness(0.35) sepia(0.4); }
-    .scene-location { position:absolute; bottom:1rem; left:1.5rem; font-size:0.6rem; letter-spacing:0.3em; color:var(--gold); opacity:0.8; }
-    .scene-chapter { position:absolute; top:1rem; right:1.5rem; font-size:0.55rem; letter-spacing:0.3em; color:var(--muted); }
-
-    /* DIALOG */
-    .dialog-box { background:rgba(8,6,4,0.97); border-top:1px solid rgba(201,168,76,0.2); padding:1.5rem; min-height:160px; position:relative; cursor:pointer; }
-    .speaker-name { font-family:'Cormorant Garamond',serif; font-size:0.88rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:0.8rem; display:block; }
-    .speaker-name.suspect { color:#c0392b; }
-    .speaker-name.detective { color:#5dade2; }
-    .speaker-name.bartender { color:var(--gold); }
-    .dialog-text { font-size:0.82rem; line-height:2; color:var(--cream); opacity:0.9; min-height:3.5rem; white-space:pre-line; }
-    .tap-hint { position:absolute; bottom:1rem; right:1.5rem; font-size:0.55rem; letter-spacing:0.2em; color:var(--muted); animation:blink 1.5s infinite; }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
-
-    /* CHOICES */
-    .choices { padding:1.5rem; display:flex; flex-direction:column; gap:0.8rem; }
-    .choice-btn { background:transparent; border:1px solid rgba(201,168,76,0.3); color:var(--cream); font-family:'Noto Serif JP',serif; font-size:0.78rem; letter-spacing:0.1em; padding:1rem 1.5rem; text-align:left; cursor:pointer; transition:all 0.3s; line-height:1.8; }
-    .choice-btn:hover,.choice-btn:active { background:rgba(201,168,76,0.1); border-color:rgba(201,168,76,0.6); color:var(--gold); }
-
-    /* INPUT */
-    .input-wrap { padding:1.5rem; }
-    .input-label { font-size:0.72rem; letter-spacing:0.15em; color:var(--cream); opacity:0.8; margin-bottom:1rem; display:block; line-height:2; white-space:pre-line; }
-    .mystery-input { background:transparent; border:none; border-bottom:1px solid rgba(201,168,76,0.4); color:var(--cream); font-family:'Cormorant Garamond',serif; font-size:1.1rem; letter-spacing:0.2em; padding:0.8rem 0; width:100%; outline:none; margin-bottom:1.2rem; }
-    .mystery-input::placeholder { color:var(--muted); opacity:0.5; }
-    .btn-answer { background:var(--red); color:#fff; border:none; font-family:'Noto Serif JP',serif; font-size:0.7rem; letter-spacing:0.25em; padding:0.9rem 2rem; cursor:pointer; }
-    .btn-hint-small { background:transparent; border:1px solid rgba(201,168,76,0.3); color:var(--muted); font-family:'Noto Serif JP',serif; font-size:0.7rem; letter-spacing:0.25em; padding:0.9rem 1.5rem; cursor:pointer; margin-left:0.8rem; }
-    .hint-box { display:none; margin-top:1rem; padding:1rem; border:1px dashed rgba(201,168,76,0.2); font-size:0.72rem; color:var(--amber); line-height:1.8; }
-    .msg-box { margin-top:1rem; font-size:0.72rem; letter-spacing:0.15em; min-height:1.2em; }
-    .msg-ok { color:var(--gold); }
-    .msg-ng { color:var(--red); }
-
-    /* EVIDENCE */
-    .evidence-box { margin:1.5rem; padding:1rem 1.5rem; border:1px solid rgba(155,28,28,0.4); background:rgba(155,28,28,0.05); }
-    .evidence-label { font-size:0.55rem; letter-spacing:0.4em; color:var(--red); margin-bottom:0.5rem; display:block; }
-    .evidence-text { font-size:0.78rem; line-height:1.9; color:var(--cream); opacity:0.8; }
-
-    /* ENDING */
-    #endingScreen { display:none; min-height:100vh; background:var(--dark); padding:6rem 2rem 4rem; text-align:center; }
-    .ending-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,6vw,3.5rem); font-weight:300; letter-spacing:0.2em; color:var(--gold); margin-bottom:1rem; animation:fadeInUp 1s ease; }
-    .ending-msg { font-size:0.82rem; line-height:2.5; color:var(--cream); opacity:0.8; max-width:500px; margin:2rem auto; animation:fadeInUp 1.5s ease; white-space:pre-line; }
-    .coupon-box { border:1px solid rgba(201,168,76,0.4); padding:2rem; max-width:360px; margin:3rem auto; animation:fadeInUp 2s ease; }
-    .coupon-label { font-size:0.55rem; letter-spacing:0.5em; color:var(--gold); margin-bottom:1rem; display:block; }
-    .coupon-title { font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--cream); letter-spacing:0.2em; margin-bottom:0.5rem; }
-    .coupon-desc { font-size:0.72rem; color:var(--muted); line-height:1.8; margin-bottom:1.5rem; }
-    .coupon-code { font-family:'Cormorant Garamond',serif; font-size:2rem; letter-spacing:0.4em; color:var(--gold); margin-bottom:1.5rem; }
-    .btn-line { display:inline-flex; align-items:center; gap:0.5rem; padding:1rem 2rem; background:#06C755; color:#fff; text-decoration:none; font-size:0.78rem; letter-spacing:0.15em; }
-    .btn-retry { margin-top:2rem; background:transparent; border:1px solid rgba(201,168,76,0.3); color:var(--muted); font-family:'Noto Serif JP',serif; font-size:0.7rem; letter-spacing:0.3em; padding:1rem 2rem; cursor:pointer; display:inline-block; }
-    @keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-  </style>
+</style>
 </head>
 <body>
 

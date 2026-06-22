@@ -1,752 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-F4JBQ8GK16"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-F4JBQ8GK16');
-  </script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-F4JBQ8GK16');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BAR EORNA | Shinjuku 3-chome British Bar</title>
-  <meta name="description" content="BAR EORNA is a British-style bar in Shinjuku 3-chome, Tokyo. 300+ whiskies, 3 draft beers. No cover charge. Open 18:00-03:00, 365 days.">
-  <meta name="keywords" content="BAR EORNA, Shinjuku bar, Tokyo bar, whisky bar, British bar, no cover charge, late night bar">
-  <meta property="og:title" content="BAR EORNA | Shinjuku British Bar">
-  <meta property="og:description" content="300+ whiskies, 3 draft beers. No cover charge. Open until 3AM. Shinjuku 3-chome, Tokyo.">
-  <meta property="og:type" content="restaurant">
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+  <title>BAR EORNA — British Bar in Shinjuku, Tokyo</title>
+  <meta name="description" content="A basement British bar in Shinjuku 3-chome. 300+ whiskies, 3 draught taps, no cover charge. Open 18:00–03:00, daily. Group Therapy Here.">
+  <meta property="og:title" content="BAR EORNA — Group Therapy Here.">
+  <meta property="og:description" content="A basement British bar in Shinjuku. 300+ whiskies, draught beer, no cover charge.">
+  <meta property="og:type" content="website">
   <meta property="og:url" content="https://eorna.info/en.html">
   <meta property="og:image" content="https://eorna.info/IMG_3185.jpeg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  <meta property="og:locale" content="en_US">
+  <meta name="theme-color" content="#0E0B09">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --red:   #9B1C1C;
-      --gold:  #C9A84C;
-      --dark:  #0D0A08;
-      --smoke: #1A1410;
-      --cream: #E8DEC8;
-      --muted: #7A6A52;
+    *,*::before,*::after{ margin:0; padding:0; box-sizing:border-box; }
+    :root{
+      --ground:#0E0B09; --panel:#16110D;
+      --ink:#E7DECB; --dim:#8C8372; --faint:#565045;
+      --line:rgba(231,222,203,0.13);
+      --gold:#C9A84C;
+      --mono:'Space Mono', ui-monospace, monospace;
+      --jp:'Noto Sans JP', sans-serif;
+      --pad:clamp(1.2rem, 5vw, 5rem);
     }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--dark);
-      color: var(--cream);
-      font-family: 'Lato', sans-serif;
-      font-weight: 300;
-      overflow-x: hidden;
-    }
+    html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+    body{ background:var(--ground); color:var(--ink); font-family:var(--jp); font-weight:300; line-height:1.8; overflow-x:hidden; letter-spacing:.01em; }
+    body::after{ content:""; position:fixed; inset:0; z-index:9990; pointer-events:none; opacity:.04; mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    a{ color:inherit; text-decoration:none; }
+    img{ display:block; }
+    ::selection{ background:rgba(201,168,76,.3); color:#fff; }
+    .mono{ font-family:var(--mono); }
+    .kick{ font-family:var(--mono); font-size:.7rem; letter-spacing:.4em; color:var(--dim); text-transform:uppercase; }
 
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0.6rem 1.2rem;
-      background: rgba(13,10,8,0.95);
-      gap: 0.4rem;
-    }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      letter-spacing: 0.35em;
-      color: var(--gold);
-      text-decoration: none;
-    }
-    .nav-links { display: flex; gap: 1.2rem; list-style: none; align-items: center; }
-    .nav-links a {
-      color: var(--cream);
-      text-decoration: none;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      opacity: 0.75;
-      transition: opacity 0.3s;
-    }
-    .nav-links a:hover { opacity: 1; color: var(--gold); }
-    .lang-switch {
-      font-size: 1.2rem;
-      text-decoration: none;
-      border: 1px solid rgba(201,168,76,0.4);
-      padding: 0.2rem 0.5rem;
-    }
+    /* HEADER */
+    header{ position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between;
+      padding:.8rem var(--pad); background:linear-gradient(to bottom, rgba(14,11,9,.96), rgba(14,11,9,.6) 70%, transparent); backdrop-filter:blur(4px); }
+    .brand{ font-family:var(--mono); font-weight:700; font-size:.85rem; letter-spacing:.3em; cursor:pointer; -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+    .topnav{ display:flex; align-items:center; gap:clamp(.7rem,2.5vw,1.5rem); }
+    .topnav a{ font-family:var(--mono); font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); transition:color .25s; }
+    .topnav a:hover{ color:var(--ink); }
+    .topnav .en{ border:1px solid var(--line); padding:.25rem .5rem; }
+    .status{ display:flex; align-items:center; gap:.4rem; font-family:var(--mono); font-size:.58rem; letter-spacing:.15em; text-transform:uppercase; color:var(--dim); }
+    .status .dot{ width:6px; height:6px; border-radius:50%; background:var(--faint); }
+    .status.open{ color:var(--ink); } .status.open .dot{ background:var(--gold); animation:ping 2.4s ease-out infinite; }
+    @keyframes ping{0%{box-shadow:0 0 0 0 rgba(201,168,76,.5)}70%{box-shadow:0 0 0 7px rgba(201,168,76,0)}100%{box-shadow:0 0 0 0 rgba(201,168,76,0)}}
+    @media(max-width:560px){ .topnav .lk{ display:none; } }
 
     /* HERO */
-    .hero {
-      height: 100vh;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        linear-gradient(to bottom, rgba(13,10,8,0.65) 0%, rgba(13,10,8,0.45) 40%, rgba(13,10,8,0.85) 100%),
-        url('IMG_3185.jpeg') center/cover no-repeat;
-    }
-    .hero-content {
-      position: relative;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.2rem;
-    }
-    .hero-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 10vw, 6rem);
-      font-weight: 300;
-      letter-spacing: 0.45em;
-      color: var(--cream);
-      line-height: 1;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.9);
-    }
-    .hero-rule { width: 60px; height: 1px; background: var(--gold); opacity: 0.6; }
-    .hero-sub {
-      font-size: 0.78rem;
-      letter-spacing: 0.25em;
-      color: #fff;
-      background: rgba(0,0,0,0.45);
-      padding: 0.4rem 1rem;
-      text-shadow: 0 1px 6px rgba(0,0,0,1);
-      text-align: center;
-      line-height: 2;
-    }
-    .hero-cta {
-      margin-top: 1.5rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .btn-primary {
-      display: inline-block;
-      padding: 0.9rem 2.2rem;
-      background: var(--red);
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.2em;
-      transition: background 0.3s;
-    }
-    .btn-primary:hover { background: #7a1515; }
-    .btn-secondary {
-      display: inline-block;
-      padding: 0.9rem 2.2rem;
-      border: 2px solid #fff;
-      background: #fff;
-      color: #000;
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.2em;
-    }
+    .hero{ padding:30vh var(--pad) 13vh; cursor:pointer; }
+    .crest{ width:clamp(96px,26vw,132px); background:#F2EAD9; padding:12px 12px 8px; margin-bottom:clamp(2rem,6vw,3.4rem); }
+    .crest img{ width:100%; }
+    .word{ font-family:var(--mono); font-weight:700; font-size:clamp(2.8rem,14vw,7.5rem); line-height:.95; letter-spacing:.01em; text-transform:uppercase; margin-top:1.2rem; }
+    .word .d{ color:var(--gold); }
+    .tag{ font-size:clamp(1.05rem,3.4vw,1.45rem); margin-top:1.6rem; }
+    .meta{ font-family:var(--mono); font-size:clamp(.62rem,2vw,.78rem); letter-spacing:.2em; color:var(--dim); text-transform:uppercase; margin-top:2.4rem; line-height:2.2; }
+    .meta b{ color:var(--gold); font-weight:400; }
+    .hero > *{ animation:rise .9s both; }
+    .hero .crest{ animation-delay:.1s } .hero .kick{ animation-delay:.2s } .hero .word{ animation-delay:.3s } .hero .tag{ animation-delay:.45s } .hero .meta{ animation-delay:.6s }
+    @keyframes rise{ from{opacity:0; transform:translateY(22px); filter:blur(3px);} to{opacity:1; transform:none; filter:none;} }
 
-    /* SECTIONS */
-    section { padding: 6rem 2rem; }
-    .section-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.35em;
-      color: var(--gold);
-      margin-bottom: 1.2rem;
-      display: block;
-    }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--cream);
-      margin-bottom: 1.5rem;
-    }
-    .divider { width: 40px; height: 1px; background: var(--red); margin: 2rem 0; }
+    /* PHOTO BAND */
+    .band{ position:relative; width:100%; height:clamp(280px,58vw,560px); overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .band img{ width:100%; height:100%; object-fit:cover; animation:ken 26s ease-in-out infinite alternate; }
+    @keyframes ken{ from{transform:scale(1)} to{transform:scale(1.09)} }
+    .band .ov{ position:absolute; inset:0; background:rgba(9,7,5,.28); }
+    .cap{ font-family:var(--mono); font-size:.62rem; letter-spacing:.25em; color:var(--dim); text-transform:uppercase; padding:1rem var(--pad); }
+
+    /* SECTION */
+    section{ padding:clamp(4rem,11vw,7.5rem) var(--pad); border-bottom:1px solid var(--line); }
+    .sidx{ font-family:var(--mono); font-size:.72rem; letter-spacing:.3em; color:var(--faint); text-transform:uppercase; margin-bottom:1.6rem; }
+    .sidx .t{ color:var(--gold); }
+    .stitle{ font-family:var(--mono); font-weight:700; font-size:clamp(1.4rem,5vw,2rem); letter-spacing:.18em; text-transform:uppercase; }
 
     /* CONCEPT */
-    .concept { max-width: 680px; margin: 0 auto; text-align: center; }
-    .concept p { font-size: 0.9rem; line-height: 2.2; color: var(--cream); opacity: 0.8; }
-    .concept .divider { margin: 2rem auto; }
-
-    /* FEATURES */
-    .features { background: var(--smoke); }
-    .features-inner { max-width: 900px; margin: 0 auto; }
-    .features-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
-    .feature-card {
-      padding: 2rem 1.5rem;
-      border: 1px solid rgba(201,168,76,0.2);
-      text-align: center;
-    }
-    .feature-card .icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
-    .feature-card h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-    }
-    .feature-card p { font-size: 0.78rem; color: var(--cream); opacity: 0.7; line-height: 1.8; }
-
-    /* INFO */
-    .info { background: var(--dark); }
-    .info-inner {
-      max-width: 900px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 4rem; align-items: start;
-    }
-    .info-block h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem; font-weight: 300;
-      letter-spacing: 0.15em; color: var(--gold);
-      margin-bottom: 2rem;
-    }
-    .info-row {
-      display: flex; gap: 1.5rem;
-      margin-bottom: 1.2rem;
-      font-size: 0.82rem; line-height: 1.8;
-    }
-    .info-row dt { color: var(--muted); min-width: 100px; flex-shrink: 0; }
-    .info-row dd { color: var(--cream); opacity: 0.85; }
-    .info-row dd a { color: var(--cream); text-decoration: none; }
-    .tel-btn {
-      display: block; margin-top: 2rem;
-      padding: 1rem; background: var(--red);
-      color: #fff; text-align: center;
-      text-decoration: none; font-size: 1rem;
-      letter-spacing: 0.15em;
-    }
-    .tel-btn span { display: block; font-size: 0.65rem; opacity: 0.7; margin-top: 0.3rem; }
-    .line-btn {
-      display: flex; align-items: center; justify-content: center;
-      gap: 0.5rem; margin-top: 0.8rem;
-      padding: 1rem; background: #06C755;
-      color: #fff; text-align: center;
-      text-decoration: none; font-size: 0.9rem;
-      letter-spacing: 0.1em;
-    }
-    .map-wrap { width: 100%; height: 280px; border: 1px solid rgba(201,168,76,0.2); overflow: hidden; }
-    .map-wrap iframe { width: 100%; height: 100%; border: none; }
+    .concept .lead{ font-size:clamp(1rem,2.6vw,1.2rem); line-height:2.2; opacity:.9; max-width:34em; margin-top:1.6rem; }
 
     /* MENU */
-    .menu { background: var(--smoke); }
-    .menu-inner { max-width: 1000px; margin: 0 auto; }
-    .menu-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      margin-top: 3rem;
-    }
-    .menu-category {
-      border-top: 1px solid rgba(201,168,76,0.3);
-      padding-top: 1.5rem;
-    }
-    .menu-category h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      color: var(--gold);
-      letter-spacing: 0.2em;
-      margin-bottom: 1rem;
-    }
-    .menu-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 0.4rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      font-size: 0.78rem;
-    }
-    .menu-item .name { color: var(--cream); opacity: 0.85; }
-    .menu-item .name span { display: block; font-size: 0.65rem; color: var(--muted); }
-    .menu-item .price { color: var(--gold); font-size: 0.75rem; white-space: nowrap; margin-left: 1rem; }
-    .menu-note {
-      margin-top: 1.5rem;
-      font-size: 0.75rem;
-      color: var(--muted);
-      line-height: 1.8;
-      font-style: italic;
-    }
-    @media (max-width: 700px) {
-      .menu-grid { grid-template-columns: 1fr; }
-    }
+    .cat{ font-family:var(--mono); font-size:.66rem; letter-spacing:.25em; color:var(--dim); text-transform:uppercase; margin:2.6rem 0 .6rem; }
+    .mi{ display:flex; justify-content:space-between; align-items:baseline; gap:1rem; padding:.85rem 0; border-bottom:1px solid rgba(231,222,203,.08); }
+    .mi .mn{ font-size:clamp(.98rem,2.4vw,1.1rem); }
+    .mi .mn .mm{ font-family:var(--mono); font-size:.62rem; letter-spacing:.12em; color:var(--dim); text-transform:uppercase; margin-left:.7rem; }
+    .mi .mp{ font-family:var(--mono); font-size:.85rem; color:var(--ink); white-space:nowrap; opacity:.85; }
+    .more{ font-family:var(--mono); font-size:.66rem; letter-spacing:.2em; color:var(--faint); text-transform:uppercase; margin-top:1.4rem; }
+    .thumbs{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(.5rem,1.5vw,.9rem); margin-top:3rem; }
+    @media(max-width:560px){ .thumbs{ grid-template-columns:repeat(2,1fr); } }
+    .thumb img{ width:100%; aspect-ratio:1/1; object-fit:cover; border:1px solid var(--line); filter:brightness(.85) saturate(.92); transition:filter .5s, transform .5s; cursor:pointer; }
+    .thumb img:hover{ filter:brightness(1.05) saturate(1); transform:scale(1.015); }
+    .thumb .tc{ font-family:var(--mono); font-size:.58rem; letter-spacing:.15em; color:var(--dim); text-transform:uppercase; margin-top:.6rem; }
 
-    /* FIRST TIME */
-    .firsttime {
-      background: var(--dark);
-      border-top: 1px solid rgba(201,168,76,0.15);
-    }
-    .firsttime-inner {
-      max-width: 680px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .firsttime-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
-    .firsttime-card {
-      padding: 1.5rem 1rem;
-      border: 1px solid rgba(201,168,76,0.2);
-      text-align: center;
-    }
-    .firsttime-card .icon {
-      font-size: 1.8rem;
-      margin-bottom: 0.8rem;
-      display: block;
-    }
-    .firsttime-card h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.9rem;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-    }
-    .firsttime-card p {
-      font-size: 0.72rem;
-      color: var(--cream);
-      opacity: 0.7;
-      line-height: 1.8;
-    }
-    @media (max-width: 700px) {
-      .firsttime-cards { grid-template-columns: 1fr; }
-    }
+    /* STORY */
+    .story-inner{ display:grid; grid-template-columns:1fr; gap:clamp(1.8rem,5vw,3rem); margin:2.6rem 0 0; align-items:start; }
+    @media(min-width:760px){ .story-inner{ grid-template-columns:minmax(240px,400px) 1fr; } }
+    .pf .psq{ position:relative; overflow:hidden; border:1px solid var(--line); cursor:pointer; }
+    .pf .psq .ph{ transition:opacity .8s ease; }
+    .pf .psq .ph img{ width:100%; aspect-ratio:1/1; object-fit:cover; }
+    .pf .psq .ph-kimura{ position:absolute; inset:0; opacity:0; pointer-events:none; }
+    .pf .psq.revealed .ph-owner{ opacity:0; }
+    .pf .psq.revealed .ph-kimura{ opacity:1; }
+    .pf .ptrib{ position:absolute; inset:auto 0 0 0; padding:1.2rem 1rem; text-align:center; background:linear-gradient(to top, rgba(9,7,5,.92), transparent); }
+    .pf .ptrib .a{ font-family:var(--mono); color:var(--gold); font-size:clamp(.9rem,2.4vw,1.1rem); letter-spacing:.1em; }
+    .pf .ptrib .b{ font-family:var(--mono); font-size:.6rem; letter-spacing:.3em; color:var(--dim); margin-top:.4rem; }
+    .pcap{ font-family:var(--mono); font-size:.8rem; letter-spacing:.15em; color:var(--ink); text-transform:uppercase; margin-top:.9rem; }
+    .pcap span{ display:block; color:var(--dim); font-size:.62rem; letter-spacing:.15em; margin-top:.35rem; }
+    .story p{ font-size:clamp(.98rem,2.4vw,1.12rem); line-height:2.05; opacity:.9; max-width:40em; margin-top:1.6rem; }
+    .story p .g{ color:var(--gold); }
+    .story .lk{ font-family:var(--mono); font-size:.66rem; letter-spacing:.25em; color:var(--dim); text-transform:uppercase; display:inline-block; margin-top:1.8rem; border-bottom:1px solid var(--line); padding-bottom:.3rem; transition:color .25s, border-color .25s; }
+    .story .lk:hover{ color:var(--gold); border-color:var(--gold); }
 
-    /* OWNER */
-    .owner {
-      background: var(--dark);
-      border-top: 1px solid rgba(201,168,76,0.15);
-    }
-    .owner-inner {
-      max-width: 680px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .owner-inner blockquote {
-      font-size: 0.88rem;
-      line-height: 2.2;
-      color: var(--cream);
-      opacity: 0.8;
-      font-style: italic;
-      margin: 2rem 0;
-    }
-    .owner-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      margin-top: 1.5rem;
-    }
-
-    /* PRIVACY */
-    .privacy {
-      background: var(--smoke);
-      padding: 4rem 2rem;
-    }
-    .privacy-inner {
-      max-width: 680px;
-      margin: 0 auto;
-    }
-    .privacy-inner h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      color: var(--gold);
-      letter-spacing: 0.2em;
-      margin-bottom: 1.5rem;
-    }
-    .privacy-inner p, .privacy-inner li {
-      font-size: 0.78rem;
-      line-height: 2;
-      color: var(--cream);
-      opacity: 0.7;
-    }
-    .privacy-inner ul {
-      padding-left: 1.2rem;
-      margin: 0.8rem 0;
-    }
-    .privacy-inner .pp-block {
-      margin-bottom: 1.5rem;
-    }
-
-    /* GALLERY */
-    .gallery { background: var(--smoke); padding: 6rem 0 3rem; }
-    .gallery-inner { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 4px; margin-top: 3rem;
-    }
-    .gallery-grid img {
-      width: 100%; height: auto;
-      display: block;
-      filter: brightness(0.88) sepia(0.1);
-      transition: filter 0.4s;
-    }
-    .gallery-grid img:hover { filter: brightness(1) sepia(0); }
+    /* VISIT */
+    .visit-grid{ display:grid; grid-template-columns:1fr; gap:clamp(1.8rem,5vw,3rem); margin-top:1.8rem; }
+    @media(min-width:760px){ .visit-grid{ grid-template-columns:1.1fr 1fr; } }
+    .vrow{ display:grid; grid-template-columns:6.5rem 1fr; gap:1rem; padding:.85rem 0; border-top:1px solid var(--line); font-size:.92rem; }
+    .vrow dt{ font-family:var(--mono); font-size:.6rem; letter-spacing:.2em; color:var(--dim); text-transform:uppercase; padding-top:.25rem; }
+    .vrow dd{ opacity:.92; }
+    .vrow dd a{ border-bottom:1px solid var(--line); }
+    #accessText{ cursor:pointer; -webkit-user-select:none; user-select:none; }
+    .map-wrap{ width:100%; aspect-ratio:4/3; border:1px solid var(--line); overflow:hidden; }
+    .map-wrap iframe{ width:100%; height:100%; border:0; filter:grayscale(.35) brightness(.85); }
+    .actions{ display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.6rem; }
+    .act{ font-family:var(--mono); font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; padding:.85rem 1.1rem; border:1px solid var(--line); transition:all .25s; }
+    .act:hover{ border-color:var(--gold); color:var(--gold); }
+    .act.line{ background:#06C755; border-color:#06C755; color:#fff; }
+    .act.tel{ background:var(--ink); border-color:var(--ink); color:var(--ground); }
 
     /* FOOTER */
-    footer {
-      background: #080604; text-align: center;
-      padding: 3rem 2rem calc(3rem + 56px);
-      border-top: 1px solid rgba(201,168,76,0.15);
-    }
-    footer .f-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem; letter-spacing: 0.4em;
-      color: var(--gold); opacity: 0.7; margin-bottom: 1rem;
-    }
-    footer p { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted); }
+    footer{ padding:clamp(3.5rem,9vw,5.5rem) var(--pad) 7rem; }
+    .foot-top{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:1.4rem; }
+    .foot-word{ font-family:var(--mono); font-weight:700; font-size:clamp(2rem,9vw,4rem); letter-spacing:.1em; text-transform:uppercase; line-height:1; cursor:pointer; -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+    .socials{ display:flex; gap:.4rem; }
+    .socials a{ font-family:var(--mono); font-size:.6rem; letter-spacing:.1em; border:1px solid var(--line); width:2.5rem; height:2.5rem; display:flex; align-items:center; justify-content:center; transition:all .25s; }
+    .socials a:hover{ border-color:var(--gold); color:var(--gold); }
+    .foot-meta{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:.6rem; margin-top:2.4rem; padding-top:1.4rem; border-top:1px solid var(--line);
+      font-family:var(--mono); font-size:.56rem; letter-spacing:.15em; text-transform:uppercase; color:var(--faint); }
+    .foot-meta a:hover{ color:var(--gold); }
 
-    /* FIXED BOTTOM */
-    .fixed-bottom {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      z-index: 200;
-      display: flex;
-      height: 56px;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
-    }
-    .fixed-btn {
-      flex: 1; display: flex;
-      align-items: center; justify-content: center;
-      gap: 0.4rem; text-decoration: none;
-      font-size: 0.78rem; letter-spacing: 0.1em;
-      transition: opacity 0.2s;
-    }
-    .fixed-btn-tel { background: var(--red); color: #fff; }
-    .fixed-btn-line { background: #06C755; color: #fff; }
-    .fixed-btn-map { background: #fff; color: #333; }
+    /* TOASTS / OVERLAYS */
+    #toast{ position:fixed; left:50%; bottom:5vh; transform:translateX(-50%) translateY(12px); z-index:600; background:rgba(14,11,9,.96); border:1px solid rgba(201,168,76,.4);
+      padding:.8rem 1.4rem; font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; color:var(--ink); opacity:0; pointer-events:none; transition:opacity .35s, transform .35s; white-space:nowrap; }
+    #toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+    #nightMsg{ display:none; position:fixed; top:54px; left:0; right:0; z-index:150; text-align:center; padding:.55rem; background:rgba(14,11,9,.96); border-bottom:1px solid rgba(201,168,76,.35);
+      font-family:var(--mono); font-size:.66rem; letter-spacing:.2em; color:var(--gold); }
+    #landscapeMsg{ display:none; position:fixed; inset:0; z-index:500; background:var(--ground); align-items:center; justify-content:center; flex-direction:column; text-align:center; padding:3rem; }
+    #landscapeMsg .lw{ font-family:var(--mono); font-weight:700; font-size:clamp(1.6rem,6vw,2.4rem); letter-spacing:.2em; color:var(--gold); }
+    #landscapeMsg .ll{ width:60px; height:1px; background:var(--gold); opacity:.4; margin:1.4rem auto; }
+    #landscapeMsg .lt{ font-size:.85rem; letter-spacing:.2em; color:var(--ink); opacity:.8; line-height:2; }
+    #landscapeMsg .ls{ margin-top:2.4rem; font-family:var(--mono); font-size:.58rem; letter-spacing:.25em; color:var(--faint); }
 
-    /* RESPONSIVE */
-    @media (max-width: 700px) {
-      nav { padding: 1rem 1.2rem; }
-      .nav-links { gap: 0.8rem; }
-      .features-grid { grid-template-columns: 1fr; }
-      .info-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-    }
+    /* REVEAL */
+    .rev{ opacity:0; transform:translateY(26px); transition:opacity .9s ease, transform .9s ease; }
+    .rev.in{ opacity:1; transform:none; }
+    @media(prefers-reduced-motion:reduce){ *{ animation:none !important; transition:none !important; } .rev{ opacity:1; transform:none; } .band img{ transform:none; } }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="#">EORNA</a>
-  <ul class="nav-links">
-    <li><a href="#concept">CONCEPT</a></li>
-    <li><a href="#menu">MENU</a></li>
-    <li><a href="#gallery">GALLERY</a></li>
-    <li><a href="#info">ACCESS</a></li>
-    <li><a href="index.html" style="font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);text-decoration:none;border:1px solid rgba(201,168,76,0.4);padding:0.3rem 0.7rem;">🇯🇵</a></li>
-  </ul>
-</nav>
+<header>
+  <div class="brand">EORNA</div>
+  <nav class="topnav">
+    <a class="lk" href="#menu">Menu</a>
+    <a class="lk" href="#story">Story</a>
+    <a class="lk" href="#visit">Visit</a>
+    <a class="en" href="index.html">日本語</a>
+    <span class="status" id="status"><span class="dot"></span><span id="statusTxt">—</span></span>
+  </nav>
+</header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <h1 class="hero-name">BAR EORNA</h1>
-    <div class="hero-rule"></div>
-    <p class="hero-sub">SHINJUKU 3-CHOME<br>NO CHARGE<br>DRINK ¥1,000〜</p>
-    <div class="hero-cta">
-      <a class="btn-primary" href="tel:0368207456">📞 Call Now</a>
-      <a class="btn-secondary" href="#info">Find Us</a>
+<section class="hero" style="border-bottom:1px solid var(--line); cursor:default;">
+  <div class="crest"><img src="BAR_EORNA.png" alt="" onerror="this.closest('.crest').remove()"></div>
+  <div class="kick">British Bar — Shinjuku 3-Chome</div>
+  <h1 class="word">BAR<br>EORNA<span class="d">.</span></h1>
+  <p class="tag">Group Therapy Here. One drink, no airs.</p>
+  <div class="meta">EST. 2007 &nbsp;·&nbsp; 300+ WHISKIES &nbsp;·&nbsp; <b>NO CHARGE</b> &nbsp;·&nbsp; 18:00–03:00</div>
+</section>
+
+<div class="band"><img src="IMG_3185.jpeg" alt="the back bar"><div class="ov"></div></div>
+<div class="cap">The Back Bar — 300+ Bottles, Shinjuku Basement</div>
+
+<section class="concept rev" id="concept">
+  <div class="sidx"><span class="t">—</span> &nbsp; Concept</div>
+  <div class="stitle">Group Therapy Here</div>
+  <p class="lead">A basement bar in Shinjuku 3-chome. Beer, whisky, and the sound of laughter. No cover charge, no pretense — just good drink and good company.</p>
+</section>
+
+<section class="menu rev" id="menu">
+  <div class="sidx"><span class="t">01</span> &nbsp;—&nbsp; Drinks</div>
+  <h2 class="stitle">Menu</h2>
+  <div class="cat">Single Malt</div>
+  <div class="mi"><span class="mn">Macallan 12y<span class="mm">Speyside</span></span><span class="mp">¥2,000</span></div>
+  <div class="mi"><span class="mn">Bowmore 18y<span class="mm">Islay</span></span><span class="mp">¥2,500</span></div>
+  <div class="mi"><span class="mn">Talisker 10y<span class="mm">Islands</span></span><span class="mp">¥1,200</span></div>
+  <div class="cat">Cocktails</div>
+  <div class="mi"><span class="mn">Gin &amp; Tonic<span class="mm">Gin</span></span><span class="mp">from ¥1,000</span></div>
+  <div class="mi"><span class="mn">God Father<span class="mm">Whisky</span></span><span class="mp">from ¥1,000</span></div>
+  <div class="mi"><span class="mn">Margarita<span class="mm">Tequila</span></span><span class="mp">from ¥1,000</span></div>
+  <div class="cat">Draught &amp; Signature</div>
+  <div class="mi"><span class="mn">Daily Draught<span class="mm">3 Taps</span></span><span class="mp">from ¥1,000</span></div>
+  <div class="mi"><span class="mn">The Bomb<span class="mm">Guinness × Jameson × Baileys</span></span><span class="mp">¥1,800</span></div>
+  <div class="more">— and 300+ more.</div>
+  <div class="thumbs">
+    <div class="thumb"><img src="IMG_1103.jpeg" alt="Bowmore"><div class="tc">Bowmore</div></div>
+    <div class="thumb"><img src="IMG_1105.jpeg" alt="Talisker"><div class="tc">Talisker</div></div>
+    <div class="thumb"><img src="IMG_1102.jpeg" alt="Old Parr"><div class="tc">Old Parr</div></div>
+    <div class="thumb"><img src="IMG_1104.jpeg" alt="Jameson"><div class="tc">Jameson</div></div>
+  </div>
+</section>
+
+<section class="story rev" id="story">
+  <div class="sidx"><span class="t">02</span> &nbsp;—&nbsp; Since 2007</div>
+  <h2 class="stitle">Story</h2>
+  <div class="story-inner">
+    <div class="pf">
+      <div class="psq" style="cursor:default;"><img src="IMG_3178.jpeg" alt="" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center 32%;" onerror="this.style.display='none'"></div>
+      <div class="pcap">Koichi Nagata<span>Owner · 2024–</span></div>
+    </div>
+    <div class="story-text">
+      <p>In 2007, Kimura opened this basement bar — a place where anyone could simply drop in. For sixteen years, its light never went out.</p>
+      <p>Today, <span class="g">Koichi Nagata</span> carries the baton, and the same warm light still burns — just as it did on the very first night.</p>
     </div>
   </div>
 </section>
 
-<!-- CONCEPT -->
-<section class="concept" id="concept">
-  <span class="section-label">— CONCEPT —</span>
-  <h2 class="section-title">GROUP THERAPY HERE</h2>
-  <div class="divider"></div>
-  <p>
-    EORNA means "barley" in Gaelic.<br>
-    A British-style bar in the basement of Shinjuku 3-chome, Tokyo.<br>
-    300+ whiskies, 3 craft draft beers, and classic cocktails.<br>
-    No cover charge. No reservations needed.<br>
-    Solo visitors, couples, and groups all welcome.
-  </p>
-</section>
-
-<!-- MENU -->
-<section class="menu" id="menu">
-  <div class="menu-inner">
-    <span class="section-label">— MENU —</span>
-    <div class="menu-grid">
-
-      <div>
-        <div class="menu-category">
-          <h4>SINGLE MALT SCOTCH · Lowland</h4>
-          <div class="menu-item"><span class="name">Auchentoshan</span><span class="price">¥1,200</span></div>
-          <div class="menu-item"><span class="name">Glenkinchie 12y</span><span class="price">¥1,200</span></div>
-        </div>
-        <div class="menu-category">
-          <h4>SINGLE MALT SCOTCH · Highland</h4>
-          <div class="menu-item"><span class="name">Oban 14y</span><span class="price">¥1,200</span></div>
-          <div class="menu-item"><span class="name">Glengoyne 10y</span><span class="price">¥1,200</span></div>
-          <div class="menu-item"><span class="name">Dalmore 12y</span><span class="price">¥2,000</span></div>
-          <div class="menu-item"><span class="name">Royal Lochnagar 12y</span><span class="price">¥1,200</span></div>
-        </div>
-        <div class="menu-category">
-          <h4>SINGLE MALT SCOTCH · Speyside</h4>
-          <div class="menu-item"><span class="name">Glenlivet 12y</span><span class="price">¥1,200</span></div>
-          <div class="menu-item"><span class="name">Glenfarclas 12y</span><span class="price">¥1,200</span></div>
-          <div class="menu-item"><span class="name">Aberlour 10y</span><span class="price">¥1,200</span></div>
-          <div class="menu-item"><span class="name">Macallan 12y</span><span class="price">¥2,000</span></div>
-        </div>
-      </div>
-
-      <div>
-        <div class="menu-category">
-          <h4>SINGLE MALT SCOTCH · Islands</h4>
-          <div class="menu-item"><span class="name">Talisker 10y</span><span class="price">¥1,200</span></div>
-          <div class="menu-item"><span class="name">Arran 10y</span><span class="price">¥1,200</span></div>
-        </div>
-        <div class="menu-category">
-          <h4>SINGLE MALT SCOTCH · Islay</h4>
-          <div class="menu-item"><span class="name">Laphroaig 10y</span><span class="price">¥1,200</span></div>
-          <div class="menu-item"><span class="name">Bowmore 18y</span><span class="price">¥2,500</span></div>
-          <div class="menu-item"><span class="name">Ardbeg 10y</span><span class="price">¥1,200</span></div>
-          <div class="menu-item"><span class="name">Bruichladdich</span><span class="price">¥1,200</span></div>
-        </div>
-        <div class="menu-category">
-          <h4>BLENDED SCOTCH</h4>
-          <div class="menu-item"><span class="name">Johnnie Walker Black</span><span class="price">¥1,000</span></div>
-          <div class="menu-item"><span class="name">Dewar's 12y</span><span class="price">¥1,000</span></div>
-          <div class="menu-item"><span class="name">Old Parr</span><span class="price">¥1,000</span></div>
-        </div>
-        <p class="menu-note">Many more whiskies, brandies, rums, and tequilas available. Feel free to ask.</p>
-      </div>
-
-      <div>
-        <div class="menu-category">
-          <h4>COCKTAIL · Gin Base</h4>
-          <div class="menu-item"><span class="name">Gin Tonic</span><span class="price">¥1,000〜</span></div>
-          <div class="menu-item"><span class="name">Martini</span><span class="price">¥1,000〜</span></div>
-          <div class="menu-item"><span class="name">Gimlet</span><span class="price">¥1,000〜</span></div>
-        </div>
-        <div class="menu-category">
-          <h4>COCKTAIL · Vodka Base</h4>
-          <div class="menu-item"><span class="name">Moscow Mule</span><span class="price">¥1,000〜</span></div>
-          <div class="menu-item"><span class="name">Salty Dog</span><span class="price">¥1,000〜</span></div>
-          <div class="menu-item"><span class="name">Balalaika</span><span class="price">¥1,000〜</span></div>
-        </div>
-        <div class="menu-category">
-          <h4>COCKTAIL · Rum Base</h4>
-          <div class="menu-item"><span class="name">Cuba Libre</span><span class="price">¥1,000〜</span></div>
-          <div class="menu-item"><span class="name">Sol Cubano</span><span class="price">¥1,000〜</span></div>
-          <div class="menu-item"><span class="name">Daiquiri</span><span class="price">¥1,000〜</span></div>
-        </div>
-      </div>
-
-      <div>
-        <div class="menu-category">
-          <h4>COCKTAIL · Tequila Base</h4>
-          <div class="menu-item"><span class="name">Tequila Sunrise</span><span class="price">¥1,000〜</span></div>
-          <div class="menu-item"><span class="name">Margarita</span><span class="price">¥1,000〜</span></div>
-          <div class="menu-item"><span class="name">El Diablo</span><span class="price">¥1,000〜</span></div>
-        </div>
-        <div class="menu-category">
-          <h4>COCKTAIL · Whisky Base</h4>
-          <div class="menu-item"><span class="name">Old Pal</span><span class="price">¥1,000〜</span></div>
-          <div class="menu-item"><span class="name">God Father</span><span class="price">¥1,000〜</span></div>
-          <div class="menu-item"><span class="name">Manhattan</span><span class="price">¥1,000〜</span></div>
-        </div>
-        <div class="menu-category">
-          <h4>COCKTAIL · Other Base</h4>
-          <div class="menu-item"><span class="name">Cassis Soda</span><span class="price">¥1,000〜</span></div>
-          <div class="menu-item"><span class="name">Spumoni</span><span class="price">¥1,000〜</span></div>
-          <div class="menu-item"><span class="name">Fuzzy Navel</span><span class="price">¥1,000〜</span></div>
-        </div>
-        <p class="menu-note">We're happy to make other drinks to your liking. Just ask.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="features" id="features">
-  <div class="features-inner">
-    <span class="section-label">— WHY EORNA —</span>
-    <div class="features-grid">
-      <div class="feature-card">
-        <span class="icon">🥃</span>
-        <h4>300+ Whiskies</h4>
-        <p>Scotch, Irish, Japanese and more. Ask the master for a recommendation.</p>
-      </div>
-      <div class="feature-card">
-        <span class="icon">🍺</span>
-        <h4>3 Draft Beers</h4>
-        <p>Rotating selection of craft beers on tap. Perfect with whisky.</p>
-      </div>
-      <div class="feature-card">
-        <span class="icon">🚪</span>
-        <h4>No Cover Charge</h4>
-        <p>Walk in anytime. No reservation required. From ¥1,000 per drink.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section class="gallery" id="gallery">
-  <div class="gallery-inner">
-    <span class="section-label">— GALLERY —</span>
-    <div class="gallery-grid">
-      <img src="IMG_1103.jpeg" alt="Bar interior">
-      <img src="IMG_1104.jpeg" alt="Bar counter">
-      <img src="IMG_1102.jpeg" alt="Bar exterior">
-      <img src="IMG_1105.jpeg" alt="Bar entrance">
-    </div>
-  </div>
-</section>
-
-<!-- FIRST TIME -->
-<section class="firsttime" id="firsttime">
-  <div class="firsttime-inner">
-    <span class="section-label">— FOR FIRST-TIME GUESTS —</span>
-    <h2 class="section-title">Solo visitors always welcome.</h2>
-    <div class="firsttime-cards">
-      <div class="firsttime-card">
-        <span class="icon">🚪</span>
-        <h4>Walk Right In</h4>
-        <p>No cover charge. No reservation needed. Solo visitors always welcome.</p>
-      </div>
-      <div class="firsttime-card">
-        <span class="icon">🥃</span>
-        <h4>Not Sure What to Order?</h4>
-        <p>300+ whiskies. Tell us your taste and the master will pick one for you.</p>
-      </div>
-      <div class="firsttime-card">
-        <span class="icon">🕐</span>
-        <h4>Open Late</h4>
-        <p>18:00–03:00. Perfect for a second or third stop of the night.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- OWNER -->
-<section class="owner" id="owner">
-  <div class="owner-inner">
-    <span class="section-label">— OWNER —</span>
-    <img src="IMG_3178.jpeg" alt="Owner Koichi Nagata" style="width:300px;height:300px;object-fit:cover;object-position:center 20%;border-radius:50%;border:2px solid rgba(201,168,76,0.4);margin:2rem auto;display:block;">
-    <blockquote>
-      "Inspired by Mr. Kimura's vision of creating a bar in Shinjuku 3-chome that anyone could comfortably drop into, I took over EORNA with that same spirit. EORNA aims to be a hideaway bar where even solo guests feel at ease. Whether it's your first visit or your hundredth, please enjoy whisky and cocktails at your own pace. We look forward to welcoming you in Shinjuku 3-chome."
-    </blockquote>
-    <p class="owner-name">Owner: Koichi Nagata</p>
-  </div>
-</section>
-
-<!-- INFO -->
-<section class="info" id="info">
-  <div class="info-inner">
-    <div class="info-block">
-      <h3>INFORMATION</h3>
-      <dl>
-        <div class="info-row"><dt>Name</dt><dd>BAR EORNA</dd></div>
-        <div class="info-row">
-          <dt>Address</dt>
-          <dd>Imai Bldg B1<br>3-11-1 Shinjuku<br>Shinjuku-ku, Tokyo 160-0022</dd>
-        </div>
-        <div class="info-row"><dt>Hours</dt><dd>18:00 〜 03:00<br><span style="opacity:0.5;font-size:0.75em;">Open 365 days</span></dd></div>
-        <div class="info-row"><dt>TEL</dt><dd><a href="tel:0368207456">03-6820-7456</a></dd></div>
-        <div class="info-row"><dt>EMAIL</dt><dd><a href="mailto:nagata@eorna.info">nagata@eorna.info</a></dd></div>
-        <div class="info-row"><dt>Cover</dt><dd>None</dd></div>
-        <div class="info-row"><dt>Drinks</dt><dd>From ¥1,000</dd></div>
-        <div class="info-row"><dt>Access</dt><dd>2 min walk from Shinjuku-sanchome Station<br>5 min walk from Shinjuku Station (East Exit)</dd></div>
+<section class="rev" id="visit">
+  <div class="sidx"><span class="t">03</span> &nbsp;—&nbsp; Access</div>
+  <h2 class="stitle">Visit</h2>
+  <div class="visit-grid">
+    <div>
+      <dl style="margin:0;">
+        <div class="vrow"><dt>Address</dt><dd>Imai Bldg. B1, 3-11-1 Shinjuku, Shinjuku-ku, Tokyo 160-0022</dd></div>
+        <div class="vrow"><dt>Hours</dt><dd>18:00 – 03:00 · Open daily</dd></div>
+        <div class="vrow"><dt>Charge</dt><dd>None · Drinks from ¥1,000</dd></div>
+        <div class="vrow"><dt>Tel</dt><dd><a href="tel:0368207456">03-6820-7456</a></dd></div>
+        <div class="vrow"><dt>Access</dt><dd>2 min from Shinjuku-sanchome Stn (Exit E1) · 5 min from Shinjuku Stn (East Exit)</dd></div>
       </dl>
-      <a class="tel-btn" href="tel:0368207456">
-        03-6820-7456
-        <span>Tap to call</span>
-      </a>
-      <a href="https://lin.ee/N6yc4mdA" target="_blank" style="display:flex;align-items:center;justify-content:center;padding:0.9rem;background:#06C755;">
-        <img src="https://scdn.line-apps.com/n/line_add_friends/btn/en.png" alt="Add Friend" height="36" border="0">
-      </a>
-    </div>
-    <div class="info-block">
-      <h3>ACCESS</h3>
-      <div class="map-wrap">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d811.9!2d139.7065674!3d35.691508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d20423a97d3%3A0xa2dc43b2c084e003!2sBAR%20EORNA!5e0!3m2!1sen!2sjp!4v1"
-          allowfullscreen loading="lazy">
-        </iframe>
-      </div>
-      <div style="margin-top:1rem;display:flex;flex-direction:column;gap:0.8rem;">
-        <a href="https://maps.app.goo.gl/2kQ74VHM5rHyLmtz6" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.9rem;background:#fff;color:#333;text-decoration:none;font-size:0.78rem;letter-spacing:0.1em;">
-          📍 Open in Google Maps
-        </a>
-        <a href="https://www.instagram.com/bar_eorna/" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.9rem;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;text-decoration:none;font-size:0.78rem;letter-spacing:0.1em;">
-          📷 Follow on Instagram
-        </a>
+      <div class="actions">
+        <a class="act tel" href="tel:0368207456">☎ Call</a>
+        <a class="act line" href="https://lin.ee/N6yc4mdA" target="_blank" rel="noopener">LINE</a>
+        <a class="act" href="https://maps.app.goo.gl/2kQ74VHM5rHyLmtz6" target="_blank" rel="noopener">Map ↗</a>
+        <a class="act" href="https://www.instagram.com/bar_eorna/" target="_blank" rel="noopener">Instagram ↗</a>
       </div>
     </div>
+    <div class="map-wrap"><iframe loading="lazy" allowfullscreen src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d811.9!2d139.7065674!3d35.691508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d20423a97d3%3A0xa2dc43b2c084e003!2sBAR%20EORNA!5e0!3m2!1sja!2sjp!4v1"></iframe></div>
   </div>
 </section>
 
-<!-- PRIVACY -->
-<section class="privacy">
-  <div class="privacy-inner">
-    <span class="section-label">— PRIVACY POLICY —</span>
-    <div class="pp-block">
-      <h3>Privacy Policy</h3>
-      <p>BAR EORNA (hereinafter "we") considers the protection of customers' personal information important and handles it appropriately based on the following policy.</p>
-    </div>
-    <div class="pp-block">
-      <p><strong style="color:var(--gold);">Collection of Personal Information</strong></p>
-      <p>We may collect personal information such as your name, email address, and phone number when you make an inquiry or reservation.</p>
-    </div>
-    <div class="pp-block">
-      <p><strong style="color:var(--gold);">Purpose of Use</strong></p>
-      <ul>
-        <li>Responding to inquiries</li>
-        <li>Confirming and contacting you about reservations</li>
-        <li>Providing information about our services</li>
-      </ul>
-    </div>
-    <div class="pp-block">
-      <p><strong style="color:var(--gold);">Disclosure to Third Parties</strong></p>
-      <p>We will not disclose your personal information to third parties without your consent, except as required by law.</p>
-    </div>
-    <div class="pp-block">
-      <p><strong style="color:var(--gold);">Contact</strong></p>
-      <p>For inquiries regarding the handling of personal information, please contact us at <a href="mailto:BAR@eorna.info" style="color:var(--gold);">BAR@eorna.info</a>.</p>
-    </div>
-    <p style="margin-top:2rem;font-size:0.7rem;opacity:0.4;">Effective: June 2026</p>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  <p class="f-logo">BAR EORNA</p>
-  <div style="display:flex;gap:1.5rem;justify-content:center;margin-bottom:1rem;">
-    <a href="index.html" style="color:var(--muted);font-size:0.7rem;letter-spacing:0.15em;text-decoration:none;">🇯🇵</a>
-    <a href="https://maps.app.goo.gl/2kQ74VHM5rHyLmtz6" target="_blank" style="color:var(--muted);font-size:0.7rem;letter-spacing:0.15em;text-decoration:none;">Google Maps</a>
-    <a href="https://www.instagram.com/bar_eorna" target="_blank" style="color:var(--muted);font-size:0.7rem;letter-spacing:0.15em;text-decoration:none;">Instagram</a>
+  <div class="foot-top">
+    <div class="foot-word">EORNA</div>
+    <div class="socials">
+      <a href="https://www.instagram.com/bar_eorna/" target="_blank" rel="noopener" title="Instagram">IG</a>
+      <a href="https://maps.app.goo.gl/2kQ74VHM5rHyLmtz6" target="_blank" rel="noopener" title="Google Maps">G</a>
+      <a href="https://lin.ee/N6yc4mdA" target="_blank" rel="noopener" title="LINE">L</a>
+    </div>
   </div>
-  <p>© 2026 BAR EORNA. All rights reserved.</p>
+  <div class="foot-meta">
+    <span>© 2026 BAR EORNA — Shinjuku, Tokyo</span>
+    <a href="index.html">日本語 ↗</a>
+  </div>
 </footer>
 
-<!-- FIXED BOTTOM -->
-<div class="fixed-bottom">
-  <a class="fixed-btn fixed-btn-tel" href="tel:0368207456">📞 Call</a>
-  <a class="fixed-btn fixed-btn-line" href="https://lin.ee/N6yc4mdA" target="_blank" style="padding:0;">
-    <img src="https://scdn.line-apps.com/n/line_add_friends/btn/en.png" alt="Add Friend" height="36" border="0">
-  </a>
-  <a class="fixed-btn fixed-btn-map" href="https://maps.app.goo.gl/2kQ74VHM5rHyLmtz6" target="_blank">📍 Map</a>
-</div>
-
+<script>
+(function(){ var h=new Date().getHours(); var open=(h>=18||h<3);
+  document.getElementById('statusTxt').textContent = open?'Open Now':'Closed';
+  if(open) document.getElementById('status').classList.add('open'); })();
+(function(){ var io=new IntersectionObserver(function(es){es.forEach(function(en){ if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);} });},{threshold:.12});
+  document.querySelectorAll('.rev').forEach(function(el){io.observe(el);}); })();
+</script>
 </body>
 </html>
