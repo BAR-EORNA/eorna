@@ -55,9 +55,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .ch-lead{font-size:clamp(.98rem,2.6vw,1.1rem);line-height:2.1;opacity:.9}
 .ch-riddle{font-size:clamp(1rem,2.8vw,1.18rem);line-height:2;margin-top:1.2rem}
 .ch-photo{margin:1.6rem 0}
-.ch-photo img{width:100%;border:1px solid var(--line);filter:brightness(.85)}
+.ch-photo img{width:100%;max-height:46vh;object-fit:cover;object-position:center;border:1px solid var(--line);filter:brightness(.85)}
 .ch-photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin:1.6rem 0}
-.ch-photo-grid img{width:100%;height:100%;object-fit:cover;border:1px solid var(--line);filter:brightness(.85)}
+.ch-photo-grid img{width:100%;height:180px;object-fit:cover;object-position:center;border:1px solid var(--line);filter:brightness(.85)}
 .riddle-numbers{font-family:var(--mono);letter-spacing:.3em;color:var(--gold)}
 .riddle-num{color:var(--gold)}
 .ch-input{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(201,168,76,.5);color:var(--ink);font-family:var(--mono);font-size:1.1rem;letter-spacing:.12em;padding:.7rem .2rem;margin-top:1.8rem;outline:none}
@@ -75,7 +75,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 @keyframes flash{0%,100%{background:transparent}40%{background:rgba(201,168,76,.12)}}
 #ending{display:none;max-width:680px;margin:0 auto;padding:14vh clamp(1.4rem,6vw,2rem);text-align:center}
 .ending-slide{margin-bottom:2.4rem}
-.ending-slide img{width:100%;border:1px solid var(--line);filter:brightness(.85)}
+.ending-slide img{width:100%;max-height:48vh;object-fit:cover;object-position:center;border:1px solid var(--line);filter:brightness(.85)}
 .ending-caption{font-size:clamp(.95rem,2.6vw,1.1rem);line-height:2.1;opacity:.85;margin-bottom:1.2rem}
 .ending-secret{margin:3rem 0}
 .ending-secret p:first-child{font-family:var(--mono);font-size:clamp(2.2rem,11vw,3.6rem);letter-spacing:.2em;color:var(--gold)}
@@ -197,7 +197,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     </p>
     <div class="ch-photo-grid">
       <img src="2E33375C-740E-4FE5-B592-3CDE02125486.jpeg" alt="木村さん">
-      <img src="481B12ED-4DC7-4A48-9F0E-7A8DC54D555D.jpeg" alt="永田さん" style="grid-column: 1 / -1; height:260px;">
+      <img src="481B12ED-4DC7-4A48-9F0E-7A8DC54D555D.jpeg" alt="永田さん" style="grid-column: 1 / -1; height:220px; object-fit:cover;">
     </div>
     <div class="ch-riddle">
       作った人。受け継いだ人。<br><br>
