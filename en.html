@@ -157,9 +157,16 @@
     .rev{ opacity:0; transform:translateY(26px); transition:opacity .9s ease, transform .9s ease; }
     .rev.in{ opacity:1; transform:none; }
     @media(prefers-reduced-motion:reduce){ *{ animation:none !important; transition:none !important; } .rev{ opacity:1; transform:none; } .band img{ transform:none; } }
-  </style>
+  
+#wcBar{display:none;position:fixed;top:0;left:0;right:0;z-index:9999;height:34px;line-height:34px;text-align:center;background:var(--gold);color:#0E0B09;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;overflow:hidden;padding:0 .5rem}
+body.wc #wcBar{display:block}
+.wc-hero{display:none;font-family:var(--mono);font-size:clamp(.62rem,2vw,.74rem);letter-spacing:.1em;color:var(--gold);border:1px solid rgba(201,168,76,.45);padding:.7rem 1rem;margin-top:1.9rem}
+body.wc .wc-hero{display:inline-block}
+body.wc header{top:34px}
+</style>
 </head>
 <body>
+<div id="wcBar">⚽ WORLD CUP 2026 &nbsp;—&nbsp; 観戦やってます · MATCHES ON SCREEN</div>
 
 <header>
   <div class="brand">EORNA</div>
@@ -178,6 +185,7 @@
   <h1 class="word">BAR<br>EORNA<span class="d">.</span></h1>
   <p class="tag">Group Therapy Here. One drink, no airs.</p>
   <div class="meta">EST. 2007 &nbsp;·&nbsp; 300+ WHISKIES &nbsp;·&nbsp; <b>NO CHARGE</b> &nbsp;·&nbsp; 18:00–03:00</div>
+  <div class="wc-hero">⚽ WORLD CUP 2026 — 観戦やってます · 期間中も 18:00–03:00 営業</div>
 </section>
 
 <div class="band"><img src="IMG_3185.jpeg" alt="the back bar"><div class="ov"></div></div>
@@ -272,5 +280,6 @@
 (function(){ var io=new IntersectionObserver(function(es){es.forEach(function(en){ if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);} });},{threshold:.12});
   document.querySelectorAll('.rev').forEach(function(el){io.observe(el);}); })();
 </script>
+<script>(function(){var n=new Date(),s=new Date('2026-06-11T00:00:00+09:00'),e=new Date('2026-07-20T12:00:00+09:00');if(n>=s&&n<e)document.body.classList.add('wc');})();</script>
 </body>
 </html>
