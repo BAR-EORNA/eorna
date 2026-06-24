@@ -186,11 +186,44 @@
 body.wc #wcBar{display:block}
 .wc-hero{display:none;font-family:var(--mono);font-size:clamp(.62rem,2vw,.74rem);letter-spacing:.1em;color:var(--gold);border:1px solid rgba(201,168,76,.45);padding:.7rem 1rem;margin-top:1.9rem}
 body.wc .wc-hero{display:inline-block}
-body.wc header{top:34px}
+body.wc header{top:62px}
+
+/* ===== WC 極限 mode ===== */
+#wcBar{background:linear-gradient(90deg,#C9A84C 0%,#1a7a4a 50%,#C9A84C 100%);overflow:hidden;padding:0}
+body.wc #wcBar{display:flex;align-items:center}
+.wc-track{display:inline-flex;flex:none;white-space:nowrap;animation:wcscroll 22s linear infinite}
+.wc-track span{padding:0 1.3rem;font-family:var(--mono);font-weight:700;font-size:.64rem;letter-spacing:.16em;color:#0E0B09;text-transform:uppercase;line-height:34px}
+@keyframes wcscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.wc-balls{display:none}
+body.wc .wc-balls{display:block;position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.wc-balls b{position:absolute;bottom:-14vh;font-size:2.1rem;opacity:.18;animation:wcfloat linear infinite;will-change:transform}
+@keyframes wcfloat{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(-135vh) rotate(540deg)}}
+body.wc .word .d{font-size:0}
+body.wc .word .d::after{content:"⚽";font-size:.5em;display:inline-block;vertical-align:.08em;animation:wcbounce 1.1s ease-in-out infinite}
+@keyframes wcbounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-26%)}}
+body.wc .wc-hero{display:inline-block;background:#1a7a4a;color:#fff;border:0;border-left:3px solid #C9A84C;font-weight:700}
+body.wc .band::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.22;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.5) 0 1px,transparent 1px 15px),repeating-linear-gradient(-45deg,rgba(255,255,255,.5) 0 1px,transparent 1px 15px)}
+
+/* ===== WC pack2: flags / confetti / pitch / countdown ===== */
+#wcFlags{display:none;position:fixed;top:34px;left:0;right:0;z-index:9998;height:28px;background:#0E0B09;border-bottom:1px solid rgba(201,168,76,.3);overflow:hidden}
+body.wc #wcFlags{display:flex;align-items:center}
+.wc-ftrack{display:inline-flex;flex:none;white-space:nowrap;font-size:1rem;line-height:28px;animation:wcscroll2 34s linear infinite}
+@keyframes wcscroll2{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.wc-confetti{display:none}
+body.wc .wc-confetti{display:block;position:fixed;inset:0;z-index:8000;pointer-events:none;overflow:hidden}
+.wc-confetti i{position:absolute;top:-12vh;width:8px;height:13px;opacity:.85;animation:wcfall linear infinite}
+@keyframes wcfall{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(125vh) rotate(720deg)}}
+body.wc .hero{background:repeating-linear-gradient(180deg,#0c3d24 0 56px,#0e482b 56px 112px)}
+body.wc .hero .kick,body.wc .hero .meta{color:#cfe8d8}
+.wc-countdown{display:none}
+body.wc .wc-countdown{display:inline-block;font-family:var(--mono);font-weight:700;font-size:clamp(.66rem,2.4vw,.82rem);letter-spacing:.1em;color:#fff;background:#b5564a;padding:.55rem .9rem;margin-top:1rem}
 </style>
 </head>
 <body>
-<div id="wcBar">⚽ WORLD CUP 2026 &nbsp;—&nbsp; 観戦やってます · MATCHES ON SCREEN</div>
+<div id="wcBar"><div class="wc-track"><span>⚽ WORLD CUP 2026 · 観戦やってます · 全104試合 · ご予約で何時でも放映 · GROUP THERAPY HERE ·</span><span>⚽ WORLD CUP 2026 · 観戦やってます · 全104試合 · ご予約で何時でも放映 · GROUP THERAPY HERE ·</span></div></div>
+<div id="wcFlags"><div class="wc-ftrack">🇯🇵 🇬🇧 🇧🇷 🇦🇷 🇫🇷 🇩🇪 🇪🇸 🇵🇹 🇳🇱 🇧🇪 🇭🇷 🇲🇽 🇺🇸 🇨🇦 🇰🇷 🇲🇦 🇸🇳 🇨🇭 🇷🇸 🇺🇾 🇯🇵 🇬🇧 🇧🇷 🇦🇷 🇫🇷 🇩🇪 🇪🇸 🇵🇹 🇳🇱 🇧🇪 🇭🇷 🇲🇽 🇺🇸 🇨🇦 🇰🇷 🇲🇦 🇸🇳 🇨🇭 🇷🇸 🇺🇾 </div></div>
+<div class="wc-confetti"><i style="left:41%;background:#1a7a4a;animation-delay:2.4s;animation-duration:4.2s"></i><i style="left:68%;background:#C9A84C;animation-delay:2.2s;animation-duration:4.3s"></i><i style="left:64%;background:#1a7a4a;animation-delay:0.2s;animation-duration:6.2s"></i><i style="left:8%;background:#1a7a4a;animation-delay:0.5s;animation-duration:6.1s"></i><i style="left:72%;background:#C9A84C;animation-delay:5.7s;animation-duration:7.2s"></i><i style="left:74%;background:#C9A84C;animation-delay:3.5s;animation-duration:6.0s"></i><i style="left:28%;background:#C9A84C;animation-delay:3.3s;animation-duration:4.7s"></i><i style="left:53%;background:#1a7a4a;animation-delay:3.2s;animation-duration:6.9s"></i><i style="left:71%;background:#e8c84a;animation-delay:1.1s;animation-duration:6.9s"></i><i style="left:81%;background:#1a7a4a;animation-delay:2.2s;animation-duration:6.7s"></i><i style="left:8%;background:#3a6fb0;animation-delay:0.4s;animation-duration:5.0s"></i><i style="left:87%;background:#3a6fb0;animation-delay:2.6s;animation-duration:5.6s"></i><i style="left:74%;background:#b5564a;animation-delay:2.2s;animation-duration:5.2s"></i><i style="left:23%;background:#e8c84a;animation-delay:4.7s;animation-duration:4.4s"></i><i style="left:38%;background:#3a6fb0;animation-delay:3.0s;animation-duration:5.7s"></i><i style="left:57%;background:#ffffff;animation-delay:3.7s;animation-duration:4.4s"></i><i style="left:65%;background:#b5564a;animation-delay:1.0s;animation-duration:5.7s"></i><i style="left:62%;background:#b5564a;animation-delay:0.2s;animation-duration:7.3s"></i><i style="left:97%;background:#3a6fb0;animation-delay:3.4s;animation-duration:8.4s"></i><i style="left:40%;background:#ffffff;animation-delay:4.2s;animation-duration:7.0s"></i><i style="left:74%;background:#b5564a;animation-delay:0.4s;animation-duration:4.5s"></i><i style="left:34%;background:#b5564a;animation-delay:4.2s;animation-duration:4.3s"></i><i style="left:93%;background:#e8c84a;animation-delay:1.9s;animation-duration:6.9s"></i><i style="left:87%;background:#b5564a;animation-delay:1.7s;animation-duration:5.9s"></i></div>
+<div class="wc-balls"><b style="left:6%;animation-duration:15s">⚽</b><b style="left:23%;animation-duration:21s;animation-delay:4s">⚽</b><b style="left:43%;animation-duration:17s;animation-delay:2s">⚽</b><b style="left:62%;animation-duration:24s;animation-delay:6s">⚽</b><b style="left:80%;animation-duration:18s;animation-delay:1s">⚽</b><b style="left:92%;animation-duration:27s;animation-delay:8s">⚽</b></div>
 
 <!-- night strip -->
 <div id="nightMsg">まだ飲んでますよ。お待ちしています。</div>
@@ -214,7 +247,8 @@ body.wc header{top:34px}
   <h1 class="word">BAR<br>EORNA<span class="d">.</span></h1>
   <p class="tag">Group Therapy Here. 肩肘張らず、一杯から。</p>
   <div class="meta">EST. 2007 &nbsp;·&nbsp; 300+ WHISKIES &nbsp;·&nbsp; <b>NO CHARGE</b> &nbsp;·&nbsp; 18:00–03:00</div>
-  <div class="wc-hero">⚽ WORLD CUP 2026 — 観戦やってます · 期間中も 18:00–03:00 営業</div>
+  <div class="wc-hero">⚽ WORLD CUP 2026 — 観戦やってます · ご予約で何時でも放映対応</div>
+  <div class="wc-countdown" id="wcCountdown"></div>
 </section>
 
 <!-- PHOTO BAND -->
@@ -441,6 +475,26 @@ function showToast(text){
   document.querySelectorAll('.rev').forEach(el=>io.observe(el));
 })();
 </script>
-<script>(function(){var n=new Date(),s=new Date('2026-06-11T00:00:00+09:00'),e=new Date('2026-07-20T12:00:00+09:00');if(n>=s&&n<e)document.body.classList.add('wc');})();</script>
+<script>
+(function(){
+  // ===== 本日の試合（ここを編集）=====  例: "🇯🇵21:00 日本 vs ブラジル · 🇫🇷24:00 仏 vs 独"
+  var WC_TODAY = "";
+  // ================================
+  var n=new Date(),
+      s=new Date('2026-06-11T00:00:00+09:00'),
+      e=new Date('2026-07-20T12:00:00+09:00'),
+      fin=new Date('2026-07-20T04:00:00+09:00');
+  if(!(n>=s&&n<e)) return;
+  document.body.classList.add('wc');
+  var base="⚽ WORLD CUP 2026 · 観戦やってます · 全104試合 · ご予約で何時でも放映 · GROUP THERAPY HERE · ";
+  var txt=(WC_TODAY?("📣 本日 "+WC_TODAY+" · "):"")+base;
+  Array.prototype.forEach.call(document.querySelectorAll('.wc-track span'),function(sp){sp.textContent=txt;});
+  var el=document.getElementById('wcCountdown');
+  if(el){var tick=function(){var d=fin-new Date();if(d<=0){el.innerHTML='🏆 GRAND FINAL';return;}
+    var dd=Math.floor(d/864e5),hh=Math.floor(d/36e5)%24,mm=Math.floor(d/6e4)%60,ss=Math.floor(d/1e3)%60;
+    el.innerHTML='🏆 FINAL まで '+dd+'日 '+('0'+hh).slice(-2)+':'+('0'+mm).slice(-2)+':'+('0'+ss).slice(-2);};
+    tick();setInterval(tick,1000);}
+})();
+</script>
 </body>
 </html>
