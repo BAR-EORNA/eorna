@@ -204,6 +204,13 @@ body.wc .wc-countdown{background:transparent!important;color:var(--gold)!importa
 /* ===== ribbon readability fix (high specificity) ===== */
 body.wc #wcBar{background:#1a140d!important}
 body.wc #wcBar .wc-track span{color:#EFE7D4!important;font-weight:600!important;font-size:.68rem!important;letter-spacing:.12em!important;opacity:1!important}
+
+/* WC: Story video -> Brazil */
+body.wc .psq{position:relative}
+body.wc .psq .v-nagata{display:none!important}
+body.wc .psq .v-brazil{display:block!important}
+.ph-cap-wc{display:none}
+body.wc .psq .ph-cap-wc{display:block;position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(8,5,3,.82));color:var(--cream);font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;padding:1.5rem .8rem .7rem;text-align:center;z-index:3;pointer-events:none}
 </style>
 </head>
 <body>
@@ -269,7 +276,7 @@ body.wc #wcBar .wc-track span{color:#EFE7D4!important;font-weight:600!important;
   <h2 class="stitle">Story</h2>
   <div class="story-inner">
     <div class="pf">
-      <div class="psq" style="cursor:default;"><video autoplay loop muted playsinline poster="IMG_3178.jpeg" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center 28%;display:block;"><source src="nagata.mp4" type="video/mp4"></video></div>
+      <div class="psq" style="cursor:default;position:relative;"><video class="v-nagata" autoplay loop muted playsinline poster="IMG_3178.jpeg" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center 28%;display:block;"><source src="nagata.mp4" type="video/mp4"></video><video class="v-brazil" autoplay loop muted playsinline poster="IMG_3185.jpeg" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:none;"><source src="brazil.mp4" type="video/mp4"></video><div class="ph-cap-wc">🇯🇵 vs BRAZIL — THE NIGHT WE WON</div></div>
       <div class="pcap">Koichi Nagata<span>Owner · 2024–</span></div>
     </div>
     <div class="story-text">
