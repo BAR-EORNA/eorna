@@ -83,7 +83,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 body.wc #wcBar{display:block}
 .wc-hero{display:none;font-family:var(--mono);font-size:clamp(.62rem,2vw,.74rem);letter-spacing:.1em;color:var(--gold);border:1px solid rgba(201,168,76,.45);padding:.7rem 1rem;margin-top:1.9rem}
 body.wc .wc-hero{display:inline-block}
-body.wc .progress-bar{top:62px}
+body.wc .progress-bar{top:34px}
 
 /* ===== WC 極限 mode ===== */
 #wcBar{background:linear-gradient(90deg,#C9A84C 0%,#1a7a4a 50%,#C9A84C 100%);overflow:hidden;padding:0}
@@ -99,7 +99,7 @@ body.wc .word .d{font-size:0}
 body.wc .word .d::after{content:"⚽";font-size:.5em;display:inline-block;vertical-align:.08em;animation:wcbounce 1.1s ease-in-out infinite}
 @keyframes wcbounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-26%)}}
 body.wc .wc-hero{display:inline-block;background:#1a7a4a;color:#fff;border:0;border-left:3px solid #C9A84C;font-weight:700}
-body.wc .band::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.22;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.5) 0 1px,transparent 1px 15px),repeating-linear-gradient(-45deg,rgba(255,255,255,.5) 0 1px,transparent 1px 15px)}
+
 
 /* ===== WC pack2: flags / confetti / pitch / countdown ===== */
 #wcFlags{display:none;position:fixed;top:34px;left:0;right:0;z-index:9998;height:28px;background:#0E0B09;border-bottom:1px solid rgba(201,168,76,.3);overflow:hidden}
@@ -110,6 +110,17 @@ body.wc .hero{background:repeating-linear-gradient(180deg,#0c3d24 0 56px,#0e482b
 body.wc .hero .kick,body.wc .hero .meta{color:#cfe8d8}
 .wc-countdown{display:none}
 body.wc .wc-countdown{display:inline-block;font-family:var(--mono);font-weight:700;font-size:clamp(.66rem,2.4vw,.82rem);letter-spacing:.1em;color:#fff;background:#b5564a;padding:.55rem .9rem;margin-top:1rem}
+
+/* ===== WC refine: 上品に引き締め ===== */
+body.wc .wc-balls{display:none!important}
+body.wc #wcFlags{display:none!important}
+body.wc .word .d{font-size:inherit!important}
+body.wc .word .d::after{content:""!important;display:none!important}
+body.wc #wcBar{background:#16110D!important;border-bottom:1px solid rgba(201,168,76,.35)}
+.wc-track{animation-duration:30s}
+.wc-track span{color:var(--cream)!important;letter-spacing:.2em;font-size:.6rem;font-weight:400}
+body.wc .wc-hero{display:block!important;margin:1.7rem auto 0!important;max-width:max-content;background:transparent!important;color:var(--cream)!important;border:0!important;border-top:1px solid rgba(201,168,76,.45)!important;border-bottom:1px solid rgba(201,168,76,.45)!important;padding:.9rem 1.5rem!important;font-size:clamp(.82rem,3vw,1.2rem)!important;font-weight:500!important;letter-spacing:.16em!important;line-height:1.5}
+body.wc .wc-countdown{background:transparent!important;color:var(--gold)!important;border:1px solid rgba(201,168,76,.5)!important;font-weight:400!important}
 </style>
 </head>
 <body>
@@ -492,7 +503,7 @@ document.addEventListener('keydown', (e) => {
       fin=new Date('2026-07-20T04:00:00+09:00');
   if(!(n>=s&&n<e)) return;
   document.body.classList.add('wc');
-  var base="⚽ WORLD CUP 2026 · 観戦やってます · 全104試合 · ご予約で何時でも放映 · GROUP THERAPY HERE · ";
+  var base="🇯🇵 日本代表 決勝トーナメント進出 · ⚽ FIFA WORLD CUP 2026 · 観戦できます · ご予約で何時でも放映 · ";
   var txt=(WC_TODAY?("📣 本日 "+WC_TODAY+" · "):"")+base;
   Array.prototype.forEach.call(document.querySelectorAll('.wc-track span'),function(sp){sp.textContent=txt;});
   var el=document.getElementById('wcCountdown');

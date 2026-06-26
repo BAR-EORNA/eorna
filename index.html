@@ -188,7 +188,7 @@
 body.wc #wcBar{display:block}
 .wc-hero{display:none;font-family:var(--mono);font-size:clamp(.62rem,2vw,.74rem);letter-spacing:.1em;color:var(--gold);border:1px solid rgba(201,168,76,.45);padding:.7rem 1rem;margin-top:1.9rem}
 body.wc .wc-hero{display:inline-block}
-body.wc header{top:62px}
+body.wc header{top:34px}
 
 /* ===== WC 極限 mode ===== */
 #wcBar{background:linear-gradient(90deg,#C9A84C 0%,#1a7a4a 50%,#C9A84C 100%);overflow:hidden;padding:0}
@@ -215,6 +215,17 @@ body.wc .hero{background:linear-gradient(rgba(8,5,3,.5),rgba(8,5,3,.66)),url(dat
 body.wc .hero .kick,body.wc .hero .meta{color:#cfe8d8}
 .wc-countdown{display:none}
 body.wc .wc-countdown{display:inline-block;font-family:var(--mono);font-weight:700;font-size:clamp(.66rem,2.4vw,.82rem);letter-spacing:.1em;color:#fff;background:#b5564a;padding:.55rem .9rem;margin-top:1rem}
+
+/* ===== WC refine: 上品に引き締め ===== */
+body.wc .wc-balls{display:none!important}
+body.wc #wcFlags{display:none!important}
+body.wc .word .d{font-size:inherit!important}
+body.wc .word .d::after{content:""!important;display:none!important}
+body.wc #wcBar{background:#16110D!important;border-bottom:1px solid rgba(201,168,76,.35)}
+.wc-track{animation-duration:30s}
+.wc-track span{color:var(--cream)!important;letter-spacing:.2em;font-size:.6rem;font-weight:400}
+body.wc .wc-hero{display:block!important;margin:1.7rem auto 0!important;max-width:max-content;background:transparent!important;color:var(--cream)!important;border:0!important;border-top:1px solid rgba(201,168,76,.45)!important;border-bottom:1px solid rgba(201,168,76,.45)!important;padding:.9rem 1.5rem!important;font-size:clamp(.82rem,3vw,1.2rem)!important;font-weight:500!important;letter-spacing:.16em!important;line-height:1.5}
+body.wc .wc-countdown{background:transparent!important;color:var(--gold)!important;border:1px solid rgba(201,168,76,.5)!important;font-weight:400!important}
 </style>
 </head>
 <body>
@@ -244,7 +255,7 @@ body.wc .wc-countdown{display:inline-block;font-family:var(--mono);font-weight:7
   <h1 class="word">BAR<br>EORNA<span class="d">.</span></h1>
   <p class="tag">Group Therapy Here. 肩肘張らず、一杯から。</p>
   <div class="meta">EST. 2007 &nbsp;·&nbsp; 300+ WHISKIES &nbsp;·&nbsp; <b>NO CHARGE</b> &nbsp;·&nbsp; 18:00–03:00</div>
-  <div class="wc-hero">⚽ WORLD CUP 2026 — 観戦やってます · ご予約で何時でも放映対応</div>
+  <div class="wc-hero">🇯🇵 日本代表 — 決勝トーナメント進出</div>
   <div class="wc-countdown" id="wcCountdown"></div>
 </section>
 
@@ -482,7 +493,7 @@ function showToast(text){
       fin=new Date('2026-07-20T04:00:00+09:00');
   if(!(n>=s&&n<e)) return;
   document.body.classList.add('wc');
-  var base="⚽ WORLD CUP 2026 · 観戦やってます · 全104試合 · ご予約で何時でも放映 · GROUP THERAPY HERE · ";
+  var base="🇯🇵 日本代表 決勝トーナメント進出 · ⚽ FIFA WORLD CUP 2026 · 観戦できます · ご予約で何時でも放映 · ";
   var txt=(WC_TODAY?("📣 本日 "+WC_TODAY+" · "):"")+base;
   Array.prototype.forEach.call(document.querySelectorAll('.wc-track span'),function(sp){sp.textContent=txt;});
   var el=document.getElementById('wcCountdown');
