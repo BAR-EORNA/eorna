@@ -68,6 +68,35 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 .ending-btns{display:flex;gap:8px;padding:0 16px 20px;}
 .ending-btn{flex:1;background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(9px,2.5vw,12px);padding:10px 8px;cursor:pointer;letter-spacing:1px;text-align:center;}
 .ending-btn:active{background:#fff;color:#000;}
+
+/* ── 証明書・クーポン ── */
+.cert-wrap{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
+.cert-hdr{background:#fff;color:#000;font-size:clamp(10px,3vw,14px);padding:4px 8px;letter-spacing:2px;text-align:center;}
+.cert-body{padding:20px 16px;text-align:center;}
+.cert-title{font-size:clamp(12px,3.5vw,18px);color:#ffff00;letter-spacing:2px;margin-bottom:16px;line-height:1.8;}
+.cert-detail{font-size:clamp(9px,2.3vw,12px);color:#fff;line-height:2.2;margin-bottom:16px;}
+.cert-coupon{border:2px dashed #ffff00;padding:16px;margin:16px 0;background:#0a0a00;}
+.cert-coupon-title{font-size:clamp(10px,2.8vw,14px);color:#ffff00;margin-bottom:8px;letter-spacing:1px;}
+.cert-coupon-body{font-size:clamp(12px,3.5vw,18px);color:#fff;letter-spacing:1px;margin-bottom:8px;}
+.cert-coupon-code{font-size:clamp(14px,4vw,22px);color:#aaffaa;letter-spacing:4px;margin:8px 0;}
+.cert-coupon-note{font-size:clamp(8px,2vw,10px);color:#888;margin-top:8px;}
+.cert-hr{border:none;border-top:1px solid #333;margin:14px 0;}
+.cert-btn{display:block;margin:0 auto 8px;background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(9px,2.5vw,12px);padding:10px 28px;cursor:pointer;letter-spacing:2px;width:90%;}
+.cert-btn:active{background:#fff;color:#000;}
+
+/* ── 人物図鑑 ── */
+.zukan-wrap{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
+.zukan-grid{padding:12px;display:flex;flex-direction:column;gap:12px;}
+.zukan-card{border:1px solid #333;display:flex;gap:10px;padding:10px;}
+.zukan-img{width:80px;height:80px;object-fit:cover;flex-shrink:0;image-rendering:pixelated;}
+.zukan-info{flex:1;min-width:0;}
+.zukan-name{font-size:clamp(10px,3vw,14px);color:#ffff00;margin-bottom:4px;}
+.zukan-role{font-size:clamp(8px,2vw,10px);color:#888;margin-bottom:6px;letter-spacing:1px;}
+.zukan-desc{font-size:clamp(8px,2vw,11px);color:#ccc;line-height:1.8;word-break:keep-all;}
+
+/* ── クリア証明ボタン ── */
+.show-cert-btn{display:block;margin:8px auto;background:#0a0a00;border:1px dashed #ffff00;color:#ffff00;font-family:'DotGothic16',monospace;font-size:clamp(9px,2.5vw,12px);padding:8px 20px;cursor:pointer;letter-spacing:1px;width:90%;}
+.show-cert-btn:active{background:#ffff00;color:#000;}
 </style>
 </head>
 <body>
@@ -118,6 +147,100 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
   <div class="ending-btns">
     <button class="ending-btn" onclick="showChapterSelect()">チャプター選択</button>
     <button class="ending-btn" onclick="resetGame()">タイトルへ</button>
+  </div>
+</div>
+
+<!-- 証明書・クーポン画面 -->
+<div id="certScreen" class="cert-wrap" style="display:none;">
+  <div class="cert-hdr">【 捜査完了証明書 】</div>
+  <div class="cert-body">
+    <div class="cert-title">BAR EORNA失踪事件<br>全章クリア達成</div>
+    <div class="cert-detail">
+      あなたはBAR EORNAの全ての謎を解き明かした。<br>
+      木村・津守・ワカメ…<br>
+      三人全員が、本物だった。
+    </div>
+    <hr class="cert-hr">
+    <div class="cert-coupon">
+      <div class="cert-coupon-title">★ 特典クーポン ★</div>
+      <div class="cert-coupon-body">ビール ハーフパイント<br>1杯 無料</div>
+      <div class="cert-coupon-code">ありがとう</div>
+      <div class="cert-coupon-note">
+        BAR EORNA（新宿三丁目）にて<br>
+        この画面をスタッフにご提示ください<br>
+        有効期限：無期限
+      </div>
+    </div>
+    <hr class="cert-hr">
+    <button class="cert-btn" onclick="showZukan()">人物図鑑を見る</button>
+    <button class="cert-btn" onclick="resetGame()">タイトルへ戻る</button>
+  </div>
+</div>
+
+<!-- 人物図鑑 -->
+<div id="zukanScreen" class="zukan-wrap" style="display:none;">
+  <div class="cert-hdr">【 人物図鑑 】</div>
+  <div class="zukan-grid">
+    <div class="zukan-card">
+      <img class="zukan-img" src="IMG_3555.jpeg" alt="木村">
+      <div class="zukan-info">
+        <div class="zukan-name">木村</div>
+        <div class="zukan-role">BAR EORNAオーナー</div>
+        <div class="zukan-desc">主人公。津守の失踪を追う。3年前、EORNAが危機の時に津守に救われた恩がある。</div>
+      </div>
+    </div>
+    <div class="zukan-card">
+      <img class="zukan-img" src="43FD7881-A9C3-4711-B9DE-9511A0F963C8.png" alt="ワカメ">
+      <div class="zukan-info">
+        <div class="zukan-name">ワカメ（永田）</div>
+        <div class="zukan-role">バーテンダー</div>
+        <div class="zukan-desc">黒川商会のスパイとしてEORNAに潜入。しかし最後の瞬間、本物を選んだ。</div>
+      </div>
+    </div>
+    <div class="zukan-card">
+      <img class="zukan-img" src="52350031-F030-461B-9EC5-BE77B893323B.png" alt="津守">
+      <div class="zukan-info">
+        <div class="zukan-name">津守</div>
+        <div class="zukan-role">古物商・鑑定士</div>
+        <div class="zukan-desc">資産家にして鑑定士。「本物かどうかは目が知っている」が口癖。黒川商会から逃げるため姿を消した。</div>
+      </div>
+    </div>
+    <div class="zukan-card">
+      <img class="zukan-img" src="macky.png" alt="マッキー">
+      <div class="zukan-info">
+        <div class="zukan-name">マッキー</div>
+        <div class="zukan-role">常連客</div>
+        <div class="zukan-desc">EORNAの常連。骨董好き。あの夜、津守が外を気にしていたことを目撃していた。</div>
+      </div>
+    </div>
+    <div class="zukan-card">
+      <img class="zukan-img" src="kobatch.png" alt="コバッチ">
+      <div class="zukan-info">
+        <div class="zukan-name">コバッチ</div>
+        <div class="zukan-role">常連客</div>
+        <div class="zukan-desc">津守と同い年。観察眼が鋭く、ワカメが外の男と接触していたことを見ていた。</div>
+      </div>
+    </div>
+    <div class="zukan-card">
+      <img class="zukan-img" src="nishinishi.png" alt="にしにし">
+      <div class="zukan-info">
+        <div class="zukan-name">にしにし</div>
+        <div class="zukan-role">常連客・最年長</div>
+        <div class="zukan-desc">骨董の世界を知る長老的存在。10年前の贋作事件とワカメの父の話を知っていた。</div>
+      </div>
+    </div>
+    <div class="zukan-card">
+      <img class="zukan-img" src="kimura_brother.png" alt="木村の兄">
+      <div class="zukan-info">
+        <div class="zukan-name">木村の兄</div>
+        <div class="zukan-role">民間調査員</div>
+        <div class="zukan-desc">長年、黒川商会を追っていた。ワカメの正体を暴く証拠を持って現れた。実は良い人。</div>
+      </div>
+    </div>
+  </div>
+  <div style="padding:12px;">
+    <button class="cert-btn" onclick="showCert()">証明書に戻る</button>
+    <button class="cert-btn" onclick="resetGame()">タイトルへ戻る</button>
   </div>
 </div>
 
@@ -657,7 +780,15 @@ const chapters = [
 ];
 
 let cleared = [];
+let playCount = 0; // 周回カウント
 let currentChapter=0, sceneIdx=0, phase='input', items=new Set(), wrongCount=0;
+
+// 2周目専用ヒント（章番号: シーン番号: テキスト）
+const secondPlayHints = {
+  '0-0': '（今思えば…あの時の永田の目が泳いでいた。最初から何かを隠していたのか。）',
+  '2-1': '（コバッチの言葉が引っかかる。ワカメが外の男と接触していた。あれは追い払おうとしていたのか…本当に？）',
+  '5-2': '（兄さんの話を知った今なら全てが繋がる。ワカメはあの時点で既に迷っていたはずだ。）',
+};
 
 function showChapterSelect(){
   ['titleScreen','gameScreen','endingScreen'].forEach(id=>{
@@ -704,6 +835,17 @@ function renderScene(){
   document.getElementById('nextBtn').disabled=true;
   document.getElementById('progressTxt').textContent=`手がかり ${items.size}`;
   phase='input';
+  // 2周目ヒント表示
+  if(playCount >= 1){
+    const key = `${currentChapter}-${sceneIdx}`;
+    if(secondPlayHints[key]){
+      const area = document.getElementById('textArea');
+      const d = document.createElement('div');
+      d.className = 'text-line hint';
+      d.textContent = secondPlayHints[key];
+      area.appendChild(d);
+    }
+  }
 }
 
 function doCmd(idx){
@@ -755,14 +897,42 @@ function showTexts(lines){
 function showEnding(ch){
   document.getElementById('gameScreen').style.display='none';
   document.getElementById('exitBtn').style.display='none';
+  if(!cleared.includes(currentChapter)) cleared.push(currentChapter);
+
+  // 全章クリア判定
+  if(ch.ending.isTrue && cleared.length >= 8){
+    playCount++;
+    showCert();
+    return;
+  }
+
   document.getElementById('endingScreen').style.display='block';
   document.getElementById('endingHdr').textContent=ch.ending.title;
-  document.getElementById('endingBody').innerHTML=ch.ending.body;
-  if(!cleared.includes(currentChapter)) cleared.push(currentChapter);
+
+  // 全章クリア済みなら証明書ボタンを追加
+  let body = ch.ending.body;
+  if(cleared.length >= 8){
+    body += `<hr class="ending-hr"><button class="show-cert-btn" onclick="showCert()">★ 捜査完了証明書・クーポンを見る ★</button>`;
+  }
+  document.getElementById('endingBody').innerHTML=body;
+}
+
+function showCert(){
+  ['endingScreen','gameScreen','chapterScreen','zukanScreen'].forEach(id=>{
+    document.getElementById(id).style.display='none';
+  });
+  document.getElementById('certScreen').style.display='block';
+}
+
+function showZukan(){
+  document.getElementById('certScreen').style.display='none';
+  document.getElementById('zukanScreen').style.display='block';
 }
 
 function resetGame(){
-  document.getElementById('endingScreen').style.display='none';
+  ['endingScreen','certScreen','zukanScreen','chapterScreen'].forEach(id=>{
+    document.getElementById(id).style.display='none';
+  });
   document.getElementById('titleScreen').style.display='block';
 }
 </script>
