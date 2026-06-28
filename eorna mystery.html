@@ -107,7 +107,7 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
   <div class="title-body">
     <div class="title-logo">■ ■ ■ ■ ■ ■ ■ ■ ■ ■<br>新宿三丁目　深夜のバー<br>■ ■ ■ ■ ■ ■ ■ ■ ■ ■</div>
     <div class="title-main">BAR EORNA<br>失踪事件</div>
-    <div class="title-sub">〜 本物かどうかは、目が知っている 〜</div>
+    <div class="title-sub">〜 信用できるかどうかは、目が知っている 〜</div>
     <button class="start-btn" onclick="startChapter(0)">はじめから</button>
     <button class="start-btn" style="font-size:clamp(10px,2.8vw,13px);padding:8px 24px;animation:none;border-color:#555;" onclick="showChapterSelect()">チャプター選択</button>
     <div class="title-copy">© 2026 BAR EORNA</div>
@@ -158,7 +158,7 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
     <div class="cert-detail">
       あなたはBAR EORNAの全ての謎を解き明かした。<br>
       木村・津守・ワカメ…<br>
-      三人全員が、本物だった。
+      三人全員が、最後まで筋を通した。
     </div>
     <hr class="cert-hr">
     <div class="cert-coupon">
@@ -194,7 +194,7 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
       <div class="zukan-info">
         <div class="zukan-name">ワカメ（永田）</div>
         <div class="zukan-role">バーテンダー</div>
-        <div class="zukan-desc">黒川商会のスパイとしてEORNAに潜入。しかし最後の瞬間、本物を選んだ。</div>
+        <div class="zukan-desc">黒川商会のスパイとしてEORNAに潜入。しかし最後の瞬間、筋を通した。</div>
       </div>
     </div>
     <div class="zukan-card">
@@ -202,7 +202,7 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
       <div class="zukan-info">
         <div class="zukan-name">津守</div>
         <div class="zukan-role">古物商・鑑定士</div>
-        <div class="zukan-desc">資産家にして鑑定士。「本物かどうかは目が知っている」が口癖。黒川商会から逃げるため姿を消した。</div>
+        <div class="zukan-desc">資産家にして鑑定士。「信用できるかどうかは、目が知っている」が口癖。黒川商会から逃げるため姿を消した。</div>
       </div>
     </div>
     <div class="zukan-card">
@@ -230,7 +230,7 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
       </div>
     </div>
     <div class="zukan-card">
-      <img class="zukan-img" src="kimura_brother.png" alt="木村の兄">
+      <img class="zukan-img" src="kimura%20brother.png" alt="木村の兄">
       <div class="zukan-info">
         <div class="zukan-name">木村の兄</div>
         <div class="zukan-role">民間調査員</div>
@@ -250,11 +250,11 @@ const IMGS = {
   kimura:'IMG_3555.jpeg',
   nagata:'43FD7881-A9C3-4711-B9DE-9511A0F963C8.png',
   tsumori:'52350031-F030-461B-9EC5-BE77B893323B.png',
-  tsumori_return:'tsumori_return.png',
+  tsumori_return:'tsumori%20return.png',
   macky:'macky.png',
   kobatch:'kobatch.png',
   nishinishi:'nishinishi.png',
-  brother:'kimura_brother.png',
+  brother:'kimura%20brother.png',
 };
 
 const chapters = [
@@ -292,7 +292,7 @@ const chapters = [
         {s:'木村',t:'飲みかけのグラス。そして…小さなメモ用紙。'},
         {s:'木村',t:'「贋作　署名するな」'},
         {s:'木村',t:'津守の几帳面な字だ。'},
-        {s:'木村',t:'（本物かどうかは、目が知っている。津守の口癖が頭をよぎった。）',type:'silent'},
+        {s:'木村',t:'（信用できるかどうかは、目が知っている。津守の口癖が頭をよぎった。）',type:'silent'},
         {s:'木村',t:'【手がかり①】メモ発見。',type:'ok'},
       ],
       wrongText:'カウンターをよく調べよう。',
@@ -309,7 +309,7 @@ const chapters = [
         {s:'永田',t:'「兄貴は古物商・鑑定士です。贋作の鑑定書を書かされそうになっていたのかもしれません」'},
         {s:'木村',t:'「誰に」'},
         {s:'永田',t:'「わかりません。でも…最近、兄貴は怖い思いをされていたと思います」'},
-        {s:'木村',t:'永田の目に、本物の心配が見えた。',type:'ok'},
+        {s:'木村',t:'永田の目に、本当の心配が見えた。',type:'ok'},
       ],
       wrongText:'永田に話しかけよう。',
     },
@@ -366,7 +366,7 @@ const chapters = [
       correctText:[
         {s:'永田',t:'「聞いたことがあります。骨董品の闇ルートを仕切る業者だと」'},
         {s:'永田',t:'「贋作を本物として高額で売買する…許せない連中です」'},
-        {s:'木村',t:'（永田は怒っていた。本物の怒りだった。）',type:'silent'},
+        {s:'木村',t:'（永田は怒っていた。嘘のない怒りだった。）',type:'silent'},
         {s:'木村',t:'3年前、EORNAが資金難だった時、津守が無利子で助けてくれた。'},
         {s:'木村',t:'俺の恩人だ。必ず見つける。'},
       ],
@@ -691,25 +691,25 @@ const chapters = [
       cmds:C, correct:2,
       correctText:[
         {s:'永田',t:'「兄貴と木村さんを見ていたら」'},
-        {s:'永田',t:'「本物の人間ってこういう人だと思いました」'},
+        {s:'永田',t:'「筋を通せる人間ってこういう人だと思いました」'},
         {s:'永田',t:'「私は父の恩人を裏切ろうとしていた。それに気づいた時」'},
         {s:'永田',t:'「もう止まれなかった」'},
         {s:'木村',t:'（永田の目から涙が一滴、落ちた。）',type:'silent'},
-        {s:'木村',t:'（この男は…最後の瞬間、本物だった。）',type:'silent'},
+        {s:'木村',t:'（この男は…最後の瞬間、筋を通した。）',type:'silent'},
       ],
       wrongText:'永田に問いかけよう。',
     },
   ],
   ending:{
     title:'第7章　クリア',
-    body:`永田は家族を守るためにスパイになった。<br>しかし最後の瞬間、本物を選んだ。<br><span style="color:#ff88ff">「本物の人間ってこういう人だと思いました」</span><hr class="ending-hr">最終章。全ての真相が明かされる。`,
+    body:`永田は家族を守るためにスパイになった。<br>しかし最後の瞬間、筋を通した。<br><span style="color:#ff88ff">「筋の通った人間ってこういう人だと思いました」</span><hr class="ending-hr">最終章。全ての真相が明かされる。`,
   }
 },
 // ══════════════════════════════════════════
-// 第8章「本物の証明」
+// 第8章「最後の選択」
 // ══════════════════════════════════════════
 {
-  title:'第8章「本物の証明」',
+  title:'第8章「最後の選択」',
   scenes:[
     {
       img:IMGS.nagata,
@@ -739,10 +739,10 @@ const chapters = [
       ],
       cmds:C, correct:5,
       correctText:[
-        {s:'木村',t:'（永田は本物だったか？）',type:'silent'},
-        {s:'木村',t:'（最後の瞬間、確かに本物だった。）',type:'silent'},
-        {s:'木村',t:'（本物かどうかは、目が知っている。）',type:'silent'},
-        {s:'木村',t:'（俺の目には…永田は本物に見えた。）',type:'silent'},
+        {s:'木村',t:'（ワカメは…最後まで筋を通したか？）',type:'silent'},
+        {s:'木村',t:'（最後の瞬間、確かに筋を通した。）',type:'silent'},
+        {s:'木村',t:'（信用できるかどうかは、目が知っている。）',type:'silent'},
+        {s:'木村',t:'（俺の目には…ワカメは信用できた。）',type:'silent'},
         {s:'木村',t:'グラスを手に取った。静かな夜だった。'},
       ],
       wrongText:'「すいり しろ」で考えをまとめよう。',
@@ -760,9 +760,9 @@ const chapters = [
         {s:'木村',t:'「…このバカ野郎」'},
         {s:'津守',t:'「黒川の件、片付きました。ご迷惑をおかけしました」'},
         {s:'木村',t:'「あなたの口癖を借りて聞かせてください」'},
-        {s:'木村',t:'「ワカメは…本物でしたか」'},
+        {s:'木村',t:'「ワカメは…信用できる人間でしたか」'},
         {s:'津守',t:'「ええ」',type:'twist'},
-        {s:'津守',t:'「最後の瞬間、確かに本物でしたよ」',type:'twist'},
+        {s:'津守',t:'「最後の瞬間、確かに信用できる人間でしたよ」',type:'twist'},
         {s:'津守',t:'「木村さんも。私の目に狂いはありませんでした」',type:'twist'},
         {s:'津守',t:'「ワカメにも心配かけたな」'},
         {s:'木村',t:'木村は失笑しながら、ボムを差し出した。',type:'ok'},
@@ -773,7 +773,7 @@ const chapters = [
   ],
   ending:{
     title:'全章クリア　真相解明',
-    body:`<span class="em">BAR EORNA失踪事件　完結</span><hr class="ending-hr">永田はスパイだった。<br>しかし最後の瞬間、本物を選んだ。<hr class="ending-hr">津守は木村を信じて逃げた。<br>木村は必ず来ると知っていた。<hr class="ending-hr">木村は失笑しながらボムを差し出した。<br><span class="em2">三人全員が、本物だった。</span><hr class="ending-hr"><span class="em3">本物かどうかは、目が知っている。</span>`,
+    body:`<span class="em">BAR EORNA失踪事件　完結</span><hr class="ending-hr">永田はスパイだった。<br>しかし最後の瞬間、筋を通した。<hr class="ending-hr">津守は木村を信じて逃げた。<br>木村は必ず来ると知っていた。<hr class="ending-hr">木村は失笑しながらボムを差し出した。<br><span class="em2">三人全員が、最後まで筋を通した。</span><hr class="ending-hr"><span class="em3">信用できるかどうかは、目が知っている。</span>`,
     isTrue:true,
   }
 },
