@@ -8,23 +8,18 @@
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'DotGothic16','MS Gothic',monospace;padding:8px;}
-
 .exit-btn{position:fixed;top:8px;right:8px;z-index:999;background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:10px;padding:4px 8px;cursor:pointer;letter-spacing:1px;text-decoration:none;display:none;}
 .exit-btn:active{background:#fff;color:#000;}
-
-/* タイトル */
 .title-screen{width:100%;max-width:500px;background:#000;border:2px solid #fff;text-align:center;}
 .hdr{background:#fff;color:#000;font-size:clamp(10px,3vw,14px);padding:4px 8px;letter-spacing:1px;}
 .title-body{padding:32px 20px;}
 .title-logo{font-size:clamp(8px,2vw,11px);color:#aaa;line-height:1.8;margin-bottom:16px;}
 .title-main{font-size:clamp(16px,5vw,26px);color:#fff;letter-spacing:2px;line-height:1.6;margin-bottom:16px;}
 .title-sub{font-size:clamp(10px,2.5vw,13px);color:#aaa;letter-spacing:2px;margin-bottom:28px;}
-.start-btn{background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(12px,3.5vw,16px);padding:12px 36px;cursor:pointer;letter-spacing:3px;animation:bb 1.5s ease infinite;}
+.start-btn{background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(12px,3.5vw,16px);padding:12px 36px;cursor:pointer;letter-spacing:3px;animation:bb 1.5s ease infinite;display:block;margin:0 auto 12px;}
 .start-btn:active{background:#fff;color:#000;}
 @keyframes bb{0%,100%{border-color:#fff;}50%{border-color:#555;}}
 .title-copy{font-size:10px;color:#444;margin-top:20px;}
-
-/* チャプター選択 */
 .chapter-screen{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
 .chapter-list{padding:16px;}
 .chapter-item{display:flex;align-items:center;gap:10px;padding:10px 8px;border-bottom:1px solid #222;cursor:pointer;}
@@ -34,8 +29,6 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 .chapter-title{font-size:clamp(10px,2.8vw,13px);color:#fff;}
 .chapter-item.cleared .chapter-title{color:#aaffaa;}
 .chapter-item.cleared .chapter-num{color:#aaffaa;}
-
-/* ゲーム */
 .game-wrap{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
 .game-titlebar{background:#fff;color:#000;font-size:clamp(9px,2.5vw,13px);padding:3px 8px;letter-spacing:1px;}
 .game-main{display:flex;background:#000;}
@@ -52,7 +45,6 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 .cmd-list li:active{color:#fff;background:#111;}
 .cmd-list li.selected{color:#ffff00;}
 .cmd-list li.selected::before{content:'▶ ';}
-
 .text-area{border-top:2px solid #fff;padding:8px 10px;min-height:90px;background:#000;}
 .text-line{font-size:clamp(9px,2.5vw,13px);color:#fff;line-height:1.9;word-break:keep-all;overflow-wrap:break-word;}
 .text-line .speaker{color:#ffff00;}
@@ -60,15 +52,12 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 .text-line.ok{color:#aaffaa;}
 .text-line.twist{color:#ff88ff;}
 .text-line.hint{color:#88aaff;}
-.text-line.silent{color:#888;font-style:italic;}
-
+.text-line.silent{color:#777;font-style:italic;}
 .next-area{border-top:1px solid #333;display:flex;justify-content:space-between;align-items:center;padding:4px 8px;}
 .progress{font-size:10px;color:#555;letter-spacing:1px;}
 .next-btn{background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(8px,2vw,11px);padding:4px 10px;cursor:pointer;letter-spacing:1px;}
 .next-btn:active{background:#fff;color:#000;}
 .next-btn:disabled{border-color:#444;color:#444;cursor:default;}
-
-/* エンディング */
 .ending-wrap{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
 .ending-hdr{background:#fff;color:#000;font-size:clamp(10px,3vw,14px);padding:4px 8px;letter-spacing:2px;text-align:center;}
 .ending-body{padding:20px 16px;font-size:clamp(10px,2.6vw,13px);color:#fff;line-height:2.4;word-break:keep-all;}
@@ -82,10 +71,8 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 </style>
 </head>
 <body>
-
 <a id="exitBtn" class="exit-btn" href="https://eorna.info">× 終了</a>
 
-<!-- タイトル -->
 <div id="titleScreen" class="title-screen">
   <div class="hdr">BAR EORNA失踪事件</div>
   <div class="title-body">
@@ -93,19 +80,16 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
     <div class="title-main">BAR EORNA<br>失踪事件</div>
     <div class="title-sub">〜 本物かどうかは、目が知っている 〜</div>
     <button class="start-btn" onclick="startChapter(0)">はじめから</button>
-    <div style="height:12px"></div>
-    <button class="start-btn" style="font-size:clamp(10px,2.8vw,13px);padding:8px 24px;" onclick="showChapterSelect()">チャプター選択</button>
+    <button class="start-btn" style="font-size:clamp(10px,2.8vw,13px);padding:8px 24px;animation:none;border-color:#555;" onclick="showChapterSelect()">チャプター選択</button>
     <div class="title-copy">© 2026 BAR EORNA</div>
   </div>
 </div>
 
-<!-- チャプター選択 -->
 <div id="chapterScreen" class="chapter-screen" style="display:none;">
   <div class="hdr">チャプター選択</div>
   <div class="chapter-list" id="chapterList"></div>
 </div>
 
-<!-- ゲーム -->
 <div id="gameScreen" class="game-wrap" style="display:none;">
   <div class="game-titlebar" id="gameTitleBar">BAR EORNA失踪事件</div>
   <div class="game-main">
@@ -128,7 +112,6 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
   </div>
 </div>
 
-<!-- エンディング -->
 <div id="endingScreen" class="ending-wrap" style="display:none;">
   <div class="ending-hdr" id="endingHdr"></div>
   <div class="ending-body" id="endingBody"></div>
@@ -139,508 +122,555 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 </div>
 
 <script>
+const C = ['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'];
 const IMGS = {
-  kimura: 'IMG_3555.jpeg',
-  nagata: '43FD7881-A9C3-4711-B9DE-9511A0F963C8.png',
-  tsumori: '52350031-F030-461B-9EC5-BE77B893323B.png',
-  tsumori_return: 'tsumori_return.png',
-  macky: 'macky.png',
-  kobatch: 'kobatch.png',
-  nishinishi: 'nishinishi.png',
-  brother: 'kimura_brother.png',
+  kimura:'IMG_3555.jpeg',
+  nagata:'43FD7881-A9C3-4711-B9DE-9511A0F963C8.png',
+  tsumori:'52350031-F030-461B-9EC5-BE77B893323B.png',
+  tsumori_return:'tsumori_return.png',
+  macky:'macky.png',
+  kobatch:'kobatch.png',
+  nishinishi:'nishinishi.png',
+  brother:'kimura_brother.png',
 };
 
 const chapters = [
-  {
-    title:'第1章「閉店後の電話」',
-    scenes:[
-      {
-        img:IMGS.kimura,
-        memo:'場所：EORNA\n時刻：深夜1時\n状況：緊急連絡',
-        text:[
-          {s:'木村',t:'深夜1時。永田から電話が入った。'},
-          {s:'永田',t:'「木村さん、大変です。兄貴がいなくなりました」'},
-          {s:'木村',t:'（今夜の津守は…いつもと少し違った。あの目。鑑定士の目だった。）',type:'silent'},
-          {s:'木村',t:'急いでEORNAへ向かった。'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:0,
-        correctText:[
-          {s:'木村',t:'「永田、落ち着け。最後に津守を見たのはいつだ」'},
-          {s:'永田',t:'「閉店30分前です。突然コートを着て…」'},
-          {s:'永田',t:'「いつも通りでした」',type:'hint'},
-          {s:'木村',t:'（一瞬、永田の目が泳いだ。）',type:'silent'},
-        ],
-        wrongText:'まず永田に話を聞こう。',
-      },
-      {
-        img:IMGS.kimura,
-        memo:'場所：カウンター\n手がかりを探せ',
-        text:[{s:'木村',t:'カウンターを調べよう。津守が何かを残しているはずだ。'}],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:1,
-        correctText:[
-          {s:'木村',t:'飲みかけのグラス。そして…小さなメモ用紙。'},
-          {s:'木村',t:'「贋作　署名するな」'},
-          {s:'木村',t:'津守の字だ。几帳面な、あの筆跡。'},
-          {s:'木村',t:'【手がかり①】メモ発見。',type:'ok'},
-        ],
-        wrongText:'カウンターをよく調べよう。',
-        item:'memo',
-      },
-    ],
-    ending:{
-      title:'第1章　クリア',
-      body:`津守は何かを知っていた。<br>「贋作　署名するな」<br>そのメモが、全ての始まりだった。<br><hr class="ending-hr">次章では永田の証言を深掘りする。`,
-    }
-  },
-  {
-    title:'第2章「嘘の匂い」',
-    scenes:[
-      {
-        img:IMGS.nagata,
-        memo:'人物：永田\n「いつも通り」は本当か',
-        text:[
-          {s:'木村',t:'「永田。正直に話せ」'},
-          {s:'永田',t:'「…何がですか」'},
-          {s:'木村',t:'（また目が泳いだ。こいつは何かを隠している。）',type:'silent'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:2,
-        correctText:[
-          {s:'木村',t:'「閉店前に変わった様子はなかったか。もう一度聞く」'},
-          {s:'永田',t:'「…実は、閉店前に一本だけ電話がありました」'},
-          {s:'永田',t:'「非通知でした。兄貴のお顔が変わって…すぐ出て行かれました」'},
-          {s:'木村',t:'「最初からそう言え」'},
-        ],
-        wrongText:'永田をもっと問い詰めよう。',
-      },
-      {
-        img:IMGS.kimura,
-        memo:'手がかり：スマホ\n着信履歴を確認',
-        text:[{s:'木村',t:'津守のスマホがカウンターに残されていた。調べよう。'}],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:1,
-        correctText:[
-          {s:'木村',t:'着信履歴。最後は「非通知」。閉店30分前。'},
-          {s:'木村',t:'しかし…その1時間前。「永田」からの着信がある。'},
-          {s:'木村',t:'永田から津守に電話していた。なぜ最初に言わなかった。'},
-          {s:'木村',t:'【手がかり②】永田が先に津守へ電話していた。',type:'ok'},
-        ],
-        wrongText:'スマホを調べよう。',
-        item:'phone',
-      },
-      {
-        img:IMGS.nagata,
-        memo:'矛盾発覚\n永田に問いただせ',
-        text:[
-          {s:'木村',t:'「永田。お前、津守に電話していたな。1時間前に」'},
-          {s:'永田',t:'「…」'},
-          {s:'木村',t:'「なぜ最初から言わなかった」'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:3,
-        correctText:[
-          {s:'木村',t:'スマホの履歴を永田に突きつけた。'},
-          {s:'永田',t:'「…兄貴から相談を受けていました」'},
-          {s:'永田',t:'「ある取引のことで。詳しくは…言えません」'},
-          {s:'木村',t:'「言えない、か」'},
-          {s:'木村',t:'【手がかり③】永田は取引を知っていた。',type:'ok'},
-        ],
-        wrongText:'スマホの履歴を見せよう。',
-        item:'nagata_knew',
-      },
-    ],
-    ending:{
-      title:'第2章　クリア',
-      body:`永田は最初から嘘をついていた。<br>取引のことを知っていた。<br>なぜ隠す必要があったのか。<hr class="ending-hr">第3章では津守の古物商としての秘密に迫る。`,
-    }
-  },
-  {
-    title:'第3章「贋作鑑定書」',
-    scenes:[
-      {
-        img:IMGS.tsumori,
-        memo:'津守の職業：古物商\n鑑定士として30年',
-        text:[
-          {s:'木村',t:'津守は古物商だ。骨董品の真贋を見極める鑑定士として30年。'},
-          {s:'木村',t:'口癖があった。「本物かどうかは、目が知っている」'},
-          {s:'木村',t:'その津守が「贋作　署名するな」と書いた。何があった。'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:1,
-        correctText:[
-          {s:'木村',t:'津守の手帳を見つけた。3ヶ月前のページ。'},
-          {s:'木村',t:'「黒川商会より接触あり。贋作の鑑定書を求められた」'},
-          {s:'木村',t:'「断った。また来た。断った。脅しが始まった」'},
-          {s:'木村',t:'【手がかり④】黒川商会が津守を脅していた。',type:'ok'},
-        ],
-        wrongText:'津守の持ち物を調べよう。',
-        item:'handbook',
-      },
-      {
-        img:IMGS.kimura,
-        memo:'黒川商会とは？\nEORNAとの関係',
-        text:[
-          {s:'木村',t:'黒川商会。聞いたことがある。'},
-          {s:'木村',t:'3年前、EORNAが資金難だった時。津守が言っていた。'},
-          {s:'木村',t:'「木村さん、黒川には近づくな。あそこは本物じゃない」'},
-          {s:'木村',t:'（あの時、津守はEORNAに無利子で資金を貸してくれた。俺の恩人だ。）',type:'silent'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:2,
-        correctText:[
-          {s:'木村',t:'「永田、黒川商会を知っているか」'},
-          {s:'永田',t:'「…知っています」'},
-          {s:'永田',t:'「兄貴が長年、断り続けてきた相手です」'},
-          {s:'木村',t:'「お前もか」'},
-          {s:'永田',t:'「…」'},
-          {s:'木村',t:'【手がかり⑤】永田も黒川商会を知っていた。',type:'ok'},
-        ],
-        wrongText:'永田に黒川商会のことを聞こう。',
-        item:'kurokawa',
-      },
-    ],
-    ending:{
-      title:'第3章　クリア',
-      body:`黒川商会。贋作の闇ルート業者。<br>津守は30年間、この連中と戦い続けていた。<br>そして永田も知っていた。<hr class="ending-hr">第4章では、あの夜EORNAにいた人物たちに迫る。`,
-    }
-  },
-  {
-    title:'第4章「謎の常連・マッキー」',
-    scenes:[
-      {
-        img:IMGS.macky,
-        memo:'人物：マッキー\n常連客\nあの夜EORNAにいた',
-        text:[
-          {s:'木村',t:'あの夜、EORNAにいた常連客・マッキーを呼んだ。'},
-          {s:'マッキー',t:'「俺？俺は関係ないっすよ」'},
-          {s:'木村',t:'「津守と話していたそうだな」'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:2,
-        correctText:[
-          {s:'木村',t:'「何を話していた」'},
-          {s:'マッキー',t:'「骨董の話ですよ。俺、最近壺買って…本物か聞いてた」'},
-          {s:'マッキー',t:'「でも津守さん、途中からそわそわしてた」'},
-          {s:'木村',t:'「そわそわ？」'},
-          {s:'マッキー',t:'「窓の外、ずっと気にしてた。誰かいたんじゃないすか」'},
-          {s:'木村',t:'【手がかり⑥】津守は外を気にしていた。',type:'ok'},
-        ],
-        wrongText:'マッキーにもっと話を聞こう。',
-        item:'macky_testimony',
-      },
-      {
-        img:IMGS.macky,
-        memo:'外に誰かいた？\n詳しく聞こう',
-        text:[
-          {s:'木村',t:'「窓の外に誰かいた。それは何時頃だ」'},
-          {s:'マッキー',t:'「閉店1時間くらい前かな」'},
-          {s:'木村',t:'（永田が津守に電話した時刻と一致する。）',type:'silent'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:2,
-        correctText:[
-          {s:'木村',t:'「その人物を見たか」'},
-          {s:'マッキー',t:'「ちらっとだけ。黒いスーツの男でした」'},
-          {s:'マッキー',t:'「津守さん、その男を見てから急に落ち着かなくなった」'},
-          {s:'木村',t:'監視されていた。津守は逃げるしかなかった。'},
-          {s:'木村',t:'マッキーは関係なかった。しかし…永田はこれを知っていたはずだ。'},
-        ],
-        wrongText:'もっと詳しく聞こう。',
-      },
-    ],
-    ending:{
-      title:'第4章　クリア',
-      body:`マッキーはシロだった。<br>しかし重要な証言を得た。<br>黒いスーツの男が店外で津守を監視していた。<hr class="ending-hr">第5章ではコバッチがさらなる真実を語る。`,
-    }
-  },
-  {
-    title:'第5章「コバッチの記憶」',
-    scenes:[
-      {
-        img:IMGS.kobatch,
-        memo:'人物：コバッチ\n常連客\n観察眼が鋭い',
-        text:[
-          {s:'木村',t:'コバッチは観察眼が鋭い。あの夜のことを覚えているはずだ。'},
-          {s:'コバッチ',t:'「ああ、いたよ。外に男が」'},
-          {s:'木村',t:'「詳しく話してくれ」'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:2,
-        correctText:[
-          {s:'コバッチ',t:'「黒いスーツ。40代くらい。ずっとスマホ見てた」'},
-          {s:'コバッチ',t:'「でもスマホじゃなくて、店の中を見てた。俺にはわかる」'},
-          {s:'コバッチ',t:'「あと…永田くんが外に出て、その男と話してた」'},
-          {s:'木村',t:'「何？」'},
-          {s:'木村',t:'【どんでん返し①】永田はあの男と話していた。',type:'twist'},
-        ],
-        wrongText:'コバッチに詳しく聞こう。',
-        item:'kobatch_twist',
-      },
-      {
-        img:IMGS.nagata,
-        memo:'永田が外の男と接触\n問いただせ',
-        text:[
-          {s:'木村',t:'「永田。お前、外の男と話していたな」'},
-          {s:'永田',t:'「…」'},
-          {s:'木村',t:'「コバッチが見ていた」'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:0,
-        correctText:[
-          {s:'永田',t:'「…木村さん」'},
-          {s:'永田',t:'「私は…黒川商会の人間です」'},
-          {s:'木村',t:'「何？」'},
-          {s:'永田',t:'「兄貴の情報を流す役割でEORNAに入りました」'},
-          {s:'永田',t:'「でも…兄貴と木村さんを見ているうちに」'},
-          {s:'木村',t:'【どんでん返し②】永田はスパイだった。',type:'twist'},
-        ],
-        wrongText:'永田に話しかけよう。',
-        item:'nagata_spy',
-      },
-    ],
-    ending:{
-      title:'第5章　クリア',
-      body:`永田は黒川商会のスパイだった。<br>津守の情報を流すためEORNAに潜入していた。<br><span style="color:#ff88ff">しかし永田はなぜ、それを自ら告白したのか。</span><hr class="ending-hr">第6章ではにしにしが10年前の真実を語る。`,
-    }
-  },
-  {
-    title:'第6章「にしにしが語る過去」',
-    scenes:[
-      {
-        img:IMGS.nishinishi,
-        memo:'人物：にしにし\n骨董の世界を知る\n10年前を知っている',
-        text:[
-          {s:'木村',t:'にしにしは骨董の世界に詳しい。津守の過去も知っているはずだ。'},
-          {s:'にしにし',t:'「木村くん、津守さんのことか」'},
-          {s:'にしにし',t:'「10年前の話をしよう」'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:2,
-        correctText:[
-          {s:'にしにし',t:'「10年前、津守さんは業界で贋作事件を内部告発した」'},
-          {s:'にしにし',t:'「黒川商会が絡む大規模な贋作流通を暴いた」'},
-          {s:'にしにし',t:'「その時、証拠を集めた協力者がいた」'},
-          {s:'木村',t:'「誰だ」'},
-          {s:'にしにし',t:'「永田くんの父親だよ」'},
-          {s:'木村',t:'【真相①】永田の父が津守の協力者だった。',type:'twist'},
-        ],
-        wrongText:'にしにしに詳しく聞こう。',
-        item:'past',
-      },
-      {
-        img:IMGS.nishinishi,
-        memo:'永田の父\nその後どうなった',
-        text:[
-          {s:'木村',t:'「永田の父が協力者…それで」'},
-          {s:'にしにし',t:'「黒川に報復された。会社を潰された」'},
-          {s:'にしにし',t:'「永田くんはまだ子供だった。家族ごと追い詰められた」'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:2,
-        correctText:[
-          {s:'にしにし',t:'「黒川商会は永田くんに接触した。大人になってから」'},
-          {s:'にしにし',t:'「父親の借金を肩代わりする代わりに、情報提供しろと」'},
-          {s:'木村',t:'永田がスパイになった理由がわかった。'},
-          {s:'木村',t:'選択の余地がなかった。家族を守るために。'},
-          {s:'木村',t:'【真相②】永田は家族を守るためにスパイになった。',type:'twist'},
-        ],
-        wrongText:'もっと詳しく聞こう。',
-        item:'nagata_reason',
-      },
-    ],
-    ending:{
-      title:'第6章　クリア',
-      body:`永田がスパイになった理由がわかった。<br>家族を守るため。選択肢はなかった。<br><span style="color:#ff88ff">それでも…津守を裏切った事実は変わらない。</span><hr class="ending-hr">第7章では木村の兄が現れる。`,
-    }
-  },
-  {
-    title:'第7章「木村の兄」',
-    scenes:[
-      {
-        img:IMGS.brother,
-        memo:'木村の兄：登場\n長年疎遠だった\nなぜ今夜ここに',
-        text:[
-          {s:'木村',t:'EORNAのドアが開いた。'},
-          {s:'木村',t:'…兄貴？'},
-          {s:'木村の兄',t:'「久しぶりだな。話がある」'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:0,
-        correctText:[
-          {s:'木村',t:'「なぜここに。何年ぶりだと思ってる」'},
-          {s:'木村の兄',t:'「お前に真実を話しに来た。津守さんのことだ」'},
-          {s:'木村',t:'「知っているのか」'},
-          {s:'木村の兄',t:'「俺は黒川商会を長年調査していた。民間の調査員として」'},
-        ],
-        wrongText:'兄に話しかけよう。',
-      },
-      {
-        img:IMGS.brother,
-        memo:'兄の調査\n永田の正体を知っていた',
-        text:[
-          {s:'木村の兄',t:'「永田という男、黒川のスパイだ」'},
-          {s:'木村',t:'「知っている。本人から聞いた」'},
-          {s:'木村の兄',t:'「…そうか。では、これも聞いているか」'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:0,
-        correctText:[
-          {s:'木村の兄',t:'「津守さんに逃げるよう警告したのは、永田だ」'},
-          {s:'木村',t:'「わかってる」'},
-          {s:'木村の兄',t:'「永田は今夜、黒川に全てを報告するはずだった」'},
-          {s:'木村の兄',t:'「だが報告しなかった。代わりに津守に電話して逃がした」'},
-          {s:'木村の兄',t:'「それが意味することがわかるか」'},
-          {s:'木村',t:'永田は…裏切った。黒川を。津守のために。'},
-          {s:'木村',t:'【真相③】永田は黒川を裏切り津守を守った。',type:'twist'},
-        ],
-        wrongText:'兄の話を聞こう。',
-        item:'brother_truth',
-      },
-      {
-        img:IMGS.brother,
-        memo:'証拠\n兄が持っている',
-        text:[
-          {s:'木村',t:'「証拠はあるか」'},
-          {s:'木村の兄',t:'「ある。永田が黒川への報告を止めた記録だ」'},
-          {s:'木村',t:'「警察に渡せるか」'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:3,
-        correctText:[
-          {s:'木村の兄',t:'「これを見ろ」'},
-          {s:'木村',t:'証拠書類を受け取った。黒川商会の不正の全記録。'},
-          {s:'木村の兄',t:'「久しぶりに声を聞けて良かった」'},
-          {s:'木村',t:'「…兄貴も変わらないな」'},
-          {s:'木村の兄',t:'「お前も変わらない。人を信じすぎる」'},
-          {s:'木村',t:'【手がかり⑦】証拠入手。',type:'ok'},
-        ],
-        wrongText:'証拠を見せてもらおう。',
-        item:'evidence',
-      },
-    ],
-    ending:{
-      title:'第7章　クリア',
-      body:`木村の兄は調査員だった。<br>長年、黒川商会を追っていた。<br>そして永田は…最後の瞬間、津守を選んだ。<hr class="ending-hr">いよいよ最終章。真相の全てが明かされる。`,
-    }
-  },
-  {
-    title:'第8章「本物の証明」',
-    scenes:[
-      {
-        img:IMGS.nagata,
-        memo:'最終章\n永田に全てをぶつけろ',
-        text:[
-          {s:'木村',t:'「永田」'},
-          {s:'永田',t:'「…木村さん」'},
-          {s:'木村',t:'「全部話せ。最初から」'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:0,
-        correctText:[
-          {s:'永田',t:'「黒川に入ったのは7年前です。父の借金のために」'},
-          {s:'永田',t:'「EORNAに来て…兄貴と木村さんを見て」'},
-          {s:'永田',t:'「本物の人間ってこういう人だと、思いました」'},
-          {s:'木村',t:'「なぜもっと早く言わなかった」'},
-          {s:'永田',t:'「言えば木村さんを巻き込む。それが怖かった」'},
-          {s:'木村',t:'「このバカ野郎」',type:'ok'},
-        ],
-        wrongText:'永田に話しかけよう。',
-      },
-      {
-        img:IMGS.nagata,
-        memo:'証拠を見せろ\n全てを終わらせる',
-        text:[
-          {s:'木村',t:'証拠書類を永田の前に置いた。'},
-          {s:'永田',t:'「…これは」'},
-          {s:'木村',t:'「黒川商会の全記録だ。警察に渡す」'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:3,
-        correctText:[
-          {s:'木村',t:'証拠書類を見せた。'},
-          {s:'永田',t:'「木村さん…俺を、逮捕させてください」'},
-          {s:'木村',t:'「お前が言うことじゃない」'},
-          {s:'永田',t:'「兄貴に…謝りたかった。でも会う資格がなくて」'},
-          {s:'木村',t:'「津守は知ってるぞ。お前が逃がしてくれたこと」'},
-          {s:'永田',t:'「…そうですか」'},
-          {s:'永田',t:'「良かった」'},
-        ],
-        wrongText:'証拠を見せよう。',
-      },
-      {
-        img:IMGS.kimura,
-        memo:'警察が来た\n永田の最後',
-        text:[
-          {s:'木村',t:'警察が来た。'},
-          {s:'永田',t:'「木村さん、EORNAで働けて良かった」'},
-          {s:'木村',t:'「…俺もだ」'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:0,
-        correctText:[
-          {s:'永田',t:'「最後に一つだけ」'},
-          {s:'永田',t:'「兄貴に…またEORNAに来てくださいと、伝えてください」'},
-          {s:'木村',t:'永田は静かに手錠を受け入れた。'},
-          {s:'木村',t:'EORNAに一人残された。'},
-          {s:'木村',t:'（カウンターに座った。津守のグラスがまだあった。）',type:'silent'},
-          {s:'木村',t:'（本物かどうかは、目が知っている。）',type:'silent'},
-          {s:'木村',t:'（俺の目には、永田は…）',type:'silent'},
-        ],
-        wrongText:'永田に話しかけよう。',
-      },
-      {
-        img:IMGS.tsumori_return,
-        memo:'数週間後\nEORNAのドアが開いた',
-        text:[
-          {s:'木村',t:'数週間後。'},
-          {s:'木村',t:'EORNAのドアが開いた。'},
-        ],
-        cmds:['よびだす','しらべる','といつめる','みせる','もちもの','すいり しろ'],
-        correct:0,
-        correctText:[
-          {s:'津守',t:'「やあ、木村さん。ウイスキーを一杯いただけますか」'},
-          {s:'木村',t:'「…このバカ野郎」'},
-          {s:'津守',t:'「黒川の件、片付きました。ご迷惑をおかけしました」'},
-          {s:'木村',t:'「津守さん、一つ聞いていいですか」'},
-          {s:'津守',t:'「何でしょう」'},
-          {s:'木村',t:'「本物かどうかは、目が知っている。あなたの口癖だ」'},
-          {s:'木村',t:'「永田は…本物でしたか」'},
-          {s:'津守',t:'「ええ」',type:'twist'},
-          {s:'津守',t:'「最後の瞬間、本物でした」',type:'twist'},
-          {s:'津守',t:'「木村さんも。私の目に狂いはありませんでした」',type:'twist'},
-        ],
-        wrongText:'津守に話しかけよう。',
-        ending:true,
-      },
-    ],
-    ending:{
-      title:'全章クリア　真相解明',
-      body:`<span class="em">BAR EORNA失踪事件　完結</span><hr class="ending-hr">津守は試していた。<br>逃げることで、木村が来るかどうかを。<hr class="ending-hr">永田は裏切った。黒川を。<br>そして最後の瞬間、本物になった。<hr class="ending-hr">木村は失笑しながら、ボムを差し出した。<br><span class="em2">「ワカメにも言っといてやる」</span><br><span class="em2">津守は静かに笑った。</span><hr class="ending-hr"><span class="em3">本物かどうかは、目が知っている。</span><br><span class="em3">この夜、三人全員が本物だった。</span>`,
-      isTrue:true,
-    }
-  },
+// ══════════════════════════════════════════
+// 第1章「閉店後の電話」
+// ══════════════════════════════════════════
+{
+  title:'第1章「閉店後の電話」',
+  scenes:[
+    {
+      img:IMGS.kimura,
+      memo:'場所：EORNA\n時刻：深夜1時\n状況：緊急連絡',
+      text:[
+        {s:'木村',t:'深夜1時。永田から電話が入った。'},
+        {s:'永田',t:'「木村さん、大変です。兄貴がいなくなりました」'},
+        {s:'木村',t:'（今夜の津守は…いつもと少し違った。あの鑑定士の目。何かを決めた目だった。）',type:'silent'},
+        {s:'木村',t:'急いでEORNAへ向かった。'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'木村',t:'「永田、落ち着け。最後に津守を見たのはいつだ」'},
+        {s:'永田',t:'「閉店30分前です。突然コートを着て…出て行かれました」'},
+        {s:'永田',t:'「私には何も言わずに」'},
+        {s:'木村',t:'「様子はどうだった」'},
+        {s:'永田',t:'「…いつも通りでした」'},
+      ],
+      wrongText:'まず永田に話を聞こう。',
+    },
+    {
+      img:IMGS.kimura,
+      memo:'場所：カウンター\n手がかりを探せ',
+      text:[{s:'木村',t:'カウンターを調べよう。津守が何かを残しているはずだ。'}],
+      cmds:C, correct:1,
+      correctText:[
+        {s:'木村',t:'飲みかけのグラス。そして…小さなメモ用紙。'},
+        {s:'木村',t:'「贋作　署名するな」'},
+        {s:'木村',t:'津守の几帳面な字だ。'},
+        {s:'木村',t:'（本物かどうかは、目が知っている。津守の口癖が頭をよぎった。）',type:'silent'},
+        {s:'木村',t:'【手がかり①】メモ発見。',type:'ok'},
+      ],
+      wrongText:'カウンターをよく調べよう。',
+      item:'memo',
+    },
+    {
+      img:IMGS.nagata,
+      memo:'永田に聞こう\nメモの意味は',
+      text:[{s:'木村',t:'このメモについて、永田に聞いてみよう。'}],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'木村',t:'「永田、このメモを知っているか」'},
+        {s:'永田',t:'「…贋作、ですか」'},
+        {s:'永田',t:'「兄貴は古物商・鑑定士です。贋作の鑑定書を書かされそうになっていたのかもしれません」'},
+        {s:'木村',t:'「誰に」'},
+        {s:'永田',t:'「わかりません。でも…最近、兄貴は怖い思いをされていたと思います」'},
+        {s:'木村',t:'永田の目に、本物の心配が見えた。',type:'ok'},
+      ],
+      wrongText:'永田に話しかけよう。',
+    },
+  ],
+  ending:{
+    title:'第1章　クリア',
+    body:`津守は古物商・鑑定士として、何者かに贋作の署名を迫られていた。<br>「贋作　署名するな」<br>そのメモが、全ての始まりだった。<hr class="ending-hr">第2章では永田と共に手がかりを集める。`,
+  }
+},
+// ══════════════════════════════════════════
+// 第2章「忠実な部下」
+// ══════════════════════════════════════════
+{
+  title:'第2章「忠実な部下」',
+  scenes:[
+    {
+      img:IMGS.nagata,
+      memo:'永田は信頼できる\n一緒に調べよう',
+      text:[
+        {s:'木村',t:'永田は津守を心配していた。一緒に調べよう。'},
+        {s:'永田',t:'「木村さん、私にできることは何でもします」'},
+      ],
+      cmds:C, correct:1,
+      correctText:[
+        {s:'木村',t:'津守のスマホがカウンターに残されていた。'},
+        {s:'永田',t:'「兄貴のスマホ…わざと置いていったんでしょうか」'},
+        {s:'木村',t:'着信履歴を見た。最後は「非通知」。閉店30分前。'},
+        {s:'木村',t:'（非通知の後、津守は出て行った。追跡されないためにスマホを残した？）',type:'silent'},
+        {s:'木村',t:'【手がかり②】非通知の着信後に失踪。',type:'ok'},
+      ],
+      wrongText:'スマホを調べよう。',
+      item:'phone',
+    },
+    {
+      img:IMGS.kimura,
+      memo:'津守の手帳\nバックヤードに',
+      text:[{s:'木村',t:'バックヤードに津守の手帳があるはずだ。'}],
+      cmds:C, correct:1,
+      correctText:[
+        {s:'木村',t:'津守の手帳を見つけた。3ヶ月前のページ。'},
+        {s:'木村',t:'「黒川商会より接触。贋作鑑定書を求められた。断った」'},
+        {s:'木村',t:'「また来た。断った。脅しが始まった」'},
+        {s:'永田',t:'「黒川商会…兄貴、ずっと悩んでいたんですね」'},
+        {s:'木村',t:'【手がかり③】黒川商会が脅していた。',type:'ok'},
+      ],
+      wrongText:'バックヤードを調べよう。',
+      item:'handbook',
+    },
+    {
+      img:IMGS.nagata,
+      memo:'黒川商会とは\n永田に聞こう',
+      text:[{s:'木村',t:'「永田、黒川商会を知っているか」'}],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'永田',t:'「聞いたことがあります。骨董品の闇ルートを仕切る業者だと」'},
+        {s:'永田',t:'「贋作を本物として高額で売買する…許せない連中です」'},
+        {s:'木村',t:'（永田は怒っていた。本物の怒りだった。）',type:'silent'},
+        {s:'木村',t:'3年前、EORNAが資金難だった時、津守が無利子で助けてくれた。'},
+        {s:'木村',t:'俺の恩人だ。必ず見つける。'},
+      ],
+      wrongText:'永田に話しかけよう。',
+    },
+  ],
+  ending:{
+    title:'第2章　クリア',
+    body:`黒川商会。贋作の闇業者。<br>津守は30年間、この連中と戦い続けていた。<br>永田は懸命に協力してくれている。<hr class="ending-hr">第3章では目撃者に当たる。`,
+  }
+},
+// ══════════════════════════════════════════
+// 第3章「目撃者たち」
+// ══════════════════════════════════════════
+{
+  title:'第3章「目撃者たち」',
+  scenes:[
+    {
+      img:IMGS.macky,
+      memo:'人物：マッキー\nあの夜EORNAにいた',
+      text:[
+        {s:'木村',t:'あの夜EORNAにいた常連客・マッキーを呼んだ。'},
+        {s:'マッキー',t:'「俺？何も知らないっすよ」'},
+        {s:'木村',t:'「津守と話していたそうだな」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'マッキー',t:'「骨董の話ですよ。壺が本物か聞いてた」'},
+        {s:'マッキー',t:'「でも津守さん、途中からそわそわしてた。窓の外ずっと見てて」'},
+        {s:'木村',t:'「外に誰かいたか」'},
+        {s:'マッキー',t:'「黒いスーツの男。ずっと立ってた。気持ち悪かった」'},
+        {s:'木村',t:'【手がかり④】外に監視の男がいた。',type:'ok'},
+      ],
+      wrongText:'マッキーに詳しく聞こう。',
+      item:'watcher',
+    },
+    {
+      img:IMGS.kobatch,
+      memo:'人物：コバッチ\n観察眼が鋭い',
+      text:[
+        {s:'木村',t:'コバッチなら外の様子も見ていたはずだ。'},
+        {s:'コバッチ',t:'「ああ、その男なら見た。黒いスーツ、40代くらい」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'コバッチ',t:'「ずっとスマホ見てるふりして、店の中を監視してた」'},
+        {s:'コバッチ',t:'「それと…永田くんが一度外に出て、その男と話してたよ」'},
+        {s:'木村',t:'「永田が？」'},
+        {s:'コバッチ',t:'「短い会話だったけどね。何か渡してた気がする」'},
+        {s:'木村',t:'（永田が外の男と接触していた。でも…何かの理由があるはずだ。）',type:'silent'},
+        {s:'木村',t:'【手がかり⑤】永田が外の男と接触。',type:'ok'},
+      ],
+      wrongText:'コバッチにもっと聞こう。',
+      item:'nagata_contact',
+    },
+    {
+      img:IMGS.nagata,
+      memo:'永田に確認\n外の男のことを',
+      text:[
+        {s:'木村',t:'「永田。外の男と話していたそうだな」'},
+        {s:'永田',t:'「…見られていたんですか」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'木村',t:'「コバッチが見ていた。正直に話せ」'},
+        {s:'永田',t:'「あの男は…兄貴に早く署名するよう催促しに来た黒川の使いです」'},
+        {s:'永田',t:'「私は追い払おうとしました。でも聞かなくて」'},
+        {s:'木村',t:'「なぜ最初から言わなかった」'},
+        {s:'永田',t:'「木村さんを心配させたくなかったんです」'},
+        {s:'木村',t:'（永田の目は真っ直ぐだった。嘘をついているようには見えない。）',type:'silent'},
+      ],
+      wrongText:'永田を問い詰めよう。',
+    },
+  ],
+  ending:{
+    title:'第3章　クリア',
+    body:`黒川商会の監視員がEORNAの外にいた。<br>永田は追い払おうとしたが失敗した。<br>永田は木村を心配させたくて黙っていた。<hr class="ending-hr">第4章ではにしにしが過去の真実を語る。`,
+  }
+},
+// ══════════════════════════════════════════
+// 第4章「10年前の真実」
+// ══════════════════════════════════════════
+{
+  title:'第4章「10年前の真実」',
+  scenes:[
+    {
+      img:IMGS.nishinishi,
+      memo:'人物：にしにし\n骨董の世界を知る\n津守の過去も',
+      text:[
+        {s:'木村',t:'にしにしは骨董の世界を知っている。津守の過去も知っているはずだ。'},
+        {s:'にしにし',t:'「木村くん、津守さんのことか。10年前の話をしよう」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'にしにし',t:'「10年前、津守さんは業界で贋作事件を内部告発した」'},
+        {s:'にしにし',t:'「黒川商会が絡む大規模な贋作流通を暴いたんだ」'},
+        {s:'にしにし',t:'「その時、証拠集めを手伝った人間がいた」'},
+        {s:'木村',t:'「誰だ」'},
+        {s:'にしにし',t:'「永田くんの…お父さんだよ」'},
+        {s:'木村',t:'【真相①】永田の父が津守の協力者だった。',type:'ok'},
+      ],
+      wrongText:'にしにしに話しかけよう。',
+      item:'past',
+    },
+    {
+      img:IMGS.nishinishi,
+      memo:'永田の父\nその後どうなった',
+      text:[
+        {s:'木村',t:'「永田の父が協力者…その後は」'},
+        {s:'にしにし',t:'「黒川に報復された。会社を潰された。家族ごと追い詰められた」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'木村',t:'「永田はそれを知っているのか」'},
+        {s:'にしにし',t:'「知っているはずだ。だから永田くんは津守さんを…慕っているんじゃないかな」'},
+        {s:'にしにし',t:'「父親が命がけで守った人だから」'},
+        {s:'木村',t:'（そういうことか。永田が津守を「兄貴」と呼ぶ理由がわかった気がした。）',type:'silent'},
+        {s:'木村',t:'【真相②】永田は父の恩人として津守を慕っていた。',type:'ok'},
+      ],
+      wrongText:'もっと詳しく聞こう。',
+      item:'nagata_reason',
+    },
+    {
+      img:IMGS.nagata,
+      memo:'永田に確認\n父のことを',
+      text:[{s:'木村',t:'「永田。お前の父親のことを聞いた。にしにしから」'}],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'永田',t:'「…そうですか」'},
+        {s:'永田',t:'「父は津守さんのために戦いました。家族を犠牲にして」'},
+        {s:'永田',t:'「だから私は兄貴を守りたかった。それだけです」'},
+        {s:'木村',t:'（永田は泣いていなかった。ただ静かに、真っ直ぐに言った。）',type:'silent'},
+        {s:'木村',t:'この男は本物だ。そう思った。'},
+      ],
+      wrongText:'永田に話しかけよう。',
+    },
+  ],
+  ending:{
+    title:'第4章　クリア',
+    body:`永田の父は津守のために戦い、全てを失った。<br>永田は父の恩人として津守を慕っていた。<br>永田への信頼が深まった。<hr class="ending-hr">第5章では津守の行方を追う。`,
+  }
+},
+// ══════════════════════════════════════════
+// 第5章「津守の行方」
+// ══════════════════════════════════════════
+{
+  title:'第5章「津守の行方」',
+  scenes:[
+    {
+      img:IMGS.nagata,
+      memo:'封筒の存在\n永田が何かを知っている',
+      text:[
+        {s:'木村',t:'「永田、津守から何か預かっていないか」'},
+        {s:'永田',t:'「…実は」'},
+        {s:'木村',t:'「正直に言え」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'永田',t:'「兄貴から、封筒を預かっています」'},
+        {s:'木村',t:'「なぜ言わなかった」'},
+        {s:'永田',t:'「"木村が来たら渡せ"と言われていました。来てくださると信じていたので」'},
+        {s:'木村',t:'（津守は俺が来ることを知っていた。最初から計画していた。）',type:'silent'},
+        {s:'木村',t:'【手がかり⑥】封筒の存在。津守は木村を待っていた。',type:'ok'},
+      ],
+      wrongText:'永田に話しかけよう。',
+      item:'envelope',
+    },
+    {
+      img:IMGS.kimura,
+      memo:'封筒を調べよう',
+      text:[{s:'木村',t:'封筒を受け取った。中身を確認しよう。'}],
+      cmds:C, correct:1,
+      correctText:[
+        {s:'木村',t:'封筒を開けた。手紙が一枚。'},
+        {s:'津守',t:'「木村さんへ。あなたが読んでいるなら、来てくれたのですね」'},
+        {s:'津守',t:'「黒川の件で身を隠します。スマホは置いていきました」'},
+        {s:'津守',t:'「落ち着いたら連絡します。あなたを信じています。津守」'},
+        {s:'木村',t:'（あいつは…俺を信じていた。）',type:'silent'},
+        {s:'木村',t:'【手がかり⑦】津守の手紙。自ら隠れている。',type:'ok'},
+      ],
+      wrongText:'封筒の中身を調べよう。',
+      item:'letter',
+    },
+    {
+      img:IMGS.nagata,
+      memo:'津守は安全だ\n黒川を追おう',
+      text:[
+        {s:'木村',t:'「永田。津守は自分で逃げた。今は安全だ」'},
+        {s:'永田',t:'「良かった…本当に良かった」'},
+        {s:'木村',t:'「次は黒川商会を潰す。手伝ってくれるか」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'永田',t:'「もちろんです。私にできることは何でも」'},
+        {s:'木村',t:'永田は迷わなかった。'},
+        {s:'木村',t:'（この男は本物だ。絶対に。）',type:'silent'},
+      ],
+      wrongText:'永田に話しかけよう。',
+    },
+  ],
+  ending:{
+    title:'第5章　クリア',
+    body:`津守は自ら身を隠していた。木村を信じて。<br>永田は迷わず協力を申し出た。<br>二人は黒川商会を追うことを決意した。<hr class="ending-hr">第6章では木村の兄が現れる。`,
+  }
+},
+// ══════════════════════════════════════════
+// 第6章「兄の登場」
+// ══════════════════════════════════════════
+{
+  title:'第6章「兄の登場」',
+  scenes:[
+    {
+      img:IMGS.brother,
+      memo:'木村の兄：突然の来訪\n長年疎遠だった',
+      text:[
+        {s:'木村',t:'翌朝。EORNAのドアが開いた。'},
+        {s:'木村',t:'…兄貴？'},
+        {s:'木村の兄',t:'「久しぶりだな。話がある」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'木村',t:'「何年ぶりだと思ってる。なぜここに」'},
+        {s:'木村の兄',t:'「黒川商会を追っていた。民間の調査員として、長年な」'},
+        {s:'木村',t:'「黒川を？」'},
+        {s:'木村の兄',t:'「お前が津守さんの件で動いていると聞いた。伝えることがある」'},
+      ],
+      wrongText:'兄に話しかけよう。',
+    },
+    {
+      img:IMGS.brother,
+      memo:'兄の情報\n何を知っている',
+      text:[
+        {s:'木村の兄',t:'「永田という男のことだ」'},
+        {s:'木村',t:'「永田がどうした。あいつは信頼できる男だ」'},
+        {s:'木村の兄',t:'「…そうか。では、これを見ろ」'},
+      ],
+      cmds:C, correct:3,
+      correctText:[
+        {s:'木村の兄',t:'「永田慎一。7年前から黒川商会に情報提供をしていた記録だ」'},
+        {s:'木村',t:'「何？」'},
+        {s:'木村の兄',t:'「EORNAに入ったのも黒川の指示だ。津守さんの情報を流すために」'},
+        {s:'木村',t:'「…嘘だ」'},
+        {s:'木村の兄',t:'「証拠がある」'},
+        {s:'木村',t:'【どんでん返し】永田はスパイだった。',type:'twist'},
+      ],
+      wrongText:'書類を見せてもらおう。',
+      item:'brother_evidence',
+    },
+    {
+      img:IMGS.brother,
+      memo:'衝撃の事実\n全てが崩れる',
+      text:[
+        {s:'木村',t:'（永田が…スパイ。あいつの目。真っ直ぐな目。全部嘘だったのか。）',type:'silent'},
+        {s:'木村の兄',t:'「ただし…一つだけ不可解なことがある」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'木村',t:'「何だ」'},
+        {s:'木村の兄',t:'「昨夜、永田は黒川への報告を止めた。記録がぱったりと途絶えている」'},
+        {s:'木村の兄',t:'「そして津守さんに逃げるよう警告したのは…永田だという証拠もある」'},
+        {s:'木村',t:'「永田が…津守を逃がした？」'},
+        {s:'木村の兄',t:'「最後の瞬間、裏切ったんだ。黒川を」'},
+        {s:'木村',t:'【真相③】永田は最後に黒川を裏切り津守を救った。',type:'twist'},
+      ],
+      wrongText:'もっと詳しく聞こう。',
+      item:'nagata_betrayal',
+    },
+  ],
+  ending:{
+    title:'第6章　クリア',
+    body:`<span style="color:#ff88ff">永田はスパイだった。</span><br>しかし最後の瞬間、黒川を裏切り津守を救った。<br>信じていた男の二面性。<hr class="ending-hr">第7章では永田に全てをぶつける。`,
+  }
+},
+// ══════════════════════════════════════════
+// 第7章「永田の告白」
+// ══════════════════════════════════════════
+{
+  title:'第7章「永田の告白」',
+  scenes:[
+    {
+      img:IMGS.nagata,
+      memo:'永田に全てをぶつけろ\n証拠がある',
+      text:[
+        {s:'木村',t:'「永田」'},
+        {s:'永田',t:'「木村さん、どうされましたか」'},
+        {s:'木村',t:'書類をカウンターに叩きつけた。'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'木村',t:'「黒川商会との7年間の記録だ。全部書いてある」'},
+        {s:'永田',t:'「…」'},
+        {s:'木村',t:'「何か言えよ、永田」'},
+        {s:'永田',t:'「…はい。私は黒川商会のスパイとして、EORNAに入りました」'},
+        {s:'木村',t:'「なぜだ」'},
+      ],
+      wrongText:'永田に話しかけよう。',
+    },
+    {
+      img:IMGS.nagata,
+      memo:'動機を聞け\nなぜスパイになった',
+      text:[
+        {s:'木村',t:'「なぜスパイになった。本当の理由を言え」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'永田',t:'「父が黒川に潰された後、家族に多額の借金が残りました」'},
+        {s:'永田',t:'「黒川が接触してきた。借金を肩代わりする代わりに情報を提供しろと」'},
+        {s:'永田',t:'「断れませんでした。家族を守るために」'},
+        {s:'木村',t:'「なぜ俺に言わなかった」'},
+        {s:'永田',t:'「言えば木村さんを巻き込む。それが…怖かった」'},
+        {s:'木村',t:'「このバカ野郎」'},
+      ],
+      wrongText:'永田を問い詰めよう。',
+    },
+    {
+      img:IMGS.nagata,
+      memo:'なぜ津守を救った\n最後の選択',
+      text:[
+        {s:'木村',t:'「なぜ最後に黒川を裏切った。なぜ津守を逃がした」'},
+        {s:'永田',t:'「…」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'永田',t:'「兄貴と木村さんを見ていたら」'},
+        {s:'永田',t:'「本物の人間ってこういう人だと思いました」'},
+        {s:'永田',t:'「私は父の恩人を裏切ろうとしていた。それに気づいた時」'},
+        {s:'永田',t:'「もう止まれなかった」'},
+        {s:'木村',t:'（永田の目から涙が一滴、落ちた。）',type:'silent'},
+        {s:'木村',t:'（この男は…最後の瞬間、本物だった。）',type:'silent'},
+      ],
+      wrongText:'永田に問いかけよう。',
+    },
+  ],
+  ending:{
+    title:'第7章　クリア',
+    body:`永田は家族を守るためにスパイになった。<br>しかし最後の瞬間、本物を選んだ。<br><span style="color:#ff88ff">「本物の人間ってこういう人だと思いました」</span><hr class="ending-hr">最終章。全ての真相が明かされる。`,
+  }
+},
+// ══════════════════════════════════════════
+// 第8章「本物の証明」
+// ══════════════════════════════════════════
+{
+  title:'第8章「本物の証明」',
+  scenes:[
+    {
+      img:IMGS.nagata,
+      memo:'最終章\n全てを終わらせる',
+      text:[
+        {s:'木村',t:'「永田。証拠を警察に渡す。お前も覚悟しろ」'},
+        {s:'永田',t:'「わかっています。木村さん、最後に一つだけ」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'永田',t:'「兄貴に…謝りたかった。でも会う資格がなくて」'},
+        {s:'木村',t:'「津守は知っている。お前が逃がしてくれたことを」'},
+        {s:'永田',t:'「…そうですか」'},
+        {s:'永田',t:'「良かった」'},
+        {s:'木村',t:'警察が来た。永田は静かに手錠を受け入れた。'},
+        {s:'永田',t:'「木村さん、EORNAで働けて良かった」'},
+        {s:'木村',t:'「…俺もだ」'},
+      ],
+      wrongText:'永田に話しかけよう。',
+    },
+    {
+      img:IMGS.kimura,
+      memo:'永田が逮捕された\n木村一人カウンターに',
+      text:[
+        {s:'木村',t:'EORNAに一人残された。'},
+        {s:'木村',t:'カウンターに座った。津守のグラスがまだあった。'},
+      ],
+      cmds:C, correct:5,
+      correctText:[
+        {s:'木村',t:'（永田は本物だったか？）',type:'silent'},
+        {s:'木村',t:'（最後の瞬間、確かに本物だった。）',type:'silent'},
+        {s:'木村',t:'（本物かどうかは、目が知っている。）',type:'silent'},
+        {s:'木村',t:'（俺の目には…永田は本物に見えた。）',type:'silent'},
+        {s:'木村',t:'グラスを手に取った。静かな夜だった。'},
+      ],
+      wrongText:'「すいり しろ」で考えをまとめよう。',
+    },
+    {
+      img:IMGS.tsumori_return,
+      memo:'数週間後\nEORNAのドアが開く',
+      text:[
+        {s:'木村',t:'数週間後。'},
+        {s:'木村',t:'EORNAのドアが開いた。'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'津守',t:'「やあ、木村さん。ウイスキーを一杯いただけますか」'},
+        {s:'木村',t:'「…このバカ野郎」'},
+        {s:'津守',t:'「黒川の件、片付きました。ご迷惑をおかけしました」'},
+        {s:'木村',t:'「一つ聞いていいですか。本物かどうかは目が知っている」'},
+        {s:'木村',t:'「永田は…本物でしたか」'},
+        {s:'津守',t:'「ええ」',type:'twist'},
+        {s:'津守',t:'「最後の瞬間、確かに本物でした」',type:'twist'},
+        {s:'津守',t:'「木村さんも。私の目に狂いはありませんでした」',type:'twist'},
+        {s:'木村',t:'木村は失笑しながら、ボムを差し出した。',type:'ok'},
+      ],
+      wrongText:'津守に話しかけよう。',
+      ending:true,
+    },
+  ],
+  ending:{
+    title:'全章クリア　真相解明',
+    body:`<span class="em">BAR EORNA失踪事件　完結</span><hr class="ending-hr">永田はスパイだった。<br>しかし最後の瞬間、本物を選んだ。<hr class="ending-hr">津守は木村を信じて逃げた。<br>木村は必ず来ると知っていた。<hr class="ending-hr">木村は失笑しながらボムを差し出した。<br><span class="em2">三人全員が、本物だった。</span><hr class="ending-hr"><span class="em3">本物かどうかは、目が知っている。</span>`,
+    isTrue:true,
+  }
+},
 ];
 
-// セーブデータ（チャプタークリア状況）
 let cleared = [];
-
 let currentChapter=0, sceneIdx=0, phase='input', items=new Set(), wrongCount=0;
 
 function showChapterSelect(){
-  document.getElementById('titleScreen').style.display='none';
-  document.getElementById('gameScreen').style.display='none';
-  document.getElementById('endingScreen').style.display='none';
+  ['titleScreen','gameScreen','endingScreen'].forEach(id=>{
+    document.getElementById(id).style.display='none';
+  });
   document.getElementById('exitBtn').style.display='none';
   const screen=document.getElementById('chapterScreen');
   screen.style.display='block';
   const list=document.getElementById('chapterList');
   list.innerHTML='';
   chapters.forEach((ch,i)=>{
-    const div=document.createElement('div');
     const isCleared=cleared.includes(i);
     const isLocked=i>0&&!cleared.includes(i-1);
+    const div=document.createElement('div');
     div.className='chapter-item'+(isCleared?' cleared':'')+(isLocked?' locked':'');
     div.innerHTML=`<span class="chapter-num">${String(i+1).padStart(2,'0')}</span><span class="chapter-title">${ch.title}${isCleared?' ✓':''}</span>`;
     if(!isLocked) div.onclick=()=>startChapter(i);
@@ -661,14 +691,6 @@ function renderScene(){
   const s=chapters[currentChapter].scenes[sceneIdx];
   document.getElementById('charImg').src=s.img;
   document.getElementById('memoBody').innerHTML=s.memo.replace(/\n/g,'<br>');
-  renderCmds(s);
-  showTexts(s.text);
-  document.getElementById('nextBtn').disabled=true;
-  document.getElementById('progressTxt').textContent=`手がかり ${items.size}`;
-  phase='input';
-}
-
-function renderCmds(s){
   const ul=document.getElementById('cmdList');
   ul.innerHTML='';
   s.cmds.forEach((label,i)=>{
@@ -677,6 +699,10 @@ function renderCmds(s){
     li.onclick=()=>{ if(phase==='input') doCmd(i); };
     ul.appendChild(li);
   });
+  showTexts(s.text);
+  document.getElementById('nextBtn').disabled=true;
+  document.getElementById('progressTxt').textContent=`手がかり ${items.size}`;
+  phase='input';
 }
 
 function doCmd(idx){
@@ -708,8 +734,7 @@ function onNext(){
   const ch=chapters[currentChapter];
   const s=ch.scenes[sceneIdx];
   if(s.ending){ showEnding(ch); return; }
-  sceneIdx++;
-  wrongCount=0;
+  sceneIdx++; wrongCount=0;
   if(sceneIdx>=ch.scenes.length){ showEnding(ch); return; }
   renderScene();
 }
@@ -732,19 +757,12 @@ function showEnding(ch){
   document.getElementById('endingScreen').style.display='block';
   document.getElementById('endingHdr').textContent=ch.ending.title;
   document.getElementById('endingBody').innerHTML=ch.ending.body;
-  if(!cleared.includes(currentChapter)){
-    cleared.push(currentChapter);
-    // save disabled
-  }
+  if(!cleared.includes(currentChapter)) cleared.push(currentChapter);
 }
 
 function resetGame(){
   document.getElementById('endingScreen').style.display='none';
   document.getElementById('titleScreen').style.display='block';
-}
-
-function startGame(){
-  showChapterSelect();
 }
 </script>
 </body>
