@@ -8,141 +8,84 @@
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 body{
-  background:#000;
-  min-height:100vh;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  font-family:'DotGothic16','MS Gothic',monospace;
-  padding:8px;
+  background:#000;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'DotGothic16','MS Gothic',monospace;padding:8px;
 }
-
-/* ── タイトル ── */
 .title-screen{
-  width:100%;max-width:500px;
-  background:#000;border:2px solid #fff;
-  text-align:center;
+  width:100%;max-width:500px;background:#000;border:2px solid #fff;text-align:center;
 }
-.title-header{
-  background:#fff;color:#000;
-  font-size:clamp(10px,3vw,14px);
-  padding:4px 8px;letter-spacing:1px;
-}
+.hdr{background:#fff;color:#000;font-size:clamp(10px,3vw,14px);padding:4px 8px;letter-spacing:1px;}
 .title-body{padding:32px 20px;}
-.title-logo{
-  font-size:clamp(8px,2vw,11px);
-  color:#aaa;line-height:1.8;
-  margin-bottom:16px;letter-spacing:1px;
-}
-.title-main{
-  font-size:clamp(16px,5vw,26px);
-  color:#fff;letter-spacing:2px;
-  line-height:1.6;margin-bottom:16px;
-}
-.title-sub{
-  font-size:clamp(10px,2.5vw,13px);
-  color:#aaa;letter-spacing:2px;margin-bottom:28px;
-}
+.title-logo{font-size:clamp(8px,2vw,11px);color:#aaa;line-height:1.8;margin-bottom:16px;}
+.title-main{font-size:clamp(16px,5vw,26px);color:#fff;letter-spacing:2px;line-height:1.6;margin-bottom:16px;}
+.title-sub{font-size:clamp(10px,2.5vw,13px);color:#aaa;letter-spacing:2px;margin-bottom:28px;}
 .start-btn{
-  background:#000;border:1px solid #fff;
-  color:#fff;font-family:'DotGothic16',monospace;
-  font-size:clamp(12px,3.5vw,16px);
+  background:#000;border:1px solid #fff;color:#fff;
+  font-family:'DotGothic16',monospace;font-size:clamp(12px,3.5vw,16px);
   padding:12px 36px;cursor:pointer;letter-spacing:3px;
-  animation:blink-border 1.5s ease infinite;
+  animation:bb 1.5s ease infinite;
 }
 .start-btn:active{background:#fff;color:#000;}
-@keyframes blink-border{
-  0%,100%{border-color:#fff;}
-  50%{border-color:#555;}
-}
-.title-copy{font-size:10px;color:#444;margin-top:20px;letter-spacing:1px;}
+@keyframes bb{0%,100%{border-color:#fff;}50%{border-color:#555;}}
+.title-copy{font-size:10px;color:#444;margin-top:20px;}
 
-/* ── ゲーム画面 ── */
 .game-wrap{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
-.game-titlebar{
-  background:#fff;color:#000;
-  font-size:clamp(9px,2.5vw,13px);
-  padding:3px 8px;letter-spacing:1px;
-}
+.game-titlebar{background:#fff;color:#000;font-size:clamp(9px,2.5vw,13px);padding:3px 8px;letter-spacing:1px;}
 .game-main{display:flex;background:#000;}
-.char-area{width:66%;position:relative;border-right:1px solid #fff;}
+.char-area{width:66%;border-right:1px solid #fff;}
 .char-img{width:100%;display:block;image-rendering:pixelated;}
 .side-area{width:34%;display:flex;flex-direction:column;}
 .memo-box{border-bottom:1px solid #fff;padding:6px 8px;flex:1;}
-.memo-title{
-  font-size:clamp(8px,2vw,11px);color:#fff;letter-spacing:1px;
-  border-bottom:1px solid #555;padding-bottom:3px;margin-bottom:5px;
-}
-.memo-body{
-  font-size:clamp(7px,1.8vw,10px);color:#ccc;
-  line-height:1.9;word-break:keep-all;overflow-wrap:break-word;
-}
+.memo-title{font-size:clamp(8px,2vw,11px);color:#fff;letter-spacing:1px;border-bottom:1px solid #555;padding-bottom:3px;margin-bottom:5px;}
+.memo-body{font-size:clamp(7px,1.8vw,10px);color:#ccc;line-height:1.9;word-break:keep-all;overflow-wrap:break-word;}
 .cmd-box{padding:6px 8px;}
-.cmd-title{
-  font-size:clamp(8px,2vw,11px);color:#fff;letter-spacing:1px;
-  border-bottom:1px solid #555;padding-bottom:3px;margin-bottom:5px;
-}
+.cmd-title{font-size:clamp(8px,2vw,11px);color:#fff;letter-spacing:1px;border-bottom:1px solid #555;padding-bottom:3px;margin-bottom:5px;}
 .cmd-list{list-style:none;}
 .cmd-list li{
-  font-size:clamp(7px,1.8vw,10px);color:#888;
-  line-height:2;padding:0 2px;cursor:pointer;
+  font-size:clamp(7px,1.8vw,11px);color:#aaa;
+  line-height:2.2;padding:0 2px;cursor:pointer;
+  -webkit-tap-highlight-color:rgba(255,255,255,0.1);
 }
-.cmd-list li.active{color:#fff;}
-.cmd-list li.active::before{content:'▶ ';}
-.cmd-list li:active{background:#222;}
+.cmd-list li:hover,.cmd-list li:active{color:#fff;background:#111;}
+.cmd-list li.selected{color:#ffff00;}
+.cmd-list li.selected::before{content:'▶ ';}
+.cmd-list li.disabled{color:#444;cursor:default;}
 
 .text-area{
-  border-top:2px solid #fff;padding:8px 10px;
-  min-height:90px;background:#000;
+  border-top:2px solid #fff;padding:8px 10px;min-height:90px;background:#000;
 }
-.text-line{
-  font-size:clamp(9px,2.5vw,13px);color:#fff;
-  line-height:1.9;word-break:keep-all;overflow-wrap:break-word;
-}
+.text-line{font-size:clamp(9px,2.5vw,13px);color:#fff;line-height:1.9;word-break:keep-all;overflow-wrap:break-word;}
 .text-line .speaker{color:#ffff00;}
+.text-line.wrong{color:#ff6666;}
+.text-line.ok{color:#aaffaa;}
 .text-line.center{text-align:center;color:#ffff00;}
+.text-line.hint{color:#88aaff;}
 
-.next-area{
-  border-top:1px solid #333;
-  display:flex;justify-content:flex-end;padding:4px 8px;
-}
+.next-area{border-top:1px solid #333;display:flex;justify-content:space-between;align-items:center;padding:4px 8px;}
+.progress{font-size:10px;color:#555;letter-spacing:1px;}
 .next-btn{
   background:#000;border:1px solid #fff;color:#fff;
-  font-family:'DotGothic16',monospace;
-  font-size:clamp(8px,2vw,11px);
+  font-family:'DotGothic16',monospace;font-size:clamp(8px,2vw,11px);
   padding:4px 10px;cursor:pointer;letter-spacing:1px;
 }
 .next-btn:active{background:#fff;color:#000;}
+.next-btn:disabled{border-color:#444;color:#444;cursor:default;}
 
-/* ── エンディング ── */
 .ending-wrap{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
-.ending-header{
-  background:#fff;color:#000;
-  font-size:clamp(10px,3vw,14px);
-  padding:4px 8px;letter-spacing:2px;text-align:center;
-}
-.ending-body{
-  padding:20px 16px;
-  font-size:clamp(10px,2.6vw,13px);
-  color:#fff;line-height:2.4;word-break:keep-all;
-}
+.ending-hdr{background:#fff;color:#000;font-size:clamp(10px,3vw,14px);padding:4px 8px;letter-spacing:2px;text-align:center;}
+.ending-body{padding:20px 16px;font-size:clamp(10px,2.6vw,13px);color:#fff;line-height:2.4;word-break:keep-all;}
 .ending-body .em{color:#ffff00;}
 .ending-body .em2{color:#aaffaa;}
 .ending-hr{border:none;border-top:1px solid #333;margin:14px 0;}
-.retry-btn{
-  display:block;margin:0 auto 20px;
-  background:#000;border:1px solid #fff;color:#fff;
-  font-family:'DotGothic16',monospace;
-  font-size:clamp(11px,3vw,14px);
-  padding:10px 28px;cursor:pointer;letter-spacing:2px;
-}
+.retry-btn{display:block;margin:0 auto 20px;background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(11px,3vw,14px);padding:10px 28px;cursor:pointer;letter-spacing:2px;}
 .retry-btn:active{background:#fff;color:#000;}
 </style>
 </head>
 <body>
 
-<!-- タイトル -->
 <div id="titleScreen" class="title-screen">
-  <div class="title-header">BAR EORNA失踪事件</div>
+  <div class="hdr">BAR EORNA失踪事件</div>
   <div class="title-body">
     <div class="title-logo">■ ■ ■ ■ ■ ■ ■ ■ ■ ■<br>新宿三丁目　深夜のバー<br>■ ■ ■ ■ ■ ■ ■ ■ ■ ■</div>
     <div class="title-main">BAR EORNA<br>失踪事件</div>
@@ -152,7 +95,6 @@ body{
   </div>
 </div>
 
-<!-- ゲーム -->
 <div id="gameScreen" class="game-wrap" style="display:none;">
   <div class="game-titlebar">BAR EORNA失踪事件</div>
   <div class="game-main">
@@ -166,261 +108,348 @@ body{
       </div>
       <div class="cmd-box">
         <div class="cmd-title">ーコマンドー</div>
-        <ul class="cmd-list" id="cmdList">
-          <li>はなす</li>
-          <li>しらべる</li>
-          <li>ひとに きく</li>
-          <li>ものを みせる</li>
-          <li>もちもの</li>
-          <li>データ</li>
-        </ul>
+        <ul class="cmd-list" id="cmdList"></ul>
       </div>
     </div>
   </div>
   <div class="text-area" id="textArea"></div>
   <div class="next-area">
-    <button class="next-btn" onclick="nextScene()">どのコマンドにしますか？ ▶</button>
+    <span class="progress" id="progressTxt"></span>
+    <button class="next-btn" id="nextBtn" onclick="onNext()" disabled>つぎへ ▶</button>
   </div>
 </div>
 
-<!-- エンディング -->
 <div id="endingScreen" class="ending-wrap" style="display:none;">
-  <div class="ending-header">【 事件解決 】</div>
+  <div class="ending-hdr">【 事件解決 】</div>
   <div class="ending-body" id="endingBody"></div>
   <button class="retry-btn" onclick="resetGame()">もう一度プレイ</button>
 </div>
 
 <script>
+// ─────────────────────────────────────────────
+// ゲームデータ定義
+// scene = {
+//   img, memo,
+//   text: [{s,t,type}],   // 初期テキスト
+//   cmds: [{label, action}]  // action: 'correct'|'wrong'|'info'
+//   correctCmd: index,
+//   correctText: [{s,t,type}],  // 正解時テキスト
+//   wrongText: string,
+//   nextAuto: bool  // 正解後自動で次へ
+// }
+// ─────────────────────────────────────────────
+
+const IMGS = {
+  kimura: 'IMG_3555.jpeg',
+  nagata: '43FD7881-A9C3-4711-B9DE-9511A0F963C8.png',
+  tsumori: '52350031-F030-461B-9EC5-BE77B893323B.png',
+};
+
 const scenes = [
-  // 序章
+  // ── 序章 ──
   {
-    img:'IMG_3555.jpeg',
-    memo:'場所：EORNA\n時刻：深夜1時\n状況：連絡入る',
-    cmd:'はなす',
-    lines:[
+    id: 'prologue1',
+    img: IMGS.kimura,
+    memo: '場所：EORNA\n時刻：深夜1時\n状況：緊急連絡入る',
+    text: [
       {s:'木村', t:'閉店後、永田から連絡が入った。'},
       {s:'永田', t:'「木村さん、大変です。兄貴がいなくなりました」'},
-      {s:'木村', t:'津守が？急いでEORNAへ向かった。'},
-    ]
+      {s:'木村', t:'急いでEORNAへ向かった。'},
+    ],
+    cmds: ['はなす', 'しらべる', 'ひとに きく', 'ものを みせる', 'もちもの'],
+    correct: 0,
+    correctText: [{s:'木村', t:'「永田、詳しく話せ。最後に兄貴を見たのはいつだ」'}],
+    wrongText: 'まず永田に話を聞こう。',
   },
   {
-    img:'43FD7881-A9C3-4711-B9DE-9511A0F963C8.png',
-    memo:'場所：EORNA店内\n状況：永田に聴取',
-    cmd:'はなす',
-    lines:[
-      {s:'木村', t:'店に着くと、永田が一人で立っていた。'},
-      {s:'木村', t:'「最後に津守を見たのはいつだ」'},
-      {s:'永田', t:'「閉店の30分前です。突然コートを着て出て行きました」'},
-    ]
+    id: 'prologue2',
+    img: IMGS.nagata,
+    memo: '場所：EORNA店内\n状況：永田に聴取中',
+    text: [
+      {s:'永田', t:'「閉店30分前です。突然コートを着て出て行きました」'},
+      {s:'永田', t:'「木村さん、何も言わずに…」'},
+    ],
+    cmds: ['はなす', 'しらべる', 'ひとに きく', 'ものを みせる', 'もちもの'],
+    correct: 2,
+    correctText: [
+      {s:'木村', t:'「変わった様子はなかったか」'},
+      {s:'永田', t:'「閉店前に一本、電話が来ていました。その後、お顔の色が変わられて」'},
+    ],
+    wrongText: 'もっと詳しく聞き込もう。',
+  },
+
+  // ── 第1章：現場捜査 ──
+  {
+    id: 'scene1',
+    img: IMGS.kimura,
+    memo: '場所：カウンター\n手がかり：？\n電話の件が気になる',
+    text: [
+      {s:'木村', t:'カウンターを調べてみよう。'},
+    ],
+    cmds: ['はなす', 'しらべる', 'ひとに きく', 'ものを みせる', 'もちもの'],
+    correct: 1,
+    correctText: [
+      {s:'木村', t:'グラスが一つ。飲みかけのまま残されている。'},
+      {s:'木村', t:'そして…小さなメモ用紙が。'},
+      {s:'木村', t:'「3月15日、取引成立。相手は信用できない」', type:'ok'},
+      {s:'木村', t:'【手がかり①】メモを入手した。', type:'ok'},
+    ],
+    wrongText: 'カウンターを調べてみよう。',
+    item: 'memo',
   },
   {
-    img:'43FD7881-A9C3-4711-B9DE-9511A0F963C8.png',
-    memo:'場所：EORNA店内\n状況：続き',
-    cmd:'ひとに きく',
-    lines:[
-      {s:'木村', t:'「何か変わった様子はなかったか」'},
-      {s:'永田', t:'「閉店前に、一本だけ電話が来ていました」'},
-      {s:'永田', t:'「お電話の後、兄貴のお顔が変わられたんです」'},
-    ]
+    id: 'scene2',
+    img: IMGS.kimura,
+    memo: '場所：カウンター\n手がかり①：メモ入手\n他に何か残っていないか',
+    text: [
+      {s:'木村', t:'まだ何か残っているかもしれない。'},
+    ],
+    cmds: ['はなす', 'しらべる', 'ひとに きく', 'ものを みせる', 'もちもの'],
+    correct: 1,
+    correctText: [
+      {s:'木村', t:'スマートフォンがカウンターに残されていた。'},
+      {s:'木村', t:'着信履歴を見ると…最後の着信は「非通知」。'},
+      {s:'木村', t:'時刻は閉店30分前。電話の直後に出て行ったのか。'},
+      {s:'木村', t:'【手がかり②】スマホの着信履歴を確認した。', type:'ok'},
+    ],
+    wrongText: 'もう一度カウンターをよく調べよう。',
+    item: 'phone',
   },
-  // 第1章：現場捜査
+
+  // ── 第2章：永田への聴取 ──
   {
-    img:'IMG_3555.jpeg',
-    memo:'場所：カウンター\n手がかり：グラス\nメモ発見',
-    cmd:'しらべる',
-    lines:[
-      {s:'木村', t:'カウンターを調べた。飲みかけのグラスが一つ。'},
-      {s:'木村', t:'グラスの横に、小さなメモが残されていた。'},
-      {s:'木村', t:'「3月15日、取引成立。相手は信用できない」'},
-    ]
-  },
-  {
-    img:'IMG_3555.jpeg',
-    memo:'手がかり：スマホ\n着信履歴を確認',
-    cmd:'しらべる',
-    lines:[
-      {s:'木村', t:'津守のスマートフォンがカウンターに残されていた。'},
-      {s:'木村', t:'着信履歴を見ると、最後の着信は「非通知」。'},
-      {s:'木村', t:'時刻は閉店30分前。メモの取引と関係があるのか。'},
-    ]
-  },
-  // 第2章：取引の調査
-  {
-    img:'IMG_3555.jpeg',
-    memo:'新事実：不動産取引\n明日が契約日',
-    cmd:'データ',
-    lines:[
-      {s:'木村', t:'津守の手帳を確認した。'},
-      {s:'木村', t:'明日、大きな不動産取引の契約が入っていた。'},
-      {s:'木村', t:'取引相手の名前は…消されていた。'},
-    ]
+    id: 'scene3',
+    img: IMGS.nagata,
+    memo: '場所：カウンター\n手がかり①②入手\n永田にメモを見せよう',
+    text: [
+      {s:'木村', t:'このメモについて、永田に聞いてみよう。'},
+    ],
+    cmds: ['はなす', 'しらべる', 'ひとに きく', 'ものを みせる', 'もちもの'],
+    correct: 3,
+    correctText: [
+      {s:'木村', t:'メモを永田に見せた。'},
+      {s:'永田', t:'「…これは。兄貴がよく悩んでいた取引のことです」'},
+      {s:'永田', t:'「ある男が兄貴に無理な取引を迫っていたんです」'},
+      {s:'木村', t:'【手がかり③】取引の存在が判明した。', type:'ok'},
+    ],
+    wrongText: 'メモを永田に見せてみよう。',
+    item: 'transaction',
   },
   {
-    img:'43FD7881-A9C3-4711-B9DE-9511A0F963C8.png',
-    memo:'人物：永田\n新たな証言',
-    cmd:'ひとに きく',
-    lines:[
-      {s:'木村', t:'永田に取引のことを聞いた。'},
-      {s:'永田', t:'「最近、兄貴はよくお悩みのご様子でした」'},
-      {s:'永田', t:'「ある取引をお断りしたいが、断れない、と仰っていました」'},
-    ]
+    id: 'scene4',
+    img: IMGS.nagata,
+    memo: '手がかり③：取引の存在\n男について詳しく聞こう',
+    text: [
+      {s:'木村', t:'その男について、もっと詳しく聞こう。'},
+    ],
+    cmds: ['はなす', 'しらべる', 'ひとに きく', 'ものを みせる', 'もちもの'],
+    correct: 2,
+    correctText: [
+      {s:'木村', t:'「その男はどんな人間だ」'},
+      {s:'永田', t:'「一週間前にいらっしゃいました。高級スーツを着た40代の方で」'},
+      {s:'永田', t:'「名刺を置いていかれましたが、兄貴がすぐに捨てられて…」'},
+      {s:'木村', t:'「名刺…ゴミ箱を調べよう」'},
+    ],
+    wrongText: 'その男についてもっと聞こう。',
+  },
+
+  // ── 第3章：名刺の謎 ──
+  {
+    id: 'scene5',
+    img: IMGS.kimura,
+    memo: '場所：ゴミ箱付近\n名刺を探せ',
+    text: [
+      {s:'木村', t:'ゴミ箱を調べよう。'},
+    ],
+    cmds: ['はなす', 'しらべる', 'ひとに きく', 'ものを みせる', 'もちもの'],
+    correct: 1,
+    correctText: [
+      {s:'木村', t:'ゴミ箱の底に、破かれた名刺の断片があった。'},
+      {s:'木村', t:'「……不動産……代表……」会社名は読めない。'},
+      {s:'木村', t:'だが確かに、不動産絡みの人間だ。'},
+      {s:'木村', t:'【手がかり④】名刺の断片を発見。', type:'ok'},
+    ],
+    wrongText: 'ゴミ箱を調べてみよう。',
+    item: 'card',
   },
   {
-    img:'43FD7881-A9C3-4711-B9DE-9511A0F963C8.png',
-    memo:'人物：永田\n重要証言',
-    cmd:'ひとに きく',
-    lines:[
-      {s:'永田', t:'「一週間前、見知らぬ男性が兄貴をお訪ねになりました」'},
-      {s:'永田', t:'「お二人は小声で話されていて、兄貴がお顔の色を変えられていました」'},
-      {s:'木村', t:'「その男の特徴は」'},
-    ]
+    id: 'scene6',
+    img: IMGS.nagata,
+    memo: '手がかり④：名刺の断片\n永田に確認しよう',
+    text: [
+      {s:'木村', t:'この名刺の断片を永田に確認しよう。'},
+    ],
+    cmds: ['はなす', 'しらべる', 'ひとに きく', 'ものを みせる', 'もちもの'],
+    correct: 3,
+    correctText: [
+      {s:'木村', t:'名刺の断片を永田に見せた。'},
+      {s:'永田', t:'「…この色、見覚えがあります。あの男の名刺です」'},
+      {s:'永田', t:'「兄貴、その男を怖がっていました。でも断れないと」'},
+      {s:'木村', t:'【手がかり⑤】男の正体が不動産業者と判明。', type:'ok'},
+    ],
+    wrongText: '名刺の断片を永田に見せよう。',
+    item: 'identity',
   },
+
+  // ── 第4章：推理 ──
   {
-    img:'43FD7881-A9C3-4711-B9DE-9511A0F963C8.png',
-    memo:'人物：謎の男\n特徴メモ',
-    cmd:'ひとに きく',
-    lines:[
-      {s:'永田', t:'「40代くらいで、高級そうなスーツを着ていました」'},
-      {s:'永田', t:'「名刺を置いていきましたが、兄貴がすぐに捨てられて」'},
-      {s:'木村', t:'「ゴミ箱を調べよう」'},
-    ]
+    id: 'scene7',
+    img: IMGS.kimura,
+    memo: '手がかり①〜⑤入手\nそろそろ推理できるはず',
+    text: [
+      {s:'木村', t:'手がかりが揃ってきた。整理してみよう。'},
+      {s:'木村', t:'津守はなぜ消えたのか。', type:'hint'},
+    ],
+    cmds: ['はなす', 'しらべる', 'ひとに きく', 'すいり　しろ', 'もちもの'],
+    correct: 3,
+    correctText: [
+      {s:'木村', t:'整理しよう。津守は不動産取引を断れない状況にあった。'},
+      {s:'木村', t:'非通知の電話の後、スマホを残して姿を消した。'},
+      {s:'木村', t:'追跡されないためにスマホを置いていった。'},
+      {s:'木村', t:'つまり…津守は自分から逃げたんだ。取引から身を守るために。'},
+      {s:'木村', t:'【推理完了】津守は取引から逃げるため自ら姿を消した。', type:'ok'},
+    ],
+    wrongText: 'まだ手がかりが足りない。もっと調べよう。',
   },
-  // 第3章：名刺の謎
+
+  // ── 終章 ──
   {
-    img:'IMG_3555.jpeg',
-    memo:'手がかり：名刺\nゴミ箱から発見',
-    cmd:'しらべる',
-    lines:[
-      {s:'木村', t:'ゴミ箱の底から、破かれた名刺の断片が出てきた。'},
-      {s:'木村', t:'「……不動産……代表取締役……」'},
-      {s:'木村', t:'会社名は判読できない。だが、何かが見えてきた。'},
-    ]
-  },
-  {
-    img:'IMG_3555.jpeg',
-    memo:'推理：取引の全貌\nが見えてきた',
-    cmd:'すいり',
-    lines:[
-      {s:'木村', t:'整理しよう。津守は不動産取引を迫られていた。'},
-      {s:'木村', t:'断りたかったが、断れない事情があった。'},
-      {s:'木村', t:'そして非通知の電話の後、自ら姿を消した。'},
-    ]
-  },
-  {
-    img:'IMG_3555.jpeg',
-    memo:'結論：自ら身を隠した\n理由は取引回避か',
-    cmd:'すいり',
-    lines:[
-      {s:'木村', t:'津守は殺されたのではない。'},
-      {s:'木村', t:'自分から消えることで、取引から逃げたんだ。'},
-      {s:'木村', t:'でも…なぜスマホを残した？'},
-    ]
-  },
-  // 終章
-  {
-    img:'43FD7881-A9C3-4711-B9DE-9511A0F963C8.png',
-    memo:'終章：EORNAにて\n木村と永田',
-    cmd:'はなす',
-    lines:[
+    id: 'ending1',
+    img: IMGS.nagata,
+    memo: '推理完了\n永田に確認しよう',
+    text: [
+      {s:'木村', t:'永田に推理を伝えよう。'},
       {s:'木村', t:'「永田、津守から何か預かっていないか」'},
+    ],
+    cmds: ['はなす', 'しらべる', 'ひとに きく', 'ものを みせる', 'もちもの'],
+    correct: 0,
+    correctText: [
       {s:'永田', t:'「…実は」'},
       {s:'永田', t:'「お出になる前に、封筒をお渡しいただきました」'},
-    ]
-  },
-  {
-    img:'43FD7881-A9C3-4711-B9DE-9511A0F963C8.png',
-    memo:'封筒の内容\n津守からの手紙',
-    cmd:'ものを みせる',
-    lines:[
       {s:'永田', t:'「木村さんに、頃合いを見てお渡しするようにと」'},
-      {s:'木村', t:'封筒を開けた。手紙が一枚。'},
-      {s:'木村', t:'「木村さんへ。心配をかけてすまない。しばらく姿を消す」'},
-    ]
+    ],
+    wrongText: '永田に話しかけよう。',
   },
   {
-    img:'52350031-F030-461B-9EC5-BE77B893323B.png',
-    memo:'津守からの手紙\n真相が明かされる',
-    cmd:'ものを みせる',
-    lines:[
+    id: 'ending2',
+    img: IMGS.kimura,
+    memo: '封筒あり\n中身を確認しよう',
+    text: [
+      {s:'木村', t:'封筒の中身を確認しよう。'},
+    ],
+    cmds: ['はなす', 'しらべる', 'ひとに きく', 'ものを みせる', 'もちもの'],
+    correct: 1,
+    correctText: [
+      {s:'木村', t:'封筒を開けた。手紙が一枚。'},
+      {s:'津守', t:'「木村さんへ。心配をかけて申し訳ありません」'},
       {s:'津守', t:'「ある取引を断るために、私は一時的に姿を消す必要がありました」'},
       {s:'津守', t:'「スマートフォンを残したのは、追跡されないためです」'},
-      {s:'津守', t:'「ワカメにも心配をかけてしまいました。　津守」'},
-    ]
-  },
-  {
-    img:'IMG_3555.jpeg',
-    memo:'事件解決\nEORNAの夜',
-    cmd:'はなす',
-    lines:[
-      {s:'木村', t:'手紙を読み終えて、俺は少し笑った。'},
-      {s:'永田', t:'「兄貴、大丈夫でいらっしゃいますかね」'},
-      {s:'木村', t:'「ああ。あいつは強い。必ず戻ってくる」'},
-    ]
-  },
-  {
-    img:'IMG_3555.jpeg',
-    memo:'エピローグ\n数週間後',
-    cmd:'はなす',
-    lines:[
-      {s:'木村', t:'数週間後、EORNAのドアが静かに開いた。'},
-      {s:'津守', t:'「やあ、木村さん。ウイスキーを一杯いただけますか」'},
-      {s:'津守', t:'「ワカメ、ギネスもお願いします」'},
-      {s:'木村', t:'「おかえり、津守」'},
-    ], ending:true
+      {s:'津守', t:'「ワカメにも心配をかけてしまいました。落ち着いたら連絡します。津守」'},
+    ],
+    wrongText: '封筒の中身を調べよう。',
+    ending: true,
   },
 ];
 
-let sceneIdx=0, lineIdx=0;
+// ── 状態管理 ──
+let sceneIdx = 0;
+let phase = 'input'; // 'input' | 'result'
+let items = new Set();
+let wrongCount = 0;
 
 function startGame(){
   document.getElementById('titleScreen').style.display='none';
   document.getElementById('gameScreen').style.display='block';
-  sceneIdx=0; lineIdx=0;
+  sceneIdx=0; phase='input'; items.clear(); wrongCount=0;
   renderScene();
 }
 
 function renderScene(){
-  const s=scenes[sceneIdx];
-  document.getElementById('charImg').src=s.img;
-  document.getElementById('memoBody').innerHTML=s.memo.replace(/\n/g,'<br>');
-  const items=document.querySelectorAll('.cmd-list li');
-  const cmds=['はなす','しらべる','ひとに きく','ものを みせる','もちもの','データ'];
-  // すいり対応
-  const activeCmd = s.cmd==='すいり' ? 'はなす' : s.cmd;
-  items.forEach((li,i)=>{
-    const match = s.cmd==='すいり' ? i===0 : cmds[i]===s.cmd;
-    li.classList.toggle('active', match);
-    li.textContent = i===0 && s.cmd==='すいり' ? 'すいり　しろ' : cmds[i];
-  });
-  renderLines();
+  const s = scenes[sceneIdx];
+  document.getElementById('charImg').src = s.img;
+  document.getElementById('memoBody').innerHTML = s.memo.replace(/\n/g,'<br>');
+  renderCmds(s);
+  showTexts(s.text);
+  document.getElementById('nextBtn').disabled = true;
+  document.getElementById('progressTxt').textContent = `手がかり ${items.size}/5`;
+  phase = 'input';
 }
 
-function renderLines(){
-  const s=scenes[sceneIdx];
-  const area=document.getElementById('textArea');
-  area.innerHTML='';
-  const start=Math.max(0,lineIdx-2);
-  for(let i=start;i<=lineIdx&&i<s.lines.length;i++){
-    const l=s.lines[i];
-    const d=document.createElement('div');
-    if(!l.s){
-      d.className='text-line center';
-      d.textContent=l.t;
-    } else {
-      d.className='text-line';
-      d.innerHTML=`<span class="speaker">${l.s}：</span>${l.t}`;
+function renderCmds(s){
+  const ul = document.getElementById('cmdList');
+  ul.innerHTML='';
+  s.cmds.forEach((label,i)=>{
+    const li = document.createElement('li');
+    li.textContent = label;
+    li.onclick = ()=>{ if(phase==='input') doCmd(i); };
+    ul.appendChild(li);
+  });
+}
+
+function doCmd(idx){
+  const s = scenes[sceneIdx];
+  const li = document.querySelectorAll('.cmd-list li');
+
+  // 選択表示
+  li.forEach(l=>l.classList.remove('selected'));
+  li[idx].classList.add('selected');
+
+  if(idx === s.correct){
+    // 正解
+    phase = 'result';
+    if(s.item) items.add(s.item);
+    document.getElementById('progressTxt').textContent = `手がかり ${items.size}/5`;
+    showTexts([...s.text, ...s.correctText]);
+    document.getElementById('nextBtn').disabled = false;
+    li.forEach(l=>{ l.onclick=null; });
+  } else {
+    // 不正解
+    wrongCount++;
+    const hint = wrongCount >= 2 ? `<br><span style="color:#88aaff">ヒント：${getHint(s)}</span>` : '';
+    showTexts([
+      ...s.text,
+      {s:'', t:s.wrongText + (wrongCount>=2 ? '' : ''), type:'wrong'},
+    ]);
+    // ヒント表示
+    if(wrongCount >= 2){
+      const area = document.getElementById('textArea');
+      const d = document.createElement('div');
+      d.className='text-line hint';
+      d.textContent = 'ヒント：' + getHint(s);
+      area.appendChild(d);
     }
-    area.appendChild(d);
   }
 }
 
-function nextScene(){
-  const s=scenes[sceneIdx];
-  if(lineIdx<s.lines.length-1){ lineIdx++; renderLines(); return; }
-  if(s.ending){ showEnding(); return; }
-  sceneIdx++; lineIdx=0;
-  if(sceneIdx>=scenes.length){ showEnding(); return; }
+function getHint(s){
+  const hints = ['はなす','しらべる','ひとに きく','ものを みせる','すいり　しろ'];
+  return `「${s.cmds[s.correct]}」を試してみよう`;
+}
+
+function onNext(){
+  const s = scenes[sceneIdx];
+  if(s.ending){
+    showEnding(); return;
+  }
+  sceneIdx++;
+  wrongCount=0;
+  if(sceneIdx >= scenes.length){ showEnding(); return; }
   renderScene();
+}
+
+function showTexts(lines){
+  const area = document.getElementById('textArea');
+  area.innerHTML='';
+  lines.forEach(l=>{
+    const d = document.createElement('div');
+    d.className = 'text-line' + (l.type ? ' '+l.type : '');
+    if(l.s){
+      d.innerHTML = `<span class="speaker">${l.s}：</span>${l.t}`;
+    } else {
+      d.textContent = l.t;
+    }
+    area.appendChild(d);
+  });
 }
 
 function showEnding(){
@@ -429,20 +458,21 @@ function showEnding(){
   document.getElementById('endingBody').innerHTML=`
 <span class="em">BAR EORNA失踪事件　解決</span><br><br>
 津守は自らの意志で姿を消した。<br>
-不当な取引を迫る相手から逃れるため、<br>
+不当な取引を迫る不動産業者から逃れるため、<br>
 スマホを残し、誰にも告げずEORNAを出た。<br>
 <hr class="ending-hr">
-永田は兄貴から手紙を預かっていた。<br>
-「頃合いを見て渡してくれ」<br>
-その言葉を守り、黙っていた。<br>
+永田は津守から手紙を預かっていた。<br>
+「頃合いを見て木村さんにお渡しするように」<br>
+その言葉を守り、黙って待っていた。<br>
 <hr class="ending-hr">
 数週間後、津守はEORNAに戻った。<br><br>
-<span class="em2">カウンターには、いつものウイスキーが待っていた。</span>
+<span class="em2">「やあ、木村さん。ウイスキーを一杯いただけますか」</span><br><br>
+カウンターには、いつもの笑顔があった。
   `;
 }
 
 function resetGame(){
-  sceneIdx=0; lineIdx=0;
+  sceneIdx=0; phase='input'; items.clear(); wrongCount=0;
   document.getElementById('endingScreen').style.display='none';
   document.getElementById('titleScreen').style.display='block';
 }
