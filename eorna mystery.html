@@ -31,6 +31,14 @@ body{
 .title-copy{font-size:10px;color:#444;margin-top:20px;}
 
 .game-wrap{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
+.exit-btn{
+  position:fixed;top:8px;right:8px;z-index:999;
+  background:#000;border:1px solid #fff;color:#fff;
+  font-family:'DotGothic16',monospace;font-size:10px;
+  padding:4px 8px;cursor:pointer;letter-spacing:1px;
+  text-decoration:none;display:none;
+}
+.exit-btn:active{background:#fff;color:#000;}
 .game-titlebar{background:#fff;color:#000;font-size:clamp(9px,2.5vw,13px);padding:3px 8px;letter-spacing:1px;}
 .game-main{display:flex;background:#000;}
 .char-area{width:66%;border-right:1px solid #fff;}
@@ -84,6 +92,7 @@ body{
 </head>
 <body>
 
+<a id="exitBtn" class="exit-btn" href="https://eorna.info">× 終了</a>
 <div id="titleScreen" class="title-screen">
   <div class="hdr">BAR EORNA失踪事件</div>
   <div class="title-body">
@@ -360,6 +369,7 @@ let wrongCount = 0;
 function startGame(){
   document.getElementById('titleScreen').style.display='none';
   document.getElementById('gameScreen').style.display='block';
+  document.getElementById('exitBtn').style.display='block';
   sceneIdx=0; phase='input'; items.clear(); wrongCount=0;
   renderScene();
 }
@@ -455,6 +465,7 @@ function showTexts(lines){
 function showEnding(){
   document.getElementById('gameScreen').style.display='none';
   document.getElementById('endingScreen').style.display='block';
+  document.getElementById('exitBtn').style.display='none';
   document.getElementById('endingBody').innerHTML=`
 <span class="em">BAR EORNA失踪事件　解決</span><br><br>
 津守は自らの意志で姿を消した。<br>
