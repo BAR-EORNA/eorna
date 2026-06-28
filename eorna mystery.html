@@ -92,7 +92,7 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
     <div class="title-logo">■ ■ ■ ■ ■ ■ ■ ■ ■ ■<br>新宿三丁目　深夜のバー<br>■ ■ ■ ■ ■ ■ ■ ■ ■ ■</div>
     <div class="title-main">BAR EORNA<br>失踪事件</div>
     <div class="title-sub">〜 本物かどうかは、目が知っている 〜</div>
-    <button class="start-btn" onclick="showChapterSelect()">はじめから</button>
+    <button class="start-btn" onclick="startChapter(0)">はじめから</button>
     <div style="height:12px"></div>
     <button class="start-btn" style="font-size:clamp(10px,2.8vw,13px);padding:8px 24px;" onclick="showChapterSelect()">チャプター選択</button>
     <div class="title-copy">© 2026 BAR EORNA</div>
@@ -624,7 +624,7 @@ const chapters = [
 ];
 
 // セーブデータ（チャプタークリア状況）
-let cleared = JSON.parse(localStorage.getItem('eorna_cleared')||'[]');
+let cleared = [];
 
 let currentChapter=0, sceneIdx=0, phase='input', items=new Set(), wrongCount=0;
 
@@ -734,7 +734,7 @@ function showEnding(ch){
   document.getElementById('endingBody').innerHTML=ch.ending.body;
   if(!cleared.includes(currentChapter)){
     cleared.push(currentChapter);
-    try{ localStorage.setItem('eorna_cleared',JSON.stringify(cleared)); }catch(e){}
+    // save disabled
   }
 }
 
