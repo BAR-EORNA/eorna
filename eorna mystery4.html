@@ -708,7 +708,10 @@ function showEnding(ch){
   document.getElementById('endingScreen').style.display='block';
   document.getElementById('endingHdr').textContent=ch.ending.title;
   let body=ch.ending.body;
-  if(cleared.length>=8) body+=`<hr class="ending-hr"><button style="display:block;margin:8px auto;background:#0a0800;border:1px dashed #ffcc00;color:#ffcc00;font-family:'DotGothic16',monospace;font-size:12px;padding:8px 20px;cursor:pointer;width:90%;" onclick="document.getElementById('endingScreen').style.display='none';document.getElementById('certScreen').style.display='block';">★ 捜査完了証明書・クーポンを見る ★</button>`;
+  if(cleared.length>=8){
+    body+=`<hr class="ending-hr"><button style="display:block;margin:8px auto;background:#0a0800;border:1px dashed #ffcc00;color:#ffcc00;font-family:'DotGothic16',monospace;font-size:12px;padding:8px 20px;cursor:pointer;width:90%;" onclick="document.getElementById('endingScreen').style.display='none';document.getElementById('certScreen').style.display='block';">★ 捜査完了証明書・クーポンを見る ★</button>`;
+    body+=`<button style="display:block;margin:8px auto;background:#0a0800;border:1px dashed #ffcc88;color:#ffcc88;font-family:'DotGothic16',monospace;font-size:12px;padding:8px 20px;cursor:pointer;width:90%;" onclick="window.location.href='eorna%20mystery5.html'">★ 最終話「いつか帰る場所」へ ★</button>`;
+  }
   document.getElementById('endingBody').innerHTML=body;
 }
 
