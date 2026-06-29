@@ -211,6 +211,22 @@ body.wc .psq .v-nagata{display:none!important}
 body.wc .psq .v-brazil{display:block!important}
 .ph-cap-wc{display:none}
 body.wc .psq .ph-cap-wc{display:block;position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(8,5,3,.82));color:var(--cream);font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;padding:1.5rem .8rem .7rem;text-align:center;z-index:3;pointer-events:none}
+
+/* ===== WC OFF: 観戦できる通知だけ残す ===== */
+body.wc .hero{background:none!important}
+body.wc .hero .kick{color:var(--dim)!important}
+body.wc .hero .meta{color:var(--dim)!important}
+body.wc .wc-hero{display:none!important}
+body.wc .wc-countdown{display:none!important}
+body.wc .wc-balls,body.wc #wcFlags{display:none!important}
+body.wc .word .d{font-size:inherit!important}
+body.wc .word .d::after{content:""!important;display:none!important}
+body.wc .ph-owner .v-brazil,body.wc .psq .v-brazil{display:none!important}
+body.wc .ph-owner .v-nagata,body.wc .psq .v-nagata{display:block!important}
+body.wc .ph-cap-wc{display:none!important}
+body.wc #wcBar{justify-content:center!important;background:#16110D!important;border-bottom:1px solid rgba(201,168,76,.28)!important}
+body.wc .wc-track{animation:none!important;width:100%;justify-content:center;display:flex}
+body.wc #wcBar .wc-track span{color:#EFE7D4!important;font-weight:500!important;font-size:.62rem!important;letter-spacing:.13em!important}
 </style>
 </head>
 <body>
@@ -333,23 +349,12 @@ body.wc .psq .ph-cap-wc{display:block;position:absolute;left:0;right:0;bottom:0;
 </script>
 <script>
 (function(){
-  // ===== 本日の試合（ここを編集）=====  例: "🇯🇵21:00 日本 vs ブラジル · 🇫🇷24:00 仏 vs 独"
-  var WC_TODAY = "";
-  // ================================
-  var n=new Date(),
-      s=new Date('2026-06-11T00:00:00+09:00'),
-      e=new Date('2026-07-20T12:00:00+09:00'),
-      fin=new Date('2026-07-20T04:00:00+09:00');
+  var n=new Date(), s=new Date('2026-06-11T00:00:00+09:00'), e=new Date('2026-07-20T12:00:00+09:00');
   if(!(n>=s&&n<e)) return;
   document.body.classList.add('wc');
-  var base="🇯🇵 JAPAN THROUGH TO THE KNOCKOUTS · ⚽ FIFA WORLD CUP 2026 · MATCHES ON · BOOK ANYTIME · ";
-  var txt=(WC_TODAY?("📣 本日 "+WC_TODAY+" · "):"")+base;
-  Array.prototype.forEach.call(document.querySelectorAll('.wc-track span'),function(sp){sp.textContent=txt;});
-  var el=document.getElementById('wcCountdown');
-  if(el){var tick=function(){var d=fin-new Date();if(d<=0){el.innerHTML='🏆 GRAND FINAL';return;}
-    var dd=Math.floor(d/864e5),hh=Math.floor(d/36e5)%24,mm=Math.floor(d/6e4)%60,ss=Math.floor(d/1e3)%60;
-    el.innerHTML='🏆 FINAL まで '+dd+'日 '+('0'+hh).slice(-2)+':'+('0'+mm).slice(-2)+':'+('0'+ss).slice(-2);};
-    tick();setInterval(tick,1000);}
+  var sp=document.querySelectorAll('.wc-track span');
+  if(sp[0]) sp[0].textContent="⚽ FIFA WORLD CUP 2026 · WATCH THE MATCHES HERE · BOOK ANYTIME";
+  if(sp[1]) sp[1].textContent="";
 })();
 </script>
 </body>
