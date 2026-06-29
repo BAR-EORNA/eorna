@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>BAR EORNA いつか帰る場所</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'DotGothic16','MS Gothic',monospace;padding:8px;}
+.exit-btn{position:fixed;top:8px;right:8px;z-index:999;background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:10px;padding:4px 8px;cursor:pointer;letter-spacing:1px;text-decoration:none;display:none;}
+.exit-btn:active{background:#fff;color:#000;}
+.title-screen{width:100%;max-width:500px;background:#000;border:2px solid #fff;text-align:center;}
+.hdr{background:#fff;color:#000;font-size:clamp(10px,3vw,14px);padding:4px 8px;letter-spacing:1px;}
+.title-body{padding:32px 20px;}
+.title-logo{font-size:clamp(8px,2vw,11px);color:#aaa;line-height:1.8;margin-bottom:16px;}
+.title-main{font-size:clamp(16px,5vw,26px);color:#fff;letter-spacing:2px;line-height:1.6;margin-bottom:16px;}
+.title-sub{font-size:clamp(10px,2.5vw,13px);color:#aaa;letter-spacing:2px;margin-bottom:28px;}
+.start-btn{background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(12px,3.5vw,16px);padding:12px 36px;cursor:pointer;letter-spacing:3px;animation:bb 1.5s ease infinite;display:block;margin:0 auto 12px;}
+.start-btn:active{background:#fff;color:#000;}
+@keyframes bb{0%,100%{border-color:#fff;}50%{border-color:#555;}}
+.title-copy{font-size:10px;color:#444;margin-top:20px;}
+.chapter-screen{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
+.chapter-list{padding:16px;}
+.chapter-item{display:flex;align-items:center;gap:10px;padding:10px 8px;border-bottom:1px solid #222;cursor:pointer;}
+.chapter-item:active{background:#111;}
+.chapter-item.locked{opacity:0.3;cursor:default;}
+.chapter-num{font-size:11px;color:#555;letter-spacing:1px;min-width:40px;}
+.chapter-title{font-size:clamp(10px,2.8vw,13px);color:#fff;}
+.chapter-item.cleared .chapter-title{color:#aaffaa;}
+.chapter-item.cleared .chapter-num{color:#aaffaa;}
+.game-wrap{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
+.game-titlebar{background:#fff;color:#000;font-size:clamp(9px,2.5vw,13px);padding:3px 8px;letter-spacing:1px;}
+.game-main{display:flex;background:#000;}
+.char-area{width:66%;border-right:1px solid #fff;}
+.char-img{width:100%;display:block;image-rendering:pixelated;}
+.side-area{width:34%;display:flex;flex-direction:column;}
+.memo-box{border-bottom:1px solid #fff;padding:6px 8px;flex:1;}
+.memo-title{font-size:clamp(8px,2vw,11px);color:#fff;letter-spacing:1px;border-bottom:1px solid #555;padding-bottom:3px;margin-bottom:5px;}
+.memo-body{font-size:clamp(7px,1.8vw,10px);color:#ccc;line-height:1.9;word-break:keep-all;overflow-wrap:break-word;}
+.cmd-box{padding:6px 8px;}
+.cmd-title{font-size:clamp(8px,2vw,11px);color:#fff;letter-spacing:1px;border-bottom:1px solid #555;padding-bottom:3px;margin-bottom:5px;}
+.cmd-list{list-style:none;}
+.cmd-list li{font-size:clamp(7px,1.8vw,11px);color:#aaa;line-height:2.2;padding:0 2px;cursor:pointer;}
+.cmd-list li:active{color:#fff;background:#111;}
+.cmd-list li.selected{color:#ffff00;}
+.cmd-list li.selected::before{content:'▶ ';}
+.text-area{border-top:2px solid #fff;padding:8px 10px;min-height:90px;background:#000;}
+.text-line{font-size:clamp(9px,2.5vw,13px);color:#fff;line-height:1.9;word-break:keep-all;overflow-wrap:break-word;}
+.text-line .speaker{color:#ffff00;}
+.text-line.wrong{color:#ff6666;}
+.text-line.ok{color:#aaffaa;}
+.text-line.twist{color:#ff88ff;}
+.text-line.hint{color:#88aaff;}
+.text-line.silent{color:#777;font-style:italic;}
+.text-line.warm{color:#ffcc88;}
+.text-line.gold{color:#ffcc00;}
+.next-area{border-top:1px solid #333;display:flex;justify-content:space-between;align-items:center;padding:4px 8px;}
+.progress{font-size:10px;color:#555;letter-spacing:1px;}
+.next-btn{background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(8px,2vw,11px);padding:4px 10px;cursor:pointer;letter-spacing:1px;}
+.next-btn:active{background:#fff;color:#000;}
+.next-btn:disabled{border-color:#444;color:#444;cursor:default;}
+.ending-wrap{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
+.ending-hdr{background:#fff;color:#000;font-size:clamp(10px,3vw,14px);padding:4px 8px;letter-spacing:2px;text-align:center;}
+.ending-body{padding:20px 16px;font-size:clamp(10px,2.6vw,13px);color:#fff;line-height:2.4;word-break:keep-all;}
+.ending-body .em{color:#ffff00;}
+.ending-body .em2{color:#aaffaa;}
+.ending-body .em3{color:#ff88ff;}
+.ending-body .em4{color:#ffcc88;}
+.ending-hr{border:none;border-top:1px solid #333;margin:14px 0;}
+.ending-btns{display:flex;gap:8px;padding:0 16px 20px;}
+.ending-btn{flex:1;background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(9px,2.5vw,12px);padding:10px 8px;cursor:pointer;letter-spacing:1px;text-align:center;}
+.ending-btn:active{background:#fff;color:#000;}
+.cert-wrap{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
+.cert-hdr{background:#fff;color:#000;font-size:clamp(10px,3vw,14px);padding:4px 8px;letter-spacing:2px;text-align:center;}
+.cert-body{padding:20px 16px;text-align:center;}
+.cert-title{font-size:clamp(12px,3.5vw,16px);color:#ffcc88;letter-spacing:2px;margin-bottom:16px;line-height:2;}
+.cert-coupon{border:2px dashed #ffcc88;padding:16px;margin:16px 0;background:#0a0800;}
+.cert-coupon-title{font-size:clamp(10px,2.8vw,14px);color:#ffcc88;margin-bottom:8px;}
+.cert-coupon-body{font-size:clamp(12px,3.5vw,18px);color:#fff;margin-bottom:8px;}
+.cert-coupon-code{font-size:clamp(14px,4vw,22px);color:#aaffaa;letter-spacing:4px;margin:8px 0;}
+.cert-coupon-note{font-size:clamp(8px,2vw,10px);color:#888;margin-top:8px;}
+.cert-hr{border:none;border-top:1px solid #333;margin:14px 0;}
+.cert-btn{display:block;margin:0 auto 8px;background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(9px,2.5vw,12px);padding:10px 28px;cursor:pointer;letter-spacing:1px;width:90%;}
+.cert-btn:active{background:#fff;color:#000;}
+</style>
+</head>
+<body>
+<a id="exitBtn" class="exit-btn" href="https://eorna.info">× 終了</a>
+
+<div id="titleScreen" class="title-screen">
+  <div class="hdr">BAR EORNA ミステリーシリーズ 最終話</div>
+  <div class="title-body">
+    <div class="title-logo">■ ■ ■ ■ ■ ■ ■ ■ ■ ■<br>新宿三丁目　深夜のバー<br>■ ■ ■ ■ ■ ■ ■ ■ ■ ■</div>
+    <div class="title-main">BAR EORNA<br>いつか帰る場所</div>
+    <div class="title-sub">〜 木村さん、EORNAはここにあります 〜</div>
+    <button class="start-btn" onclick="startChapter(0)">はじめから</button>
+    <button class="start-btn" style="font-size:clamp(10px,2.8vw,13px);padding:8px 24px;animation:none;border-color:#555;" onclick="showChapterSelect()">チャプター選択</button>
+    <div class="title-copy">© 2026 BAR EORNA</div>
+  </div>
+</div>
+
+<div id="chapterScreen" class="chapter-screen" style="display:none;">
+  <div class="hdr">チャプター選択</div>
+  <div class="chapter-list" id="chapterList"></div>
+</div>
+
+<div id="gameScreen" class="game-wrap" style="display:none;">
+  <div class="game-titlebar" id="gameTitleBar">BAR EORNA いつか帰る場所</div>
+  <div class="game-main">
+    <div class="char-area"><img id="charImg" class="char-img" src="" alt=""></div>
+    <div class="side-area">
+      <div class="memo-box">
+        <div class="memo-title">ー捜査メモー</div>
+        <div class="memo-body" id="memoBody"></div>
+      </div>
+      <div class="cmd-box">
+        <div class="cmd-title">ーコマンドー</div>
+        <ul class="cmd-list" id="cmdList"></ul>
+      </div>
+    </div>
+  </div>
+  <div class="text-area" id="textArea"></div>
+  <div class="next-area">
+    <span class="progress" id="progressTxt"></span>
+    <button class="next-btn" id="nextBtn" onclick="onNext()" disabled>つぎへ ▶</button>
+  </div>
+</div>
+
+<div id="endingScreen" class="ending-wrap" style="display:none;">
+  <div class="ending-hdr" id="endingHdr"></div>
+  <div class="ending-body" id="endingBody"></div>
+  <div class="ending-btns">
+    <button class="ending-btn" onclick="showChapterSelect()">チャプター選択</button>
+    <button class="ending-btn" onclick="resetGame()">タイトルへ</button>
+  </div>
+</div>
+
+<div id="certScreen" class="cert-wrap" style="display:none;">
+  <div class="cert-hdr">【 全シリーズ完結 】</div>
+  <div class="cert-body">
+    <div class="cert-title">BAR EORNAミステリーシリーズ<br>全話クリア達成<br>ありがとうございました</div>
+    <div style="font-size:clamp(9px,2.3vw,12px);color:#ffcc88;line-height:2.4;margin-bottom:16px;">
+      木村さんは長い旅に出ています。<br>
+      津守・永田・木村のお兄さん、<br>
+      そしてお客様たちが<br>
+      EORNAを守り続けています。<br><br>
+      このゲームは<br>
+      お客様に喜んでいただくために<br>
+      作られました。<br><br>
+      木村さん、<br>
+      EORNAはここにあります。
+    </div>
+    <hr class="cert-hr">
+    <div class="cert-coupon">
+      <div class="cert-coupon-title">★ 特典クーポン ★</div>
+      <div class="cert-coupon-body">ビール ハーフパイント<br>1杯 無料</div>
+      <div class="cert-coupon-code">ありがとう</div>
+      <div class="cert-coupon-note">BAR EORNA（新宿三丁目）にて<br>この画面をスタッフにご提示ください<br>有効期限：無期限</div>
+    </div>
+    <hr class="cert-hr">
+    <button class="cert-btn" onclick="resetGame()">タイトルへ戻る</button>
+  </div>
+</div>
+
+<script>
+const C = ['はなす','しらべる','といつめる','みせる','もちもの','すいり しろ'];
+const IMGS = {
+  kimura:'IMG_3555.jpeg',
+  nagata:'43FD7881-A9C3-4711-B9DE-9511A0F963C8.png',
+  nagata_out:'nagata_out.png',
+  tsumori:'52350031-F030-461B-9EC5-BE77B893323B.png',
+  tsumori_return:'tsumori%20return.png',
+  macky:'macky.png',
+  kobatch:'kobatch.png',
+  nishinishi:'nishinishi.png',
+  brother:'kimura%20brother.png',
+  akiaki:'akiaki.jpeg',
+  fukufuku:'fukufuku.png',
+  kuroki:'kuroki.jpeg',
+  tommy:'tommy.png',
+};
+
+const chapters = [
+// ══════════════════════════════
+// 第1章「のれん分け」
+// ══════════════════════════════
+{
+  title:'第1章「のれん分け」',
+  scenes:[
+    {
+      img:IMGS.tsumori,
+      memo:'木村さんが旅に出て3年\nEORNAは続いている',
+      text:[
+        {s:'津守',t:'木村さんが長い旅に出て、3年が経った。'},
+        {s:'津守',t:'「この店はお前に任せる。若い奴を使っても良いし、あとは任せたぞ」'},
+        {s:'津守',t:'あの言葉を、今でも覚えている。'},
+        {s:'津守',t:'（俺は鑑定士なのに…）',type:'silent'},
+      ],
+      cmds:C, correct:1,
+      correctText:[
+        {s:'津守',t:'カウンターを見渡した。アキアキが仕込みをしている。'},
+        {s:'津守',t:'木村のお兄さんから今朝、連絡が来た。'},
+        {s:'木村の兄',t:'「今夜、みんなを集めてほしい。津守さん、大切な日だから」'},
+        {s:'津守',t:'今日は木村さんがEORNAを始めた日だ。'},
+        {s:'津守',t:'【今日は特別な夜だ。】',type:'warm'},
+      ],
+      wrongText:'まず店内を調べよう。',
+      item:'anniversary',
+    },
+    {
+      img:IMGS.akiaki,
+      memo:'アキアキが準備中\n西麻布から来た',
+      text:[
+        {s:'津守',t:'「アキアキ、今日は来てくれてありがとう」'},
+        {s:'アキアキ',t:'「西麻布のランチが終わってすぐ来ました。料理長も今日は特別です」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'津守',t:'「木村さんのこと、覚えているか」'},
+        {s:'アキアキ',t:'「もちろんです。あの人がいなかったら、私は西麻布にいなかった」'},
+        {s:'アキアキ',t:'「「バカ野郎。明日から来い」って言われた時、本当に嬉しかった」'},
+        {s:'アキアキ',t:'「あの言葉が、今の私を作ったんです」',type:'warm'},
+        {s:'津守',t:'（木村さん。聞こえていますか。）',type:'silent'},
+      ],
+      wrongText:'アキアキに話しかけよう。',
+    },
+  ],
+  ending:{
+    title:'第1章　クリア',
+    body:`今日は木村さんがEORNAを始めた日。<br>津守とアキアキが特別な夜の準備をしている。<br>木村のお兄さんが「みんなを集めてほしい」と言った。<hr class="ending-hr">第2章では懐かしい顔が集まってくる。`,
+  }
+},
+// ══════════════════════════════
+// 第2章「帰還」
+// ══════════════════════════════
+{
+  title:'第2章「帰還」',
+  scenes:[
+    {
+      img:IMGS.nagata_out,
+      memo:'ワカメが来た\nギネスを持って',
+      text:[
+        {s:'津守',t:'EORNAのドアが開いた。'},
+        {s:'ワカメ',t:'「よう、津守さん。邪魔するぞ」'},
+        {s:'津守',t:'ギネスを持っていた。笑っていた。'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'津守',t:'「ワカメ、来たか」'},
+        {s:'ワカメ',t:'「木村さんの日だろ。来ないわけにいかないよ」'},
+        {s:'津守',t:'「お前…変わったな」'},
+        {s:'ワカメ',t:'「変わってないよ。ただ…EORNAが恋しかっただけだ」'},
+        {s:'アキアキ',t:'「ワカメさん、ボムどうぞ」'},
+        {s:'ワカメ',t:'「ありがとよ、アキアキちゃん」',type:'warm'},
+      ],
+      wrongText:'ワカメに話しかけよう。',
+    },
+    {
+      img:IMGS.macky,
+      memo:'マッキーも来た\nいつも通り',
+      text:[
+        {s:'マッキー',t:'「津守さーん！来ましたよ！」'},
+        {s:'津守',t:'「マッキー、騒がしいぞ」'},
+        {s:'マッキー',t:'「だってこんな日、テンション上がるじゃないっすか！」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'マッキー',t:'「木村さんさ、俺の壺を本物だって言ってくれたんっすよ」'},
+        {s:'津守',t:'「贋作だったがな」'},
+        {s:'マッキー',t:'「えっ！？」'},
+        {s:'津守',t:'「でも木村さんは「マッキーの目は本物だ」と言っていた」'},
+        {s:'マッキー',t:'「…泣けるっすそれ」',type:'warm'},
+      ],
+      wrongText:'マッキーに話しかけよう。',
+    },
+    {
+      img:IMGS.kobatch,
+      memo:'コバッチも来た',
+      text:[
+        {s:'コバッチ',t:'「津守さん、今日は来られて良かった」'},
+        {s:'津守',t:'「コバッチ、遠くから来てくれたな」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'コバッチ',t:'「木村くんが最初にEORNAに来た時から知ってるからね」'},
+        {s:'コバッチ',t:'「あの頃は小さな店だったけど、目が輝いてた」'},
+        {s:'コバッチ',t:'「今もその目のままだよ。あの人は」',type:'warm'},
+        {s:'津守',t:'（木村さん。みんながここにいます。）',type:'silent'},
+      ],
+      wrongText:'コバッチに話しかけよう。',
+    },
+  ],
+  ending:{
+    title:'第2章　クリア',
+    body:`ワカメが帰ってきた。マッキーが来た。コバッチが来た。<br>みんな木村さんのことを覚えていた。<hr class="ending-hr">第3章ではさらに懐かしい顔が揃う。`,
+  }
+},
+// ══════════════════════════════
+// 第3章「全員集合」
+// ══════════════════════════════
+{
+  title:'第3章「全員集合」',
+  scenes:[
+    {
+      img:IMGS.kuroki,
+      memo:'黒木さん登場\n売れないプロレスラー',
+      text:[
+        {s:'黒木',t:'「津守さん！俺も来ましたよ！」'},
+        {s:'津守',t:'「黒木か。今日は試合はないのか」'},
+        {s:'黒木',t:'「木村さんの日に試合なんか入れませんよ！」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'黒木',t:'「木村さんにね、言われたんですよ」'},
+        {s:'津守',t:'「何と？」'},
+        {s:'黒木',t:'「「売れなくてもリングに立ち続けろ。それがお前の本物だ」って」'},
+        {s:'黒木',t:'「だから今も続けてます。まだ売れてないけど！」',type:'warm'},
+        {s:'津守',t:'「木村さんらしい言葉だ」'},
+      ],
+      wrongText:'黒木に話しかけよう。',
+    },
+    {
+      img:IMGS.tommy,
+      memo:'トミー登場\nお坊さん・CD持参',
+      text:[
+        {s:'トミー',t:'「みなさん、今日は良い日ですねえ」'},
+        {s:'津守',t:'「トミー、またCDを持ってきたのか」'},
+        {s:'トミー',t:'「もちろんです。木村さんが好きだった曲です」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'トミー',t:'「木村さんにね、言われたんですよ。「お坊さんがバーにいる意味がある」って」'},
+        {s:'津守',t:'「どういう意味だ」'},
+        {s:'トミー',t:'「「人は誰でも、迷った時にEORNAに来る。その時お前がいれば、話せる」って」'},
+        {s:'アキアキ',t:'「木村さん…深い」',type:'warm'},
+        {s:'トミー',t:'「僕も最初は意味がわからなかったけど、今はわかります」'},
+      ],
+      wrongText:'トミーに話しかけよう。',
+    },
+    {
+      img:IMGS.fukufuku,
+      memo:'ふくふく登場\nEORNAグループ全権',
+      text:[
+        {s:'ふくふく',t:'「津守さん、お邪魔します」'},
+        {s:'津守',t:'「ふくふくさん、来てくれたか」'},
+        {s:'ふくふく',t:'「木村副社長から、今日は必ず行けと言われていました」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'ふくふく',t:'「木村さんは世界中を旅しながら、いつもEORNAの話をします」'},
+        {s:'津守',t:'「そうか」'},
+        {s:'ふくふく',t:'「「EORNAには俺が信用できる人間がいる」と言っていました」'},
+        {s:'ふくふく',t:'「その言葉、本当だと思います」',type:'warm'},
+      ],
+      wrongText:'ふくふくに話しかけよう。',
+    },
+  ],
+  ending:{
+    title:'第3章　クリア',
+    body:`黒木・トミー・ふくふくが集まった。<br>みんな木村さんの言葉を持っていた。<hr class="ending-hr">第4章では木村のお兄さんが来る。`,
+  }
+},
+// ══════════════════════════════
+// 第4章「兄の言葉」
+// ══════════════════════════════
+{
+  title:'第4章「兄の言葉」',
+  scenes:[
+    {
+      img:IMGS.brother,
+      memo:'木村の兄が来た\n大切なものを持って',
+      text:[
+        {s:'木村の兄',t:'「津守さん、遅くなった」'},
+        {s:'津守',t:'「来てくれてありがとうございます」'},
+        {s:'木村の兄',t:'「弟から預かってきた。みんなに渡してくれと言っていた」'},
+      ],
+      cmds:C, correct:3,
+      correctText:[
+        {s:'木村の兄',t:'封筒を取り出した。'},
+        {s:'木村の兄',t:'「弟の手紙だ。今夜、みんなで読んでほしいと」'},
+        {s:'津守',t:'「…木村さんから」'},
+        {s:'木村の兄',t:'「旅先から書いたそうだ。元気にしていると言っていた」'},
+        {s:'津守',t:'【木村さんからの手紙。】',type:'warm'},
+      ],
+      wrongText:'手紙を見せてもらおう。',
+      item:'letter',
+    },
+    {
+      img:IMGS.brother,
+      memo:'手紙を読む\n木村さんの言葉',
+      text:[
+        {s:'津守',t:'全員が静かになった。津守が手紙を読んだ。'},
+      ],
+      cmds:C, correct:1,
+      correctText:[
+        {s:'木村',t:'「みんなへ。元気にしているか。俺は旅の途中だ」',type:'warm'},
+        {s:'木村',t:'「EORNAを作った時、こんなに多くの人が集まるとは思わなかった」',type:'warm'},
+        {s:'木村',t:'「津守、ありがとう。店を守ってくれて。俺鑑定士に頼みすぎたな」',type:'warm'},
+        {s:'木村',t:'「ワカメ、お前はやっぱりEORNAが好きなんだろ。正直に生きろ」',type:'warm'},
+        {s:'木村',t:'「みんな、いつかまた一緒にボムを飲もう。木村より」',type:'warm'},
+        {s:'津守',t:'誰も何も言わなかった。'},
+      ],
+      wrongText:'手紙を調べよう。',
+      item:'letter_read',
+    },
+  ],
+  ending:{
+    title:'第4章　クリア',
+    body:`木村さんからの手紙が読まれた。<br>「津守、ありがとう。俺鑑定士に頼みすぎたな」<br>「いつかまた一緒にボムを飲もう」<hr class="ending-hr">第5章、にしにしが現れる。`,
+  }
+},
+// ══════════════════════════════
+// 第5章「にしにし来店」
+// ══════════════════════════════
+{
+  title:'第5章「にしにし来店」',
+  scenes:[
+    {
+      img:IMGS.nishinishi,
+      memo:'静寂の中\nドアが開く',
+      text:[
+        {s:'津守',t:'手紙を読み終えた後、しばらく静かだった。'},
+        {s:'津守',t:'その時、EORNAのドアが静かに開いた。'},
+        {s:'ワカメ',t:'「…にしにしさん」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'にしにし',t:'「やあ。邪魔するよ」'},
+        {s:'津守',t:'「…何しに来た」'},
+        {s:'にしにし',t:'「ギャルを連れてきた。いい子だよ」'},
+        {s:'にしにし',t:'「それと…木村くんの日だろ。頑張れよ、って言いに来た」'},
+        {s:'津守',t:'「…それだけか」'},
+        {s:'にしにし',t:'「それだけだ」',type:'twist'},
+      ],
+      wrongText:'にしにしに話しかけよう。',
+    },
+    {
+      img:IMGS.nishinishi,
+      memo:'にしにしの本音\n改心はしていない',
+      text:[
+        {s:'津守',t:'「捕まるぞ、いつか」'},
+        {s:'にしにし',t:'「そうかもな。でも今日じゃない」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'津守',t:'「木村さんのこと、どう思っている」'},
+        {s:'にしにし',t:'「…面白い男だと思ってたよ。ずっと」'},
+        {s:'にしにし',t:'「だから長く関わった。それだけだ」'},
+        {s:'にしにし',t:'「じゃあな。ギャルが待ってる」'},
+        {s:'津守',t:'にしにしはギャルと一緒に出て行った。'},
+        {s:'ワカメ',t:'「…相変わらずっすね」',type:'warm'},
+      ],
+      wrongText:'にしにしを問い詰めよう。',
+    },
+  ],
+  ending:{
+    title:'第5章　クリア',
+    body:`にしにしがギャルと来て「頑張れよ」と言って去った。<br>改心はしていない。でも来た。<br>それがにしにしだ。<hr class="ending-hr">第6章、全員で乾杯。`,
+  }
+},
+// ══════════════════════════════
+// 第6章「ボムの夜」
+// ══════════════════════════════
+{
+  title:'第6章「ボムの夜」',
+  scenes:[
+    {
+      img:IMGS.tsumori_return,
+      memo:'全員が揃った\nEORNAの夜',
+      text:[
+        {s:'津守',t:'EORNAに全員が揃った。'},
+        {s:'津守',t:'ワカメ・アキアキ・マッキー・コバッチ・黒木・トミー・ふくふく・木村の兄。'},
+        {s:'津守',t:'みんながカウンターを囲んでいた。'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'木村の兄',t:'「津守さん、一言どうぞ」'},
+        {s:'津守',t:'「…俺、鑑定士なんだけどな」'},
+        {s:'全員',t:'「「笑」」',type:'warm'},
+        {s:'津守',t:'「でも…木村さんに任せてもらえて、良かった」'},
+        {s:'津守',t:'「みんながいるから、EORNAは続いている」'},
+      ],
+      wrongText:'津守に話しかけよう。',
+    },
+    {
+      img:IMGS.akiaki,
+      memo:'アキアキがボムを用意\n全員分',
+      text:[
+        {s:'アキアキ',t:'「みなさん、ボムを用意しました」'},
+        {s:'アキアキ',t:'「全員分です」'},
+      ],
+      cmds:C, correct:3,
+      correctText:[
+        {s:'津守',t:'アキアキがギネスを並べた。'},
+        {s:'津守',t:'ワカメがショットグラスを並べた。'},
+        {s:'黒木',t:'「俺もやっていいっすか？」'},
+        {s:'津守',t:'「全員でやる」'},
+        {s:'木村の兄',t:'「木村に、乾杯」'},
+        {s:'全員',t:'「乾杯」',type:'gold'},
+        {s:'津守',t:'全員がボムを飲んだ。',type:'warm'},
+        {s:'津守',t:'EORNAに笑い声が響いた。',type:'warm'},
+      ],
+      wrongText:'ボムを用意しよう。',
+      item:'kanpai',
+    },
+  ],
+  ending:{
+    title:'第6章　クリア',
+    body:`全員でボムを飲んだ。<br>EORNAに笑い声が響いた。<hr class="ending-hr">第7章、津守が一人残る。`,
+  }
+},
+// ══════════════════════════════
+// 第7章「閉店後」
+// ══════════════════════════════
+{
+  title:'第7章「閉店後」',
+  scenes:[
+    {
+      img:IMGS.tsumori,
+      memo:'閉店後\n津守が一人カウンターに',
+      text:[
+        {s:'津守',t:'みんなが帰った後、津守は一人カウンターに残った。'},
+        {s:'津守',t:'グラスを磨きながら、木村さんのことを考えた。'},
+      ],
+      cmds:C, correct:1,
+      correctText:[
+        {s:'津守',t:'カウンターを見渡した。'},
+        {s:'津守',t:'ここに木村さんが立っていた。'},
+        {s:'津守',t:'ここでワカメがグラスを磨いていた。'},
+        {s:'津守',t:'ここでアキアキが初めてボムを飲んだ。'},
+        {s:'津守',t:'（全部、ここにある。）',type:'silent'},
+      ],
+      wrongText:'カウンターを調べよう。',
+    },
+    {
+      img:IMGS.tsumori,
+      memo:'津守の決意\nEORNAを守る',
+      text:[
+        {s:'津守',t:'木村さんからの手紙の最後の一文を思い出した。'},
+        {s:'津守',t:'「いつかまた一緒にボムを飲もう」'},
+      ],
+      cmds:C, correct:5,
+      correctText:[
+        {s:'津守',t:'整理しよう。俺は鑑定士だ。'},
+        {s:'津守',t:'でも今は、EORNAのオーナーだ。'},
+        {s:'津守',t:'木村さんが戻る場所を、守り続ける。'},
+        {s:'津守',t:'それが俺にできることだ。'},
+        {s:'津守',t:'（木村さん。急がなくていい。）',type:'silent'},
+        {s:'津守',t:'（EORNAはここにある。）',type:'warm'},
+      ],
+      wrongText:'「すいり しろ」で考えをまとめよう。',
+      item:'decision',
+    },
+  ],
+  ending:{
+    title:'第7章　クリア',
+    body:`津守が一人、カウンターに残った。<br>「いつかまた一緒にボムを飲もう」<br>木村さんが戻る場所を守り続ける。<hr class="ending-hr">最終章。`,
+  }
+},
+// ══════════════════════════════
+// 第8章「いつか帰る場所」
+// ══════════════════════════════
+{
+  title:'第8章「いつか帰る場所」',
+  scenes:[
+    {
+      img:IMGS.tsumori,
+      memo:'翌朝\nEORNAの開店準備',
+      text:[
+        {s:'津守',t:'翌朝。津守はEORNAの開店準備をしていた。'},
+        {s:'津守',t:'アキアキが来た。ワカメが来た。'},
+        {s:'津守',t:'いつもの朝だ。'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'アキアキ',t:'「津守さん、今日も開けますね」'},
+        {s:'津守',t:'「ああ。毎日開ける。木村さんが帰ってきた時、開いていなかったら困る」'},
+        {s:'ワカメ',t:'「いいっすね、それ」'},
+        {s:'アキアキ',t:'「私も毎日来ます」'},
+        {s:'津守',t:'「俺鑑定士なのに、毎日バーにいる」',type:'warm'},
+        {s:'アキアキ',t:'「津守さん、それEORNAに来るたびに言いますよね」',type:'warm'},
+        {s:'ワカメ',t:'「笑」',type:'warm'},
+      ],
+      wrongText:'津守に話しかけよう。',
+    },
+    {
+      img:IMGS.tsumori_return,
+      memo:'EORNAの扉が開く\n今日も客が来る',
+      text:[
+        {s:'津守',t:'EORNAの扉を開けた。'},
+        {s:'津守',t:'新宿三丁目に、朝の光が差し込んだ。'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'津守',t:'「木村さん。EORNAはここにあります」'},
+        {s:'津守',t:'「津守・永田・木村のお兄さん、そしてお客様たちが守っています」'},
+        {s:'津守',t:'「急がなくていい。でも…早く帰ってきてください」'},
+        {s:'アキアキ',t:'「津守さん、最初のお客様です」'},
+        {s:'津守',t:'「いらっしゃいませ」'},
+        {s:'津守',t:'今日も、EORNAは開いている。',type:'warm'},
+      ],
+      wrongText:'津守に話しかけよう。',
+      ending:true,
+    },
+  ],
+  ending:{
+    title:'最終話　完結\nBAR EORNAミステリーシリーズ',
+    body:`<span class="em">全シリーズ完結</span><hr class="ending-hr">木村さんは長い旅に出ています。<br>津守・永田・木村のお兄さん、<br>そしてお客様たちがEORNAを守っています。<hr class="ending-hr"><span class="em4">「木村さん。EORNAはここにあります」</span><hr class="ending-hr">このゲームは、お客様に喜んでいただくために作られました。<br><br>ご来店いただいた全てのお客様に、ありがとうございます。<hr class="ending-hr"><span class="em2">BAR EORNA 新宿三丁目</span><br><span class="em2">今日も開いています。</span>`,
+    isTrue:true,
+  }
+},
+];
+
+let cleared=[], currentChapter=0, sceneIdx=0, phase='input', items=new Set(), wrongCount=0;
+
+function showChapterSelect(){
+  ['titleScreen','gameScreen','endingScreen','certScreen'].forEach(id=>{
+    document.getElementById(id).style.display='none';
+  });
+  document.getElementById('exitBtn').style.display='none';
+  document.getElementById('chapterScreen').style.display='block';
+  const list=document.getElementById('chapterList');
+  list.innerHTML='';
+  chapters.forEach((ch,i)=>{
+    const isCleared=cleared.includes(i);
+    const isLocked=i>0&&!cleared.includes(i-1);
+    const div=document.createElement('div');
+    div.className='chapter-item'+(isCleared?' cleared':'')+(isLocked?' locked':'');
+    div.innerHTML=`<span class="chapter-num">${String(i+1).padStart(2,'0')}</span><span class="chapter-title">${ch.title}${isCleared?' ✓':''}</span>`;
+    if(!isLocked) div.onclick=()=>startChapter(i);
+    list.appendChild(div);
+  });
+}
+
+function startChapter(idx){
+  currentChapter=idx; sceneIdx=0; phase='input'; items.clear(); wrongCount=0;
+  document.getElementById('chapterScreen').style.display='none';
+  document.getElementById('gameScreen').style.display='block';
+  document.getElementById('exitBtn').style.display='block';
+  document.getElementById('gameTitleBar').textContent=chapters[idx].title;
+  renderScene();
+}
+
+function renderScene(){
+  const s=chapters[currentChapter].scenes[sceneIdx];
+  document.getElementById('charImg').src=s.img;
+  document.getElementById('memoBody').innerHTML=s.memo.replace(/\n/g,'<br>');
+  const ul=document.getElementById('cmdList');
+  ul.innerHTML='';
+  s.cmds.forEach((label,i)=>{
+    const li=document.createElement('li');
+    li.textContent=label;
+    li.onclick=()=>{ if(phase==='input') doCmd(i); };
+    ul.appendChild(li);
+  });
+  showTexts(s.text);
+  document.getElementById('nextBtn').disabled=true;
+  document.getElementById('progressTxt').textContent=`手がかり ${items.size}`;
+  phase='input';
+}
+
+function doCmd(idx){
+  const s=chapters[currentChapter].scenes[sceneIdx];
+  const lis=document.querySelectorAll('.cmd-list li');
+  lis.forEach(l=>l.classList.remove('selected'));
+  lis[idx].classList.add('selected');
+  if(idx===s.correct){
+    phase='result';
+    if(s.item) items.add(s.item);
+    document.getElementById('progressTxt').textContent=`手がかり ${items.size}`;
+    showTexts([...s.text,...s.correctText]);
+    document.getElementById('nextBtn').disabled=false;
+    lis.forEach(l=>{ l.onclick=null; });
+  } else {
+    wrongCount++;
+    showTexts([...s.text,{s:'',t:s.wrongText,type:'wrong'}]);
+    if(wrongCount>=2){
+      const area=document.getElementById('textArea');
+      const d=document.createElement('div');
+      d.className='text-line hint';
+      d.textContent='ヒント：「'+s.cmds[s.correct]+'」を試してみよう';
+      area.appendChild(d);
+    }
+  }
+}
+
+function onNext(){
+  const ch=chapters[currentChapter];
+  const s=ch.scenes[sceneIdx];
+  if(s.ending){ showEnding(ch); return; }
+  sceneIdx++; wrongCount=0;
+  if(sceneIdx>=ch.scenes.length){ showEnding(ch); return; }
+  renderScene();
+}
+
+function showTexts(lines){
+  const area=document.getElementById('textArea');
+  area.innerHTML='';
+  lines.forEach(l=>{
+    const d=document.createElement('div');
+    d.className='text-line'+(l.type?' '+l.type:'');
+    if(l.s==='全員') d.innerHTML=`<span class="speaker">全員：</span>${l.t}`;
+    else if(l.s) d.innerHTML=`<span class="speaker">${l.s}：</span>${l.t}`;
+    else d.textContent=l.t;
+    area.appendChild(d);
+  });
+}
+
+function showEnding(ch){
+  document.getElementById('gameScreen').style.display='none';
+  document.getElementById('exitBtn').style.display='none';
+  if(!cleared.includes(currentChapter)) cleared.push(currentChapter);
+  if(ch.ending.isTrue && cleared.length>=8){
+    document.getElementById('certScreen').style.display='block';
+    return;
+  }
+  document.getElementById('endingScreen').style.display='block';
+  document.getElementById('endingHdr').textContent=ch.ending.title;
+  let body=ch.ending.body;
+  if(cleared.length>=8) body+=`<hr class="ending-hr"><button style="display:block;margin:8px auto;background:#0a0800;border:1px dashed #ffcc88;color:#ffcc88;font-family:'DotGothic16',monospace;font-size:12px;padding:8px 20px;cursor:pointer;width:90%;" onclick="document.getElementById('endingScreen').style.display='none';document.getElementById('certScreen').style.display='block';">★ 全シリーズ完結証明書を見る ★</button>`;
+  document.getElementById('endingBody').innerHTML=body;
+}
+
+function resetGame(){
+  ['endingScreen','certScreen','chapterScreen'].forEach(id=>{
+    document.getElementById(id).style.display='none';
+  });
+  document.getElementById('titleScreen').style.display='block';
+}
+</script>
+</body>
+</html>
