@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>BAR EORNA 夜襲</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'DotGothic16','MS Gothic',monospace;padding:8px;}
+.exit-btn{position:fixed;top:8px;right:8px;z-index:999;background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:10px;padding:4px 8px;cursor:pointer;letter-spacing:1px;text-decoration:none;display:none;}
+.exit-btn:active{background:#fff;color:#000;}
+.title-screen{width:100%;max-width:500px;background:#000;border:2px solid #fff;text-align:center;}
+.hdr{background:#fff;color:#000;font-size:clamp(10px,3vw,14px);padding:4px 8px;letter-spacing:1px;}
+.title-body{padding:32px 20px;}
+.title-logo{font-size:clamp(8px,2vw,11px);color:#aaa;line-height:1.8;margin-bottom:16px;}
+.title-main{font-size:clamp(16px,5vw,26px);color:#fff;letter-spacing:2px;line-height:1.6;margin-bottom:16px;}
+.title-sub{font-size:clamp(10px,2.5vw,13px);color:#aaa;letter-spacing:2px;margin-bottom:28px;}
+.start-btn{background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(12px,3.5vw,16px);padding:12px 36px;cursor:pointer;letter-spacing:3px;animation:bb 1.5s ease infinite;display:block;margin:0 auto 12px;}
+.start-btn:active{background:#fff;color:#000;}
+@keyframes bb{0%,100%{border-color:#fff;}50%{border-color:#555;}}
+.title-copy{font-size:10px;color:#444;margin-top:20px;}
+.chapter-screen{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
+.chapter-list{padding:16px;}
+.chapter-item{display:flex;align-items:center;gap:10px;padding:10px 8px;border-bottom:1px solid #222;cursor:pointer;}
+.chapter-item:active{background:#111;}
+.chapter-item.locked{opacity:0.3;cursor:default;}
+.chapter-num{font-size:11px;color:#555;letter-spacing:1px;min-width:40px;}
+.chapter-title{font-size:clamp(10px,2.8vw,13px);color:#fff;}
+.chapter-item.cleared .chapter-title{color:#aaffaa;}
+.chapter-item.cleared .chapter-num{color:#aaffaa;}
+.game-wrap{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
+.game-titlebar{background:#fff;color:#000;font-size:clamp(9px,2.5vw,13px);padding:3px 8px;letter-spacing:1px;}
+.game-main{display:flex;background:#000;}
+.char-area{width:66%;border-right:1px solid #fff;}
+.char-img{width:100%;display:block;image-rendering:pixelated;}
+.side-area{width:34%;display:flex;flex-direction:column;}
+.memo-box{border-bottom:1px solid #fff;padding:6px 8px;flex:1;}
+.memo-title{font-size:clamp(8px,2vw,11px);color:#fff;letter-spacing:1px;border-bottom:1px solid #555;padding-bottom:3px;margin-bottom:5px;}
+.memo-body{font-size:clamp(7px,1.8vw,10px);color:#ccc;line-height:1.9;word-break:keep-all;overflow-wrap:break-word;}
+.cmd-box{padding:6px 8px;}
+.cmd-title{font-size:clamp(8px,2vw,11px);color:#fff;letter-spacing:1px;border-bottom:1px solid #555;padding-bottom:3px;margin-bottom:5px;}
+.cmd-list{list-style:none;}
+.cmd-list li{font-size:clamp(7px,1.8vw,11px);color:#aaa;line-height:2.2;padding:0 2px;cursor:pointer;}
+.cmd-list li:active{color:#fff;background:#111;}
+.cmd-list li.selected{color:#ffff00;}
+.cmd-list li.selected::before{content:'▶ ';}
+.text-area{border-top:2px solid #fff;padding:8px 10px;min-height:90px;background:#000;}
+.text-line{font-size:clamp(9px,2.5vw,13px);color:#fff;line-height:1.9;word-break:keep-all;overflow-wrap:break-word;}
+.text-line .speaker{color:#ffff00;}
+.text-line.wrong{color:#ff6666;}
+.text-line.ok{color:#aaffaa;}
+.text-line.twist{color:#ff88ff;}
+.text-line.hint{color:#88aaff;}
+.text-line.silent{color:#777;font-style:italic;}
+.text-line.danger{color:#ff4444;}
+.next-area{border-top:1px solid #333;display:flex;justify-content:space-between;align-items:center;padding:4px 8px;}
+.progress{font-size:10px;color:#555;letter-spacing:1px;}
+.next-btn{background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(8px,2vw,11px);padding:4px 10px;cursor:pointer;letter-spacing:1px;}
+.next-btn:active{background:#fff;color:#000;}
+.next-btn:disabled{border-color:#444;color:#444;cursor:default;}
+.ending-wrap{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
+.ending-hdr{background:#fff;color:#000;font-size:clamp(10px,3vw,14px);padding:4px 8px;letter-spacing:2px;text-align:center;}
+.ending-body{padding:20px 16px;font-size:clamp(10px,2.6vw,13px);color:#fff;line-height:2.4;word-break:keep-all;}
+.ending-body .em{color:#ffff00;}
+.ending-body .em2{color:#aaffaa;}
+.ending-body .em3{color:#ff88ff;}
+.ending-body .em4{color:#ff4444;}
+.ending-hr{border:none;border-top:1px solid #333;margin:14px 0;}
+.ending-btns{display:flex;gap:8px;padding:0 16px 20px;}
+.ending-btn{flex:1;background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(9px,2.5vw,12px);padding:10px 8px;cursor:pointer;letter-spacing:1px;text-align:center;}
+.ending-btn:active{background:#fff;color:#000;}
+.cert-wrap{width:100%;max-width:500px;background:#000;border:2px solid #fff;}
+.cert-hdr{background:#fff;color:#000;font-size:clamp(10px,3vw,14px);padding:4px 8px;letter-spacing:2px;text-align:center;}
+.cert-body{padding:20px 16px;text-align:center;}
+.cert-title{font-size:clamp(12px,3.5vw,18px);color:#ffff00;letter-spacing:2px;margin-bottom:16px;line-height:1.8;}
+.cert-coupon{border:2px dashed #ffff00;padding:16px;margin:16px 0;background:#0a0a00;}
+.cert-coupon-title{font-size:clamp(10px,2.8vw,14px);color:#ffff00;margin-bottom:8px;}
+.cert-coupon-body{font-size:clamp(12px,3.5vw,18px);color:#fff;margin-bottom:8px;}
+.cert-coupon-code{font-size:clamp(14px,4vw,22px);color:#aaffaa;letter-spacing:4px;margin:8px 0;}
+.cert-coupon-note{font-size:clamp(8px,2vw,10px);color:#888;margin-top:8px;}
+.cert-hr{border:none;border-top:1px solid #333;margin:14px 0;}
+.cert-btn{display:block;margin:0 auto 8px;background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(9px,2.5vw,12px);padding:10px 28px;cursor:pointer;letter-spacing:1px;width:90%;}
+.cert-btn:active{background:#fff;color:#000;}
+</style>
+</head>
+<body>
+<a id="exitBtn" class="exit-btn" href="https://eorna.info">× 終了</a>
+
+<div id="titleScreen" class="title-screen">
+  <div class="hdr">BAR EORNA ミステリーシリーズ 第3話</div>
+  <div class="title-body">
+    <div class="title-logo">■ ■ ■ ■ ■ ■ ■ ■ ■ ■<br>新宿三丁目　深夜のバー<br>■ ■ ■ ■ ■ ■ ■ ■ ■ ■</div>
+    <div class="title-main">BAR EORNA<br>夜襲</div>
+    <div class="title-sub">〜 長老は、敵だった 〜</div>
+    <button class="start-btn" onclick="startChapter(0)">はじめから</button>
+    <button class="start-btn" style="font-size:clamp(10px,2.8vw,13px);padding:8px 24px;animation:none;border-color:#555;" onclick="showChapterSelect()">チャプター選択</button>
+    <div class="title-copy">© 2026 BAR EORNA</div>
+  </div>
+</div>
+
+<div id="chapterScreen" class="chapter-screen" style="display:none;">
+  <div class="hdr">チャプター選択</div>
+  <div class="chapter-list" id="chapterList"></div>
+</div>
+
+<div id="gameScreen" class="game-wrap" style="display:none;">
+  <div class="game-titlebar" id="gameTitleBar">BAR EORNA 夜襲</div>
+  <div class="game-main">
+    <div class="char-area"><img id="charImg" class="char-img" src="" alt=""></div>
+    <div class="side-area">
+      <div class="memo-box">
+        <div class="memo-title">ー捜査メモー</div>
+        <div class="memo-body" id="memoBody"></div>
+      </div>
+      <div class="cmd-box">
+        <div class="cmd-title">ーコマンドー</div>
+        <ul class="cmd-list" id="cmdList"></ul>
+      </div>
+    </div>
+  </div>
+  <div class="text-area" id="textArea"></div>
+  <div class="next-area">
+    <span class="progress" id="progressTxt"></span>
+    <button class="next-btn" id="nextBtn" onclick="onNext()" disabled>つぎへ ▶</button>
+  </div>
+</div>
+
+<div id="endingScreen" class="ending-wrap" style="display:none;">
+  <div class="ending-hdr" id="endingHdr"></div>
+  <div class="ending-body" id="endingBody"></div>
+  <div class="ending-btns">
+    <button class="ending-btn" onclick="showChapterSelect()">チャプター選択</button>
+    <button class="ending-btn" onclick="resetGame()">タイトルへ</button>
+  </div>
+</div>
+
+<div id="certScreen" class="cert-wrap" style="display:none;">
+  <div class="cert-hdr">【 捜査完了証明書 】</div>
+  <div class="cert-body">
+    <div class="cert-title">BAR EORNA 夜襲<br>全章クリア達成</div>
+    <div style="font-size:clamp(9px,2.3vw,12px);color:#fff;line-height:2.2;margin-bottom:16px;">
+      あなたはEORNAの最大の危機を乗り越えた。<br>
+      ワカメは去り、にしにしは今もどこかにいる。<br>
+      EORNAは今夜も開いている。
+    </div>
+    <hr class="cert-hr">
+    <div class="cert-coupon">
+      <div class="cert-coupon-title">★ 特典クーポン ★</div>
+      <div class="cert-coupon-body">ビール ハーフパイント<br>1杯 無料</div>
+      <div class="cert-coupon-code">ありがとう</div>
+      <div class="cert-coupon-note">BAR EORNA（新宿三丁目）にて<br>この画面をスタッフにご提示ください<br>有効期限：無期限</div>
+    </div>
+    <hr class="cert-hr">
+    <button class="cert-btn" onclick="resetGame()">タイトルへ戻る</button>
+  </div>
+</div>
+
+<script>
+const C = ['はなす','しらべる','といつめる','みせる','もちもの','すいり しろ'];
+const IMGS = {
+  kimura:'IMG_3555.jpeg',
+  nagata:'43FD7881-A9C3-4711-B9DE-9511A0F963C8.png',
+  tsumori:'52350031-F030-461B-9EC5-BE77B893323B.png',
+  tsumori_return:'tsumori%20return.png',
+  macky:'macky.png',
+  kobatch:'kobatch.png',
+  nishinishi:'nishinishi.png',
+  nishinishi_nagata:'nishinishi_nagata.png',
+  brother:'kimura%20brother.png',
+  akiaki:'akiaki.jpeg',
+};
+
+const chapters = [
+// ══════════════════════════════
+// 第1章「出所」
+// ══════════════════════════════
+{
+  title:'第1章「出所」',
+  scenes:[
+    {
+      img:IMGS.kimura,
+      memo:'時刻：第2話から数週間後\nワカメが出所した',
+      text:[
+        {s:'木村',t:'木村の兄から連絡が来た。'},
+        {s:'木村の兄',t:'「ワカメが出所した。行き先は不明だ」'},
+        {s:'木村',t:'（また黒川に戻るのか。それとも…）',type:'silent'},
+      ],
+      cmds:C, correct:1,
+      correctText:[
+        {s:'木村',t:'EORNAを見渡した。アキアキが静かにグラスを磨いている。'},
+        {s:'木村',t:'津守が来た。ギネスを一口飲んで言った。'},
+        {s:'津守',t:'「木村さん、ワカメのことが気になっていますか」'},
+        {s:'木村',t:'「ああ。あいつがまた動くとしたら…」'},
+        {s:'木村',t:'【手がかり①】ワカメが出所した。',type:'ok'},
+      ],
+      wrongText:'まず状況を調べよう。',
+      item:'nagata_out',
+    },
+    {
+      img:IMGS.nishinishi,
+      memo:'にしにし来店\nいつも通りの長老',
+      text:[
+        {s:'木村',t:'その夜、にしにしが来た。いつも通りシャンパンを頼んだ。'},
+        {s:'にしにし',t:'「木村くん、ワカメが出所したそうだね」'},
+        {s:'にしにし',t:'「気をつけなさい。黒川はまだ動いているよ」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'木村',t:'「にしにしさん、何か知っていますか」'},
+        {s:'にしにし',t:'「噂だけどね。黒川に新しい大幹部が現れたという話だ」'},
+        {s:'にしにし',t:'「ワカメを使って、また動くかもしれない」'},
+        {s:'木村',t:'（にしにしは信頼できる。いつも的確な情報をくれる。）',type:'silent'},
+      ],
+      wrongText:'にしにしに話しかけよう。',
+    },
+  ],
+  ending:{
+    title:'第1章　クリア',
+    body:`ワカメが出所した。<br>にしにしは「黒川に新しい大幹部が現れた」と警告した。<br>木村はにしにしを信頼していた。<hr class="ending-hr">第2章では不審な動きが始まる。`,
+  }
+},
+// ══════════════════════════════
+// 第2章「不審な影」
+// ══════════════════════════════
+{
+  title:'第2章「不審な影」',
+  scenes:[
+    {
+      img:IMGS.macky,
+      memo:'マッキーが何かを見た\n様子がおかしい',
+      text:[
+        {s:'木村',t:'マッキーが珍しく早い時間に来た。顔色が悪い。'},
+        {s:'マッキー',t:'「木村さん、昨夜変なものを見たんっすよ」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'マッキー',t:'「EORNAの近くで、ワカメを見たんっす」'},
+        {s:'木村',t:'「何？」'},
+        {s:'マッキー',t:'「誰かと話してました。かなり親しそうで」'},
+        {s:'木村',t:'「その人物は誰だった」'},
+        {s:'マッキー',t:'「遠くて顔は見えなかったっす。でも…白髪の老人でした」'},
+        {s:'木村',t:'【手がかり②】ワカメが白髪の老人と接触。',type:'ok'},
+      ],
+      wrongText:'マッキーを問い詰めよう。',
+      item:'watcher',
+    },
+    {
+      img:IMGS.kobatch,
+      memo:'コバッチも目撃\n白髪の老人とは',
+      text:[
+        {s:'木村',t:'コバッチにも確認してみよう。'},
+        {s:'コバッチ',t:'「木村さん、俺も見たよ。昨夜EORNAの近くで」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'コバッチ',t:'「白髪の老人とワカメが話してた。かなり長い時間」'},
+        {s:'木村',t:'「その老人、特徴は？」'},
+        {s:'コバッチ',t:'「丸眼鏡をかけてた。どこかで見た気がするけど…」'},
+        {s:'木村',t:'（丸眼鏡の白髪の老人…）',type:'silent'},
+        {s:'木村',t:'【手がかり③】丸眼鏡の白髪老人。',type:'ok'},
+      ],
+      wrongText:'コバッチを問い詰めよう。',
+      item:'old_man',
+    },
+    {
+      img:IMGS.kimura,
+      memo:'防犯カメラを調べよう',
+      text:[{s:'木村',t:'EORNAの周辺に防犯カメラがある。確認しよう。'}],
+      cmds:C, correct:1,
+      correctText:[
+        {s:'木村',t:'近くのコンビニの防犯カメラ映像を確認した。'},
+        {s:'木村',t:'ワカメと老人が映っていた。老人は封筒を渡していた。'},
+        {s:'木村',t:'（指示書か。金か。）',type:'silent'},
+        {s:'木村',t:'老人の顔は…映像が粗くてはっきりしない。'},
+        {s:'木村',t:'【手がかり④】封筒を受け取ったワカメ。',type:'ok'},
+      ],
+      wrongText:'防犯カメラを調べよう。',
+      item:'camera',
+    },
+  ],
+  ending:{
+    title:'第2章　クリア',
+    body:`ワカメが白髪の老人から封筒を受け取った。<br>丸眼鏡の白髪老人…どこかで見た顔。<br>しかし映像は粗く、正体が掴めない。<hr class="ending-hr">第3章では老人の正体に迫る。`,
+  }
+},
+// ══════════════════════════════
+// 第3章「長老の正体」
+// ══════════════════════════════
+{
+  title:'第3章「長老の正体」',
+  scenes:[
+    {
+      img:IMGS.nishinishi,
+      memo:'にしにしに相談\n信頼できる長老として',
+      text:[
+        {s:'木村',t:'にしにしに相談しよう。骨董の世界を知る長老だ。'},
+        {s:'木村',t:'「にしにしさん、白髪で丸眼鏡の老人に心当たりはありますか」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'にしにし',t:'「…さあ、心当たりはないね」'},
+        {s:'木村',t:'（珍しい。にしにしが知らないと言った。）',type:'silent'},
+        {s:'にしにし',t:'「でも木村くん、あまり深追いしない方がいい」'},
+        {s:'にしにし',t:'「黒川の大幹部は危険だよ。命に関わる」'},
+        {s:'木村',t:'（なぜそこまで詳しいんだ…）',type:'silent'},
+      ],
+      wrongText:'にしにしに話しかけよう。',
+    },
+    {
+      img:IMGS.brother,
+      memo:'木村の兄に連絡\n映像を見せる',
+      text:[
+        {s:'木村',t:'兄さんに防犯カメラの映像を送った。'},
+        {s:'木村の兄',t:'「画像を解析した。結果を伝える」'},
+      ],
+      cmds:C, correct:3,
+      correctText:[
+        {s:'木村',t:'解析結果の書類を受け取った。'},
+        {s:'木村の兄',t:'「この老人…黒川商会の大幹部だ」'},
+        {s:'木村',t:'「正体は？」'},
+        {s:'木村の兄',t:'「長年、正体を隠していた人物だ。本名は…」'},
+        {s:'木村の兄',t:'「にしにし。お前も知っている人物だ」',type:'twist'},
+        {s:'木村',t:'「…何？」'},
+        {s:'木村',t:'【どんでん返し①】にしにしが黒川の大幹部だった。',type:'twist'},
+      ],
+      wrongText:'兄に書類を見せよう。',
+      item:'nishinishi_identity',
+    },
+    {
+      img:IMGS.nishinishi_nagata,
+      memo:'衝撃の真実\n二人の関係',
+      text:[
+        {s:'木村',t:'（にしにしが…黒川の大幹部。）',type:'silent'},
+        {s:'木村',t:'（第1話から、第2話から、ずっとEORNAにいた。）',type:'silent'},
+        {s:'木村',t:'（あいつが俺に「気をつけろ」と言い続けていた。）',type:'silent'},
+      ],
+      cmds:C, correct:5,
+      correctText:[
+        {s:'木村',t:'整理しよう。にしにしは最初から黒川の人間だった。'},
+        {s:'木村',t:'ワカメに接触し、今度はEORNAへの夜襲を計画している。'},
+        {s:'木村',t:'「気をつけろ」という言葉は…全部芝居だったのか。'},
+        {s:'木村',t:'（あの二人が笑っている。最初から、全部仕組まれていた。）',type:'silent'},
+        {s:'木村',t:'【どんでん返し②】全ては最初から計画されていた。',type:'twist'},
+      ],
+      wrongText:'「すいり しろ」で考えをまとめよう。',
+      item:'plan_revealed',
+    },
+  ],
+  ending:{
+    title:'第3章　クリア',
+    body:`<span style="color:#ff88ff">にしにしは黒川商会の大幹部だった。</span><br>第1話から第2話まで、ずっとEORNAにいた。<br>「気をつけろ」という言葉は全部芝居だった。<hr class="ending-hr">第4章では夜襲の計画が明らかになる。`,
+  }
+},
+// ══════════════════════════════
+// 第4章「夜襲の計画」
+// ══════════════════════════════
+{
+  title:'第4章「夜襲の計画」',
+  scenes:[
+    {
+      img:IMGS.brother,
+      memo:'兄が計画書を入手\nEORNAへの夜襲',
+      text:[
+        {s:'木村の兄',t:'「木村、急ぎだ。にしにしとワカメの計画書を入手した」'},
+        {s:'木村',t:'「見せてくれ」'},
+      ],
+      cmds:C, correct:3,
+      correctText:[
+        {s:'木村の兄',t:'「今週末の深夜、EORNAに複数人で乗り込む計画だ」'},
+        {s:'木村',t:'「目的は？」'},
+        {s:'木村の兄',t:'「黒川が持つ津守さんの鑑定書の原本を取り戻す。そしてEORNAを潰す」'},
+        {s:'木村',t:'「津守の鑑定書…第1話の贋作事件の証拠だ」'},
+        {s:'木村の兄',t:'「その通り。にしにしはずっとそれを狙っていた」'},
+        {s:'木村',t:'【手がかり⑤】今週末、EORNAへの夜襲が計画されている。',type:'ok'},
+      ],
+      wrongText:'計画書を見せてもらおう。',
+      item:'night_plan',
+    },
+    {
+      img:IMGS.kimura,
+      memo:'迎え撃つ準備\n仲間を集めろ',
+      text:[
+        {s:'木村',t:'迎え撃つしかない。仲間を集めよう。'},
+        {s:'木村',t:'アキアキ・津守・兄さん。全員に連絡した。'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'アキアキ',t:'「木村さん、私も戦います」'},
+        {s:'津守',t:'「当然です。EORNAは私たちの場所ですから」'},
+        {s:'木村の兄',t:'「警察にも連絡した。ただし証拠を押さえるまで動かない」'},
+        {s:'木村',t:'「わかった。週末まで待つ」'},
+        {s:'木村',t:'（にしにし…ワカメ…来るなら来い。）',type:'silent'},
+      ],
+      wrongText:'仲間に話しかけよう。',
+    },
+  ],
+  ending:{
+    title:'第4章　クリア',
+    body:`今週末の深夜、EORNAに夜襲が来る。<br>目的は津守の鑑定書の原本と、EORNAを潰すこと。<br>木村・アキアキ・津守・兄が迎え撃つ準備をした。<hr class="ending-hr">第5章、決戦の夜が来る。`,
+  }
+},
+// ══════════════════════════════
+// 第5章「決戦の夜」
+// ══════════════════════════════
+{
+  title:'第5章「決戦の夜」',
+  scenes:[
+    {
+      img:IMGS.kimura,
+      memo:'週末深夜\nEORNAで待機中',
+      text:[
+        {s:'木村',t:'週末の深夜。EORNAは閉店後の静寂に包まれていた。'},
+        {s:'木村',t:'アキアキ・津守・兄さんが待機している。'},
+        {s:'木村',t:'午前1時。ドアが叩かれた。'},
+      ],
+      cmds:C, correct:1,
+      correctText:[
+        {s:'木村',t:'ドアの外を確認した。3人の人影。'},
+        {s:'木村',t:'先頭はワカメだった。'},
+        {s:'ワカメ',t:'「木村さん、久しぶりだな。今度こそ終わりにしよう」',type:'danger'},
+        {s:'木村',t:'「ああ。終わりにしよう」'},
+        {s:'木村',t:'ドアを開けた。'},
+      ],
+      wrongText:'外の様子を調べよう。',
+    },
+    {
+      img:IMGS.nagata,
+      memo:'ワカメが乗り込んできた\n対峙せよ',
+      text:[
+        {s:'ワカメ',t:'「邪魔するなよ、木村さん。俺はもう迷わない」'},
+        {s:'木村',t:'「お前は何度同じことを言うんだ」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'木村',t:'「ワカメ、お前の後ろにいる人間を見ろ」'},
+        {s:'ワカメ',t:'「…何？」'},
+        {s:'木村',t:'「にしにしはお前を使い捨てにするつもりだ。証拠がある」'},
+        {s:'ワカメ',t:'「嘘をつくな」'},
+        {s:'木村の兄',t:'「嘘じゃない。ワカメ、これを見ろ」'},
+        {s:'木村',t:'兄さんが書類を見せた。にしにしが警察に「ワカメを売る」と約束した密約書だ。'},
+        {s:'ワカメ',t:'「…」',type:'twist'},
+      ],
+      wrongText:'ワカメを問い詰めよう。',
+    },
+    {
+      img:IMGS.nagata,
+      memo:'ワカメが動揺\nにしにしの裏切り',
+      text:[
+        {s:'木村',t:'「にしにしはお前が逮捕されれば、証拠を全部お前に押し付けられる」'},
+        {s:'ワカメ',t:'「…にしにしさんが？」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'木村',t:'「お前はまたあいつに利用されているんだ」'},
+        {s:'ワカメ',t:'「…チッ」'},
+        {s:'木村',t:'「ワカメ。EORNAに戻る気はないか」'},
+        {s:'ワカメ',t:'「ない」'},
+        {s:'ワカメ',t:'「でも…にしにしに義理はない」'},
+        {s:'木村',t:'【転換点】ワカメが動いた。',type:'ok'},
+      ],
+      wrongText:'ワカメを問い詰めよう。',
+      item:'nagata_turns',
+    },
+  ],
+  ending:{
+    title:'第5章　クリア',
+    body:`ワカメはにしにしに裏切られていた。<br>「にしにしに義理はない」<br>ワカメが動いた。<hr class="ending-hr">第6章、にしにしを追い詰める。`,
+  }
+},
+// ══════════════════════════════
+// 第6章「大幹部の失墜」
+// ══════════════════════════════
+{
+  title:'第6章「大幹部の失墜」',
+  scenes:[
+    {
+      img:IMGS.nagata,
+      memo:'ワカメが証拠を提供\nにしにしを売る',
+      text:[
+        {s:'ワカメ',t:'「木村さん、にしにしの隠し口座の情報がある」'},
+        {s:'木村',t:'「本当か」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'ワカメ',t:'「黒川の資金はここに流れている。これで大幹部の証拠になる」'},
+        {s:'木村',t:'「なぜそれを俺に」'},
+        {s:'ワカメ',t:'「俺が間抜けだったのは認める。でも利用されたまま終わるのは嫌だ」'},
+        {s:'木村',t:'（そこだけは、変わらない奴だ。）',type:'silent'},
+        {s:'木村',t:'【手がかり⑥】にしにしの資金記録を入手。',type:'ok'},
+      ],
+      wrongText:'ワカメに話しかけよう。',
+      item:'nishinishi_account',
+    },
+    {
+      img:IMGS.brother,
+      memo:'警察が動く\nにしにしを追え',
+      text:[
+        {s:'木村の兄',t:'「証拠が揃った。警察が動く」'},
+        {s:'木村',t:'「にしにしを逮捕できるか」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'木村の兄',t:'「それが…にしにしは既に動いていた」'},
+        {s:'木村',t:'「何？」'},
+        {s:'木村の兄',t:'「資金を全て海外に移した。そして姿を消した」'},
+        {s:'木村',t:'「逃げたのか」'},
+        {s:'木村の兄',t:'「ああ。あの男は証拠を掴まれる前に逃げる準備をしていた」'},
+        {s:'木村',t:'（最初から…全部計算していたのか。）',type:'silent'},
+        {s:'木村',t:'【真相】にしにしは逃亡した。',type:'twist'},
+      ],
+      wrongText:'兄を問い詰めよう。',
+      item:'nishinishi_escape',
+    },
+  ],
+  ending:{
+    title:'第6章　クリア',
+    body:`にしにしは証拠を掴まれる前に逃亡した。<br>資金を海外に移し、姿を消した。<br><span style="color:#ff4444">大幹部は今も捕まっていない。</span><hr class="ending-hr">第7章、ワカメの最期。`,
+  }
+},
+// ══════════════════════════════
+// 第7章「ワカメの最期」
+// ══════════════════════════════
+{
+  title:'第7章「ワカメの最期」',
+  scenes:[
+    {
+      img:IMGS.nagata,
+      memo:'ワカメが逮捕される\n三度目の対峙',
+      text:[
+        {s:'木村',t:'警察がワカメを逮捕しに来た。'},
+        {s:'木村',t:'ワカメは逃げなかった。'},
+        {s:'ワカメ',t:'「木村さん、にしにしは逃げたか」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'木村',t:'「ああ。逃げた」'},
+        {s:'ワカメ',t:'「そうか。俺だけか」'},
+        {s:'ワカメ',t:'「まあ…いつものことだ」'},
+        {s:'木村',t:'「ワカメ。お前はなぜ逃げなかった」'},
+        {s:'ワカメ',t:'「…疲れた」'},
+      ],
+      wrongText:'ワカメに話しかけよう。',
+    },
+    {
+      img:IMGS.nagata,
+      memo:'ワカメの本音\n最後の言葉',
+      text:[
+        {s:'木村',t:'「疲れた、か」'},
+        {s:'ワカメ',t:'「黒川にいても、にしにしに使われるだけだった」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'木村',t:'「反省はないのか」'},
+        {s:'ワカメ',t:'「ない」'},
+        {s:'木村',t:'「EORNAのことは」'},
+        {s:'ワカメ',t:'「…」'},
+        {s:'ワカメ',t:'「アキアキちゃんのボム、美味かったか？」'},
+        {s:'木村',t:'木村は失笑した。'},
+        {s:'木村',t:'「最高だった」',type:'ok'},
+      ],
+      wrongText:'ワカメを問い詰めよう。',
+    },
+    {
+      img:IMGS.nagata,
+      memo:'ワカメ三度目の逮捕\n反省なし',
+      text:[
+        {s:'木村',t:'手錠をかけられながら、ワカメは振り返らなかった。'},
+        {s:'木村',t:'今度こそ、終わりだ。'},
+      ],
+      cmds:C, correct:5,
+      correctText:[
+        {s:'木村',t:'（ワカメは最後まで反省しなかった。）',type:'silent'},
+        {s:'木村',t:'（でも最後の瞬間、アキアキのボムを聞いてきた。）',type:'silent'},
+        {s:'木村',t:'（あいつは…ずっとEORNAが好きだったんだろう。）',type:'silent'},
+        {s:'木村',t:'（それだけは本当だったのかもしれない。）',type:'silent'},
+      ],
+      wrongText:'「すいり しろ」で考えをまとめよう。',
+    },
+  ],
+  ending:{
+    title:'第7章　クリア',
+    body:`ワカメは三度目の逮捕。反省なし。<br>「アキアキちゃんのボム、美味かったか？」<br><span style="color:#aaffaa">それだけは、本当だったのかもしれない。</span><hr class="ending-hr">最終章。EORNAの夜明け。`,
+  }
+},
+// ══════════════════════════════
+// 第8章「EORNAの夜明け」
+// ══════════════════════════════
+{
+  title:'第8章「EORNAの夜明け」',
+  scenes:[
+    {
+      img:IMGS.akiaki,
+      memo:'翌朝\nEORNAに残った人たち',
+      text:[
+        {s:'木村',t:'夜が明けた。EORNAに残ったのは木村・アキアキ・津守だった。'},
+        {s:'アキアキ',t:'「木村さん、にしにしは捕まらないんですか」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'木村',t:'「今は無理だ。でも必ずいつか」'},
+        {s:'アキアキ',t:'「…そうですね」'},
+        {s:'津守',t:'「木村さん、一つ聞いていいですか」'},
+        {s:'木村',t:'「何だ」'},
+        {s:'津守',t:'「EORNAは続けますか」'},
+        {s:'木村',t:'「当たり前だ」',type:'ok'},
+      ],
+      wrongText:'アキアキに話しかけよう。',
+    },
+    {
+      img:IMGS.tsumori_return,
+      memo:'津守の言葉\nEORNAの未来',
+      text:[
+        {s:'津守',t:'「信用できるかどうかは、目が知っている」'},
+        {s:'津守',t:'「にしにしの目は…最初から笑っていませんでした」'},
+        {s:'木村',t:'「気づかなかった」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'津守',t:'「私も気づきませんでした。だから悔しい」'},
+        {s:'木村',t:'「次は見抜く」'},
+        {s:'津守',t:'「ええ。私たちの目を、もっと鍛えましょう」'},
+        {s:'アキアキ',t:'「…私も」'},
+        {s:'木村',t:'三人でカウンターに座った。'},
+        {s:'木村',t:'夜明けのEORNAは、静かだった。'},
+      ],
+      wrongText:'津守に話しかけよう。',
+    },
+    {
+      img:IMGS.nishinishi_nagata,
+      memo:'エピローグ\n二人は今も',
+      text:[
+        {s:'木村',t:'…その後。'},
+        {s:'木村',t:'にしにしは今も捕まっていない。'},
+        {s:'木村',t:'ワカメは服役中だ。'},
+      ],
+      cmds:C, correct:1,
+      correctText:[
+        {s:'木村',t:'古い写真が一枚出てきた。'},
+        {s:'木村',t:'にしにしとワカメが並んで笑っている。'},
+        {s:'木村',t:'（これは…いつ撮った写真だ。）',type:'silent'},
+        {s:'木村',t:'（最初から、全部仕組まれていたのか。）',type:'silent'},
+        {s:'木村',t:'木村は写真をカウンターに置いた。'},
+        {s:'木村',t:'「EORNAを開けよう。今夜も客が来る」',type:'ok'},
+      ],
+      wrongText:'写真を調べよう。',
+      ending:true,
+    },
+  ],
+  ending:{
+    title:'全章クリア　完結',
+    body:`<span class="em">BAR EORNA 夜襲　完結</span><hr class="ending-hr">にしにしは今も捕まっていない。<br>ワカメは服役中。反省なし。<hr class="ending-hr"><span class="em3">あの二人が笑っている写真。</span><br>最初から、全部仕組まれていた。<hr class="ending-hr">それでもEORNAは今夜も開いている。<br><span class="em2">木村・アキアキ・津守。</span><br><span class="em2">三人の目を、誰も欺けない。</span>`,
+    isTrue:true,
+  }
+},
+];
+
+let cleared=[], currentChapter=0, sceneIdx=0, phase='input', items=new Set(), wrongCount=0;
+
+function showChapterSelect(){
+  ['titleScreen','gameScreen','endingScreen','certScreen'].forEach(id=>{
+    document.getElementById(id).style.display='none';
+  });
+  document.getElementById('exitBtn').style.display='none';
+  document.getElementById('chapterScreen').style.display='block';
+  const list=document.getElementById('chapterList');
+  list.innerHTML='';
+  chapters.forEach((ch,i)=>{
+    const isCleared=cleared.includes(i);
+    const isLocked=i>0&&!cleared.includes(i-1);
+    const div=document.createElement('div');
+    div.className='chapter-item'+(isCleared?' cleared':'')+(isLocked?' locked':'');
+    div.innerHTML=`<span class="chapter-num">${String(i+1).padStart(2,'0')}</span><span class="chapter-title">${ch.title}${isCleared?' ✓':''}</span>`;
+    if(!isLocked) div.onclick=()=>startChapter(i);
+    list.appendChild(div);
+  });
+}
+
+function startChapter(idx){
+  currentChapter=idx; sceneIdx=0; phase='input'; items.clear(); wrongCount=0;
+  document.getElementById('chapterScreen').style.display='none';
+  document.getElementById('gameScreen').style.display='block';
+  document.getElementById('exitBtn').style.display='block';
+  document.getElementById('gameTitleBar').textContent=chapters[idx].title;
+  renderScene();
+}
+
+function renderScene(){
+  const s=chapters[currentChapter].scenes[sceneIdx];
+  document.getElementById('charImg').src=s.img;
+  document.getElementById('memoBody').innerHTML=s.memo.replace(/\n/g,'<br>');
+  const ul=document.getElementById('cmdList');
+  ul.innerHTML='';
+  s.cmds.forEach((label,i)=>{
+    const li=document.createElement('li');
+    li.textContent=label;
+    li.onclick=()=>{ if(phase==='input') doCmd(i); };
+    ul.appendChild(li);
+  });
+  showTexts(s.text);
+  document.getElementById('nextBtn').disabled=true;
+  document.getElementById('progressTxt').textContent=`手がかり ${items.size}`;
+  phase='input';
+}
+
+function doCmd(idx){
+  const s=chapters[currentChapter].scenes[sceneIdx];
+  const lis=document.querySelectorAll('.cmd-list li');
+  lis.forEach(l=>l.classList.remove('selected'));
+  lis[idx].classList.add('selected');
+  if(idx===s.correct){
+    phase='result';
+    if(s.item) items.add(s.item);
+    document.getElementById('progressTxt').textContent=`手がかり ${items.size}`;
+    showTexts([...s.text,...s.correctText]);
+    document.getElementById('nextBtn').disabled=false;
+    lis.forEach(l=>{ l.onclick=null; });
+  } else {
+    wrongCount++;
+    showTexts([...s.text,{s:'',t:s.wrongText,type:'wrong'}]);
+    if(wrongCount>=2){
+      const area=document.getElementById('textArea');
+      const d=document.createElement('div');
+      d.className='text-line hint';
+      d.textContent='ヒント：「'+s.cmds[s.correct]+'」を試してみよう';
+      area.appendChild(d);
+    }
+  }
+}
+
+function onNext(){
+  const ch=chapters[currentChapter];
+  const s=ch.scenes[sceneIdx];
+  if(s.ending){ showEnding(ch); return; }
+  sceneIdx++; wrongCount=0;
+  if(sceneIdx>=ch.scenes.length){ showEnding(ch); return; }
+  renderScene();
+}
+
+function showTexts(lines){
+  const area=document.getElementById('textArea');
+  area.innerHTML='';
+  lines.forEach(l=>{
+    const d=document.createElement('div');
+    d.className='text-line'+(l.type?' '+l.type:'');
+    if(l.s) d.innerHTML=`<span class="speaker">${l.s}：</span>${l.t}`;
+    else d.textContent=l.t;
+    area.appendChild(d);
+  });
+}
+
+function showEnding(ch){
+  document.getElementById('gameScreen').style.display='none';
+  document.getElementById('exitBtn').style.display='none';
+  if(!cleared.includes(currentChapter)) cleared.push(currentChapter);
+  if(ch.ending.isTrue && cleared.length>=8){
+    document.getElementById('certScreen').style.display='block';
+    return;
+  }
+  document.getElementById('endingScreen').style.display='block';
+  document.getElementById('endingHdr').textContent=ch.ending.title;
+  let body=ch.ending.body;
+  if(cleared.length>=8) body+=`<hr class="ending-hr"><button style="display:block;margin:8px auto;background:#0a0a00;border:1px dashed #ffff00;color:#ffff00;font-family:'DotGothic16',monospace;font-size:12px;padding:8px 20px;cursor:pointer;width:90%;" onclick="document.getElementById('endingScreen').style.display='none';document.getElementById('certScreen').style.display='block';">★ 捜査完了証明書・クーポンを見る ★</button>`;
+  document.getElementById('endingBody').innerHTML=body;
+}
+
+function resetGame(){
+  ['endingScreen','certScreen','chapterScreen'].forEach(id=>{
+    document.getElementById(id).style.display='none';
+  });
+  document.getElementById('titleScreen').style.display='block';
+}
+</script>
+</body>
+</html>
