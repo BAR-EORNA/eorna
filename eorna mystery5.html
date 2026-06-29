@@ -148,19 +148,46 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
   </div>
 </div>
 
+<!-- 隠しチャプター -->
+<div id="hiddenScreen" class="cert-wrap" style="display:none;">
+  <div class="cert-hdr">【 ？ ？ ？ 】</div>
+  <div class="cert-body">
+    <div style="font-size:clamp(10px,2.8vw,14px);color:#fff;line-height:2.8;margin:20px 0;">
+      これは事件ではない。<br><br>
+      EORNAへ帰るための<br>
+      鍵だ。<br><br>
+      <span style="color:#ffcc88;">店で</span><br>
+      <span style="font-size:clamp(18px,5vw,26px);color:#ffcc88;letter-spacing:4px;">「ありがとう」</span><br>
+      <span style="color:#ffcc88;">と言ってみてください。</span><br><br>
+      <span style="color:#555;font-size:clamp(8px,2vw,11px);">きっと誰かが笑ってくれます。</span>
+    </div>
+    <hr class="cert-hr">
+    <button class="cert-btn" onclick="document.getElementById('hiddenScreen').style.display='none';document.getElementById('chapterScreen').style.display='block';">戻る</button>
+  </div>
+</div>
+
 <div id="certScreen" class="cert-wrap" style="display:none;">
   <div class="cert-hdr">【 全シリーズ完結 】</div>
   <div class="cert-body">
     <div class="cert-title">BAR EORNAミステリーシリーズ<br>全話クリア達成<br>ありがとうございました</div>
     <div style="font-size:clamp(9px,2.3vw,12px);color:#ffcc88;line-height:2.4;margin-bottom:16px;">
+      あなたの冒険は終わりました。<br>
+      でも、EORNAの物語は<br>
+      まだ終わっていません。<br><br>
       木村さんは不在ですが、<br>
       津守・永田・木村のお兄さん、<br>
       そしてお客様たちが<br>
       EORNAを守り続けています。<br><br>
-      このゲームは<br>
-      お客様に喜んでいただくために<br>
-      作られました。<br><br>
-      また皆でボムやって酔っ払いましょう！<br><br>
+      店に来て<br>
+      <span style="color:#ffcc88;font-size:clamp(14px,4vw,20px);letter-spacing:3px;">「ありがとう」</span><br>
+      と言ってください。<br>
+      きっと誰かが笑ってくれます。<br><br>
+      <div style="font-size:clamp(10px,2.8vw,14px);color:#fff;line-height:2.4;margin-bottom:16px;font-style:italic;">
+      「店は人が続けるものじゃない。<br>
+      また来たいと思ってくれる人が、<br>
+      続けてくれる。」<br>
+      <span style="font-size:clamp(9px,2vw,11px);color:#888;">─ 木村</span>
+      </div>
       <span style="font-size:clamp(16px,5vw,24px);color:#ffcc88;letter-spacing:4px;">ありがとう</span>
     </div>
     <hr class="cert-hr">
@@ -172,6 +199,16 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
         <img src="eorna%20start.png" alt="EORNAの始まり">
         <div class="photo-caption">Special thanks　ここからよくできたよね笑</div>
       </div>
+    </div>
+    <hr class="cert-hr">
+    <div style="font-size:clamp(9px,2.3vw,11px);color:#888;margin-bottom:8px;letter-spacing:1px;">─ 木村さんの日記 ─</div>
+    <div style="background:#0a0800;border:1px solid #333;padding:14px;margin-bottom:16px;font-size:clamp(9px,2.3vw,12px);color:#ffcc88;line-height:2.4;text-align:left;">
+      「店は建物じゃない。<br><br>
+      また帰って来たいと思う人がいる限り、<br>
+      EORNAはなくならない。<br><br>
+      カウンターの端に「ありがとう」と彫った。<br>
+      誰かがいつか気づいてくれればいい。<br><br>
+      ─ 木村」
     </div>
     <hr class="cert-hr">
     <div class="cert-coupon">
@@ -670,6 +707,7 @@ const chapters = [
         {s:'アキアキ',t:'「津守さん、最初のお客様です」'},
         {s:'津守',t:'「いらっしゃいませ」'},
         {s:'津守',t:'今日も、EORNAは開いている。',type:'warm'},
+        {s:'津守',t:'（カウンターの左端。空のグラスが、今日もそこにある。）',type:'silent'},
       ],
       wrongText:'津守に話しかけよう。',
       ending:true,
@@ -702,6 +740,23 @@ function showChapterSelect(){
     if(!isLocked) div.onclick=()=>startChapter(i);
     list.appendChild(div);
   });
+
+  // 全8章クリア後に隠しチャプター「？？？」を表示
+  if(cleared.length >= 8){
+    const div = document.createElement('div');
+    div.className = 'chapter-item';
+    div.style.borderColor = '#333';
+    div.innerHTML = `<span class="chapter-num" style="color:#555">？？</span><span class="chapter-title" style="color:#555;letter-spacing:3px;">？ ？ ？</span>`;
+    div.onclick = () => showHiddenChapter();
+    list.appendChild(div);
+  }
+}
+
+function showHiddenChapter(){
+  ['chapterScreen','endingScreen','certScreen'].forEach(id=>{
+    document.getElementById(id).style.display='none';
+  });
+  document.getElementById('hiddenScreen').style.display='block';
 }
 
 function startChapter(idx){
