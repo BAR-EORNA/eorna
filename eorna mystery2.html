@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>BAR EORNA 繁盛の罠</title>
+<title>BAR EORNA 夜襲</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -53,6 +53,7 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 .text-line.twist{color:#ff88ff;}
 .text-line.hint{color:#88aaff;}
 .text-line.silent{color:#777;font-style:italic;}
+.text-line.danger{color:#ff4444;}
 .next-area{border-top:1px solid #333;display:flex;justify-content:space-between;align-items:center;padding:4px 8px;}
 .progress{font-size:10px;color:#555;letter-spacing:1px;}
 .next-btn{background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(8px,2vw,11px);padding:4px 10px;cursor:pointer;letter-spacing:1px;}
@@ -64,6 +65,7 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 .ending-body .em{color:#ffff00;}
 .ending-body .em2{color:#aaffaa;}
 .ending-body .em3{color:#ff88ff;}
+.ending-body .em4{color:#ff4444;}
 .ending-hr{border:none;border-top:1px solid #333;margin:14px 0;}
 .ending-btns{display:flex;gap:8px;padding:0 16px 20px;}
 .ending-btn{flex:1;background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(9px,2.5vw,12px);padding:10px 8px;cursor:pointer;letter-spacing:1px;text-align:center;}
@@ -86,11 +88,11 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 <a id="exitBtn" class="exit-btn" href="https://eorna.info">× 終了</a>
 
 <div id="titleScreen" class="title-screen">
-  <div class="hdr">BAR EORNA ミステリーシリーズ 第2話</div>
+  <div class="hdr">BAR EORNA ミステリーシリーズ 第3話</div>
   <div class="title-body">
     <div class="title-logo">■ ■ ■ ■ ■ ■ ■ ■ ■ ■<br>新宿三丁目　深夜のバー<br>■ ■ ■ ■ ■ ■ ■ ■ ■ ■</div>
-    <div class="title-main">BAR EORNA<br>繁盛の罠</div>
-    <div class="title-sub">〜 笑顔の裏に、何かがある 〜</div>
+    <div class="title-main">BAR EORNA<br>夜襲</div>
+    <div class="title-sub">〜 長老は、敵だった 〜</div>
     <button class="start-btn" onclick="startChapter(0)">はじめから</button>
     <button class="start-btn" style="font-size:clamp(10px,2.8vw,13px);padding:8px 24px;animation:none;border-color:#555;" onclick="showChapterSelect()">チャプター選択</button>
     <div class="title-copy">© 2026 BAR EORNA</div>
@@ -103,7 +105,7 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 </div>
 
 <div id="gameScreen" class="game-wrap" style="display:none;">
-  <div class="game-titlebar" id="gameTitleBar">BAR EORNA 繁盛の罠</div>
+  <div class="game-titlebar" id="gameTitleBar">BAR EORNA 夜襲</div>
   <div class="game-main">
     <div class="char-area"><img id="charImg" class="char-img" src="" alt=""></div>
     <div class="side-area">
@@ -136,11 +138,11 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 <div id="certScreen" class="cert-wrap" style="display:none;">
   <div class="cert-hdr">【 捜査完了証明書 】</div>
   <div class="cert-body">
-    <div class="cert-title">BAR EORNA 繁盛の罠<br>全章クリア達成</div>
+    <div class="cert-title">BAR EORNA 夜襲<br>全章クリア達成</div>
     <div style="font-size:clamp(9px,2.3vw,12px);color:#fff;line-height:2.2;margin-bottom:16px;">
-      あなたはEORNAの繁盛の裏に潜む罠を解き明かした。<br>
-      アキアキ・木村・津守…<br>
-      最後にボムが全てを語った。
+      あなたはEORNAの最大の危機を乗り越えた。<br>
+      ワカメは去り、にしにしは今もどこかにいる。<br>
+      EORNAは今夜も開いている。
     </div>
     <hr class="cert-hr">
     <div class="cert-coupon">
@@ -150,7 +152,7 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
       <div class="cert-coupon-note">BAR EORNA（新宿三丁目）にて<br>この画面をスタッフにご提示ください<br>有効期限：無期限</div>
     </div>
     <hr class="cert-hr">
-    <button class="cert-btn" style="border-color:#ffff00;color:#ffff00;" onclick="window.location.href='eorna%20mystery3.html'">★ 第3話「夜襲」へ進む ★</button>
+    <button class="cert-btn" style="border-color:#ffcc00;color:#ffcc00;" onclick="window.location.href='eorna%20mystery4.html'">★ 第4話「世界の半分」へ進む ★</button>
     <button class="cert-btn" onclick="resetGame()">タイトルへ戻る</button>
   </div>
 </div>
@@ -165,450 +167,491 @@ const IMGS = {
   macky:'macky.png',
   kobatch:'kobatch.png',
   nishinishi:'nishinishi.png',
+  nishinishi_nagata:'nishinishi%20nagata.png',
   brother:'kimura%20brother.png',
   akiaki:'akiaki.jpeg',
 };
 
 const chapters = [
-// ══════════════════════════════════════════
-// 第1章「新しい風」
-// ══════════════════════════════════════════
+// ══════════════════════════════
+// 第1章「出所」
+// ══════════════════════════════
 {
-  title:'第1章「新しい風」',
+  title:'第1章「出所」',
   scenes:[
     {
       img:IMGS.kimura,
-      memo:'時刻：ワカメ逮捕から3ヶ月後\nEORNAに新しい風が吹いた',
+      memo:'時刻：第2話から数週間後\nワカメが出所した',
       text:[
-        {s:'木村',t:'ワカメが逮捕されて3ヶ月。EORNAに新しいバーテンダーが来た。'},
-        {s:'木村',t:'アキアキ。腕は確かだ。笑顔も愛想もいい。'},
-        {s:'木村',t:'（しかし…何かが引っかかる。）',type:'silent'},
+        {s:'木村',t:'木村の兄から連絡が来た。'},
+        {s:'木村の兄',t:'「ワカメが出所した。行き先は不明だ」'},
+        {s:'木村の兄',t:'「坊主頭になっていたそうだ」'},
+        {s:'木村',t:'（また黒川に戻るのか。それとも…）',type:'silent'},
       ],
       cmds:C, correct:1,
       correctText:[
-        {s:'木村',t:'カウンターを見渡した。客が増えている。'},
-        {s:'木村',t:'アキアキが来てから、EORNAは毎晩満席に近い。'},
-        {s:'木村',t:'良いことのはずだ。なのになぜ、俺は落ち着かない。'},
+        {s:'木村',t:'EORNAを見渡した。アキアキが静かにグラスを磨いている。'},
+        {s:'木村',t:'津守が来た。ギネスを一口飲んで言った。'},
+        {s:'津守',t:'「木村さん、ワカメのことが気になっていますか」'},
+        {s:'木村',t:'「ああ。あいつがまた動くとしたら…」'},
+        {s:'木村',t:'【手がかり①】ワカメが出所した。',type:'ok'},
       ],
-      wrongText:'まず店内の様子を調べよう。',
+      wrongText:'まず状況を調べよう。',
+      item:'nagata_out',
     },
     {
-      img:IMGS.akiaki,
-      memo:'人物：アキアキ\n新バーテンダー\n腕は確か',
+      img:IMGS.nishinishi,
+      memo:'にしにし来店\nいつも通りの長老',
       text:[
-        {s:'木村',t:'アキアキに話しかけてみよう。'},
-        {s:'アキアキ',t:'「木村さん、今夜も満席ですね」'},
-        {s:'アキアキ',t:'「嬉しいです」'},
+        {s:'木村',t:'その夜、にしにしが来た。いつも通りシャンパンを頼んだ。'},
+        {s:'にしにし',t:'「木村くん、ワカメが出所したそうだね」'},
+        {s:'にしにし',t:'「気をつけなさい。黒川はまだ動いているよ」'},
       ],
       cmds:C, correct:0,
       correctText:[
-        {s:'木村',t:'「アキアキ、新規客が増えたな。何か心当たりはあるか」'},
-        {s:'アキアキ',t:'「SNSで紹介したんです。EORNAの雰囲気が好きで」'},
-        {s:'アキアキ',t:'「ダメでしたか？」'},
-        {s:'木村',t:'（笑顔だ。嘘のない笑顔に見える。でも…）',type:'silent'},
+        {s:'木村',t:'「にしにしさん、何か知っていますか」'},
+        {s:'にしにし',t:'「噂だけどね。黒川に新しい大幹部が現れたという話だ」'},
+        {s:'にしにし',t:'「ワカメを使って、また動くかもしれない」'},
+        {s:'木村',t:'（にしにしは信頼できる。いつも的確な情報をくれる。）',type:'silent'},
       ],
-      wrongText:'アキアキに話しかけよう。',
+      wrongText:'にしにしに話しかけよう。',
     },
   ],
   ending:{
     title:'第1章　クリア',
-    body:`アキアキが来てEORNAは繁盛し始めた。<br>SNSで紹介したと言う。<br>しかし木村の違和感は消えなかった。<hr class="ending-hr">第2章では新規客の不審な行動が明らかになる。`,
+    body:`ワカメが出所した。<br>にしにしは「黒川に新しい大幹部が現れた」と警告した。<br>木村はにしにしを信頼していた。<hr class="ending-hr">第2章では不審な動きが始まる。`,
   }
 },
-// ══════════════════════════════════════════
-// 第2章「見知らぬ客たち」
-// ══════════════════════════════════════════
+// ══════════════════════════════
+// 第2章「不審な影」
+// ══════════════════════════════
 {
-  title:'第2章「見知らぬ客たち」',
+  title:'第2章「不審な影」',
   scenes:[
     {
-      img:IMGS.kimura,
-      memo:'新規客が毎晩来る\n何かがおかしい',
+      img:IMGS.macky,
+      memo:'マッキーが何かを見た\n様子がおかしい',
       text:[
-        {s:'木村',t:'今夜も見知らぬ客が数人来ている。'},
-        {s:'木村',t:'酒より…店内をよく見ている気がする。'},
+        {s:'木村',t:'マッキーが珍しく早い時間に来た。顔色が悪い。'},
+        {s:'マッキー',t:'「木村さん、昨夜変なものを見たんっすよ」'},
       ],
-      cmds:C, correct:1,
-      correctText:[
-        {s:'木村',t:'客の一人がスマホで店内を撮影していた。'},
-        {s:'木村',t:'「撮影はご遠慮ください」と声をかけると、黙って止めた。'},
-        {s:'木村',t:'しかし目が…笑っていなかった。'},
-        {s:'木村',t:'【手がかり①】客が店内を撮影していた。',type:'ok'},
-      ],
-      wrongText:'店内をよく調べよう。',
-      item:'photo',
-    },
-    {
-      img:IMGS.akiaki,
-      memo:'アキアキに確認\n撮影した客を知っているか',
-      text:[{s:'木村',t:'「アキアキ、さっきの客を知っているか」'}],
       cmds:C, correct:2,
       correctText:[
-        {s:'木村',t:'「店内を撮影していた。知り合いか」'},
-        {s:'アキアキ',t:'「…知りません。初めて見る方です」'},
-        {s:'木村',t:'（一瞬、目が揺れた。）',type:'silent'},
-        {s:'木村',t:'「そうか」'},
-        {s:'木村',t:'（アキアキは何かを知っている。）',type:'silent'},
+        {s:'マッキー',t:'「EORNAの近くで、ワカメを見たんっす」'},
+        {s:'木村',t:'「何？」'},
+        {s:'マッキー',t:'「誰かと話してました。かなり親しそうで」'},
+        {s:'木村',t:'「その人物は誰だった」'},
+        {s:'マッキー',t:'「遠くて顔は見えなかったっす。でも…白髪の老人でした」'},
+        {s:'木村',t:'【手がかり②】ワカメが白髪の老人と接触。',type:'ok'},
       ],
-      wrongText:'アキアキを問い詰めよう。',
+      wrongText:'マッキーを問い詰めよう。',
+      item:'watcher',
+    },
+    {
+      img:IMGS.kobatch,
+      memo:'コバッチも目撃\n白髪の老人とは',
+      text:[
+        {s:'木村',t:'コバッチにも確認してみよう。'},
+        {s:'コバッチ',t:'「木村さん、俺も見たよ。昨夜EORNAの近くで」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'コバッチ',t:'「白髪の老人とワカメが話してた。かなり長い時間」'},
+        {s:'木村',t:'「その老人、特徴は？」'},
+        {s:'コバッチ',t:'「丸眼鏡をかけてた。どこかで見た気がするけど…」'},
+        {s:'木村',t:'（丸眼鏡の白髪の老人…）',type:'silent'},
+        {s:'木村',t:'【手がかり③】丸眼鏡の白髪老人。',type:'ok'},
+      ],
+      wrongText:'コバッチを問い詰めよう。',
+      item:'old_man',
     },
     {
       img:IMGS.kimura,
-      memo:'客の動きを記録\nもっと調べよう',
-      text:[{s:'木村',t:'新規客の動きをもっと調べよう。レジの記録を確認する。'}],
+      memo:'防犯カメラを調べよう',
+      text:[{s:'木村',t:'EORNAの周辺に防犯カメラがある。確認しよう。'}],
       cmds:C, correct:1,
       correctText:[
-        {s:'木村',t:'レジの記録を見た。新規客のほとんどが同じ時間帯に来ている。'},
-        {s:'木村',t:'しかも…注文が少ない。長居するわりに酒をほとんど飲まない。'},
-        {s:'木村',t:'【手がかり②】新規客は飲みに来ているのではない。',type:'ok'},
+        {s:'木村',t:'近くのコンビニの防犯カメラ映像を確認した。'},
+        {s:'木村',t:'ワカメと老人が映っていた。老人は封筒を渡していた。'},
+        {s:'木村',t:'（指示書か。金か。）',type:'silent'},
+        {s:'木村',t:'老人の顔は…映像が粗くてはっきりしない。'},
+        {s:'木村',t:'【手がかり④】封筒を受け取ったワカメ。',type:'ok'},
       ],
-      wrongText:'レジの記録を調べよう。',
-      item:'register',
+      wrongText:'防犯カメラを調べよう。',
+      item:'camera',
     },
   ],
   ending:{
     title:'第2章　クリア',
-    body:`新規客は酒を飲みに来ているのではなかった。<br>店内を監視している。<br>アキアキは何かを知っている。<hr class="ending-hr">第3章では常連客の証言を集める。`,
+    body:`ワカメが白髪の老人から封筒を受け取った。<br>丸眼鏡の白髪老人…どこかで見た顔。<br>しかし映像は粗く、正体が掴めない。<hr class="ending-hr">第3章では老人の正体に迫る。`,
   }
 },
-// ══════════════════════════════════════════
-// 第3章「マッキーとコバッチの目撃」
-// ══════════════════════════════════════════
+// ══════════════════════════════
+// 第3章「長老の正体」
+// ══════════════════════════════
 {
-  title:'第3章「常連たちの証言」',
+  title:'第3章「長老の正体」',
   scenes:[
     {
-      img:IMGS.macky,
-      memo:'人物：マッキー\nあの新規客を知っているか',
+      img:IMGS.nishinishi,
+      memo:'にしにしに相談\n信頼できる長老として',
       text:[
-        {s:'木村',t:'「マッキー、最近の新規客について何か気づいたことはあるか」'},
-        {s:'マッキー',t:'「あー、実は木村さんに言おうと思ってたんっすよ」'},
+        {s:'木村',t:'にしにしに相談しよう。骨董の世界を知る長老だ。'},
+        {s:'木村',t:'「にしにしさん、白髪で丸眼鏡の老人に心当たりはありますか」'},
       ],
-      cmds:C, correct:2,
+      cmds:C, correct:0,
       correctText:[
-        {s:'マッキー',t:'「新規客の一人、どっかで見た顔なんっすよね」'},
-        {s:'マッキー',t:'「確か…2年前に潰れたバーにいた人っす」'},
-        {s:'木村',t:'「どんな店だった」'},
-        {s:'マッキー',t:'「黒川商会が絡んでたって噂の店っす。突然閉店して」'},
-        {s:'木村',t:'【手がかり③】新規客は黒川商会と関係がある。',type:'ok'},
+        {s:'にしにし',t:'「…さあ、心当たりはないね」'},
+        {s:'木村',t:'（珍しい。にしにしが知らないと言った。）',type:'silent'},
+        {s:'にしにし',t:'「でも木村くん、あまり深追いしない方がいい」'},
+        {s:'にしにし',t:'「黒川の大幹部は危険だよ。命に関わる」'},
+        {s:'木村',t:'（なぜそこまで詳しいんだ…）',type:'silent'},
       ],
-      wrongText:'マッキーを問い詰めよう。',
-      item:'macky_testimony',
+      wrongText:'にしにしに話しかけよう。',
     },
     {
-      img:IMGS.kobatch,
-      memo:'人物：コバッチ\n観察眼が鋭い',
+      img:IMGS.brother,
+      memo:'木村の兄に連絡\n映像を見せる',
       text:[
-        {s:'木村',t:'「コバッチ、新規客について何か気づいたことはあるか」'},
-        {s:'コバッチ',t:'「木村さん、気になってたんだよ」'},
+        {s:'木村',t:'兄貴に防犯カメラの映像を送った。'},
+        {s:'木村の兄',t:'「画像を解析した。結果を伝える」'},
       ],
-      cmds:C, correct:2,
+      cmds:C, correct:3,
       correctText:[
-        {s:'コバッチ',t:'「あの客たち、酒より木村さんをずっと見てるよ」'},
-        {s:'コバッチ',t:'「それとアキアキちゃんと、時々目配せしてる気がする」'},
-        {s:'木村',t:'「目配せ？」'},
-        {s:'コバッチ',t:'「俺の気のせいかもしれないけどね。でも…気をつけて」'},
-        {s:'木村',t:'【手がかり④】アキアキと新規客が目配せしていた。',type:'twist'},
+        {s:'木村',t:'解析結果の書類を受け取った。'},
+        {s:'木村の兄',t:'「この老人…黒川商会の大幹部だ」'},
+        {s:'木村',t:'「正体は？」'},
+        {s:'木村の兄',t:'「長年、正体を隠していた人物だ。本名は…」'},
+        {s:'木村の兄',t:'「にしにし。お前も知っている人物だ」',type:'twist'},
+        {s:'木村',t:'「…何？」'},
+        {s:'木村',t:'【どんでん返し①】にしにしが黒川の大幹部だった。',type:'twist'},
       ],
-      wrongText:'コバッチを問い詰めよう。',
-      item:'kobatch_testimony',
+      wrongText:'兄に書類を見せよう。',
+      item:'nishinishi_identity',
+    },
+    {
+      img:IMGS.nishinishi_nagata,
+      memo:'衝撃の真実\n二人の関係',
+      text:[
+        {s:'木村',t:'（にしにしが…黒川の大幹部。）',type:'silent'},
+        {s:'木村',t:'（第1話から、第2話から、ずっとEORNAにいた。）',type:'silent'},
+        {s:'木村',t:'（あいつが俺に「気をつけろ」と言い続けていた。）',type:'silent'},
+      ],
+      cmds:C, correct:5,
+      correctText:[
+        {s:'木村',t:'整理しよう。にしにしは最初から黒川の人間だった。'},
+        {s:'木村',t:'ワカメに接触し、今度はEORNAへの夜襲を計画している。'},
+        {s:'木村',t:'「気をつけろ」という言葉は…全部芝居だったのか。'},
+        {s:'木村',t:'（あの二人が笑っている。最初から、全部仕組まれていた。）',type:'silent'},
+        {s:'木村',t:'【どんでん返し②】全ては最初から計画されていた。',type:'twist'},
+      ],
+      wrongText:'「すいり しろ」で考えをまとめよう。',
+      item:'plan_revealed',
     },
   ],
   ending:{
     title:'第3章　クリア',
-    body:`新規客は黒川商会と関係がある。<br>そしてアキアキと目配せしていた。<br><span style="color:#ff88ff">アキアキは黒川商会と繋がっているのか。</span><hr class="ending-hr">第4章ではにしにしが真実に迫る証言をする。`,
+    body:`<span style="color:#ff88ff">にしにしは黒川商会の大幹部だった。</span><br>第1話から第2話まで、ずっとEORNAにいた。<br>「気をつけろ」という言葉は全部芝居だった。<hr class="ending-hr">第4章では夜襲の計画が明らかになる。`,
   }
 },
-// ══════════════════════════════════════════
-// 第4章「にしにしの警告」
-// ══════════════════════════════════════════
+// ══════════════════════════════
+// 第4章「夜襲の計画」
+// ══════════════════════════════
 {
-  title:'第4章「にしにしの警告」',
+  title:'第4章「夜襲の計画」',
   scenes:[
     {
-      img:IMGS.nishinishi,
-      memo:'人物：にしにし\n最年長・何でも知っている',
+      img:IMGS.brother,
+      memo:'兄が計画書を入手\nEORNAへの夜襲',
       text:[
-        {s:'木村',t:'にしにしが珍しく先に声をかけてきた。'},
-        {s:'にしにし',t:'「木村くん、少し話せるか」'},
+        {s:'木村の兄',t:'「木村、急ぎだ。にしにしとワカメの計画書を入手した」'},
+        {s:'木村',t:'「見せてくれ」'},
+      ],
+      cmds:C, correct:3,
+      correctText:[
+        {s:'木村の兄',t:'「今週末の深夜、EORNAに複数人で乗り込む計画だ」'},
+        {s:'木村',t:'「目的は？」'},
+        {s:'木村の兄',t:'「黒川が持つ津守くんの鑑定書の原本を取り戻す。そしてEORNAを潰す」'},
+        {s:'木村',t:'「津守の鑑定書…第1話の贋作事件の証拠だ」'},
+        {s:'木村の兄',t:'「その通り。にしにしはずっとそれを狙っていた」'},
+        {s:'木村',t:'【手がかり⑤】今週末、EORNAへの夜襲が計画されている。',type:'ok'},
+      ],
+      wrongText:'計画書を見せてもらおう。',
+      item:'night_plan',
+    },
+    {
+      img:IMGS.kimura,
+      memo:'迎え撃つ準備\n仲間を集めろ',
+      text:[
+        {s:'木村',t:'迎え撃つしかない。仲間を集めよう。'},
+        {s:'木村',t:'アキアキ・津守・兄貴。全員に連絡した。'},
       ],
       cmds:C, correct:0,
       correctText:[
-        {s:'にしにし',t:'「新規客の中に黒川商会の人間がいる。木村くん、気をつけろ」'},
-        {s:'木村',t:'「やはりそうか。にしにしさんは知っていたのか」'},
-        {s:'にしにし',t:'「確信はなかった。でも今夜、一人の顔を見て確信した」'},
-        {s:'にしにし',t:'「黒川の幹部だ。以前、津守くんを脅しに来た男だよ」'},
-        {s:'木村',t:'【手がかり⑤】黒川の幹部がEORNAに来ている。',type:'ok'},
+        {s:'アキアキ',t:'「木村さん、私も戦います」'},
+        {s:'津守',t:'「当然です。EORNAは私たちの場所ですから」'},
+        {s:'木村の兄',t:'「警察にも連絡した。ただし証拠を押さえるまで動かない」'},
+        {s:'木村',t:'「わかった。週末まで待つ」'},
+        {s:'木村',t:'（にしにし…ワカメ…来るなら来い。）',type:'silent'},
       ],
-      wrongText:'にしにしに話しかけよう。',
-      item:'nishinishi_warning',
-    },
-    {
-      img:IMGS.nishinishi,
-      memo:'アキアキについて\nにしにしに聞く',
-      text:[{s:'木村',t:'「にしにしさん、アキアキについて何か知っているか」'}],
-      cmds:C, correct:2,
-      correctText:[
-        {s:'にしにし',t:'「アキアキちゃんか。実は気になって調べてみた」'},
-        {s:'にしにし',t:'「3年前、新宿で小さなバーをやっていたそうだ」'},
-        {s:'木村',t:'「それが？」'},
-        {s:'にしにし',t:'「黒川商会に因縁をつけられて潰された。10年かけて育てた店だったそうだ」'},
-        {s:'木村',t:'（そういうことか…）',type:'silent'},
-        {s:'木村',t:'【手がかり⑥】アキアキは黒川に店を潰された。',type:'ok'},
-      ],
-      wrongText:'にしにしに問い詰めよう。',
-      item:'akiaki_past',
+      wrongText:'仲間に話しかけよう。',
     },
   ],
   ending:{
     title:'第4章　クリア',
-    body:`アキアキは黒川商会に店を潰されていた。<br>黒川の幹部がEORNAに現れている。<br>これは偶然ではない。<hr class="ending-hr">第5章ではアキアキに全てをぶつける。`,
+    body:`今週末の深夜、EORNAに夜襲が来る。<br>目的は津守の鑑定書の原本と、EORNAを潰すこと。<br>木村・アキアキ・津守・兄が迎え撃つ準備をした。<hr class="ending-hr">第5章、決戦の夜が来る。`,
   }
 },
-// ══════════════════════════════════════════
-// 第5章「アキアキの告白」
-// ══════════════════════════════════════════
+// ══════════════════════════════
+// 第5章「決戦の夜」
+// ══════════════════════════════
 {
-  title:'第5章「アキアキの告白」',
+  title:'第5章「決戦の夜」',
   scenes:[
     {
-      img:IMGS.akiaki,
-      memo:'アキアキに全てをぶつけろ\n証拠がある',
+      img:IMGS.kimura,
+      memo:'週末深夜\nEORNAで待機中',
       text:[
-        {s:'木村',t:'閉店後、アキアキを呼んだ。'},
-        {s:'木村',t:'「アキアキ。正直に話せ」'},
+        {s:'木村',t:'週末の深夜。EORNAは閉店後の静寂に包まれていた。'},
+        {s:'木村',t:'アキアキ・津守・兄貴が待機している。'},
+        {s:'木村',t:'午前1時。ドアが叩かれた。'},
       ],
-      cmds:C, correct:2,
+      cmds:C, correct:1,
       correctText:[
-        {s:'木村',t:'「お前の店を潰したのは黒川商会だろう。新規客は黒川の人間だ」'},
-        {s:'アキアキ',t:'「…わかりました」'},
-        {s:'アキアキ',t:'「全部話します」'},
-        {s:'木村',t:'アキアキはゆっくりと話し始めた。'},
+        {s:'木村',t:'ドアの外を確認した。3人の人影。'},
+        {s:'木村',t:'先頭はワカメだった。'},
+        {s:'ワカメ',t:'「木村さん、久しぶりっす。今度こそ終わりにしましょう」',type:'danger'},
+        {s:'木村',t:'「ああ。終わりにしよう」'},
+        {s:'木村',t:'ドアを開けた。'},
       ],
-      wrongText:'アキアキを問い詰めよう。',
-    },
-    {
-      img:IMGS.akiaki,
-      memo:'アキアキの告白\n真相が明かされる',
-      text:[
-        {s:'アキアキ',t:'「3年前、私のバーは黒川商会に潰されました」'},
-        {s:'アキアキ',t:'「10年かけて育てた店でした」'},
-      ],
-      cmds:C, correct:0,
-      correctText:[
-        {s:'アキアキ',t:'「復讐しようと思いました。でも一人では無理だった」'},
-        {s:'アキアキ',t:'「EORNAなら黒川の人間を集められると思った」'},
-        {s:'アキアキ',t:'「SNSで黒川の関係者に情報を流して、おびき寄せていました」'},
-        {s:'木村',t:'「俺を…利用したのか」'},
-        {s:'アキアキ',t:'「はい。ごめんなさい」'},
-        {s:'木村',t:'（この目は…嘘をついていない。）',type:'silent'},
-      ],
-      wrongText:'アキアキに話しかけよう。',
-    },
-    {
-      img:IMGS.akiaki,
-      memo:'なぜEORNAを選んだ\n問い詰めよ',
-      text:[{s:'木村',t:'「なぜEORNAを選んだ」'}],
-      cmds:C, correct:2,
-      correctText:[
-        {s:'アキアキ',t:'「木村さんなら…黒川に立ち向かえると思ったから」'},
-        {s:'アキアキ',t:'「第1話の事件、業界で有名なんです。木村さんが黒川を追い詰めた話」'},
-        {s:'木村',t:'「お前が集めた黒川の人間。その中に責任者はいるか」'},
-        {s:'アキアキ',t:'「います。今夜も来るはずです」'},
-        {s:'木村',t:'【手がかり⑦】今夜、黒川の責任者がEORNAに来る。',type:'ok'},
-      ],
-      wrongText:'アキアキを問い詰めよう。',
-      item:'tonight',
-    },
-  ],
-  ending:{
-    title:'第5章　クリア',
-    body:`アキアキは復讐のためにEORNAを選んだ。<br>黒川の人間をおびき寄せるために。<br>今夜、黒川の責任者がEORNAに来る。<hr class="ending-hr">第6章では衝撃の真相が明かされる。`,
-  }
-},
-// ══════════════════════════════════════════
-// 第6章「ワカメの影」
-// ══════════════════════════════════════════
-{
-  title:'第6章「ワカメの影」',
-  scenes:[
-    {
-      img:IMGS.brother,
-      memo:'木村の兄：再登場\n重要な情報を持っている',
-      text:[
-        {s:'木村',t:'EORNAのドアが開いた。'},
-        {s:'木村',t:'…兄貴。'},
-        {s:'木村の兄',t:'「また来た。今夜は急ぎだ」'},
-      ],
-      cmds:C, correct:0,
-      correctText:[
-        {s:'木村の兄',t:'「黒川商会の現場責任者が判明した」'},
-        {s:'木村',t:'「誰だ」'},
-        {s:'木村の兄',t:'「これを見ろ」'},
-        {s:'木村',t:'書類を受け取った。そこにある名前を見て、俺は言葉を失った。'},
-        {s:'木村',t:'「…ワカメ？」'},
-      ],
-      wrongText:'兄に話しかけよう。',
-    },
-    {
-      img:IMGS.brother,
-      memo:'ワカメが黒川の幹部に\n出所後に戻った',
-      text:[
-        {s:'木村の兄',t:'「出所後、行き場をなくして黒川に戻ったようだ」'},
-        {s:'木村',t:'「あいつが…」'},
-      ],
-      cmds:C, correct:2,
-      correctText:[
-        {s:'木村',t:'「今度は迷いがないのか」'},
-        {s:'木村の兄',t:'「ああ。第1話の時とは別人だ。完全に黒川の人間になっている」'},
-        {s:'木村の兄',t:'「今夜、EORNAに来る可能性がある。証拠を押さえるチャンスだ」'},
-        {s:'木村',t:'（ワカメ…お前は。）',type:'silent'},
-        {s:'木村',t:'【どんでん返し】ワカメが黒川の幹部として現れる。',type:'twist'},
-      ],
-      wrongText:'兄に問い詰めよう。',
-      item:'nagata_return',
-    },
-  ],
-  ending:{
-    title:'第6章　クリア',
-    body:`<span style="color:#ff88ff">ワカメが黒川商会の幹部として戻ってきた。</span><br>出所後、行き場をなくし黒川に戻った。<br>今度は迷いがない。<hr class="ending-hr">第7章では木村とワカメが再対峙する。`,
-  }
-},
-// ══════════════════════════════════════════
-// 第7章「再会」
-// ══════════════════════════════════════════
-{
-  title:'第7章「再会」',
-  scenes:[
-    {
-      img:IMGS.nagata,
-      memo:'ワカメが現れた\n対峙せよ',
-      text:[
-        {s:'木村',t:'深夜。EORNAのドアが開いた。'},
-        {s:'木村',t:'坊主頭の男が立っていた。'},
-        {s:'木村',t:'ワカメだった。出所後、坊主になっていた。'},
-        {s:'ワカメ',t:'「久しぶりだな、木村さん」'},
-      ],
-      cmds:C, correct:0,
-      correctText:[
-        {s:'木村',t:'「ワカメ…お前、何をやっている」'},
-        {s:'ワカメ',t:'「見ての通りだ。仕事だよ」'},
-        {s:'木村',t:'「第1話の時、お前は…」'},
-        {s:'ワカメ',t:'「あれは弱さだった。もう迷わない」'},
-        {s:'木村',t:'（変わってしまった。あの目じゃない。）',type:'silent'},
-      ],
-      wrongText:'ワカメに話しかけよう。',
+      wrongText:'外の様子を調べよう。',
     },
     {
       img:IMGS.nagata,
-      memo:'ワカメを問い詰めろ\n後悔はないか',
+      memo:'ワカメが乗り込んできた\n対峙せよ',
       text:[
-        {s:'木村',t:'「後悔はないのか、ワカメ」'},
-        {s:'ワカメ',t:'「ない」'},
+        {s:'ワカメ',t:'「邪魔するなよ、木村さん。俺はもう迷わない」'},
+        {s:'木村',t:'「お前は何度同じことを言うんだ」'},
       ],
       cmds:C, correct:2,
       correctText:[
-        {s:'木村',t:'「EORNAで働いた日々は」'},
-        {s:'ワカメ',t:'「…」'},
-        {s:'木村',t:'「津守は今でもお前のことを…」'},
-        {s:'ワカメ',t:'「それがどうした。俺には関係ない」'},
-        {s:'木村',t:'（目が泳いだ。一瞬だけ。）',type:'silent'},
-        {s:'木村',t:'「そうか」'},
+        {s:'木村',t:'「ワカメ、お前の後ろにいる人間を見ろ」'},
+        {s:'ワカメ',t:'「…何？」'},
+        {s:'木村',t:'「にしにしはお前を使い捨てにするつもりだ。証拠がある」'},
+        {s:'ワカメ',t:'「嘘をつくな」'},
+        {s:'木村の兄',t:'「嘘じゃない。ワカメ、これを見ろ」'},
+        {s:'木村',t:'兄貴が書類を見せた。にしにしが警察に「ワカメを売る」と約束した密約書だ。'},
+        {s:'ワカメ',t:'「…」',type:'twist'},
       ],
       wrongText:'ワカメを問い詰めよう。',
     },
     {
       img:IMGS.nagata,
-      memo:'証拠を突きつけろ\n逮捕へ',
+      memo:'ワカメが動揺\nにしにしの裏切り',
       text:[
-        {s:'木村',t:'証拠書類をワカメの前に置いた。'},
-        {s:'ワカメ',t:'「…用意がいいな」'},
+        {s:'木村',t:'「にしにしはお前が逮捕されれば、証拠を全部お前に押し付けられる」'},
+        {s:'ワカメ',t:'「…にしにしさんが？」'},
       ],
-      cmds:C, correct:3,
+      cmds:C, correct:2,
       correctText:[
-        {s:'木村',t:'「黒川商会との7年間の記録だ。今度は全部ある」'},
-        {s:'ワカメ',t:'「それがどうした。俺は弁護士を呼ぶ」'},
-        {s:'木村',t:'警察が来た。木村の兄が呼んでいた。'},
+        {s:'木村',t:'「お前はまたあいつに利用されているんだ」'},
         {s:'ワカメ',t:'「…チッ」'},
-        {s:'木村',t:'手錠をかけられながら、ワカメは一度だけ振り返った。'},
-        {s:'ワカメ',t:'「木村さん。お前は甘い」'},
-        {s:'木村',t:'木村は失笑した。'},
-        {s:'木村',t:'「そうかもな」',type:'ok'},
+        {s:'木村',t:'「ワカメ。EORNAに戻る気はないか」'},
+        {s:'ワカメ',t:'「ない」'},
+        {s:'ワカメ',t:'「でも…にしにしに義理はない」'},
+        {s:'木村',t:'【転換点】ワカメが動いた。',type:'ok'},
       ],
-      wrongText:'証拠を見せよう。',
-      item:'nagata_arrest',
+      wrongText:'ワカメを問い詰めよう。',
+      item:'nagata_turns',
+    },
+  ],
+  ending:{
+    title:'第5章　クリア',
+    body:`ワカメはにしにしに裏切られていた。<br>「にしにしに義理はない」<br>ワカメが動いた。<hr class="ending-hr">第6章、にしにしを追い詰める。`,
+  }
+},
+// ══════════════════════════════
+// 第6章「大幹部の失墜」
+// ══════════════════════════════
+{
+  title:'第6章「大幹部の失墜」',
+  scenes:[
+    {
+      img:IMGS.nagata,
+      memo:'ワカメが証拠を提供\nにしにしを売る',
+      text:[
+        {s:'ワカメ',t:'「木村さん、にしにしの隠し口座の情報がある」'},
+        {s:'木村',t:'「本当か」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'ワカメ',t:'「黒川の資金はここに流れている。これで大幹部の証拠になる」'},
+        {s:'木村',t:'「なぜそれを俺に」'},
+        {s:'ワカメ',t:'「俺が間抜けだったのは認める。でも利用されたまま終わるのは嫌だ」'},
+        {s:'木村',t:'（そこだけは、変わらない奴だ。）',type:'silent'},
+        {s:'木村',t:'【手がかり⑥】にしにしの資金記録を入手。',type:'ok'},
+      ],
+      wrongText:'ワカメに話しかけよう。',
+      item:'nishinishi_account',
+    },
+    {
+      img:IMGS.brother,
+      memo:'警察が動く\nにしにしを追え',
+      text:[
+        {s:'木村の兄',t:'「証拠が揃った。警察が動く」'},
+        {s:'木村',t:'「にしにしを逮捕できるか」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'木村の兄',t:'「それが…にしにしは既に動いていた」'},
+        {s:'木村',t:'「何？」'},
+        {s:'木村の兄',t:'「資金を全て海外に移した。そして姿を消した」'},
+        {s:'木村',t:'「逃げたのか」'},
+        {s:'木村の兄',t:'「ああ。あの男は証拠を掴まれる前に逃げる準備をしていた」'},
+        {s:'木村',t:'（最初から…全部計算していたのか。）',type:'silent'},
+        {s:'木村',t:'【真相】にしにしは逃亡した。',type:'twist'},
+      ],
+      wrongText:'兄を問い詰めよう。',
+      item:'nishinishi_escape',
+    },
+  ],
+  ending:{
+    title:'第6章　クリア',
+    body:`にしにしは証拠を掴まれる前に逃亡した。<br>資金を海外に移し、姿を消した。<br><span style="color:#ff4444">大幹部は今も捕まっていない。</span><hr class="ending-hr">第7章、ワカメの最期。`,
+  }
+},
+// ══════════════════════════════
+// 第7章「ワカメの最期」
+// ══════════════════════════════
+{
+  title:'第7章「ワカメの最期」',
+  scenes:[
+    {
+      img:IMGS.nagata,
+      memo:'ワカメが逮捕される\n三度目の対峙',
+      text:[
+        {s:'木村',t:'警察がワカメを逮捕しに来た。'},
+        {s:'木村',t:'ワカメは逃げなかった。'},
+        {s:'ワカメ',t:'「木村さん、にしにしは逃げたか」'},
+      ],
+      cmds:C, correct:0,
+      correctText:[
+        {s:'木村',t:'「ああ。逃げた」'},
+        {s:'ワカメ',t:'「そうか。俺だけか」'},
+        {s:'ワカメ',t:'「まあ…いつものことだ」'},
+        {s:'木村',t:'「ワカメ。お前はなぜ逃げなかった」'},
+        {s:'ワカメ',t:'「…疲れた」'},
+      ],
+      wrongText:'ワカメに話しかけよう。',
+    },
+    {
+      img:IMGS.nagata,
+      memo:'ワカメの本音\n最後の言葉',
+      text:[
+        {s:'木村',t:'「疲れた、か」'},
+        {s:'ワカメ',t:'「黒川にいても、にしにしに使われるだけだった」'},
+      ],
+      cmds:C, correct:2,
+      correctText:[
+        {s:'木村',t:'「反省はないのか」'},
+        {s:'ワカメ',t:'「ない」'},
+        {s:'木村',t:'「EORNAのことは」'},
+        {s:'ワカメ',t:'「…」'},
+        {s:'ワカメ',t:'「アキアキさんのボム、美味かったか？」'},
+        {s:'木村',t:'木村は失笑した。'},
+        {s:'木村',t:'「最高だった」',type:'ok'},
+      ],
+      wrongText:'ワカメを問い詰めよう。',
+    },
+    {
+      img:IMGS.nagata,
+      memo:'ワカメ三度目の逮捕\n反省なし',
+      text:[
+        {s:'木村',t:'手錠をかけられながら、ワカメは振り返らなかった。'},
+        {s:'木村',t:'今度こそ、終わりだ。'},
+      ],
+      cmds:C, correct:5,
+      correctText:[
+        {s:'木村',t:'（ワカメは最後まで反省しなかった。）',type:'silent'},
+        {s:'木村',t:'（でも最後の瞬間、アキアキのボムを聞いてきた。）',type:'silent'},
+        {s:'木村',t:'（あいつは…ずっとEORNAが好きだったんだろう。）',type:'silent'},
+        {s:'木村',t:'（それだけは本当だったのかもしれない。）',type:'silent'},
+      ],
+      wrongText:'「すいり しろ」で考えをまとめよう。',
     },
   ],
   ending:{
     title:'第7章　クリア',
-    body:`ワカメは反省なく再逮捕された。<br>「あれは弱さだった。もう迷わない」<br><span style="color:#ff88ff">あの目には、何も残っていなかった。</span><hr class="ending-hr">最終章。アキアキとEORNAの未来。`,
+    body:`ワカメは三度目の逮捕。反省なし。<br>「アキアキさんのボム、美味かったか？」<br><span style="color:#aaffaa">それだけは、本当だったのかもしれない。</span><hr class="ending-hr">最終章。EORNAの夜明け。`,
   }
 },
-// ══════════════════════════════════════════
-// 第8章「ボム」
-// ══════════════════════════════════════════
+// ══════════════════════════════
+// 第8章「EORNAの夜明け」
+// ══════════════════════════════
 {
-  title:'第8章「ボム」',
+  title:'第8章「EORNAの夜明け」',
   scenes:[
     {
       img:IMGS.akiaki,
-      memo:'事件解決\nアキアキが去ろうとする',
+      memo:'翌朝\nEORNAに残った人たち',
       text:[
-        {s:'木村',t:'翌朝。アキアキがコートを着ていた。'},
-        {s:'アキアキ',t:'「木村さん、今までありがとうございました」'},
-        {s:'木村',t:'「どこへ行く」'},
+        {s:'木村',t:'夜が明けた。EORNAに残ったのは木村・アキアキ・津守だった。'},
+        {s:'アキアキ',t:'「木村さん、にしにしは捕まらないんですか」'},
       ],
       cmds:C, correct:0,
       correctText:[
-        {s:'アキアキ',t:'「復讐のためにあなたを利用しました。許してもらえるはずがない」'},
-        {s:'アキアキ',t:'「EORNAに迷惑をかけました。出ていきます」'},
-        {s:'木村',t:'「バカ野郎」'},
-        {s:'アキアキ',t:'「え？」'},
-        {s:'木村',t:'「明日から来い」'},
-      ],
-      wrongText:'アキアキに話しかけよう。',
-    },
-    {
-      img:IMGS.akiaki,
-      memo:'木村の言葉\nアキアキの反応',
-      text:[
-        {s:'アキアキ',t:'「でも私は…」'},
-        {s:'木村',t:'「お前の腕は本物だ。EORNAにはお前が必要だ」'},
-      ],
-      cmds:C, correct:0,
-      correctText:[
-        {s:'アキアキ',t:'「木村さん…」'},
-        {s:'木村',t:'「ワカメの分まで働け。あいつの席は空いたままだ」'},
-        {s:'アキアキ',t:'（初めて、笑った。）',type:'silent'},
-        {s:'アキアキ',t:'「…はい」'},
+        {s:'木村',t:'「今は無理だ。でも必ずいつか」'},
+        {s:'アキアキ',t:'「…そうですね」'},
+        {s:'津守',t:'「木村さん、一つ聞いていいですか」'},
+        {s:'木村',t:'「何だ」'},
+        {s:'津守',t:'「EORNAは続けますか」'},
+        {s:'木村',t:'「当たり前だ」',type:'ok'},
       ],
       wrongText:'アキアキに話しかけよう。',
     },
     {
       img:IMGS.tsumori_return,
-      memo:'津守が現れた\nボムで締める',
+      memo:'津守の言葉\nEORNAの未来',
       text:[
-        {s:'木村',t:'その時、EORNAのドアが開いた。'},
-        {s:'津守',t:'「やあ、木村さん。騒がしかったようですね」'},
+        {s:'津守',t:'「信用できるかどうかは、目が知っている」'},
+        {s:'津守',t:'「にしにしの目は…最初から笑っていませんでした」'},
+        {s:'木村',t:'「気づかなかった」'},
       ],
       cmds:C, correct:0,
       correctText:[
-        {s:'木村',t:'「津守、お前いつもこのタイミングで現れるな」'},
-        {s:'津守',t:'「信用できるかどうかは、目が知っている」'},
-        {s:'津守',t:'「アキアキさん、いい目をしていますよ」'},
-        {s:'アキアキ',t:'「津守さん…」'},
-        {s:'津守',t:'津守がギネスを差し出した。'},
-        {s:'木村',t:'木村がショットグラスを差し出した。'},
-        {s:'アキアキ',t:'「…ボムですか？」'},
-        {s:'木村',t:'「EORNAへようこそ」',type:'ok'},
+        {s:'津守',t:'「私も気づきませんでした。だから悔しい」'},
+        {s:'木村',t:'「次は見抜く」'},
+        {s:'津守',t:'「ええ。私たちの目を、もっと鍛えましょう」'},
+        {s:'アキアキ',t:'「…私も」'},
+        {s:'木村',t:'三人でカウンターに座った。'},
+        {s:'木村',t:'夜明けのEORNAは、静かだった。'},
       ],
       wrongText:'津守に話しかけよう。',
+    },
+    {
+      img:IMGS.nishinishi_nagata,
+      memo:'エピローグ\n二人は今も',
+      text:[
+        {s:'木村',t:'…その後。'},
+        {s:'木村',t:'にしにしは今も捕まっていない。'},
+        {s:'木村',t:'ワカメは服役中だ。'},
+      ],
+      cmds:C, correct:1,
+      correctText:[
+        {s:'木村',t:'古い写真が一枚出てきた。'},
+        {s:'木村',t:'にしにしとワカメが並んで笑っている。'},
+        {s:'木村',t:'（これは…いつ撮った写真だ。）',type:'silent'},
+        {s:'木村',t:'（最初から、全部仕組まれていたのか。）',type:'silent'},
+        {s:'木村',t:'木村は写真をカウンターに置いた。'},
+        {s:'木村',t:'「EORNAを開けよう。今夜も客が来る」',type:'ok'},
+      ],
+      wrongText:'写真を調べよう。',
       ending:true,
     },
   ],
   ending:{
-    title:'全章クリア　事件解決',
-    body:`<span class="em">BAR EORNA 繁盛の罠　完結</span><hr class="ending-hr">アキアキは復讐のためにEORNAを選んだ。<br>しかし最後に残ったのは復讐ではなく、<br>新しい居場所だった。<hr class="ending-hr">ワカメは反省なく去った。<br><span class="em3">あれは弱さだった。もう迷わない。</span><hr class="ending-hr">津守がギネスを差し出した。<br>木村がショットグラスを差し出した。<br><span class="em2">EORNAにまた、ボムの夜が来た。</span>`,
+    title:'全章クリア　完結',
+    body:`<span class="em">BAR EORNA 夜襲　完結</span><hr class="ending-hr">にしにしは今も捕まっていない。<br>ワカメは服役中。反省なし。<hr class="ending-hr"><span class="em3">あの二人が笑っている写真。</span><br>最初から、全部仕組まれていた。<hr class="ending-hr">それでもEORNAは今夜も開いている。<br><span class="em2">木村・アキアキ・津守。</span><br><span class="em2">三人の目を、誰も欺けない。</span>`,
     isTrue:true,
   }
 },
@@ -720,8 +763,8 @@ function showEnding(ch){
   document.getElementById('endingHdr').textContent=ch.ending.title;
   let body=ch.ending.body;
   if(cleared.length>=8){
-    body+=`<hr class="ending-hr"><button class="ending-btn" onclick="document.getElementById('endingScreen').style.display='none';document.getElementById('certScreen').style.display='block';">★ 証明書・クーポンを見る ★</button>`;
-    body+=`<button class="ending-btn" style="border-color:#ffff00;color:#ffff00;margin-top:8px;" onclick="window.location.href='eorna%20mystery3.html'">★ 第3話「夜襲」へ進む ★</button>`;
+    body+=`<hr class="ending-hr"><button style="display:block;margin:8px auto;background:#0a0a00;border:1px dashed #ffff00;color:#ffff00;font-family:'DotGothic16',monospace;font-size:12px;padding:8px 20px;cursor:pointer;width:90%;" onclick="document.getElementById('endingScreen').style.display='none';document.getElementById('certScreen').style.display='block';">★ 捜査完了証明書・クーポンを見る ★</button>`;
+    body+=`<button style="display:block;margin:8px auto;background:#0a0800;border:1px dashed #ffcc00;color:#ffcc00;font-family:'DotGothic16',monospace;font-size:12px;padding:8px 20px;cursor:pointer;width:90%;" onclick="window.location.href='eorna%20mystery4.html'">★ 第4話「世界の半分」へ進む ★</button>`;
   }
   document.getElementById('endingBody').innerHTML=body;
 }
