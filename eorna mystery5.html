@@ -83,6 +83,18 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
 .cert-hr{border:none;border-top:1px solid #333;margin:14px 0;}
 .cert-btn{display:block;margin:0 auto 8px;background:#000;border:1px solid #fff;color:#fff;font-family:'DotGothic16',monospace;font-size:clamp(9px,2.5vw,12px);padding:10px 28px;cursor:pointer;letter-spacing:1px;width:90%;}
 .cert-btn:active{background:#fff;color:#000;}
+
+/* ── フォトギャラリー ── */
+.photo-gallery{margin:16px 0;}
+.photo-slide{display:none;width:100%;border:1px solid #333;}
+.photo-slide.active{display:block;}
+.photo-slide img{width:100%;display:block;image-rendering:auto;}
+.photo-caption{font-size:clamp(8px,2vw,10px);color:#888;text-align:center;padding:4px;letter-spacing:1px;}
+.photo-nav{display:flex;justify-content:center;gap:8px;margin:8px 0;}
+.photo-dot{width:8px;height:8px;border-radius:50%;background:#444;cursor:pointer;border:none;}
+.photo-dot.active{background:#ffcc88;}
+.photo-nav-btn{background:#000;border:1px solid #555;color:#888;font-family:'DotGothic16',monospace;font-size:10px;padding:4px 12px;cursor:pointer;}
+.photo-nav-btn:active{background:#333;}
 </style>
 </head>
 <body>
@@ -153,6 +165,16 @@ body{background:#000;min-height:100vh;display:flex;flex-direction:column;align-i
       <span style="font-size:clamp(16px,5vw,24px);color:#ffcc88;letter-spacing:4px;">ありがとう</span>
     </div>
     <hr class="cert-hr">
+
+    <!-- フォトギャラリー -->
+    <div style="font-size:clamp(9px,2.3vw,12px);color:#ffcc88;margin-bottom:8px;letter-spacing:1px;">★ これが本物のEORNAです ★</div>
+    <div class="photo-gallery">
+      <div class="photo-slide active" id="slide0">
+        <img src="eorna_start.png" alt="EORNAの始まり">
+        <div class="photo-caption">何もない状態から、ここから始まりました</div>
+      </div>
+    </div>
+    <hr class="cert-hr">
     <div class="cert-coupon">
       <div class="cert-coupon-title">★ 特典クーポン ★</div>
       <div class="cert-coupon-body">ビール ハーフパイント<br>1杯 無料</div>
@@ -181,6 +203,7 @@ const IMGS = {
   kuroki:'kuroki.jpeg',
   tommy:'tommy.png',
   tsumori_final:'tsumori_final.png',
+  yassu:'yassu.png',
 };
 
 const chapters = [
@@ -401,6 +424,7 @@ const chapters = [
         {s:'木村',t:'「津守、ありがとう。店を守ってくれて。俺鑑定士に頼みすぎたな」',type:'warm'},
         {s:'木村',t:'「ワカメ、お前はやっぱりEORNAが好きなんだろ。正直に生きろ」',type:'warm'},
         {s:'木村',t:'「みんな、いつかまた一緒にボムを飲もう。木村より」',type:'warm'},
+        {s:'木村',t:'「追伸：またヤッスーにばったり会った。今度はバルセロナだ。なぜあいつはいつもいるんだ」',type:'warm'},
         {s:'津守',t:'誰も何も言わなかった。'},
       ],
       wrongText:'手紙を調べよう。',
@@ -723,6 +747,10 @@ function showEnding(ch){
   if(cleared.length>=8) body+=`<hr class="ending-hr"><button style="display:block;margin:8px auto;background:#0a0800;border:1px dashed #ffcc88;color:#ffcc88;font-family:'DotGothic16',monospace;font-size:12px;padding:8px 20px;cursor:pointer;width:90%;" onclick="document.getElementById('endingScreen').style.display='none';document.getElementById('certScreen').style.display='block';">★ 全シリーズ完結証明書を見る ★</button>`;
   document.getElementById('endingBody').innerHTML=body;
 }
+
+// フォトギャラリー（1枚）
+function goSlide(n){}
+function changeSlide(dir){}
 
 function resetGame(){
   ['endingScreen','certScreen','chapterScreen'].forEach(id=>{
