@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%23B0281C%27/%3E%3Ctext x=%2732%27 y=%2746%27 font-family=%27Arial Black,sans-serif%27 font-size=%2740%27 font-weight=%27900%27 fill=%27%23EDE5D2%27 text-anchor=%27middle%27%3EE%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#EDE5D2">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BAR EORNA 失踪事件</title>
+  <title>BAR EORNA 密室殺人事件 | 木村探偵事務所</title>
   <meta name="robots" content="noindex, nofollow">
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -125,11 +128,39 @@ body.wc .wc-countdown{background:transparent!important;color:var(--gold)!importa
 /* ===== ribbon readability fix (high specificity) ===== */
 body.wc #wcBar{background:#1a140d!important}
 body.wc #wcBar .wc-track span{color:#EFE7D4!important;font-weight:600!important;font-size:.68rem!important;letter-spacing:.12em!important;opacity:1!important}
+
+/* ===== WC OFF: 観戦できる通知だけ残す ===== */
+body.wc .hero{background:none!important}
+body.wc .hero .kick{color:var(--dim)!important}
+body.wc .hero .meta{color:var(--dim)!important}
+body.wc .wc-hero{display:none!important}
+body.wc .wc-countdown{display:none!important}
+body.wc .wc-balls,body.wc #wcFlags{display:none!important}
+body.wc .word .d{font-size:inherit!important}
+body.wc .word .d::after{content:""!important;display:none!important}
+body.wc .ph-owner .v-brazil,body.wc .psq .v-brazil{display:none!important}
+body.wc .ph-owner .v-nagata,body.wc .psq .v-nagata{display:block!important}
+body.wc .ph-cap-wc{display:none!important}
+body.wc #wcBar{justify-content:center!important;background:#16110D!important;border-bottom:1px solid rgba(201,168,76,.28)!important}
+body.wc .wc-track{animation:none!important;width:100%;justify-content:center;display:flex}
+body.wc #wcBar .wc-track span{color:#EFE7D4!important;font-weight:500!important;font-size:.62rem!important;letter-spacing:.13em!important}
+
+/* ===== POSTER UNIFY: 紙×墨×緋 ===== */
+:root{
+ --ground:#EDE5D2!important; --smoke:#E4DBC4!important; --dark:#EDE5D2!important;
+ --ink:#141110!important; --cream:#141110!important;
+ --dim:#5d5548!important; --muted:#5d5548!important; --faint:#8a8172!important;
+ --gold:#B0281C!important; --red:#B0281C!important;
+ --line:rgba(20,17,16,.22)!important;
+}
+body{background:#EDE5D2!important;color:#141110!important}
+#wcBar,#wcFlags{display:none!important}
+img{filter:none}
+::selection{background:#B0281C;color:#EDE5D2}
+a:focus-visible,button:focus-visible{outline:3px solid #B0281C;outline-offset:3px}
 </style>
 </head>
 <body>
-<div id="wcBar"><div class="wc-track"><span>⚽ WORLD CUP 2026 · 観戦やってます · 全104試合 · ご予約で何時でも放映 · GROUP THERAPY HERE ·</span><span>⚽ WORLD CUP 2026 · 観戦やってます · 全104試合 · ご予約で何時でも放映 · GROUP THERAPY HERE ·</span></div></div>
-<div id="wcFlags"><div class="wc-ftrack">🇯🇵 🇬🇧 🇧🇷 🇦🇷 🇫🇷 🇩🇪 🇪🇸 🇵🇹 🇳🇱 🇧🇪 🇭🇷 🇲🇽 🇺🇸 🇨🇦 🇰🇷 🇲🇦 🇸🇳 🇨🇭 🇷🇸 🇺🇾 🇯🇵 🇬🇧 🇧🇷 🇦🇷 🇫🇷 🇩🇪 🇪🇸 🇵🇹 🇳🇱 🇧🇪 🇭🇷 🇲🇽 🇺🇸 🇨🇦 🇰🇷 🇲🇦 🇸🇳 🇨🇭 🇷🇸 🇺🇾 </div></div>
 <div class="wc-balls"><b style="left:6%;animation-duration:15s">⚽</b><b style="left:23%;animation-duration:21s;animation-delay:4s">⚽</b><b style="left:43%;animation-duration:17s;animation-delay:2s">⚽</b><b style="left:62%;animation-duration:24s;animation-delay:6s">⚽</b><b style="left:80%;animation-duration:18s;animation-delay:1s">⚽</b><b style="left:92%;animation-duration:27s;animation-delay:8s">⚽</b></div>
 
 <div class="progress-bar">
@@ -147,19 +178,11 @@ body.wc #wcBar .wc-track span{color:#EFE7D4!important;font-weight:600!important;
   <div class="title-rule"></div>
   <p class="title-desc">
     閉店後のBAR EORNA。<br>
-    常連客・津守が忽然と姿を消した。<br>
-    手がかりなし。深夜の新宿三丁目。<br><br>
-    オーナー・木村が真実を追う。
+    一人の男が死んでいた。<br>
+    密室。証拠なし。容疑者は3人。<br><br>
+    探偵・りーくんが真実を暴く。
   </p>
-  <button class="btn-start" onclick="window.location.href='eorna%20mystery.html'">第1話　失踪事件</button>
-  <br><br>
-  <button class="btn-start" onclick="window.location.href='eorna%20mystery2.html'">第2話　繁盛の罠</button>
-  <br><br>
-  <button class="btn-start" onclick="window.location.href='eorna%20mystery3.html'">第3話　夜襲</button>
-  <br><br>
-  <button class="btn-start" onclick="window.location.href='eorna%20mystery4.html'">第4話　世界の半分</button>
-  <br><br>
-  <button class="btn-start" onclick="window.location.href='eorna%20mystery5.html'">最終話　いつか帰る場所</button>
+  <button class="btn-start" onclick="startGame()">捜査を開始する</button>
 </div>
 
 <!-- GAME -->
@@ -504,26 +527,6 @@ document.addEventListener('keydown', (e) => {
   if(e.key === 'Enter' && document.getElementById('inputArea').style.display !== 'none') checkAnswer();
 });
 </script>
-<script>
-(function(){
-  // ===== 本日の試合（ここを編集）=====  例: "🇯🇵21:00 日本 vs ブラジル · 🇫🇷24:00 仏 vs 独"
-  var WC_TODAY = "";
-  // ================================
-  var n=new Date(),
-      s=new Date('2026-06-11T00:00:00+09:00'),
-      e=new Date('2026-07-20T12:00:00+09:00'),
-      fin=new Date('2026-07-20T04:00:00+09:00');
-  if(!(n>=s&&n<e)) return;
-  document.body.classList.add('wc');
-  var base="⚽ FIFA WORLD CUP 2026 · 観戦できます · ご予約で何時でも放映 · BAR EORNA · ";
-  var txt=(WC_TODAY?("📣 本日 "+WC_TODAY+" · "):"")+base;
-  Array.prototype.forEach.call(document.querySelectorAll('.wc-track span'),function(sp){sp.textContent=txt;});
-  var el=document.getElementById('wcCountdown');
-  if(el){var tick=function(){var d=fin-new Date();if(d<=0){el.innerHTML='🏆 GRAND FINAL';return;}
-    var dd=Math.floor(d/864e5),hh=Math.floor(d/36e5)%24,mm=Math.floor(d/6e4)%60,ss=Math.floor(d/1e3)%60;
-    el.innerHTML='🏆 FINAL まで '+dd+'日 '+('0'+hh).slice(-2)+':'+('0'+mm).slice(-2)+':'+('0'+ss).slice(-2);};
-    tick();setInterval(tick,1000);}
-})();
-</script>
+
 </body>
 </html>
