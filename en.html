@@ -286,9 +286,34 @@ body{background:#0B0908}
 /* Footer 大詰め */
 .foot-word{font-family:var(--serif)!important;font-weight:800;font-size:clamp(3.6rem,19vw,9.5rem)!important;letter-spacing:-.01em!important}
 @media(prefers-reduced-motion:reduce){.vrail{animation:none;opacity:1}}
+
+/* ===== FREEHAND: 印刷物の夜 ===== */
+/* ページ枠 — 刷り物のトンボ */
+.pageframe{position:fixed;inset:11px;border:1px solid rgba(231,222,203,.14);pointer-events:none;z-index:9990}
+.pageframe::before,.pageframe::after{content:"";position:absolute;width:14px;height:14px;border-color:var(--ox);border-style:solid}
+.pageframe::before{top:-1px;left:-1px;border-width:2px 0 0 2px}
+.pageframe::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+/* 章番号 — 漢数字 */
+.sidx{font-family:var(--serif)!important;font-weight:800;font-size:1.5rem!important;letter-spacing:.1em!important;color:var(--ox)!important}
+/* 見出し — 二言語（主役は和文） */
+.st-en{display:block;font-family:var(--mono);font-weight:700;font-size:.6rem;letter-spacing:.62em;color:var(--dim);margin:0 0 1.1rem .1em;text-transform:uppercase}
+/* 宣言の帯 — 巨大アウトライン文字が流れる */
+.gt-marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.6rem 0;background:#0A0807}
+.gt-track{display:inline-flex;white-space:nowrap;animation:gtscroll 30s linear infinite}
+.gt-track span{font-family:var(--serif);font-weight:800;font-size:clamp(2.4rem,9.5vw,5.4rem);line-height:1.15;color:transparent;-webkit-text-stroke:1px rgba(231,222,203,.38);padding-right:.6em}
+.gt-track b{color:var(--ox);-webkit-text-stroke:0;font-weight:800;padding-right:.6em}
+@keyframes gtscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* 朱印 */
+.seal{position:absolute;right:calc(var(--pad)*1.1);bottom:13vh;width:72px;height:72px;border:3px solid var(--ox);color:var(--ox);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:800;writing-mode:vertical-rl;font-size:1.2rem;letter-spacing:.18em;transform:rotate(-4deg);opacity:0;animation:luxeUp 1s cubic-bezier(.16,1,.3,1) 1.15s forwards;border-radius:2px}
+/* 品書のドットリーダー */
+.mi{align-items:baseline}
+.mm{flex:1;border-bottom:1px dotted rgba(231,222,203,.25);margin:0 .7rem;height:.8em}
+@media(prefers-reduced-motion:reduce){.gt-track{animation:none}.seal{animation:none;opacity:.92}}
+@media(max-width:480px){.pageframe{inset:8px}.seal{width:60px;height:60px;font-size:1rem;bottom:10vh}}
 </style>
 </head>
 <body>
+<div class="pageframe" aria-hidden="true"></div>
 <a class="a11y-jump" href="access.html">読みやすい・音声対応ページへ</a>
 
 <div id="wcBar"><div class="wc-track"><span>⚽ WORLD CUP 2026 · 観戦やってます · 全104試合 · ご予約で何時でも放映 · GROUP THERAPY HERE ·</span><span>⚽ WORLD CUP 2026 · 観戦やってます · 全104試合 · ご予約で何時でも放映 · GROUP THERAPY HERE ·</span></div></div>
@@ -313,11 +338,13 @@ body{background:#0B0908}
   <h1 class="word"><span class="w1">BAR — SINCE 2007</span>EORNA<span class="d">.</span></h1>
   <p class="tag">Group Therapy Here. One drink, no airs.</p>
   <div class="meta">EST. 2007 &nbsp;·&nbsp; 300+ WHISKIES &nbsp;·&nbsp; <b>NO CHARGE</b> &nbsp;·&nbsp; 18:00–03:00</div>
+  <div class="seal">オルナ</div>
   <div class="wc-hero">🇯🇵 JAPAN — THROUGH TO THE KNOCKOUTS</div>
   <div class="wc-countdown" id="wcCountdown"></div>
 </section>
 
 <div class="band"><img src="IMG_3185.jpeg" alt="the back bar"><div class="ov"></div></div>
+<div class="gt-marquee" aria-hidden="true"><div class="gt-track"><span>GROUP THERAPY HERE</span><b>・</b><span>肩肘張らず、一杯から</span><b>・</b><span>GROUP THERAPY HERE</span><b>・</b><span>肩肘張らず、一杯から</span><b>・</b></div></div>
 <div class="cap">The Back Bar — 300+ Bottles, Shinjuku Basement</div>
 
 <section class="concept rev" id="concept">
@@ -430,6 +457,20 @@ body{background:#0B0908}
     var p=(r.top+r.height/2-vh/2)/vh; img.style.setProperty('--par',(p*-34).toFixed(1)+'px');}
   addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(move);}},{passive:true});
   move();
+})();
+</script>
+<script>
+/* freehand: bilingual titles + kanji chapters */
+(function(){
+  var map={'Menu':'品書','Story':'物語','Visit':'所在'};
+  var EN_PAGE=true;
+  document.querySelectorAll('.stitle').forEach(function(t){
+    var en=t.textContent.trim(); var jp=map[en]; if(!jp) return;
+    t.innerHTML = EN_PAGE ? '<span class="st-en">'+jp+'</span>'+en
+                          : '<span class="st-en">'+en+'</span>'+jp;
+  });
+  var k=['壱','弐','参','肆','伍'];
+  document.querySelectorAll('.sidx').forEach(function(s,i){ if(k[i]) s.textContent=k[i]; });
 })();
 </script>
 </body>
