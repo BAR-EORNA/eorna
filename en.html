@@ -17,7 +17,7 @@
   <meta name="theme-color" content="#0E0B09">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Shippori+Mincho:wght@600;700;800&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{ margin:0; padding:0; box-sizing:border-box; }
     :root{
@@ -225,9 +225,72 @@ body.wc .wc-track{animation:none!important;width:100%;justify-content:center;dis
 body.wc #wcBar .wc-track span{color:#EFE7D4!important;font-weight:500!important;font-size:.62rem!important;letter-spacing:.13em!important}
 
 body.wc .ph-owner .v-nagata,body.wc .psq .v-nagata{display:block!important}
+
+.a11y-jump{position:absolute;left:-9999px;top:0;z-index:100000}
+.a11y-jump:focus{left:0;display:inline-block;background:#D8B75A;color:#0E0B09;padding:.8rem 1.1rem;font-weight:700;text-decoration:none}
+
+/* ===== LUXE POLISH: 高級・静かな迫力 ===== */
+/* 1) Hero — 画面を支配する大型ワードマーク */
+.hero{padding:26vh var(--pad) 15vh}
+.word{font-size:clamp(3.4rem,19vw,11rem)!important;line-height:.92!important;letter-spacing:-.005em!important}
+.word .d{color:var(--gold)}
+.hero .kick{font-size:.62rem;letter-spacing:.52em}
+.hero .tag{font-size:clamp(.95rem,3.2vw,1.15rem);color:var(--cream);opacity:.92;margin-top:2rem}
+.hero .meta{margin-top:2.8rem;color:var(--dim)}
+.hero .meta b{color:var(--gold);font-weight:700}
+/* 登場演出：静かに立ち上がる */
+@keyframes luxeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+.hero .crest,.hero .kick,.hero .word,.hero .tag,.hero .meta{opacity:0;animation:luxeUp 1.15s cubic-bezier(.16,1,.3,1) forwards}
+.hero .crest{animation-delay:.05s}.hero .kick{animation-delay:.18s}
+.hero .word{animation-delay:.34s}.hero .tag{animation-delay:.62s}.hero .meta{animation-delay:.82s}
+/* 2) 写真バンド — フルブリード＋静かな視差 */
+.band{overflow:hidden}
+.band img{will-change:transform;transform:translateY(var(--par,0px)) scale(1.12)}
+/* 3) スクロール出現の所作を重く上質に */
+.rev{transition:opacity 1.1s cubic-bezier(.16,1,.3,1),transform 1.1s cubic-bezier(.16,1,.3,1);transform:translateY(30px)}
+.rev.in{transform:translateY(0)}
+/* 4) 細部 — 罫線と余白のリズム */
+section{scroll-margin-top:70px}
+@media(prefers-reduced-motion:reduce){
+  .hero .crest,.hero .kick,.hero .word,.hero .tag,.hero .meta{animation:none;opacity:1}
+  .band img{transform:none}
+  .rev{transition:none;transform:none}
+}
+
+/* ===== GRAND REDESIGN: 明朝 × 墨黒 × 緋 ===== */
+:root{--ox:#8C2B22;--serif:'Shippori Mincho',serif}
+body{background:#0B0908}
+/* Hero — 全画面の扉 */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative;padding:18vh var(--pad) 12vh!important}
+.vrail{position:absolute;top:50%;right:calc(var(--pad)*.55);transform:translateY(-50%);writing-mode:vertical-rl;font-family:var(--mono);font-size:.58rem;letter-spacing:.55em;color:var(--faint);text-transform:uppercase;opacity:0;animation:luxeUp 1.15s cubic-bezier(.16,1,.3,1) .95s forwards}
+.word{font-family:var(--serif)!important;font-weight:800;font-size:clamp(4.6rem,26vw,16rem)!important;line-height:.88!important;letter-spacing:-.015em!important;color:var(--cream)}
+.word .w1{display:block;font-family:var(--mono);font-weight:700;font-size:clamp(.6rem,2.6vw,.85rem);letter-spacing:.85em;color:var(--dim);margin:0 0 1.7rem .2em}
+.word .d{color:var(--ox)!important}
+.hero .kick{display:none}
+.hero .tag{font-family:var(--serif);font-weight:600;font-size:clamp(1.05rem,3.7vw,1.5rem);color:var(--cream);opacity:.94;margin-top:2.4rem}
+.hero .meta{margin-top:3rem}
+.hero .meta b{color:var(--gold)}
+/* Section — 雑誌の扉 */
+.sidx{color:var(--ox)!important;font-size:.6rem!important;letter-spacing:.5em!important}
+.stitle{font-family:var(--serif)!important;font-weight:700;font-size:clamp(2.7rem,11vw,5.6rem)!important;line-height:1!important;color:var(--cream)!important;text-transform:none!important}
+.stitle::after{content:"";display:block;width:58px;height:3px;background:var(--ox);margin-top:1.3rem}
+/* 写真バンド — ほぼ全画面 */
+.band{height:78svh;overflow:hidden;position:relative}
+.band img{width:100%;height:100%;object-fit:cover;display:block}
+/* Menu の品書き */
+.mn{font-family:var(--serif);font-weight:600;font-size:1.12rem}
+.mp{color:var(--gold)}
+.cat{color:var(--ox)!important;letter-spacing:.42em}
+/* Story 本文を明朝に */
+.story-text p{font-family:var(--serif);font-size:1.02rem;line-height:2.15}
+/* Footer 大詰め */
+.foot-word{font-family:var(--serif)!important;font-weight:800;font-size:clamp(3.6rem,19vw,9.5rem)!important;letter-spacing:-.01em!important}
+@media(prefers-reduced-motion:reduce){.vrail{animation:none;opacity:1}}
 </style>
 </head>
 <body>
+<a class="a11y-jump" href="access.html">読みやすい・音声対応ページへ</a>
+
 <div id="wcBar"><div class="wc-track"><span>⚽ WORLD CUP 2026 · 観戦やってます · 全104試合 · ご予約で何時でも放映 · GROUP THERAPY HERE ·</span><span>⚽ WORLD CUP 2026 · 観戦やってます · 全104試合 · ご予約で何時でも放映 · GROUP THERAPY HERE ·</span></div></div>
 <div id="wcFlags"><div class="wc-ftrack">🇯🇵 🇬🇧 🇧🇷 🇦🇷 🇫🇷 🇩🇪 🇪🇸 🇵🇹 🇳🇱 🇧🇪 🇭🇷 🇲🇽 🇺🇸 🇨🇦 🇰🇷 🇲🇦 🇸🇳 🇨🇭 🇷🇸 🇺🇾 🇯🇵 🇬🇧 🇧🇷 🇦🇷 🇫🇷 🇩🇪 🇪🇸 🇵🇹 🇳🇱 🇧🇪 🇭🇷 🇲🇽 🇺🇸 🇨🇦 🇰🇷 🇲🇦 🇸🇳 🇨🇭 🇷🇸 🇺🇾 </div></div>
 <div class="wc-balls"><b style="left:6%;animation-duration:15s">⚽</b><b style="left:23%;animation-duration:21s;animation-delay:4s">⚽</b><b style="left:43%;animation-duration:17s;animation-delay:2s">⚽</b><b style="left:62%;animation-duration:24s;animation-delay:6s">⚽</b><b style="left:80%;animation-duration:18s;animation-delay:1s">⚽</b><b style="left:92%;animation-duration:27s;animation-delay:8s">⚽</b></div>
@@ -245,8 +308,9 @@ body.wc .ph-owner .v-nagata,body.wc .psq .v-nagata{display:block!important}
 
 <section class="hero" style="border-bottom:1px solid var(--line); cursor:default;">
   <div class="crest"><img src="BAR_EORNA.png" alt="" onerror="this.closest('.crest').remove()"></div>
+  <div class="vrail">SHINJUKU 3-CHOME · BASEMENT BAR</div>
   <div class="kick">British Bar — Shinjuku 3-Chome</div>
-  <h1 class="word">BAR<br>EORNA<span class="d">.</span></h1>
+  <h1 class="word"><span class="w1">BAR — SINCE 2007</span>EORNA<span class="d">.</span></h1>
   <p class="tag">Group Therapy Here. One drink, no airs.</p>
   <div class="meta">EST. 2007 &nbsp;·&nbsp; 300+ WHISKIES &nbsp;·&nbsp; <b>NO CHARGE</b> &nbsp;·&nbsp; 18:00–03:00</div>
   <div class="wc-hero">🇯🇵 JAPAN — THROUGH TO THE KNOCKOUTS</div>
@@ -353,6 +417,19 @@ body.wc .ph-owner .v-nagata,body.wc .psq .v-nagata{display:block!important}
   var sp=document.querySelectorAll('.wc-track span');
   if(sp[0]) sp[0].textContent="⚽ FIFA WORLD CUP 2026 · WATCH THE MATCHES HERE · BOOK ANYTIME";
   if(sp[1]) sp[1].textContent="";
+})();
+</script>
+<script>
+/* luxe parallax */
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var img=document.querySelector('.band img'); if(!img) return;
+  var band=img.closest('.band'), t=false;
+  function move(){t=false;var r=band.getBoundingClientRect(),vh=innerHeight;
+    if(r.bottom<0||r.top>vh) return;
+    var p=(r.top+r.height/2-vh/2)/vh; img.style.setProperty('--par',(p*-34).toFixed(1)+'px');}
+  addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(move);}},{passive:true});
+  move();
 })();
 </script>
 </body>
