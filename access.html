@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BAR EORNA｜読みやすい・音声対応ページ</title>
+<meta name="description" content="新宿三丁目の英国風バー BAR EORNA（バー オルナ）の、読みやすく音声読み上げに対応したページ。営業時間・場所・ご予約のご案内。">
+<style>
+  :root{
+    --bg:#0E0B09; --text:#EDE6D4; --head:#D8B75A; --link:#F2ECDB;
+    --focus:#E0BE5E; --line:rgba(237,230,212,.25);
+  }
+  *{box-sizing:border-box}
+  html{font-size:112.5%}                 /* 大きめの基準サイズ */
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:'Noto Sans JP','Hiragino Sans','Yu Gothic',system-ui,sans-serif;
+    font-weight:400;line-height:1.9;letter-spacing:.02em;
+    -webkit-text-size-adjust:100%;}
+  .skip{position:absolute;left:-9999px;top:0}
+  .skip:focus{left:0;z-index:100;display:inline-block;background:var(--head);color:#0E0B09;
+    padding:.8rem 1.2rem;font-weight:700;text-decoration:none}
+  .wrap{max-width:40rem;margin:0 auto;padding:2rem 1.3rem 4rem}
+  header{border-bottom:1px solid var(--line);padding-bottom:1.4rem;margin-bottom:1.6rem}
+  .kicker{margin:0 0 .4rem;font-size:1rem;color:var(--head);font-weight:700}
+  h1{margin:.2rem 0;font-size:2rem;line-height:1.35;color:var(--text)}
+  .sub{margin:.4rem 0 0;font-size:1.15rem;color:var(--text)}
+  section{margin:0 0 2.2rem}
+  h2{font-size:1.45rem;color:var(--head);margin:0 0 .6rem;line-height:1.4}
+  p{margin:.5rem 0;font-size:1.15rem}
+  a{color:var(--link);text-decoration:underline;text-underline-offset:3px}
+  a:focus,a:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+  ul.links{list-style:none;margin:.6rem 0 0;padding:0}
+  ul.links li{margin:0 0 .2rem}
+  ul.links a{display:block;padding:1rem .2rem;font-size:1.2rem;border-bottom:1px solid var(--line)}
+  address{font-style:normal}
+  footer{border-top:1px solid var(--line);padding-top:1.4rem;margin-top:2rem}
+  .note{border:1px solid var(--line);border-left:4px solid var(--head);padding:1rem 1.1rem;margin-top:1rem;background:rgba(216,183,90,.06)}
+  footer a{font-size:1.1rem}
+</style>
+</head>
+<body>
+  <a class="skip" href="#main">本文へスキップ</a>
+  <div class="wrap">
+    <header>
+      <p class="kicker">読みやすい・音声対応ページ</p>
+      <h1>BAR EORNA（バー オルナ）</h1>
+      <p class="sub">東京・新宿三丁目の英国風バー</p>
+    </header>
+
+    <main id="main">
+      <section aria-labelledby="about-h">
+        <h2 id="about-h">お店について</h2>
+        <p>2007年に始まった英国風のバーです。300種類以上のウイスキーを揃え、チャージ（席料）はいただきません。肩肘を張らず、一杯からお気軽にお越しください。</p>
+      </section>
+
+      <section aria-labelledby="hours-h">
+        <h2 id="hours-h">営業時間</h2>
+        <p>18:00 から 翌 3:00 まで</p>
+        <p>定休日や臨時のお休みは、InstagramまたはLINEでご確認ください。</p>
+      </section>
+
+      <section aria-labelledby="access-h">
+        <h2 id="access-h">場所・アクセス</h2>
+        <p>東京都 新宿区 新宿三丁目（地下）</p>
+        <p><a href="https://www.google.com/maps/search/?api=1&amp;query=35.691508%2C139.7065674" target="_blank" rel="noopener">地図で場所を見る（Googleマップ。新しいタブで開きます）</a></p>
+        <p class="note">当店は地下にあり、階段がやや急です。段差にご不安のある方は、無理をなさらず事前にご連絡ください。<a href="tel:0368207456">お電話（03-6820-7456）</a>・<a href="https://lin.ee/N6yc4mdA" target="_blank" rel="noopener">LINE</a>・<a href="mailto:BAR@eorna.info">メール</a>をいただければ、スタッフが入口までご案内します。</p>
+      </section>
+
+      <section aria-labelledby="contact-h">
+        <h2 id="contact-h">ご予約・お問い合わせ</h2>
+        <address>
+          <ul class="links">
+            <li><a href="tel:0368207456">電話をかける：03-6820-7456</a></li>
+            <li><a href="mailto:BAR@eorna.info">メールを送る（お店へ）：BAR@eorna.info</a></li>
+            <li><a href="mailto:nagata@eorna.info">メールを送る（オーナー永田へ）：nagata@eorna.info</a></li>
+            <li><a href="https://lin.ee/N6yc4mdA" target="_blank" rel="noopener">LINEで予約・問い合わせをする（新しいタブで開きます）</a></li>
+            <li><a href="https://instagram.com/bar_eorna" target="_blank" rel="noopener">Instagramを見る（新しいタブで開きます）</a></li>
+          </ul>
+        </address>
+      </section>
+    </main>
+
+    <footer>
+      <p><a href="index.html">通常版のサイトへ戻る</a></p>
+    </footer>
+  </div>
+</body>
+</html>
