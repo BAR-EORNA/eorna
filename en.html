@@ -391,7 +391,7 @@ addEventListener('orientationchange',function(){setTimeout(ori,300);});addEventL
 var count=parseInt(localStorage.getItem('eornaVisits')||'0')+1;
 localStorage.setItem('eornaVisits',count);
 if(count===3||count===10||count===20){setTimeout(function(){toast('A regular now. Thank you, as always.');},2500);}
-document.getElementById('footerLogo').addEventListener('click',function(){location.href='kimura.html';});
+document.getElementById('footerLogo').addEventListener('click',function(){scrollTo({top:0,behavior:'smooth'});});
 var cur=document.getElementById('curtain');
 document.querySelectorAll('a[href$=".html"]').forEach(function(a){
   if(a.target==='_blank')return;
