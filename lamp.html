@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>灯 — BAR EORNA</title>
 <meta name="description" content="暗闇のカウンターを灯りで照らし、3本の特別なボトルを見つけてください。BAR EORNAの小さな3D体験。">
-<meta name="theme-color" content="#05060A">
+<meta name="theme-color" content="#070503">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%23B0281C%27/%3E%3Ctext x=%2732%27 y=%2746%27 font-family=%27Arial Black,sans-serif%27 font-size=%2740%27 font-weight=%27900%27 fill=%27%23EDE5D2%27 text-anchor=%27middle%27%3EE%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-F4JBQ8GK16"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-F4JBQ8GK16');</script>
 <style>
-:root{--bg:#05060A;--cream:#EDE5D2;--red:#C9A96A;--dim:#9a9081;--mono:'Space Mono',monospace;--min:'Shippori Mincho',serif;--disp:'Anton',sans-serif;--sans:'Noto Sans JP',sans-serif}
+:root{--bg:#070503;--cream:#EDE5D2;--red:#C9A96A;--dim:#9a9081;--mono:'Space Mono',monospace;--min:'Shippori Mincho',serif;--disp:'Anton',sans-serif;--sans:'Noto Sans JP',sans-serif}
 *{box-sizing:border-box;margin:0}
 html,body{height:100%}
 body{background:var(--bg);color:var(--cream);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
@@ -102,8 +102,8 @@ renderer.shadowMap.enabled=false;
 document.getElementById('stage').appendChild(renderer.domElement);
 
 var scene=new THREE.Scene();
-scene.background=new THREE.Color(0x05060A);
-scene.fog=new THREE.Fog(0x05060A,6,14);
+scene.background=new THREE.Color(0x070504);
+scene.fog=new THREE.Fog(0x070504,6,14);
 
 var cam=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.1,50);
 cam.position.set(0,1.9,4.6);
@@ -123,9 +123,9 @@ scene.add(lampGlow);
 /* room */
 var wood=new THREE.MeshStandardMaterial({color:0x35231a,roughness:.6,metalness:.15});
 var woodDark=new THREE.MeshStandardMaterial({color:0x1f1410,roughness:.8,metalness:.08});
-var wall=new THREE.MeshStandardMaterial({color:0x10131c,roughness:.9});
+var wall=new THREE.MeshStandardMaterial({color:0x161210,roughness:.9});
 /* floor */
-var floor=new THREE.Mesh(new THREE.PlaneGeometry(20,20),new THREE.MeshStandardMaterial({color:0x0a0c12,roughness:.85,metalness:.2}));
+var floor=new THREE.Mesh(new THREE.PlaneGeometry(20,20),new THREE.MeshStandardMaterial({color:0x0b0907,roughness:.85,metalness:.15}));
 floor.rotation.x=-Math.PI/2;scene.add(floor);
 /* back wall */
 var bw=new THREE.Mesh(new THREE.PlaneGeometry(20,8),wall);bw.position.set(0,4,-3.2);scene.add(bw);
@@ -191,9 +191,9 @@ var brass=new THREE.Mesh(new THREE.CylinderGeometry(.02,.02,7.4,10),
   new THREE.MeshStandardMaterial({color:0xC9A96A,metalness:.9,roughness:.25}));
 brass.rotation.z=Math.PI/2;brass.position.set(0,1.17,1.13);scene.add(brass);
 var neon=new THREE.Mesh(new THREE.BoxGeometry(7.4,.028,.02),
-  new THREE.MeshBasicMaterial({color:0x43E8E0,transparent:true,opacity:.75}));
+  new THREE.MeshBasicMaterial({color:0x43E8E0,transparent:true,opacity:.38}));
 neon.position.set(0,3.35,-3.15);scene.add(neon);
-scene.add(function(){var nl=new THREE.PointLight(0x43E8E0,.3,4.5,2);nl.position.set(0,3.2,-2.3);return nl;}());
+scene.add(function(){var nl=new THREE.PointLight(0x43E8E0,.16,4.5,2);nl.position.set(0,3.2,-2.3);return nl;}());
 /* fit shelf spread to the visible width (portrait safe) */
 var usable=3.1;
 function layout(){

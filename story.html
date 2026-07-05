@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%23B0281C%27/%3E%3Ctext x=%2732%27 y=%2746%27 font-family=%27Arial Black,sans-serif%27 font-size=%2740%27 font-weight=%27900%27 fill=%27%23EDE5D2%27 text-anchor=%27middle%27%3EE%3C/text%3E%3C/svg%3E">
-<meta name="theme-color" content="#06070B">
+<meta name="theme-color" content="#0C0A08">
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
   <style>
     *,*::before,*::after{ margin:0; padding:0; box-sizing:border-box; }
     :root{
-      --ground:#06070B; --ink:#E7DECB; --dim:#8C8372; --faint:#565045;
+      --ground:#0C0A08; --ink:#E7DECB; --dim:#8C8372; --faint:#565045;
       --line:rgba(233,227,211,.13); --gold:#C9A96A;
       --mono:'Space Mono',ui-monospace,monospace; --jp:'Noto Sans JP',sans-serif;
     }
@@ -42,7 +42,7 @@
     .story-footer a:hover{ color:var(--gold); border-color:var(--gold); }
     @media(prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} .story-line,.story-line.highlight,.story-footer{opacity:1;transform:none} }
   
-#wcBar{display:none;position:fixed;top:0;left:0;right:0;z-index:9999;height:34px;line-height:34px;text-align:center;background:var(--gold);color:#06070B;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;overflow:hidden;padding:0 .5rem}
+#wcBar{display:none;position:fixed;top:0;left:0;right:0;z-index:9999;height:34px;line-height:34px;text-align:center;background:var(--gold);color:#0C0A08;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;overflow:hidden;padding:0 .5rem}
 body.wc #wcBar{display:block}
 .wc-hero{display:none;font-family:var(--mono);font-size:clamp(.62rem,2vw,.74rem);letter-spacing:.1em;color:var(--gold);border:1px solid rgba(201,169,106,.45);padding:.7rem 1rem;margin-top:1.9rem}
 body.wc .wc-hero{display:inline-block}
@@ -52,7 +52,7 @@ body.wc nav{top:34px}
 #wcBar{background:linear-gradient(90deg,#C9A96A 0%,#1a7a4a 50%,#C9A96A 100%);overflow:hidden;padding:0}
 body.wc #wcBar{display:flex;align-items:center}
 .wc-track{display:inline-flex;flex:none;white-space:nowrap;animation:wcscroll 22s linear infinite}
-.wc-track span{padding:0 1.3rem;font-family:var(--mono);font-weight:700;font-size:.64rem;letter-spacing:.16em;color:#06070B;text-transform:uppercase;line-height:34px}
+.wc-track span{padding:0 1.3rem;font-family:var(--mono);font-weight:700;font-size:.64rem;letter-spacing:.16em;color:#0C0A08;text-transform:uppercase;line-height:34px}
 @keyframes wcscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .wc-balls{display:none}
 body.wc .wc-balls{display:block;position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
@@ -65,7 +65,7 @@ body.wc .wc-hero{display:inline-block;background:#1a7a4a;color:#fff;border:0;bor
 
 
 /* ===== WC pack2: flags / confetti / pitch / countdown ===== */
-#wcFlags{display:none;position:fixed;top:34px;left:0;right:0;z-index:9998;height:28px;background:#06070B;border-bottom:1px solid rgba(201,169,106,.3);overflow:hidden}
+#wcFlags{display:none;position:fixed;top:34px;left:0;right:0;z-index:9998;height:28px;background:#0C0A08;border-bottom:1px solid rgba(201,169,106,.3);overflow:hidden}
 body.wc #wcFlags{display:flex;align-items:center}
 .wc-ftrack{display:inline-flex;flex:none;white-space:nowrap;font-size:1rem;line-height:28px;animation:wcscroll2 34s linear infinite}
 @keyframes wcscroll2{from{transform:translateX(-50%)}to{transform:translateX(0)}}
@@ -79,14 +79,14 @@ body.wc .wc-balls{display:none!important}
 body.wc #wcFlags{display:none!important}
 body.wc .word .d{font-size:inherit!important}
 body.wc .word .d::after{content:""!important;display:none!important}
-body.wc #wcBar{background:#0B0D13!important;border-bottom:1px solid rgba(201,169,106,.35)}
+body.wc #wcBar{background:#15110D!important;border-bottom:1px solid rgba(201,169,106,.35)}
 .wc-track{animation-duration:30s}
 .wc-track span{color:var(--cream)!important;letter-spacing:.2em;font-size:.6rem;font-weight:400}
 body.wc .wc-hero{display:block!important;margin:1.7rem auto 0!important;max-width:max-content;background:transparent!important;color:var(--cream)!important;border:0!important;border-top:1px solid rgba(201,169,106,.45)!important;border-bottom:1px solid rgba(201,169,106,.45)!important;padding:.9rem 1.5rem!important;font-size:clamp(.82rem,3vw,1.2rem)!important;font-weight:500!important;letter-spacing:.16em!important;line-height:1.5}
 body.wc .wc-countdown{background:transparent!important;color:var(--gold)!important;border:1px solid rgba(201,169,106,.5)!important;font-weight:400!important}
 
 /* ===== ribbon readability fix (high specificity) ===== */
-body.wc #wcBar{background:#0B0D13!important}
+body.wc #wcBar{background:#15110D!important}
 body.wc #wcBar .wc-track span{color:#EFE7D4!important;font-weight:600!important;font-size:.68rem!important;letter-spacing:.12em!important;opacity:1!important}
 
 /* ===== WC OFF: 観戦できる通知だけ残す ===== */
@@ -101,22 +101,22 @@ body.wc .word .d::after{content:""!important;display:none!important}
 body.wc .ph-owner .v-brazil,body.wc .psq .v-brazil{display:none!important}
 body.wc .ph-owner .v-nagata,body.wc .psq .v-nagata{display:block!important}
 body.wc .ph-cap-wc{display:none!important}
-body.wc #wcBar{justify-content:center!important;background:#0B0D13!important;border-bottom:1px solid rgba(201,169,106,.28)!important}
+body.wc #wcBar{justify-content:center!important;background:#15110D!important;border-bottom:1px solid rgba(201,169,106,.28)!important}
 body.wc .wc-track{animation:none!important;width:100%;justify-content:center;display:flex}
 body.wc #wcBar .wc-track span{color:#EFE7D4!important;font-weight:500!important;font-size:.62rem!important;letter-spacing:.13em!important}
 
 /* ===== POSTER UNIFY: 紙×墨×緋 ===== */
 :root{
- --ground:#06070B!important; --smoke:#0B0D13!important; --dark:#06070B!important;
+ --ground:#0C0A08!important; --smoke:#15110D!important; --dark:#0C0A08!important;
  --ink:#EDE5D2!important; --cream:#EDE5D2!important;
  --dim:#9a9081!important; --muted:#9a9081!important; --faint:#6b6355!important;
  --gold:#C9A96A!important; --red:#C9A96A!important;
  --line:rgba(233,227,211,.16)!important;
 }
-body{background:#06070B!important;color:#E9E3D3!important}
+body{background:#0C0A08!important;color:#E9E3D3!important}
 #wcBar,#wcFlags{display:none!important}
 img{filter:none}
-::selection{background:#C9A96A;color:#06070B}
+::selection{background:#C9A96A;color:#0C0A08}
 a:focus-visible,button:focus-visible{outline:2px solid #43E8E0;outline-offset:3px}
 
 /* ===== TONE UNIFY: NOIR共通部品 ===== */
@@ -125,8 +125,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #43E8E0;outline-offset:3p
 h1,h2,.title-main,.lock-title{font-family:'Shippori Mincho',serif}
 button,.btn-answer,.btn-hint,.btn-restart,.lock-btn,.choice-btn,.btn-start,.btn-retry,.btn-line,.btn-hint-small{
  font-family:'Space Mono',monospace!important;border-color:#C9A96A!important;color:#E9E3D3!important;background:transparent}
-button:active,.btn-answer:active,.choice-btn:active,.lock-btn:active{background:#C9A96A!important;color:#06070B!important}
-input,.lock-input{border-color:rgba(237,229,210,.3)!important;background:#0B0D13!important;color:#E9E3D3!important}
+button:active,.btn-answer:active,.choice-btn:active,.lock-btn:active{background:#C9A96A!important;color:#0C0A08!important}
+input,.lock-input{border-color:rgba(237,229,210,.3)!important;background:#15110D!important;color:#E9E3D3!important}
 ::placeholder{color:#6b6355}
 </style>
 </head>
