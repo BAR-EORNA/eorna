@@ -246,6 +246,18 @@ a:focus-visible,button:focus-visible,.brand:focus-visible{outline:2px solid var(
 .sigvids video{width:100%;height:100%;object-fit:cover;display:block}
 .sigvids figure::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(12,10,8,.7));pointer-events:none}
 .sigvids figcaption{position:absolute;left:.6rem;bottom:.5rem;z-index:2;font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;color:var(--cream);text-transform:uppercase}
+
+/* ===== HERO READABILITY ===== */
+#cover::after{background:linear-gradient(180deg,rgba(12,10,8,.55) 0%,rgba(12,10,8,.35) 32%,rgba(12,10,8,.82) 70%,rgba(12,10,8,.96) 100%)!important}
+.hin{background:linear-gradient(0deg,rgba(12,10,8,.55),transparent 62%)}
+.hin .big{text-shadow:0 2px 26px rgba(8,6,4,.9),0 1px 3px rgba(8,6,4,.8)}
+.hin .copy{text-shadow:0 2px 16px rgba(8,6,4,.95)}
+.hin .kick{color:var(--cream);opacity:.9;text-shadow:0 1px 10px rgba(8,6,4,.9)}
+.big .r{color:var(--gold);text-shadow:0 2px 22px rgba(8,6,4,.95)}
+.chip{background:rgba(12,10,8,.62)!important;color:var(--cream)!important;border-color:rgba(233,227,211,.35)!important;backdrop-filter:blur(3px)}
+.chip.g{color:var(--gold)!important;border-color:rgba(201,169,106,.6)!important}
+.tokline{color:var(--cream);opacity:.8;text-shadow:0 1px 8px rgba(8,6,4,.9)}
+#nightMsg{text-shadow:0 1px 10px rgba(8,6,4,.9)}
 </style>
 </head>
 <body>
@@ -263,7 +275,7 @@ a:focus-visible,button:focus-visible,.brand:focus-visible{outline:2px solid var(
 
 <!-- HERO CARD -->
 <section id="cover">
-  <video class="bg" autoplay loop muted playsinline poster="IMG_3185.jpeg"><source src="hero_irish.mp4" type="video/mp4"></video><div class="aura" aria-hidden="true"></div><div class="sweep" aria-hidden="true"></div><div class="bokeh" aria-hidden="true"><b></b><b></b><b></b><b></b></div>
+  <video class="bg" autoplay loop muted playsinline poster="IMG_3185.jpeg"><source src="hero%20irish.mp4" type="video/mp4"></video><div class="aura" aria-hidden="true"></div><div class="sweep" aria-hidden="true"></div><div class="bokeh" aria-hidden="true"><b></b><b></b><b></b><b></b></div>
   <div class="hin">
     <div class="kick">BRITISH BAR — 新宿三丁目 · 地下</div>
     <h1 class="big">BAR EOR<span class="r">NA</span></h1>
@@ -319,7 +331,7 @@ a:focus-visible,button:focus-visible,.brand:focus-visible{outline:2px solid var(
     <div class="cat">DRAUGHT &amp; SIGNATURE</div>
     <div class="mi"><span class="mn">本日のドラフト</span><span class="ms">3 Taps</span><span class="ml"></span><span class="mp">¥1,000〜</span></div>
     <div class="mi"><span class="mn">The Bomb</span><span class="ms">Guinness × Jameson × Baileys</span><span class="ml"></span><span class="mp">¥1,800</span></div>
-    <div class="sigvids"><figure><video src="vid_cocktail.mp4" autoplay loop muted playsinline poster="IMG_3185.jpeg"></video><figcaption>ゾンビ</figcaption></figure><figure><video src="vid_download.mp4" autoplay loop muted playsinline poster="IMG_3185.jpeg"></video><figcaption>ニコラシカ</figcaption></figure></div>
+    <div class="sigvids"><figure><video src="vid%20cocktail.mp4" autoplay loop muted playsinline poster="IMG_3185.jpeg"></video><figcaption>ゾンビ</figcaption></figure><figure><video src="vid%20download.mp4" autoplay loop muted playsinline poster="IMG_3185.jpeg"></video><figcaption>ニコラシカ</figcaption></figure></div>
     <div class="mnote">一部のみ掲載 · 全300種はカウンターで</div>
   </div>
 </section>
