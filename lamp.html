@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>灯 — BAR EORNA</title>
+<meta name="description" content="暗闇のカウンターを灯りで照らし、3本の特別なボトルを見つけてください。BAR EORNAの小さな3D体験。">
+<meta name="theme-color" content="#050403">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%23B0281C%27/%3E%3Ctext x=%2732%27 y=%2746%27 font-family=%27Arial Black,sans-serif%27 font-size=%2740%27 font-weight=%27900%27 fill=%27%23EDE5D2%27 text-anchor=%27middle%27%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Shippori+Mincho:wght@700;800&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F4JBQ8GK16"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-F4JBQ8GK16');</script>
+<style>
+:root{--bg:#050403;--cream:#EDE5D2;--red:#C1301F;--dim:#9a9081;--mono:'Space Mono',monospace;--min:'Shippori Mincho',serif;--disp:'Anton',sans-serif;--sans:'Noto Sans JP',sans-serif}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--cream);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+#stage{position:fixed;inset:0}
+canvas{display:block;touch-action:none}
+/* UI */
+#hud{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:1rem 1.2rem;z-index:10;pointer-events:none}
+#hud a{pointer-events:auto;font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;color:var(--dim);text-decoration:none;border:1px solid rgba(237,229,210,.25);padding:.5rem .8rem}
+#hud a:active{color:var(--red);border-color:var(--red)}
+#prog{font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;color:var(--cream)}
+#prog b{color:var(--red)}
+#hint{position:fixed;bottom:4.5vh;left:0;right:0;text-align:center;z-index:10;font-family:var(--mono);font-size:.58rem;letter-spacing:.3em;color:var(--dim);text-transform:uppercase;pointer-events:none;transition:opacity .8s}
+#hint.off{opacity:0}
+#title{position:fixed;top:16vh;left:0;right:0;text-align:center;z-index:10;pointer-events:none;transition:opacity 1s}
+#title .k{font-family:var(--mono);font-size:.58rem;letter-spacing:.5em;color:var(--dim);text-transform:uppercase}
+#title h1{font-family:var(--min);font-weight:800;font-size:clamp(3.4rem,17vw,7rem);color:var(--cream);line-height:1.1}
+#title.off{opacity:0}
+/* discovery card */
+#card{position:fixed;left:50%;bottom:10vh;transform:translateX(-50%) translateY(30px);z-index:20;width:min(84vw,340px);background:#0E0C0A;border:1px solid var(--red);padding:1.2rem 1.2rem 1rem;opacity:0;pointer-events:none;transition:.45s cubic-bezier(.16,1,.3,1)}
+#card.on{opacity:1;transform:translateX(-50%);pointer-events:auto}
+#card .cn{font-family:var(--min);font-weight:800;font-size:1.2rem}
+#card .cp{font-family:var(--disp);color:var(--red);font-size:1rem;margin-top:.2rem}
+#card .cl{font-size:.82rem;color:var(--dim);margin-top:.6rem;line-height:1.8}
+#card .cx{display:block;text-align:right;font-family:var(--mono);font-size:.55rem;letter-spacing:.3em;color:var(--dim);margin-top:.8rem}
+/* finale */
+#fin{position:fixed;inset:0;z-index:30;background:rgba(5,4,3,.9);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:2rem;opacity:0;pointer-events:none;transition:opacity 1s}
+#fin.on{opacity:1;pointer-events:auto}
+#fin .fa{font-family:var(--min);font-weight:800;font-size:clamp(1.4rem,6vw,2.2rem);line-height:2}
+#fin .fb{font-family:var(--mono);font-size:.6rem;letter-spacing:.3em;color:var(--dim);margin:1.4rem 0 2.2rem;text-transform:uppercase}
+#fin .fl{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
+#fin a{font-family:var(--disp);font-size:.95rem;letter-spacing:.08em;color:var(--cream);border:1px solid var(--red);padding:.85rem 1.4rem;text-decoration:none}
+#fin a:active{background:var(--red)}
+/* loading & fallback */
+#load{position:fixed;inset:0;z-index:40;background:var(--bg);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.4em;color:var(--dim);text-transform:uppercase;transition:opacity .8s}
+#load.off{opacity:0;pointer-events:none}
+#fb{display:none;position:fixed;inset:0;z-index:50;background:var(--bg);align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:2rem}
+#fb p{font-family:var(--min);font-size:1rem;line-height:2.2;max-width:26em}
+#fb a{margin-top:1.6rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;color:var(--red);border:1px solid var(--red);padding:.7rem 1.1rem;text-decoration:none}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+
+<div id="hud">
+  <a href="index.html">← EORNA</a>
+  <div id="prog">LAMP <b id="pc">0</b> / 3</div>
+</div>
+<div id="title"><div class="k">A Small Experience</div><h1>灯</h1></div>
+<div id="hint">指でなぞって、闇を照らしてください</div>
+
+<div id="card">
+  <div class="cn" id="cn"></div>
+  <div class="cp" id="cp"></div>
+  <div class="cl" id="cl"></div>
+  <span class="cx">TAP TO CLOSE</span>
+</div>
+
+<div id="fin">
+  <div class="fa">三つの灯が、揃いました。<br>続きは、カウンターで。</div>
+  <div class="fb">The lamp never went out — est. 2007</div>
+  <div class="fl">
+    <a href="index.html#menu">品書へ</a>
+    <a href="index.html">トップへ</a>
+  </div>
+</div>
+
+<div id="load">LIGHTING THE DARK…</div>
+<div id="fb">
+  <p>この端末では3D表示を利用できませんでした。<br>でも、本物のカウンターはいつでも点いています。</p>
+  <a href="index.html">トップへ戻る</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var fbEl=document.getElementById('fb'),loadEl=document.getElementById('load');
+function fallback(){loadEl.classList.add('off');fbEl.style.display='flex';}
+if(!window.THREE){fallback();return;}
+var renderer;
+try{
+  renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
+}catch(e){fallback();return;}
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth,innerHeight);
+renderer.shadowMap.enabled=false;
+document.getElementById('stage').appendChild(renderer.domElement);
+
+var scene=new THREE.Scene();
+scene.background=new THREE.Color(0x050403);
+scene.fog=new THREE.Fog(0x050403,6,14);
+
+var cam=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.1,50);
+cam.position.set(0,1.9,4.6);
+cam.lookAt(0,1.5,-2);
+
+/* ambient: almost nothing */
+scene.add(new THREE.AmbientLight(0x1a1410,.5));
+
+/* the lamp (follows pointer) */
+var lamp=new THREE.PointLight(0xC98A4C,0,7,2);
+lamp.position.set(0,2.2,0);
+scene.add(lamp);
+var lampGlow=new THREE.Mesh(new THREE.SphereGeometry(.045,12,12),
+  new THREE.MeshBasicMaterial({color:0xF0C070,transparent:true,opacity:0}));
+scene.add(lampGlow);
+
+/* room */
+var wood=new THREE.MeshStandardMaterial({color:0x4a2f1c,roughness:.75,metalness:.1});
+var woodDark=new THREE.MeshStandardMaterial({color:0x33200f,roughness:.85,metalness:.05});
+var wall=new THREE.MeshStandardMaterial({color:0x171310,roughness:.95});
+/* floor */
+var floor=new THREE.Mesh(new THREE.PlaneGeometry(20,20),new THREE.MeshStandardMaterial({color:0x0c0906,roughness:.9}));
+floor.rotation.x=-Math.PI/2;scene.add(floor);
+/* back wall */
+var bw=new THREE.Mesh(new THREE.PlaneGeometry(20,8),wall);bw.position.set(0,4,-3.2);scene.add(bw);
+/* counter */
+var counter=new THREE.Mesh(new THREE.BoxGeometry(7.5,.16,1.1),wood);counter.position.set(0,1.05,.6);scene.add(counter);
+var cbase=new THREE.Mesh(new THREE.BoxGeometry(7.5,1.0,.9),woodDark);cbase.position.set(0,.5,.62);scene.add(cbase);
+/* shelves */
+[1.7,2.5].forEach(function(y){
+  var sh=new THREE.Mesh(new THREE.BoxGeometry(7.2,.08,.55),wood);sh.position.set(0,y,-2.6);scene.add(sh);
+});
+/* hanging pendant above counter (static, faint) */
+var cord=new THREE.Mesh(new THREE.CylinderGeometry(.008,.008,1.4,6),woodDark);cord.position.set(0,3.6,.2);scene.add(cord);
+var shade=new THREE.Mesh(new THREE.ConeGeometry(.22,.22,24,1,true),new THREE.MeshStandardMaterial({color:0x2a1c10,roughness:.6,side:THREE.DoubleSide}));
+shade.position.set(0,2.9,.2);scene.add(shade);
+var faint=new THREE.PointLight(0x8a5a2a,.5,3.2,2);faint.position.set(0,2.75,.2);scene.add(faint);
+
+/* bottles */
+var bottles=[], specials=[];
+var specialData=[
+ {name:'Jameson',price:'¥900',lore:'木村がいちばん注いだアイリッシュ。この店の始まりの味。'},
+ {name:'Bowmore 18y',price:'¥2,500',lore:'潮とスモーク。アイラの王道は、静かな夜に。'},
+ {name:'The Bomb',price:'¥1,800',lore:'ギネス×ジェムソン×ベイリーズ。ここだけの一杯。'}
+];
+var palette=[0x2a3d2a,0x3d2a2a,0x2a2a3d,0x3d362a,0x24303a,0x362a3d,0x30302a];
+var specialIdx=[4,11,18];
+var N=22, si=0;
+for(var i=0;i<N;i++){
+  var isSpec=specialIdx.indexOf(i)>=0;
+  var h=.42+Math.random()*.34;
+  var geo=new THREE.CylinderGeometry(.075,.09,h,14);
+  var mat=isSpec
+    ? new THREE.MeshStandardMaterial({color:0x7d1f14,roughness:.25,metalness:.35,emissive:0x2a0703})
+    : new THREE.MeshStandardMaterial({color:palette[i%palette.length],roughness:.3,metalness:.25});
+  var b=new THREE.Mesh(geo,mat);
+  var row=i<Math.ceil(N/2)?0:1;
+  var per=Math.ceil(N/2);
+  var xi=row===0? i : i-per;
+  var x=-3.1+xi*(6.2/(per-1))+(Math.random()*.14-.07);
+  var y=(row===0?1.7:2.5)+.04+h/2;
+  b.position.set(x,y,-2.6);
+  b.userData={special:isSpec,found:false,data:isSpec?specialData[si++]:null,baseE:isSpec?0x2a0703:0x000000};
+  scene.add(b);bottles.push(b);
+  if(isSpec)specials.push(b);
+  /* neck */
+  var nk=new THREE.Mesh(new THREE.CylinderGeometry(.028,.05,.16,10),mat);
+  nk.position.set(x,y+h/2+.08,-2.6);scene.add(nk);
+}
+
+/* glasses on counter */
+for(var g=0;g<4;g++){
+  var gl=new THREE.Mesh(new THREE.CylinderGeometry(.06,.05,.13,12,1,true),
+   new THREE.MeshStandardMaterial({color:0xEDE5D2,roughness:.1,metalness:.1,transparent:true,opacity:.25,side:THREE.DoubleSide}));
+  gl.position.set(-2.4+g*1.6,1.2,.55);scene.add(gl);
+}
+
+/* pointer -> lamp */
+var ray=new THREE.Raycaster(), ptr=new THREE.Vector2(-9,-9);
+var plane=new THREE.Plane(new THREE.Vector3(0,0,1),2.0); /* z = -2.0 plane-ish for light travel */
+var target=new THREE.Vector3(0,2.2,0), lit=false, hintOff=false;
+function onMove(x,y){
+  ptr.x=(x/innerWidth)*2-1; ptr.y=-(y/innerHeight)*2+1;
+  ray.setFromCamera(ptr,cam);
+  var p=new THREE.Vector3();
+  ray.ray.intersectPlane(plane,p);
+  if(p){
+    p.x=Math.max(-3.4,Math.min(3.4,p.x));
+    p.y=Math.max(1.2,Math.min(3.1,p.y));
+    p.z=-1.6;
+    target.copy(p);
+    if(!lit){lit=true;}
+    if(!hintOff){hintOff=true;document.getElementById('hint').classList.add('off');document.getElementById('title').classList.add('off');}
+  }
+}
+addEventListener('pointermove',function(e){onMove(e.clientX,e.clientY);},{passive:true});
+addEventListener('touchmove',function(e){var t=e.touches[0];onMove(t.clientX,t.clientY);},{passive:true});
+
+/* tap to inspect */
+var found=0, card=document.getElementById('card');
+function openCard(d){
+  document.getElementById('cn').textContent=d.name;
+  document.getElementById('cp').textContent=d.price;
+  document.getElementById('cl').textContent=d.lore;
+  card.classList.add('on');
+}
+card.addEventListener('click',function(){card.classList.remove('on');});
+addEventListener('pointerdown',function(e){
+  ptr.x=(e.clientX/innerWidth)*2-1; ptr.y=-(e.clientY/innerHeight)*2+1;
+  ray.setFromCamera(ptr,cam);
+  var hits=ray.intersectObjects(bottles);
+  if(!hits.length)return;
+  var b=hits[0].object;
+  if(b.position.distanceTo(lamp.position)>1.5)return; /* must be lit */
+  if(b.userData.special && !b.userData.found){
+    b.userData.found=true;
+    b.material.emissive.setHex(0xC1301F);
+    found++;document.getElementById('pc').textContent=found;
+    openCard(b.userData.data);
+    if(found>=3){setTimeout(function(){card.classList.remove('on');document.getElementById('fin').classList.add('on');},1700);}
+  }
+});
+
+/* animate */
+var clock=new THREE.Clock();
+function loop(){
+  requestAnimationFrame(loop);
+  var t=clock.getElapsedTime();
+  /* lamp easing */
+  lamp.position.lerp(target,.12);
+  lampGlow.position.copy(lamp.position);
+  var want=lit?2.6:0;
+  lamp.intensity+= (want-lamp.intensity)*.08;
+  lampGlow.material.opacity=Math.min(.9,lamp.intensity*.3);
+  /* flicker like a flame */
+  if(lit){lamp.intensity+=Math.sin(t*17)*.045+Math.sin(t*7.3)*.03;}
+  /* specials shimmer when near */
+  specials.forEach(function(s){
+    if(s.userData.found)return;
+    var d=s.position.distanceTo(lamp.position);
+    var glow=Math.max(0,1.4-d)/1.4;
+    s.material.emissive.setHex(0x2a0703);
+    s.material.emissiveIntensity=.4+glow*2.2+Math.sin(t*5+s.position.x)*glow*.4;
+  });
+  renderer.render(scene,cam);
+}
+loop();
+setTimeout(function(){loadEl.classList.add('off');},600);
+
+addEventListener('resize',function(){
+  cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+})();
+</script>
+</body>
+</html>

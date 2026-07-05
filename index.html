@@ -150,6 +150,12 @@ footer{padding:10vh var(--pad) 5vh;position:relative;overflow:hidden}
 a:focus-visible,button:focus-visible,.brand:focus-visible{outline:3px solid var(--red);outline-offset:3px}
 ::selection{background:var(--red);color:var(--cream)}
 @media(prefers-reduced-motion:reduce){.fu{opacity:1;transform:none;transition:none}#cine{display:none}.badge,.mtk,.fmq{animation:none}.lamp{display:none}}
+
+.lampcta{display:inline-flex;align-items:center;gap:.6rem;margin-top:1.4rem;font-family:var(--disp);font-size:.95rem;letter-spacing:.08em;color:var(--cream);border:1px solid var(--red);padding:.8rem 1.3rem;position:relative;z-index:2}
+.lampcta i{font-style:normal;width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 12px rgba(193,48,31,.9);animation:lpulse 2s ease-in-out infinite}
+@keyframes lpulse{0%,100%{opacity:.5}50%{opacity:1}}
+.lampcta:active{background:var(--red)}
+@media(prefers-reduced-motion:reduce){.lampcta i{animation:none}}
 </style>
 </head>
 <body>
@@ -172,6 +178,7 @@ a:focus-visible,button:focus-visible,.brand:focus-visible{outline:3px solid var(
   <div class="sticker fu">肩肘張らず、一杯から。</div>
   <div class="covmeta fu">EST. 2007 · 300+ WHISKIES · <b>NO CHARGE</b><br>18:00–03:00 · <span id="tok">TOKYO --:--:--</span></div>
   <div id="nightMsg">こんな時間まで、お疲れさまです。今夜はもう一杯だけ。</div>
+  <a class="lampcta" href="lamp.html"><i></i>「灯」— 小さな3D体験 →</a>
   <div class="badge">NO<br>CHARGE</div>
 </section>
 
@@ -244,6 +251,7 @@ a:focus-visible,button:focus-visible,.brand:focus-visible{outline:3px solid var(
   <div class="fword" id="footerLogo">EORNA</div>
   <div class="fmarq"><div class="fmq"><span>GROUP THERAPY HERE</span><b>◆</b><span>肩肘張らず、一杯から。</span><b>◆</b><span>GROUP THERAPY HERE</span><b>◆</b><span>肩肘張らず、一杯から。</span><b>◆</b></div></div>
   <div class="flinks">
+    <a href="lamp.html">灯 — 3D</a>
     <a href="story.html">Story</a>
     <a href="archive.html">Since 2007 · 18年目の忘れ物 ↗</a>
     <a href="access.html">読みやすい・音声対応 ↗</a>
