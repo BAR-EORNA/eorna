@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>灯 — BAR EORNA</title>
 <meta name="description" content="暗闇のカウンターを灯りで照らし、3本の特別なボトルを見つけてください。BAR EORNAの小さな3D体験。">
-<meta name="theme-color" content="#050403">
+<meta name="theme-color" content="#05060A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%23B0281C%27/%3E%3Ctext x=%2732%27 y=%2746%27 font-family=%27Arial Black,sans-serif%27 font-size=%2740%27 font-weight=%27900%27 fill=%27%23EDE5D2%27 text-anchor=%27middle%27%3EE%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-F4JBQ8GK16"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-F4JBQ8GK16');</script>
 <style>
-:root{--bg:#050403;--cream:#EDE5D2;--red:#C1301F;--dim:#9a9081;--mono:'Space Mono',monospace;--min:'Shippori Mincho',serif;--disp:'Anton',sans-serif;--sans:'Noto Sans JP',sans-serif}
+:root{--bg:#05060A;--cream:#EDE5D2;--red:#C9A96A;--dim:#9a9081;--mono:'Space Mono',monospace;--min:'Shippori Mincho',serif;--disp:'Anton',sans-serif;--sans:'Noto Sans JP',sans-serif}
 *{box-sizing:border-box;margin:0}
 html,body{height:100%}
 body{background:var(--bg);color:var(--cream);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
@@ -102,8 +102,8 @@ renderer.shadowMap.enabled=false;
 document.getElementById('stage').appendChild(renderer.domElement);
 
 var scene=new THREE.Scene();
-scene.background=new THREE.Color(0x050403);
-scene.fog=new THREE.Fog(0x050403,6,14);
+scene.background=new THREE.Color(0x05060A);
+scene.fog=new THREE.Fog(0x05060A,6,14);
 
 var cam=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.1,50);
 cam.position.set(0,1.9,4.6);
@@ -113,19 +113,19 @@ cam.lookAt(0,1.5,-2);
 scene.add(new THREE.AmbientLight(0x1a1410,.5));
 
 /* the lamp (follows pointer) */
-var lamp=new THREE.PointLight(0xC98A4C,0,7,2);
+var lamp=new THREE.PointLight(0xD9B072,0,7,2);
 lamp.position.set(0,2.2,0);
 scene.add(lamp);
 var lampGlow=new THREE.Mesh(new THREE.SphereGeometry(.045,12,12),
-  new THREE.MeshBasicMaterial({color:0xF0C070,transparent:true,opacity:0}));
+  new THREE.MeshBasicMaterial({color:0xEBD8AC,transparent:true,opacity:0}));
 scene.add(lampGlow);
 
 /* room */
-var wood=new THREE.MeshStandardMaterial({color:0x4a2f1c,roughness:.75,metalness:.1});
-var woodDark=new THREE.MeshStandardMaterial({color:0x33200f,roughness:.85,metalness:.05});
-var wall=new THREE.MeshStandardMaterial({color:0x171310,roughness:.95});
+var wood=new THREE.MeshStandardMaterial({color:0x35231a,roughness:.6,metalness:.15});
+var woodDark=new THREE.MeshStandardMaterial({color:0x1f1410,roughness:.8,metalness:.08});
+var wall=new THREE.MeshStandardMaterial({color:0x10131c,roughness:.9});
 /* floor */
-var floor=new THREE.Mesh(new THREE.PlaneGeometry(20,20),new THREE.MeshStandardMaterial({color:0x0c0906,roughness:.9}));
+var floor=new THREE.Mesh(new THREE.PlaneGeometry(20,20),new THREE.MeshStandardMaterial({color:0x0a0c12,roughness:.85,metalness:.2}));
 floor.rotation.x=-Math.PI/2;scene.add(floor);
 /* back wall */
 var bw=new THREE.Mesh(new THREE.PlaneGeometry(20,8),wall);bw.position.set(0,4,-3.2);scene.add(bw);
@@ -140,7 +140,7 @@ var cbase=new THREE.Mesh(new THREE.BoxGeometry(7.5,1.0,.9),woodDark);cbase.posit
 var cord=new THREE.Mesh(new THREE.CylinderGeometry(.008,.008,1.4,6),woodDark);cord.position.set(0,3.6,.2);scene.add(cord);
 var shade=new THREE.Mesh(new THREE.ConeGeometry(.22,.22,24,1,true),new THREE.MeshStandardMaterial({color:0x2a1c10,roughness:.6,side:THREE.DoubleSide}));
 shade.position.set(0,2.9,.2);scene.add(shade);
-var faint=new THREE.PointLight(0x8a5a2a,.5,3.2,2);faint.position.set(0,2.75,.2);scene.add(faint);
+var faint=new THREE.PointLight(0x9a7a42,.55,3.4,2);faint.position.set(0,2.75,.2);scene.add(faint);
 
 /* bottles */
 var bottles=[], specials=[];
@@ -149,7 +149,7 @@ var specialData=[
  {name:'Bowmore 18y',price:'¥2,500',lore:'潮とスモーク。アイラの王道は、静かな夜に。'},
  {name:'The Bomb',price:'¥1,800',lore:'ギネス×ジェムソン×ベイリーズ。ここだけの一杯。'}
 ];
-var palette=[0x2a3d2a,0x3d2a2a,0x2a2a3d,0x3d362a,0x24303a,0x362a3d,0x30302a];
+var palette=[0x5c3d18,0x6b4a1e,0x3a2d14,0x27331f,0x232c38,0x4a2a20,0x54401e];
 var specialIdx=[4,11,18];
 var N=22, si=0;
 for(var i=0;i<N;i++){
@@ -157,7 +157,7 @@ for(var i=0;i<N;i++){
   var h=.42+Math.random()*.34;
   var geo=new THREE.CylinderGeometry(.075,.09,h,14);
   var mat=isSpec
-    ? new THREE.MeshStandardMaterial({color:0x7d1f14,roughness:.25,metalness:.35,emissive:0x2a0703})
+    ? new THREE.MeshStandardMaterial({color:0x7a5a22,roughness:.18,metalness:.45,emissive:0x1f1608})
     : new THREE.MeshStandardMaterial({color:palette[i%palette.length],roughness:.3,metalness:.25});
   var b=new THREE.Mesh(geo,mat);
   var row=i<Math.ceil(N/2)?0:1;
@@ -166,20 +166,53 @@ for(var i=0;i<N;i++){
   var x=-3.1+xi*(6.2/(per-1))+(Math.random()*.14-.07);
   var y=(row===0?1.7:2.5)+.04+h/2;
   b.position.set(x,y,-2.6);
-  b.userData={special:isSpec,found:false,data:isSpec?specialData[si++]:null,baseE:isSpec?0x2a0703:0x000000};
+  b.userData={special:isSpec,found:false,data:isSpec?specialData[si++]:null,baseE:isSpec?0x1f1608:0x000000};
   scene.add(b);bottles.push(b);
   if(isSpec)specials.push(b);
   /* neck */
   var nk=new THREE.Mesh(new THREE.CylinderGeometry(.028,.05,.16,10),mat);
   nk.position.set(x,y+h/2+.08,-2.6);scene.add(nk);
+  b.userData.neck=nk;b.userData.row=row;b.userData.xi=xi;
+  /* paper label */
+  var lb=new THREE.Mesh(new THREE.CylinderGeometry(.078,.09,Math.min(.16,h*.36),14),
+    new THREE.MeshStandardMaterial({color:isSpec?0xE9E3D3:0x8f8878,roughness:.65,metalness:.05}));
+  lb.position.set(x,y-h*.08,-2.6);scene.add(lb);b.userData.label=lb;
 }
 
 /* glasses on counter */
+var glasses=[];
 for(var g=0;g<4;g++){
   var gl=new THREE.Mesh(new THREE.CylinderGeometry(.06,.05,.13,12,1,true),
    new THREE.MeshStandardMaterial({color:0xEDE5D2,roughness:.1,metalness:.1,transparent:true,opacity:.25,side:THREE.DoubleSide}));
-  gl.position.set(-2.4+g*1.6,1.2,.55);scene.add(gl);
+  gl.position.set(-2.4+g*1.6,1.2,.55);scene.add(gl);glasses.push(gl);
 }
+/* brass rail + neon sliver */
+var brass=new THREE.Mesh(new THREE.CylinderGeometry(.02,.02,7.4,10),
+  new THREE.MeshStandardMaterial({color:0xC9A96A,metalness:.9,roughness:.25}));
+brass.rotation.z=Math.PI/2;brass.position.set(0,1.17,1.13);scene.add(brass);
+var neon=new THREE.Mesh(new THREE.BoxGeometry(7.4,.028,.02),
+  new THREE.MeshBasicMaterial({color:0x43E8E0,transparent:true,opacity:.75}));
+neon.position.set(0,3.35,-3.15);scene.add(neon);
+scene.add(function(){var nl=new THREE.PointLight(0x43E8E0,.3,4.5,2);nl.position.set(0,3.2,-2.3);return nl;}());
+/* fit shelf spread to the visible width (portrait safe) */
+var usable=3.1;
+function layout(){
+  var vF=cam.fov*Math.PI/180;
+  var dist=cam.position.z+2.6; /* camera z to shelf z=-2.6 */
+  var halfW=Math.tan(vF/2)*dist*cam.aspect;
+  usable=Math.max(1.0,Math.min(3.1,halfW*.86));
+  var per=Math.ceil(N/2);
+  bottles.forEach(function(b){
+    var x=-usable + b.userData.xi*(2*usable/(per-1));
+    b.position.x=x;
+    if(b.userData.neck)b.userData.neck.position.x=x;
+    if(b.userData.label)b.userData.label.position.x=x;
+  });
+  glasses.forEach(function(gl,gi){
+    gl.position.x=(-0.72+gi*0.48)*usable;
+  });
+}
+layout();
 
 /* pointer -> lamp */
 var ray=new THREE.Raycaster(), ptr=new THREE.Vector2(-9,-9);
@@ -191,7 +224,7 @@ function onMove(x,y){
   var p=new THREE.Vector3();
   ray.ray.intersectPlane(plane,p);
   if(p){
-    p.x=Math.max(-3.4,Math.min(3.4,p.x));
+    p.x=Math.max(-usable-.3,Math.min(usable+.3,p.x));
     p.y=Math.max(1.2,Math.min(3.1,p.y));
     p.z=-1.6;
     target.copy(p);
@@ -220,7 +253,7 @@ addEventListener('pointerdown',function(e){
   if(b.position.distanceTo(lamp.position)>1.5)return; /* must be lit */
   if(b.userData.special && !b.userData.found){
     b.userData.found=true;
-    b.material.emissive.setHex(0xC1301F);
+    b.material.emissive.setHex(0xC9A96A);
     found++;document.getElementById('pc').textContent=found;
     openCard(b.userData.data);
     if(found>=3){setTimeout(function(){card.classList.remove('on');document.getElementById('fin').classList.add('on');},1700);}
@@ -245,7 +278,7 @@ function loop(){
     if(s.userData.found)return;
     var d=s.position.distanceTo(lamp.position);
     var glow=Math.max(0,1.4-d)/1.4;
-    s.material.emissive.setHex(0x2a0703);
+    s.material.emissive.setHex(0x1f1608);
     s.material.emissiveIntensity=.4+glow*2.2+Math.sin(t*5+s.position.x)*glow*.4;
   });
   renderer.render(scene,cam);
@@ -256,6 +289,7 @@ setTimeout(function(){loadEl.classList.add('off');},600);
 addEventListener('resize',function(){
   cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();
   renderer.setSize(innerWidth,innerHeight);
+  layout();
 });
 })();
 </script>
