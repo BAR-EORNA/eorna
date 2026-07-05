@@ -47,6 +47,7 @@ body::before{content:"";position:fixed;inset:0;z-index:80;pointer-events:none;op
 /* ===== hero card ===== */
 #cover{position:relative;border-radius:var(--r);overflow:hidden;margin:12px 0 8px;min-height:74svh;display:flex;align-items:flex-end;border:1px solid var(--hair)}
 #cover .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kb 26s ease-in-out infinite alternate}
+#cover video.bg{animation:none}
 @keyframes kb{from{transform:scale(1)}to{transform:scale(1.14)}}
 #cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,10,8,.25) 0%,rgba(12,10,8,.05) 35%,rgba(12,10,8,.88) 78%,rgba(12,10,8,.96) 100%)}
 .hin{position:relative;z-index:2;padding:1.4rem 1.2rem 1.5rem;width:100%}
@@ -238,6 +239,13 @@ a:focus-visible,button:focus-visible,.brand:focus-visible{outline:2px solid var(
  .hin .kick,.hin .big,.hin .copy,.hin .chips,.hin .ctas,.hin .tokline{opacity:1;transform:none;animation:none}
  .big .ll{opacity:1;transform:none}.chips .chip{opacity:1;animation:none}
 }
+
+/* signature drink videos in menu card */
+.sigvids{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1.3rem}
+.sigvids figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--hair);position:relative;aspect-ratio:3/4}
+.sigvids video{width:100%;height:100%;object-fit:cover;display:block}
+.sigvids figure::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(12,10,8,.7));pointer-events:none}
+.sigvids figcaption{position:absolute;left:.6rem;bottom:.5rem;z-index:2;font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;color:var(--cream);text-transform:uppercase}
 </style>
 </head>
 <body>
@@ -255,7 +263,7 @@ a:focus-visible,button:focus-visible,.brand:focus-visible{outline:2px solid var(
 
 <!-- HERO CARD -->
 <section id="cover">
-  <img class="bg" src="IMG_3185.jpeg" alt=""><div class="aura" aria-hidden="true"></div><div class="sweep" aria-hidden="true"></div><div class="bokeh" aria-hidden="true"><b></b><b></b><b></b><b></b></div>
+  <video class="bg" autoplay loop muted playsinline poster="IMG_3185.jpeg"><source src="hero_irish.mp4" type="video/mp4"></video><div class="aura" aria-hidden="true"></div><div class="sweep" aria-hidden="true"></div><div class="bokeh" aria-hidden="true"><b></b><b></b><b></b><b></b></div>
   <div class="hin">
     <div class="kick">BRITISH BAR — SHINJUKU 3-CHOME · B1</div>
     <h1 class="big">BAR EOR<span class="r">NA</span></h1>
@@ -282,11 +290,11 @@ a:focus-visible,button:focus-visible,.brand:focus-visible{outline:2px solid var(
     <a class="sall" href="games.html">View all →</a>
   </div>
   <div class="rail">
-    <a class="epc fu" href="eorna%20mystery.html"><img loading="lazy" src="IMG_1102.jpeg" alt=""><span class="no">EP.01</span><span class="tt">失踪事件</span></a>
-    <a class="epc fu" href="eorna%20mystery2.html"><img loading="lazy" src="IMG_1103.jpeg" alt=""><span class="no">EP.02</span><span class="tt">繁盛の罠</span></a>
-    <a class="epc fu" href="eorna%20mystery3.html"><img loading="lazy" src="IMG_1104.jpeg" alt=""><span class="no">EP.03</span><span class="tt">夜襲</span></a>
-    <a class="epc fu" href="eorna%20mystery4.html"><img loading="lazy" src="IMG_1105.jpeg" alt=""><span class="no">EP.04</span><span class="tt">世界の半分</span></a>
-    <a class="epc fu" href="eorna%20mystery5.html"><img loading="lazy" src="IMG_3185.jpeg" alt=""><span class="no">FINAL</span><span class="tt">いつか帰る場所</span></a>
+    <a class="epc fu" href="eorna%20mystery.html"><img loading="lazy" src="IMG_1102.jpeg" alt=""><span class="no">EP.01</span><span class="tt">The Disappearance</span></a>
+    <a class="epc fu" href="eorna%20mystery2.html"><img loading="lazy" src="IMG_1103.jpeg" alt=""><span class="no">EP.02</span><span class="tt">A Full House</span></a>
+    <a class="epc fu" href="eorna%20mystery3.html"><img loading="lazy" src="IMG_1104.jpeg" alt=""><span class="no">EP.03</span><span class="tt">Night Raid</span></a>
+    <a class="epc fu" href="eorna%20mystery4.html"><img loading="lazy" src="IMG_1105.jpeg" alt=""><span class="no">EP.04</span><span class="tt">Half the World</span></a>
+    <a class="epc fu" href="eorna%20mystery5.html"><img loading="lazy" src="IMG_3185.jpeg" alt=""><span class="no">FINAL</span><span class="tt">The Place We Return To</span></a>
     <a class="epc more fu" href="games.html"><span>All 5 episodes →</span></a>
   </div>
 </section>
@@ -305,15 +313,13 @@ a:focus-visible,button:focus-visible,.brand:focus-visible{outline:2px solid var(
     <div class="mi"><span class="mn">Gin &amp; Tonic</span><span class="ms">Gin</span><span class="ml"></span><span class="mp">¥1,000〜</span></div>
     <div class="mi"><span class="mn">God Father</span><span class="ms">Whisky</span><span class="ml"></span><span class="mp">¥1,000〜</span></div>
     <div class="mi"><span class="mn">Margarita</span><span class="ms">Tequila</span><span class="ml"></span><span class="mp">¥1,000〜</span></div>
+    <div class="mi"><span class="mn">Zombie</span><span class="ms">Rum</span><span class="ml"></span><span class="mp">¥1,500</span></div>
+    <div class="mi"><span class="mn">Nikolaschka</span><span class="ms">Brandy</span><span class="ml"></span><span class="mp">¥1,200</span></div>
+    <div class="mi"><span class="mn">Irish Car Bomb</span><span class="ms">Guinness × Irish</span><span class="ml"></span><span class="mp">¥1,800</span></div>
     <div class="cat">DRAUGHT &amp; SIGNATURE</div>
     <div class="mi"><span class="mn">Today's Draught</span><span class="ms">3 Taps</span><span class="ml"></span><span class="mp">¥1,000〜</span></div>
     <div class="mi"><span class="mn">The Bomb</span><span class="ms">Guinness × Jameson × Baileys</span><span class="ml"></span><span class="mp">¥1,800</span></div>
-    <div class="thumbs">
-      <img loading="lazy" src="IMG_1102.jpeg" alt="Old Parr">
-      <img loading="lazy" src="IMG_1103.jpeg" alt="Bowmore">
-      <img loading="lazy" src="IMG_1104.jpeg" alt="Jameson">
-      <img loading="lazy" src="IMG_1105.jpeg" alt="Talisker">
-    </div>
+    <div class="sigvids"><figure><video src="vid_cocktail.mp4" autoplay loop muted playsinline poster="IMG_3185.jpeg"></video><figcaption>Zombie</figcaption></figure><figure><video src="vid_download.mp4" autoplay loop muted playsinline poster="IMG_3185.jpeg"></video><figcaption>Nikolaschka</figcaption></figure></div>
     <div class="mnote">A short list · 300+ bottles at the counter</div>
   </div>
 </section>
