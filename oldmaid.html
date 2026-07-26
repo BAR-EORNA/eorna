@@ -181,7 +181,7 @@ function cardHTML(c,cw){
  if(c.baba){return '<div class="card face baba" style="--cw:'+cw+'px"><img src="'+BABIMG+'"><div class="rk">JOKER</div><div class="band">わかめ</div></div>';}
  var key=c.s+c.r,f=FACE[key],cls=RED[c.s]?'red':'blk';
  if(f)return '<div class="card face" style="--cw:'+cw+'px"><img src="'+f[0]+'"><div class="rk">'+RANKS[c.r]+SYM[c.s]+'</div><div class="band">'+f[1]+'</div></div>';
- return '<div class="card" style="--cw:'+cw+'px"><div class="rk '+cls+'">'+RANKS[c.r]+SYM[c.s]+'</div><div class="mid '+cls+'">'+SYM[c.s]+'</div></div>';
+ return numberCard(c,cw,cls);
 }
 function render(){
  // opponents
