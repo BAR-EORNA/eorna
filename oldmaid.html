@@ -56,6 +56,22 @@ header a:active,.newbtn:active{color:var(--gold);border-color:var(--gold)}
 #over .sub{color:var(--dim);margin-bottom:1.4rem;line-height:1.8;max-width:20em}
 #over button{font-family:'Anton',sans-serif;font-size:1.1rem;letter-spacing:.06em;color:var(--bg);background:var(--gold);border:0;padding:.9rem 2.2rem;border-radius:999px;cursor:pointer}
 #over .babapic{width:96px;height:134px;border-radius:8px;object-fit:cover;border:2px solid var(--red);margin-bottom:12px}
+/* drawn-card reveal */
+#reveal{display:flex;justify-content:center;margin-top:10px;min-height:0}
+#reveal .card{--cw:74px;animation:pop .35s cubic-bezier(.16,1,.3,1)}
+@keyframes pop{from{transform:scale(.4) translateY(20px);opacity:0}to{transform:none;opacity:1}}
+/* BABA dramatic overlay */
+#baba{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;flex-direction:column;pointer-events:none}
+#baba.on{display:flex;animation:babaflash .6s}
+@keyframes babaflash{0%{background:rgba(193,48,31,.0)}12%{background:rgba(193,48,31,.85)}100%{background:rgba(8,6,4,.86)}}
+#baba .bwrap{text-align:center;animation:babain .5s cubic-bezier(.16,1,.3,1)}
+@keyframes babain{from{transform:scale(.3) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
+#baba img{width:min(56vw,240px);height:auto;border:4px solid var(--gold);border-radius:12px;box-shadow:0 0 60px rgba(201,169,106,.6);animation:babashake .5s .4s}
+@keyframes babashake{0%,100%{transform:translateX(0) rotate(0)}20%{transform:translateX(-10px) rotate(-3deg)}40%{transform:translateX(10px) rotate(3deg)}60%{transform:translateX(-8px) rotate(-2deg)}80%{transform:translateX(8px) rotate(2deg)}}
+#baba .btxt{font-family:'Anton',sans-serif;color:var(--gold);font-size:clamp(1.8rem,9vw,3rem);letter-spacing:.1em;margin-top:16px;text-shadow:0 2px 20px #000}
+#baba .bsub{font-family:'Space Mono',monospace;color:var(--cream);font-size:.7rem;letter-spacing:.2em;margin-top:6px}
+#baba .spark{position:absolute;width:8px;height:8px;background:var(--gold);border-radius:50%;opacity:0}
+
 </style>
 </head>
 <body>
@@ -65,12 +81,13 @@ header a:active,.newbtn:active{color:var(--gold);border-color:var(--gold)}
 </header>
 <div id="table">
   <div class="opprow" id="oppRow"></div>
-  <div class="center"><div><div id="msg"></div><div class="pickrow" id="pickRow"></div></div></div>
+  <div class="center"><div><div id="msg"></div><div class="pickrow" id="pickRow"></div><div id="reveal"></div></div></div>
   <div id="me">
     <div class="myname" id="myName">あなた</div>
     <div id="myhand"></div>
   </div>
 </div>
+<div id="baba"><div class="bwrap"><img id="babaImg" src=""><div class="btxt">わかめを つかんだ！</div><div class="bsub">BABA!!</div></div></div>
 <div id="over">
   <div class="k" id="overK"></div>
   <img id="overPic" class="babapic" style="display:none">
@@ -164,34 +181,52 @@ function drawCard(from,to,idx){
  var c=players[from].hand.splice(idx,1)[0];
  players[to].hand.push(c);
  // check pair for 'to'
- var made=resolvePair(players[to],c);
- return {card:c,made:made};
+ var partner=resolvePair(players[to],c);
+ return {card:c,made:!!partner,partner:partner};
 }
 function resolvePair(p,c){
- if(c.baba)return false;
+ if(c.baba)return null;
  for(var i=0;i<p.hand.length;i++){ if(p.hand[i]!==c && !p.hand[i].baba && p.hand[i].r===c.r){
-   // remove both
+   var partner=p.hand[i];
    var idxs=[i,p.hand.indexOf(c)].sort(function(a,b){return b-a;});
-   idxs.forEach(function(x){p.hand.splice(x,1);}); return true; } }
- return false;
+   idxs.forEach(function(x){p.hand.splice(x,1);}); return partner; } }
+ return null;
 }
 function playerDraw(t,idx){
  PICK.innerHTML='';
+ var drawn=players[t].hand[idx];
  var r=drawCard(t,0,idx);
- var label=r.card.baba?'<span class="g">わかめ（ババ）</span>':(RANKS[r.card.r]+SYM[r.card.s]);
- MSG.innerHTML='引いたのは '+label+(r.made?'　→ ペアで捨てた！':(r.card.baba?'　…つかんでしまった。':''))+'';
  render();
- setTimeout(function(){ turn=nextAlive(turn); nextStep(); }, r.made||r.card.baba?1200:800);
+ if(r.card.baba){ showReveal(drawn); babaEffect(function(){ clearReveal(); turn=nextAlive(turn); nextStep(); }); return; }
+ if(r.made){ showReveal(r.card,r.partner);
+   MSG.innerHTML='引いたのは <span class="g">'+RANKS[r.card.r]+SYM[r.card.s]+'</span>　→ 同じ数字の 2枚で ペア成立！ 捨てた。';
+   setTimeout(function(){ clearReveal(); turn=nextAlive(turn); nextStep(); },1600);
+ }else{ showReveal(r.card);
+   MSG.innerHTML='引いたのは '+RANKS[r.card.r]+SYM[r.card.s]+'。 手札に くわえた。';
+   setTimeout(function(){ clearReveal(); turn=nextAlive(turn); nextStep(); },1100);
+ }
 }
 function cpuDraw(ci,t){
- // simple AI: random pick; slight avoidance handled by target's shuffle
  var n=players[t].hand.length; var idx=(Math.random()*n)|0;
+ var drawn=players[t].hand[idx];
  var r=drawCard(t,ci,idx);
  render();
  var who=players[ci].name;
- if(r.card.baba)MSG.innerHTML=who+' は ババ（わかめ）を引いた…';
- else MSG.innerHTML=who+' が 1枚 引いた'+(r.made?' → ペア成立':'');
+ if(r.card.baba){ showReveal(drawn); MSG.innerHTML='<span class="g">'+who+'</span> は ババ（わかめ）を引いた…!';
+   setTimeout(function(){clearReveal();turn=nextAlive(turn);nextStep();},1400); return; }
+ MSG.innerHTML=who+' が 1枚 引いた'+(r.made?' → ペア成立':'');
  setTimeout(function(){ turn=nextAlive(turn); nextStep(); }, 900);
+}
+function showReveal(card,card2){var el=document.getElementById('reveal');el.innerHTML=cardHTML(card,74)+(card2?cardHTML(card2,74):'');}
+function clearReveal(){document.getElementById('reveal').innerHTML='';}
+function babaEffect(cb){
+ var o=document.getElementById('baba');document.getElementById('babaImg').src=BABIMG;o.classList.add('on');
+ // sparks
+ for(var i=0;i<14;i++){(function(i){var s=document.createElement('div');s.className='spark';o.appendChild(s);
+   var ang=Math.random()*6.28,dist=80+Math.random()*160;
+   s.animate([{transform:'translate(0,0)',opacity:1},{transform:'translate('+Math.cos(ang)*dist+'px,'+Math.sin(ang)*dist+'px)',opacity:0}],{duration:800,delay:300+Math.random()*200,easing:'ease-out'});
+   setTimeout(function(){s.remove();},1400);})(i);}
+ setTimeout(function(){o.classList.remove('on');cb&&cb();},1700);
 }
 function endGame(loser){
  var o=document.getElementById('over');
