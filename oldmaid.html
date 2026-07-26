@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>EORNA ババ抜き — BAR EORNA</title>
+<meta name="theme-color" content="#0C0A08">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%23B0281C%27/%3E%3Ctext x=%2732%27 y=%2746%27 font-family=%27Arial Black,sans-serif%27 font-size=%2740%27 font-weight=%27900%27 fill=%27%23EDE5D2%27 text-anchor=%27middle%27%3EE%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F4JBQ8GK16"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-F4JBQ8GK16');</script>
+<style>
+:root{--bg:#0C0A08;--panel:#15110D;--cream:#E9E3D3;--gold:#C9A96A;--red:#C1301F;--dim:#9a9081;--hair:rgba(233,227,211,.14)}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{background:radial-gradient(120% 80% at 50% 0,#13251a,#0C0A08 70%);color:var(--cream);font-family:'Noto Sans JP',sans-serif;display:flex;flex-direction:column;align-items:center;user-select:none;touch-action:manipulation}
+header{width:100%;max-width:560px;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem}
+.brand{font-family:'Anton',sans-serif;font-size:1.05rem;letter-spacing:.1em}.brand b{color:var(--gold);font-weight:400}
+header a,.newbtn{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.18em;color:var(--dim);text-decoration:none;border:1px solid var(--hair);padding:.45rem .7rem;border-radius:999px;background:none;cursor:pointer}
+header a:active,.newbtn:active{color:var(--gold);border-color:var(--gold)}
+#table{position:relative;width:100%;max-width:560px;flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:8px 10px 12px}
+.opp{display:flex;flex-direction:column;align-items:center;gap:4px}
+.avatar{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);background:#000}
+.oppname.turn~.avatar,.opp .oppname.turn{}
+.opprow{display:flex;justify-content:center;gap:16px;width:100%}
+.oppname{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;color:var(--dim)}
+.oppname.turn{color:var(--gold)}
+.oppname .cnt{color:var(--cream)}
+.mini{display:flex;gap:-6px}
+.mini .m{width:20px;height:28px;border-radius:3px;background:linear-gradient(135deg,#1a1410,#0e0b08);border:1px solid var(--gold);margin-left:-8px}
+.mini .m:first-child{margin-left:0}
+.center{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:6px}
+#msg{font-family:'Noto Sans JP';font-size:.95rem;color:var(--cream);line-height:1.7;min-height:3em;max-width:22em}
+#msg .g{color:var(--gold)}
+.pickrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.pcard{width:44px;height:62px;border-radius:5px;background:linear-gradient(135deg,#1a1410,#0e0b08);border:1px solid var(--gold);cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Anton';color:var(--gold);position:relative}
+.pcard:active{transform:translateY(-4px)}
+.pcard.picked{transform:translateY(-8px)}
+/* my hand */
+#me{display:flex;flex-direction:column;align-items:center;gap:6px}
+.myname{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;color:var(--gold)}
+#myhand{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;max-width:100%}
+.card{width:var(--cw,52px);height:calc(var(--cw,52px)*1.4);border-radius:6px;background:var(--cream);color:#111;position:relative;overflow:hidden;border:1px solid #0006;box-shadow:0 1px 3px rgba(0,0,0,.5)}
+.card .rk{position:absolute;top:1px;left:3px;font-family:'Space Mono',monospace;font-weight:700;font-size:.6rem;line-height:1}
+.card .mid{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.card.face img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card.face .rk{color:var(--gold);text-shadow:0 1px 2px #000;z-index:2}
+.card.face .band{position:absolute;left:0;right:0;bottom:0;z-index:2;background:rgba(12,10,8,.72);color:var(--cream);font-size:.42rem;text-align:center;font-family:'Space Mono';letter-spacing:.05em}
+.card.baba{outline:2px solid var(--red)}
+.red{color:var(--red)}.blk{color:#141110}
+#over{position:fixed;inset:0;z-index:20;background:rgba(8,6,4,.93);display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:2rem}
+#over.on{display:flex}
+#over .k{font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.4em;color:var(--gold)}
+#over h1{font-family:'Anton',sans-serif;font-size:clamp(2.4rem,12vw,4rem);margin:.4rem 0}
+#over .sub{color:var(--dim);margin-bottom:1.4rem;line-height:1.8;max-width:20em}
+#over button{font-family:'Anton',sans-serif;font-size:1.1rem;letter-spacing:.06em;color:var(--bg);background:var(--gold);border:0;padding:.9rem 2.2rem;border-radius:999px;cursor:pointer}
+#over .babapic{width:96px;height:134px;border-radius:8px;object-fit:cover;border:2px solid var(--red);margin-bottom:12px}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">EORNA <b>ババ抜き</b></div>
+  <div style="display:flex;gap:.5rem"><button class="newbtn" id="newBtn">NEW</button><a href="games.html">← 一覧</a></div>
+</header>
+<div id="table">
+  <div class="opprow" id="oppRow"></div>
+  <div class="center"><div><div id="msg"></div><div class="pickrow" id="pickRow"></div></div></div>
+  <div id="me">
+    <div class="myname" id="myName">あなた</div>
+    <div id="myhand"></div>
+  </div>
+</div>
+<div id="over">
+  <div class="k" id="overK"></div>
+  <img id="overPic" class="babapic" style="display:none">
+  <h1 id="overT"></h1>
+  <div class="sub" id="overS"></div>
+  <button id="overBtn">もう一度</button>
+</div>
+<script>
+(function(){
+var SUITS=['S','H','D','C'],RED={H:1,D:1},SYM={S:'♠',H:'♥',D:'♦',C:'♣'};
+var RANKS=['','A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+var FACE={
+ 'S13':['kimura.jpeg','木村'],'S12':['macky.png','マッキー'],'S11':['kobatch.png','コバッチ'],
+ 'H13':['tsumori%20wutang.png','津守'],'H12':['nishinishi.png','にしにし'],'H11':['akiaki.jpeg','アキアキ'],
+ 'D13':['kimura%20brother.png','お兄さん'],'D12':['tommy.png','トミー'],'D11':['kimura.jpeg','木村'],
+ 'C13':['nagata%20out.png','わかめ'],'C12':['kimura%20brother.png','お兄さん'],'C11':['yassu.png','ヤッス']
+};
+var BABA={s:'J',r:0,baba:true}; // joker = 坊主わかめ
+var BABIMG='nagata%20out.png';
+var players=[{name:'あなた',hand:[],me:true},{name:'わかめ',hand:[],av:'nagata%20out.png'},{name:'津守',hand:[],av:'tsumori%20wutang.png'},{name:'木村',hand:[],av:'IMG_3555.jpeg'}];
+var turn=0, phase='', pickList=[];
+var MSG=document.getElementById('msg'),PICK=document.getElementById('pickRow');
+
+function deal(){
+ var deck=[];
+ for(var s=0;s<4;s++)for(var r=1;r<=13;r++)deck.push({s:SUITS[s],r:r});
+ deck.push(BABA); // 53 cards (one joker)
+ // remove one card so pairs are even? With 52+1 joker, 26 pairs +1 baba = fine
+ for(var i=deck.length-1;i>0;i--){var j=(Math.random()*(i+1))|0;var t=deck[i];deck[i]=deck[j];deck[j]=t;}
+ players.forEach(function(p){p.hand=[];});
+ var pi=0; while(deck.length){players[pi%4].hand.push(deck.pop());pi++;}
+ players.forEach(function(p){discardPairs(p);});
+ turn=0; phase='play';
+ render(); nextStep();
+}
+function discardPairs(p){
+ var byRank={},keep=[];
+ p.hand.forEach(function(c){ if(c.baba){keep.push(c);return;} (byRank[c.r]=byRank[c.r]||[]).push(c); });
+ for(var r in byRank){var a=byRank[r]; while(a.length>=2){a.pop();a.pop();} if(a.length)keep.push(a[0]);}
+ p.hand=keep;
+}
+function cardHTML(c,cw){
+ if(c.baba){return '<div class="card face baba" style="--cw:'+cw+'px"><img src="'+BABIMG+'"><div class="rk">JOKER</div><div class="band">わかめ</div></div>';}
+ var key=c.s+c.r,f=FACE[key],cls=RED[c.s]?'red':'blk';
+ if(f)return '<div class="card face" style="--cw:'+cw+'px"><img src="'+f[0]+'"><div class="rk">'+RANKS[c.r]+SYM[c.s]+'</div><div class="band">'+f[1]+'</div></div>';
+ return '<div class="card" style="--cw:'+cw+'px"><div class="rk '+cls+'">'+RANKS[c.r]+SYM[c.s]+'</div><div class="mid '+cls+'">'+SYM[c.s]+'</div></div>';
+}
+function render(){
+ // opponents
+ var row=document.getElementById('oppRow');row.innerHTML='';
+ [1,2,3].forEach(function(i){var p=players[i];var d=document.createElement('div');d.className='opp';
+  var mini='';for(var k=0;k<Math.min(p.hand.length,8);k++)mini+='<div class="m"></div>';
+  d.innerHTML='<img class="avatar" src="'+p.av+'" alt="">'+'<div class="oppname'+(turn===i?' turn':'')+'">'+p.name+' <span class="cnt">('+p.hand.length+')</span></div><div class="mini">'+mini+'</div>';
+  row.appendChild(d);});
+ // me
+ var mh=document.getElementById('myhand');mh.innerHTML='';
+ var me=players[0]; var cw=me.hand.length>10?40:52;
+ me.hand.forEach(function(c){mh.innerHTML+=cardHTML(c,cw);});
+ document.getElementById('myName').className='myname'+(turn===0?' turn':'');
+ document.getElementById('myName').innerHTML='あなた ('+me.hand.length+')'+(turn===0?' ← あなたの番':'');
+}
+function alive(i){return players[i].hand.length>0;}
+function nextAlive(from){var i=from;for(var k=0;k<4;k++){i=(i+1)%4;if(alive(i))return i;}return -1;}
+function leftTarget(i){ // draw from next alive player to the left
+ return nextAlive(i);
+}
+function checkEnd(){
+ var living=players.filter(function(p){return p.hand.length>0;});
+ if(living.length===1){ endGame(living[0]); return true; }
+ return false;
+}
+function nextStep(){
+ if(checkEnd())return;
+ if(!alive(turn)){turn=nextAlive(turn);}
+ var t=leftTarget(turn);
+ if(turn===0){ // player's turn: pick from target
+  var tp=players[t];
+  MSG.innerHTML='<span class="g">'+tp.name+'</span> から 1枚 引いてください。';
+  PICK.innerHTML='';
+  var n=tp.hand.length;
+  for(var k=0;k<n;k++){(function(k){var d=document.createElement('div');d.className='pcard';d.textContent='?';
+    d.onclick=function(){playerDraw(t,k);};PICK.appendChild(d);})(k);}
+ } else {
+  // CPU turn
+  PICK.innerHTML='';
+  MSG.innerHTML='<span class="g">'+players[turn].name+'</span> の番…';
+  setTimeout(function(){cpuDraw(turn,t);},900);
+ }
+}
+function drawCard(from,to,idx){
+ var c=players[from].hand.splice(idx,1)[0];
+ players[to].hand.push(c);
+ // check pair for 'to'
+ var made=resolvePair(players[to],c);
+ return {card:c,made:made};
+}
+function resolvePair(p,c){
+ if(c.baba)return false;
+ for(var i=0;i<p.hand.length;i++){ if(p.hand[i]!==c && !p.hand[i].baba && p.hand[i].r===c.r){
+   // remove both
+   var idxs=[i,p.hand.indexOf(c)].sort(function(a,b){return b-a;});
+   idxs.forEach(function(x){p.hand.splice(x,1);}); return true; } }
+ return false;
+}
+function playerDraw(t,idx){
+ PICK.innerHTML='';
+ var r=drawCard(t,0,idx);
+ var label=r.card.baba?'<span class="g">わかめ（ババ）</span>':(RANKS[r.card.r]+SYM[r.card.s]);
+ MSG.innerHTML='引いたのは '+label+(r.made?'　→ ペアで捨てた！':(r.card.baba?'　…つかんでしまった。':''))+'';
+ render();
+ setTimeout(function(){ turn=nextAlive(turn); nextStep(); }, r.made||r.card.baba?1200:800);
+}
+function cpuDraw(ci,t){
+ // simple AI: random pick; slight avoidance handled by target's shuffle
+ var n=players[t].hand.length; var idx=(Math.random()*n)|0;
+ var r=drawCard(t,ci,idx);
+ render();
+ var who=players[ci].name;
+ if(r.card.baba)MSG.innerHTML=who+' は ババ（わかめ）を引いた…';
+ else MSG.innerHTML=who+' が 1枚 引いた'+(r.made?' → ペア成立':'');
+ setTimeout(function(){ turn=nextAlive(turn); nextStep(); }, 900);
+}
+function endGame(loser){
+ var o=document.getElementById('over');
+ var isMe=loser.me;
+ document.getElementById('overK').textContent='GAME SET';
+ if(isMe){
+  document.getElementById('overPic').src=BABIMG;document.getElementById('overPic').style.display='block';
+  document.getElementById('overT').textContent='あなたの負け…';
+  document.getElementById('overS').innerHTML='最後に わかめ（ババ）が 残ってしまった。<br>「…もう一杯、いかがですか?」';
+ }else{
+  document.getElementById('overPic').style.display='none';
+  document.getElementById('overT').textContent='あなたの勝ち!';
+  document.getElementById('overS').innerHTML='ババを掴んだのは <span style="color:#C9A96A">'+loser.name+'</span> でした。<br>お見事!';
+ }
+ o.classList.add('on');
+}
+document.getElementById('newBtn').onclick=deal;
+document.getElementById('overBtn').onclick=function(){document.getElementById('over').classList.remove('on');deal();};
+deal();
+})();
+</script>
+</body>
+</html>
