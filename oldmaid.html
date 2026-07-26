@@ -56,9 +56,12 @@ header a:active,.newbtn:active{color:var(--gold);border-color:var(--gold)}
 #over .sub{color:var(--dim);margin-bottom:1.4rem;line-height:1.8;max-width:20em}
 #over button{font-family:'Anton',sans-serif;font-size:1.1rem;letter-spacing:.06em;color:var(--bg);background:var(--gold);border:0;padding:.9rem 2.2rem;border-radius:999px;cursor:pointer}
 #over .babapic{width:96px;height:134px;border-radius:8px;object-fit:cover;border:2px solid var(--red);margin-bottom:12px}
-/* drawn-card reveal */
-#reveal{display:flex;justify-content:center;margin-top:10px;min-height:0}
-#reveal .card{--cw:74px;animation:pop .35s cubic-bezier(.16,1,.3,1)}
+/* drawn-card popup (center screen) */
+#reveal{position:fixed;inset:0;z-index:18;display:none;align-items:center;justify-content:center;flex-direction:column;background:rgba(8,6,4,.72);pointer-events:none}
+#reveal.on{display:flex}
+#reveal .rlabel{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:var(--gold);margin-bottom:12px;text-transform:uppercase}
+#reveal .rcards{display:flex;gap:12px;animation:pop .4s cubic-bezier(.16,1,.3,1)}
+#reveal .card{--cw:120px}
 @keyframes pop{from{transform:scale(.4) translateY(20px);opacity:0}to{transform:none;opacity:1}}
 /* BABA dramatic overlay */
 #baba{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;flex-direction:column;pointer-events:none}
@@ -81,7 +84,7 @@ header a:active,.newbtn:active{color:var(--gold);border-color:var(--gold)}
 </header>
 <div id="table">
   <div class="opprow" id="oppRow"></div>
-  <div class="center"><div><div id="msg"></div><div class="pickrow" id="pickRow"></div><div id="reveal"></div></div></div>
+  <div class="center"><div><div id="msg"></div><div class="pickrow" id="pickRow"></div><div id="reveal"><div class="rlabel" id="rlabel"></div><div class="rcards" id="rcards"></div></div></div></div>
   <div id="me">
     <div class="myname" id="myName">あなた</div>
     <div id="myhand"></div>
@@ -194,31 +197,28 @@ function resolvePair(p,c){
 }
 function playerDraw(t,idx){
  PICK.innerHTML='';
- var drawn=players[t].hand[idx];
  var r=drawCard(t,0,idx);
  render();
- if(r.card.baba){ showReveal(drawn); babaEffect(function(){ clearReveal(); turn=nextAlive(turn); nextStep(); }); return; }
- if(r.made){ showReveal(r.card,r.partner);
-   MSG.innerHTML='引いたのは <span class="g">'+RANKS[r.card.r]+SYM[r.card.s]+'</span>　→ 同じ数字の 2枚で ペア成立！ 捨てた。';
-   setTimeout(function(){ clearReveal(); turn=nextAlive(turn); nextStep(); },1600);
- }else{ showReveal(r.card);
-   MSG.innerHTML='引いたのは '+RANKS[r.card.r]+SYM[r.card.s]+'。 手札に くわえた。';
-   setTimeout(function(){ clearReveal(); turn=nextAlive(turn); nextStep(); },1100);
+ if(r.card.baba){ babaEffect(function(){ turn=nextAlive(turn); nextStep(); }); return; }
+ if(r.made){ showReveal(r.card,r.partner,'ペア成立！');
+   MSG.innerHTML='同じ数字が そろって ペア成立！ 2枚 捨てた。';
+   setTimeout(function(){ clearReveal(); turn=nextAlive(turn); nextStep(); },1700);
+ }else{ showReveal(r.card,null,'ひいたカード');
+   MSG.innerHTML='手札に くわえた。';
+   setTimeout(function(){ clearReveal(); turn=nextAlive(turn); nextStep(); },1300);
  }
 }
 function cpuDraw(ci,t){
  var n=players[t].hand.length; var idx=(Math.random()*n)|0;
- var drawn=players[t].hand[idx];
  var r=drawCard(t,ci,idx);
  render();
  var who=players[ci].name;
- if(r.card.baba){ showReveal(drawn); MSG.innerHTML='<span class="g">'+who+'</span> は ババ（わかめ）を引いた…!';
-   setTimeout(function(){clearReveal();turn=nextAlive(turn);nextStep();},1400); return; }
+ if(r.card.baba){ babaEffect(function(){turn=nextAlive(turn);nextStep();}); MSG.innerHTML='<span class="g">'+who+'</span> は ババ（わかめ）を引いた…!'; return; }
  MSG.innerHTML=who+' が 1枚 引いた'+(r.made?' → ペア成立':'');
  setTimeout(function(){ turn=nextAlive(turn); nextStep(); }, 900);
 }
-function showReveal(card,card2){var el=document.getElementById('reveal');el.innerHTML=cardHTML(card,74)+(card2?cardHTML(card2,74):'');}
-function clearReveal(){document.getElementById('reveal').innerHTML='';}
+function showReveal(card,card2,label){document.getElementById('rlabel').textContent=label||'ひいたカード';document.getElementById('rcards').innerHTML=cardHTML(card,120)+(card2?cardHTML(card2,120):'');document.getElementById('reveal').classList.add('on');}
+function clearReveal(){document.getElementById('reveal').classList.remove('on');}
 function babaEffect(cb){
  var o=document.getElementById('baba');document.getElementById('babaImg').src=BABIMG;o.classList.add('on');
  // sparks
