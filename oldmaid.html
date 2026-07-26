@@ -48,6 +48,13 @@ header a:active,.newbtn:active{color:var(--gold);border-color:var(--gold)}
 .card.face .rk{color:var(--gold);text-shadow:0 1px 2px #000;z-index:2}
 .card.face .band{position:absolute;left:0;right:0;bottom:0;z-index:2;background:rgba(12,10,8,.72);color:var(--cream);font-size:.42rem;text-align:center;font-family:'Space Mono';letter-spacing:.05em}
 .card.baba{outline:2px solid var(--red)}
+.card .pips{position:absolute;inset:14% 12% 14% 12%;display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:repeat(5,1fr);justify-items:center;align-items:center}
+.card .pips span{font-size:calc(var(--cw,52px)*0.22);line-height:1}
+.card .pips span.inv{transform:rotate(180deg)}
+.card .big{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:calc(var(--cw,52px)*0.6)}
+.card .rk.tl{top:2px;left:3px}.card .rk.brr{bottom:2px;right:3px;transform:rotate(180deg)}
+.card .rk2{position:absolute;font-family:'Space Mono',monospace;font-weight:700;line-height:1}
+
 .red{color:var(--red)}.blk{color:#141110}
 #over{position:fixed;inset:0;z-index:20;background:rgba(8,6,4,.93);display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:2rem}
 #over.on{display:flex}
@@ -131,6 +138,44 @@ function discardPairs(p){
  p.hand.forEach(function(c){ if(c.baba){keep.push(c);return;} (byRank[c.r]=byRank[c.r]||[]).push(c); });
  for(var r in byRank){var a=byRank[r]; while(a.length>=2){a.pop();a.pop();} if(a.length)keep.push(a[0]);}
  p.hand=keep;
+}
+function pipPositions(n){
+ // grid positions (col1..3, row1..5) for standard pip layouts; center col=2
+ var L=1,C=2,R=3;
+ var map={
+  1:[[C,3]],
+  2:[[C,1],[C,5]],
+  3:[[C,1],[C,3],[C,5]],
+  4:[[L,1],[R,1],[L,5],[R,5]],
+  5:[[L,1],[R,1],[C,3],[L,5],[R,5]],
+  6:[[L,1],[R,1],[L,3],[R,3],[L,5],[R,5]],
+  7:[[L,1],[R,1],[C,2],[L,3],[R,3],[L,5],[R,5]],
+  8:[[L,1],[R,1],[L,2],[R,2],[L,4],[R,4],[L,5],[R,5]],
+  9:[[L,1],[R,1],[L,2],[R,2],[C,3],[L,4],[R,4],[L,5],[R,5]],
+  10:[[L,1],[R,1],[C,1.6],[L,2],[R,2],[L,4],[R,4],[C,4.4],[L,5],[R,5]]
+ };
+ return map[n]||[];
+}
+function numberCard(c,cw,cls){
+ var sym=SYM[c.s], rk=RANKS[c.r];
+ var corner='<div class="rk2 tl '+cls+'" style="top:2px;left:3px;font-size:'+(cw*0.2)+'px">'+rk+'<br>'+sym+'</div>'+
+            '<div class="rk2 brr '+cls+'" style="bottom:2px;right:3px;transform:rotate(180deg);font-size:'+(cw*0.2)+'px">'+rk+'<br>'+sym+'</div>';
+ var inner;
+ if(c.r===1){ inner='<div class="big '+cls+'">'+sym+'</div>'; }
+ else{
+  var pos=pipPositions(c.r), cells='';
+  // build a 3x5 grid; place pips
+  var grid={};
+  pos.forEach(function(p){var key=p[0]+'_'+Math.round(p[1]);grid[key]=p;});
+  inner='<div class="pips '+cls+'">';
+  for(var row=1;row<=5;row++){for(var col=1;col<=3;col++){
+    var found=pos.filter(function(p){return p[0]===col && Math.round(p[1])===row;});
+    if(found.length){var invert=found[0][1]>3?' inv':'';inner+='<span class="'+invert+'">'+sym+'</span>';}
+    else inner+='<span></span>';
+  }}
+  inner+='</div>';
+ }
+ return '<div class="card" style="--cw:'+cw+'px">'+corner+inner+'</div>';
 }
 function cardHTML(c,cw){
  if(c.baba){return '<div class="card face baba" style="--cw:'+cw+'px"><img src="'+BABIMG+'"><div class="rk">JOKER</div><div class="band">わかめ</div></div>';}
