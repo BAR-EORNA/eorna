@@ -158,13 +158,17 @@ function movable(pile,idx){ // returns array of cards from idx to end if valid d
  return arr;
 }
 function onCard(pile,idx){
- if(pile==='waste'){ toggleSel('waste',waste.length-1); return; }
+ if(pile==='waste'){
+  if(!sel){ var wc=waste[waste.length-1]; if(wc&&canFound(wc)){ waste.pop(); found[wc.s].push(wc); bump(); check(); render(); return; } }
+  toggleSel('waste',waste.length-1); return;
+ }
  if(pile.indexOf('found_')===0){ return; }
  if(pile.indexOf('tab_')===0){
   var c=+pile.split('_')[1]; var card=tab[c][idx];
   if(!card.up){ if(idx===tab[c].length-1){card.up=true;bump();render();} return; }
-  if(sel){ tryMoveTo('tab',c); }
-  else{ if(movable(tab[c],idx)) toggleSel(pile,idx); }
+  if(sel){ tryMoveTo('tab',c); return; }
+  if(idx===tab[c].length-1 && canFound(card)){ tab[c].pop(); found[card.s].push(card); bump(); check(); render(); return; }
+  if(movable(tab[c],idx)) toggleSel(pile,idx);
  }
 }
 function toggleSel(pile,idx){ if(sel&&sel.pile===pile&&sel.idx===idx){sel=null;} else {sel={pile:pile,idx:idx};} render(); }
