@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>EORNA MERGE — BAR EORNA</title>
+<meta name="description" content="BAR EORNAの合体パズル。オリーブからボトルへ、同じもの同士を重ねて育てよう。">
+<meta name="theme-color" content="#0C0A08">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%23B0281C%27/%3E%3Ctext x=%2732%27 y=%2746%27 font-family=%27Arial Black,sans-serif%27 font-size=%2740%27 font-weight=%27900%27 fill=%27%23EDE5D2%27 text-anchor=%27middle%27%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Shippori+Mincho:wght@700;800&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F4JBQ8GK16"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-F4JBQ8GK16');</script>
+<style>
+:root{--bg:#0C0A08;--panel:#15110D;--cream:#E9E3D3;--gold:#C9A96A;--red:#C1301F;--dim:#9a9081;--hair:rgba(233,227,211,.14);
+ --disp:'Anton',sans-serif;--min:'Shippori Mincho',serif;--mono:'Space Mono',monospace;--sans:'Noto Sans JP',sans-serif}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--cream);font-family:var(--sans);display:flex;flex-direction:column;align-items:center;
+ -webkit-font-smoothing:antialiased;touch-action:none;user-select:none}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+header{position:relative;z-index:2;width:100%;max-width:480px;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem}
+header a{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;color:var(--dim);text-decoration:none;border:1px solid var(--hair);padding:.45rem .7rem;border-radius:999px}
+header a:active{color:var(--gold);border-color:var(--gold)}
+.brand{font-family:var(--disp);font-size:1.05rem;letter-spacing:.12em}
+.brand b{color:var(--gold);font-weight:400}
+.hud{position:relative;z-index:2;width:100%;max-width:480px;display:flex;justify-content:space-between;align-items:flex-end;padding:0 1rem .4rem}
+.hud .s{font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+.hud .v{font-family:var(--disp);font-size:1.8rem;line-height:1}
+.hud .best{text-align:right}
+.hud .best .v{font-size:1.1rem;color:var(--dim)}
+#stage{position:relative;z-index:2;flex:1;width:100%;max-width:480px;display:flex;align-items:center;justify-content:center;min-height:0;padding:0 1rem 1rem}
+#wrap{position:relative;border:1px solid var(--hair);border-radius:14px;overflow:hidden;
+ box-shadow:inset 0 2px 30px rgba(0,0,0,.6),0 20px 50px -30px #000;background:linear-gradient(180deg,#110D0A,#0A0705)}
+canvas{display:block;touch-action:none}
+#line{position:absolute;left:0;right:0;height:1px;background:repeating-linear-gradient(90deg,rgba(193,48,31,.6) 0 8px,transparent 8px 16px);pointer-events:none}
+#nextChip{position:absolute;top:8px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;pointer-events:none;z-index:3}
+/* overlay */
+#over{position:fixed;inset:0;z-index:10;background:rgba(8,6,4,.92);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:2rem;opacity:0;pointer-events:none;transition:opacity .4s}
+#over.on{opacity:1;pointer-events:auto}
+#over .k{font-family:var(--mono);font-size:.56rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase}
+#over h1{font-family:var(--disp);font-size:clamp(3rem,15vw,5rem);line-height:.92;margin:.5rem 0 .3rem}
+#over h1 b{color:var(--gold);font-weight:400}
+#over .sub{font-family:var(--min);font-weight:700;color:var(--dim);font-size:.95rem;margin-bottom:1.4rem;max-width:24em;line-height:1.9}
+#over .ladder{font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;color:var(--dim);margin-bottom:1.4rem;line-height:2;max-width:22em}
+#over .score{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;color:var(--cream);margin-bottom:1.4rem}
+#over button{font-family:var(--disp);font-size:1.1rem;letter-spacing:.06em;color:var(--bg);background:var(--gold);border:0;padding:.9rem 2.2rem;border-radius:999px}
+#over button:active{transform:scale(.97)}
+#over a{margin-top:1rem;font-family:var(--mono);font-size:.56rem;letter-spacing:.22em;color:var(--dim);text-decoration:none;text-transform:uppercase}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">EORNA <b>MERGE</b></div>
+  <a href="index.html">← EORNA</a>
+</header>
+
+<div class="hud">
+  <div><div class="s">Score</div><div class="v" id="score">0</div></div>
+  <div class="best"><div class="s">Best</div><div class="v" id="best">0</div></div>
+</div>
+
+<div id="stage">
+  <div id="wrap">
+    <div id="nextChip">NEXT</div>
+    <div id="line"></div>
+    <canvas id="c"></canvas>
+  </div>
+</div>
+
+<div id="over" class="on">
+  <div class="k">Bar Eorna — A Small Game</div>
+  <h1>EORNA <b>MERGE</b></h1>
+  <div class="sub">同じものを重ねると、ひとつ上へ育ちます。オリーブから始めて、EORNAの看板を目指してください。タップした位置に落ちます。</div>
+  <div class="ladder">オリーブ › ライム › レモン › アイス › ショット › タンブラー › シェイカー › ボトル › 樽 › 看板</div>
+  <div class="score" id="finalScore"></div>
+  <button id="start">はじめる</button>
+  <a href="index.html">トップへ戻る</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<script>
+(function(){
+if(!window.Matter){document.querySelector('.sub').textContent='この端末ではゲームを読み込めませんでした。トップへ戻ってください。';return;}
+var M=Matter,Engine=M.Engine,World=M.World,Bodies=M.Bodies,Body=M.Body,Events=M.Events,Composite=M.Composite;
+
+// tiers: radius grows; palette bar-themed
+var TIERS=[
+ {name:'オリーブ', r:14, c:'#4a5d2f', score:1},
+ {name:'ライム',   r:19, c:'#5f7d2e', score:3},
+ {name:'レモン',   r:25, c:'#b99a2e', score:6},
+ {name:'アイス',   r:32, c:'#bcd3d8', score:10},
+ {name:'ショット', r:40, c:'#b9863b', score:15},
+ {name:'タンブラー',r:49, c:'#8a6a2e', score:21},
+ {name:'シェイカー',r:59, c:'#c9c3b6', score:28},
+ {name:'ボトル',   r:70, c:'#3f5d3a', score:36},
+ {name:'樽',       r:82, c:'#7a4a1c', score:45},
+ {name:'看板',     r:95, c:'#C9A96A', score:60}
+];
+var DROPPABLE=5; // only spawn tiers 0..4
+
+var engine,world,render,canvas,ctx,W,H,scaleF=1;
+var wallT=40, topLine, score=0, best=parseInt(localStorage.getItem('eornaMergeBest')||'0');
+var current=null, nextTier=0, canDrop=true, playing=false, overFlag=false, dropX=null;
+var bodies=[], flashes=[];
+document.getElementById('best').textContent=best;
+
+function pickTier(){return (Math.random()*DROPPABLE)|0;}
+
+function setup(){
+ var wrap=document.getElementById('wrap');
+ var stage=document.getElementById('stage');
+ var availH=stage.clientHeight-2, availW=Math.min(stage.clientWidth-2,460);
+ // board ratio ~ 3:4
+ W=availW; H=Math.min(availH, availW*1.34);
+ wrap.style.width=W+'px'; wrap.style.height=H+'px';
+ canvas=document.getElementById('c'); canvas.width=W; canvas.height=H; ctx=canvas.getContext('2d');
+ topLine=H*0.16;
+ document.getElementById('line').style.top=topLine+'px';
+ engine=Engine.create(); world=engine.world; engine.gravity.y=1.0;
+ var opt={isStatic:true,restitution:.2,friction:.6,render:{}};
+ World.add(world,[
+  Bodies.rectangle(W/2,H+wallT/2,W,wallT,opt),          // floor
+  Bodies.rectangle(-wallT/2,H/2,wallT,H*2,opt),          // left
+  Bodies.rectangle(W+wallT/2,H/2,wallT,H*2,opt)          // right
+ ]);
+ Events.on(engine,'collisionStart',onCollide);
+}
+
+function addFruit(x,y,tier,noVel){
+ var t=TIERS[tier];
+ var b=Bodies.circle(x,y,t.r,{restitution:.15,friction:.55,density:.0016,label:'f'+tier});
+ b.tier=tier; World.add(world,b); bodies.push(b);
+ return b;
+}
+function onCollide(ev){
+ for(var i=0;i<ev.pairs.length;i++){
+  var a=ev.pairs[i].bodyA, b=ev.pairs[i].bodyB;
+  if(a.tier==null||b.tier==null)continue;
+  if(a.tier===b.tier && !a.merged && !b.merged && a.tier<TIERS.length-1){
+   a.merged=b.merged=true;
+   var nx=(a.position.x+b.position.x)/2, ny=(a.position.y+b.position.y)/2, nt=a.tier+1;
+   World.remove(world,a);World.remove(world,b);
+   bodies=bodies.filter(function(x){return x!==a&&x!==b;});
+   var nb=addFruit(nx,ny,nt);
+   Body.setVelocity(nb,{x:0,y:-1});
+   score+=TIERS[nt].score; document.getElementById('score').textContent=score;
+   flashes.push({x:nx,y:ny,r:TIERS[nt].r,a:1});
+   if(nt===TIERS.length-1){ // reached signboard: bonus + clear it
+     score+=120; document.getElementById('score').textContent=score;
+     setTimeout(function(){ if(bodies.indexOf(nb)>=0){World.remove(world,nb);bodies=bodies.filter(function(x){return x!==nb;});flashes.push({x:nx,y:ny,r:120,a:1});} },700);
+   }
+  }
+ }
+}
+
+function spawnCurrent(){
+ current={tier:nextTier, x:W/2};
+ nextTier=pickTier();
+ document.getElementById('nextChip').textContent='NEXT ▸ '+TIERS[nextTier].name;
+ canDrop=true;
+}
+function drop(x){
+ if(!playing||!canDrop||!current)return;
+ canDrop=false;
+ var t=TIERS[current.tier];
+ var cx=Math.max(t.r+4,Math.min(W-t.r-4,x));
+ addFruit(cx,topLine-10,current.tier);
+ current=null;
+ setTimeout(function(){ if(playing){spawnCurrent();} },520);
+}
+
+function loop(){
+ if(!playing)return;
+ Engine.update(engine,1000/60);
+ // draw
+ ctx.clearRect(0,0,W,H);
+ // settled bodies
+ for(var i=0;i<bodies.length;i++){drawBody(bodies[i]);}
+ // preview current at top
+ if(current){drawCircle(current.x,topLine-10,TIERS[current.tier].r,TIERS[current.tier].c,TIERS[current.tier].name,.9);
+   // aim line
+   ctx.strokeStyle='rgba(233,227,211,.12)';ctx.setLineDash([4,6]);ctx.beginPath();ctx.moveTo(current.x,topLine);ctx.lineTo(current.x,H);ctx.stroke();ctx.setLineDash([]);
+ }
+ // flashes
+ for(var f=flashes.length-1;f>=0;f--){var fl=flashes[f];ctx.fillStyle='rgba(201,169,106,'+(fl.a*0.4)+')';ctx.beginPath();ctx.arc(fl.x,fl.y,fl.r*(1.4-fl.a*0.4),0,7);ctx.fill();fl.a-=0.06;if(fl.a<=0)flashes.splice(f,1);}
+ // over check: any body above top line & settled
+ checkOver();
+ requestAnimationFrame(loop);
+}
+function drawBody(b){
+ var t=TIERS[b.tier];
+ ctx.save();ctx.translate(b.position.x,b.position.y);ctx.rotate(b.angle);
+ drawCircle(0,0,t.r,t.c,t.r>26?t.name:'',1);
+ ctx.restore();
+}
+function drawCircle(x,y,r,color,label,alpha){
+ ctx.globalAlpha=alpha||1;
+ var g=ctx.createRadialGradient(x-r*0.3,y-r*0.35,r*0.1,x,y,r);
+ g.addColorStop(0,'rgba(255,255,255,0.28)');g.addColorStop(0.25,color);g.addColorStop(1,shade(color,-18));
+ ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();
+ ctx.strokeStyle='rgba(0,0,0,0.25)';ctx.lineWidth=1;ctx.stroke();
+ ctx.fillStyle='rgba(233,227,211,0.22)';ctx.beginPath();ctx.ellipse(x-r*0.32,y-r*0.36,r*0.26,r*0.16,-0.5,0,7);ctx.fill();
+ if(label){ctx.globalAlpha=alpha||1;ctx.fillStyle='rgba(20,17,13,0.72)';ctx.font='700 '+Math.max(8,r*0.34)+"px 'Noto Sans JP',sans-serif";ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,x,y);}
+ ctx.globalAlpha=1;
+}
+function shade(hex,p){var n=parseInt(hex.slice(1),16),r=(n>>16)+p,g=((n>>8)&255)+p,b=(n&255)+p;r=Math.max(0,Math.min(255,r));g=Math.max(0,Math.min(255,g));b=Math.max(0,Math.min(255,b));return '#'+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);}
+
+var overTimer=0;
+function checkOver(){
+ var above=false;
+ for(var i=0;i<bodies.length;i++){var b=bodies[i];
+  if(b.position.y-TIERS[b.tier].r < topLine && Math.abs(b.velocity.y)<0.25 && Math.abs(b.velocity.x)<0.25){above=true;break;}
+ }
+ if(above){overTimer++; if(overTimer>90){gameOver();}}else{overTimer=Math.max(0,overTimer-2);}
+}
+
+function start(){
+ document.getElementById('over').classList.remove('on');
+ // reset world
+ if(world){World.clear(world,false);Engine.clear(engine);}
+ bodies=[];flashes=[];score=0;overTimer=0;overFlag=false;
+ document.getElementById('score').textContent=0;
+ setup(); playing=true; nextTier=pickTier(); spawnCurrent();
+ requestAnimationFrame(loop);
+}
+function gameOver(){
+ if(overFlag)return; overFlag=true; playing=false;
+ if(score>best){best=score;localStorage.setItem('eornaMergeBest',best);document.getElementById('best').textContent=best;}
+ document.querySelector('#over .k').textContent='Bar Eorna';
+ document.querySelector('#over .sub').textContent='いい積み方でした。もう一杯、いかがですか。';
+ document.getElementById('finalScore').textContent='SCORE '+score+'  /  BEST '+best;
+ document.getElementById('start').textContent='もう一度';
+ document.getElementById('over').classList.add('on');
+}
+
+// input
+function rel(e){var r=canvas.getBoundingClientRect();var cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left;return cx;}
+document.getElementById('wrap').addEventListener('pointermove',function(e){if(current&&playing){current.x=Math.max(0,Math.min(W,rel(e)));}},{passive:true});
+document.getElementById('wrap').addEventListener('pointerdown',function(e){if(current&&playing){current.x=Math.max(0,Math.min(W,rel(e)));}},{passive:true});
+document.getElementById('wrap').addEventListener('pointerup',function(e){if(playing&&current){drop(current.x);}},{passive:true});
+document.getElementById('start').addEventListener('click',start);
+addEventListener('resize',function(){ if(playing){ /* keep simple: rebuild on next game */ } });
+})();
+</script>
+</body>
+</html>
