@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>EORNA SNAKE — BAR EORNA</title>
+<meta name="theme-color" content="#0C0A08">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%23B0281C%27/%3E%3Ctext x=%2732%27 y=%2746%27 font-family=%27Arial Black,sans-serif%27 font-size=%2740%27 font-weight=%27900%27 fill=%27%23EDE5D2%27 text-anchor=%27middle%27%3EE%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F4JBQ8GK16"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-F4JBQ8GK16');</script>
+<style>
+:root{--bg:#0C0A08;--panel:#15110D;--cream:#E9E3D3;--gold:#C9A96A;--red:#C1301F;--dim:#9a9081;--hair:rgba(233,227,211,.14);
+--disp:'Anton',sans-serif;--mono:'Space Mono',monospace;--sans:'Noto Sans JP',sans-serif}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--cream);font-family:var(--sans);display:flex;flex-direction:column;align-items:center;user-select:none;touch-action:none}
+header{width:100%;max-width:460px;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem}
+.brand{font-family:var(--disp);font-size:1.05rem;letter-spacing:.1em}.brand b{color:var(--gold);font-weight:400}
+header a{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;color:var(--dim);text-decoration:none;border:1px solid var(--hair);padding:.45rem .7rem;border-radius:999px}
+.hud{width:100%;max-width:460px;display:flex;justify-content:space-between;padding:0 1rem .3rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.15em;color:var(--dim)}
+.hud b{color:var(--gold)}
+#stage{position:relative;flex:1;width:100%;max-width:460px;display:flex;align-items:center;justify-content:center;min-height:0;padding:.3rem .6rem 1rem}
+canvas{background:linear-gradient(180deg,#110D0A,#0A0705);border:1px solid var(--hair);border-radius:14px;box-shadow:inset 0 2px 30px rgba(0,0,0,.6);touch-action:none;max-height:100%}
+#over{position:fixed;inset:0;z-index:10;background:rgba(8,6,4,.92);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:2rem}
+#over.off{display:none}
+#over .k{font-family:var(--mono);font-size:.56rem;letter-spacing:.4em;color:var(--gold)}
+#over h1{font-family:var(--disp);font-size:clamp(2.6rem,14vw,4.4rem);margin:.4rem 0 .3rem}
+#over h1 b{color:var(--gold);font-weight:400}
+#over .sub{color:var(--dim);font-size:.92rem;margin-bottom:1.4rem;max-width:22em;line-height:1.8}
+#over .score{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;color:var(--cream);margin-bottom:1.4rem}
+#over button{font-family:var(--disp);font-size:1.1rem;letter-spacing:.06em;color:var(--bg);background:var(--gold);border:0;padding:.9rem 2.2rem;border-radius:999px}
+#over a{margin-top:1rem;font-family:var(--mono);font-size:.56rem;letter-spacing:.22em;color:var(--dim);text-decoration:none}
+</style>
+</head>
+<body>
+<header><div class="brand">EORNA <b>SNAKE</b></div><a href="arcade.html">← ARCADE</a></header>
+<div class="hud"><div>SCORE <b id="score">0</b></div><div>← スワイプで方向転換 →</div><div>BEST <b id="best">0</b></div></div>
+<div id="stage"><canvas id="c"></canvas></div>
+<div id="over">
+  <div class="k">Bar Eorna — A Small Game</div>
+  <h1>EORNA <b>SNAKE</b></h1>
+  <div class="sub">オリーブを食べて伸ばそう。壁と自分の体に当たると終わり。スワイプで曲がります。</div>
+  <div class="score" id="finalScore"></div>
+  <button id="start">はじめる</button>
+  <a href="arcade.html">ゲーム一覧へ</a>
+</div>
+<script>
+(function(){
+var canvas=document.getElementById('c'),ctx=canvas.getContext('2d'),DPR=Math.min(devicePixelRatio||1,2);
+var GRID=17, CELL, W, H, snake, dir, nextDir, food, score, best, playing=false, speed, acc, last;
+best=parseInt(localStorage.getItem('eornaSnakeBest')||'0');document.getElementById('best').textContent=best;
+function resize(){
+ var s=document.getElementById('stage');var d=Math.min(s.clientWidth,s.clientHeight)-2;
+ CELL=Math.floor(d/GRID); W=CELL*GRID; H=CELL*GRID;
+ canvas.style.width=W+'px';canvas.style.height=H+'px';canvas.width=W*DPR;canvas.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);
+ draw();
+}
+function placeFood(){do{food={x:(Math.random()*GRID)|0,y:(Math.random()*GRID)|0};}while(snake.some(function(s){return s.x===food.x&&s.y===food.y;}));}
+function start(){
+ resize();
+ snake=[{x:8,y:8},{x:7,y:8},{x:6,y:8}]; dir={x:1,y:0}; nextDir=dir;
+ score=0; speed=160; acc=0; last=0; placeFood();
+ document.getElementById('score').textContent=0;
+ document.getElementById('over').classList.add('off'); playing=true;
+ requestAnimationFrame(loop);
+}
+function loop(t){
+ if(!playing)return;
+ if(!last)last=t; acc+=t-last; last=t;
+ if(acc>=speed){acc=0;stepGame();}
+ draw(); requestAnimationFrame(loop);
+}
+function stepGame(){
+ dir=nextDir;
+ var head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+ if(head.x<0||head.x>=GRID||head.y<0||head.y>=GRID)return gameOver();
+ if(snake.some(function(s){return s.x===head.x&&s.y===head.y;}))return gameOver();
+ snake.unshift(head);
+ if(head.x===food.x&&head.y===food.y){score+=10;document.getElementById('score').textContent=score;placeFood();if(speed>70)speed-=4;}
+ else snake.pop();
+}
+function rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function draw(){
+ ctx.clearRect(0,0,W,H);
+ ctx.strokeStyle='rgba(233,227,211,.04)';
+ for(var i=1;i<GRID;i++){ctx.beginPath();ctx.moveTo(i*CELL,0);ctx.lineTo(i*CELL,H);ctx.stroke();ctx.beginPath();ctx.moveTo(0,i*CELL);ctx.lineTo(W,i*CELL);ctx.stroke();}
+ if(food){var fx=food.x*CELL+CELL/2,fy=food.y*CELL+CELL/2;
+  ctx.fillStyle='#5f7d2e';ctx.beginPath();ctx.ellipse(fx,fy,CELL*0.32,CELL*0.38,0,0,7);ctx.fill();
+  ctx.fillStyle='#C1301F';ctx.beginPath();ctx.arc(fx,fy,CELL*0.1,0,7);ctx.fill();}
+ if(snake)for(var s=snake.length-1;s>=0;s--){var seg=snake[s];var pad=CELL*0.12;
+  ctx.fillStyle=s===0?'#E9E3D3':'#C9A96A';
+  rr(seg.x*CELL+pad,seg.y*CELL+pad,CELL-pad*2,CELL-pad*2,CELL*0.28);ctx.fill();
+  if(s===0){ctx.fillStyle='#0C0A08';var ex=seg.x*CELL+CELL/2,ey=seg.y*CELL+CELL/2;
+   ctx.beginPath();
+   ctx.arc(ex+dir.x*CELL*0.16-dir.y*CELL*0.14,ey+dir.y*CELL*0.16-dir.x*CELL*0.14,CELL*0.07,0,7);
+   ctx.arc(ex+dir.x*CELL*0.16+dir.y*CELL*0.14,ey+dir.y*CELL*0.16+dir.x*CELL*0.14,CELL*0.07,0,7);ctx.fill();}
+ }
+}
+function gameOver(){
+ playing=false;
+ if(score>best){best=score;localStorage.setItem('eornaSnakeBest',best);document.getElementById('best').textContent=best;}
+ document.getElementById('finalScore').textContent='SCORE '+score+'  /  BEST '+best;
+ document.querySelector('#over .sub').textContent='また一杯、いかがですか。';
+ document.getElementById('start').textContent='もう一度';
+ document.getElementById('over').classList.remove('off');
+}
+function turn(nx,ny){if(nx===-dir.x&&ny===-dir.y)return;nextDir={x:nx,y:ny};}
+var sx,sy;
+canvas.addEventListener('touchstart',function(e){var t=e.touches[0];sx=t.clientX;sy=t.clientY;},{passive:true});
+canvas.addEventListener('touchmove',function(e){if(sx==null)return;var t=e.touches[0];var dx=t.clientX-sx,dy=t.clientY-sy;
+ if(Math.abs(dx)+Math.abs(dy)<20)return;
+ if(Math.abs(dx)>Math.abs(dy))turn(dx>0?1:-1,0);else turn(0,dy>0?1:-1);sx=t.clientX;sy=t.clientY;},{passive:true});
+canvas.addEventListener('touchend',function(){sx=sy=null;});
+addEventListener('keydown',function(e){if(!playing)return;
+ if(e.key==='ArrowLeft')turn(-1,0);else if(e.key==='ArrowRight')turn(1,0);
+ else if(e.key==='ArrowUp')turn(0,-1);else if(e.key==='ArrowDown')turn(0,1);});
+document.getElementById('start').addEventListener('click',start);
+addEventListener('resize',resize);
+resize();
+})();
+</script>
+</body>
+</html>
