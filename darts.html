@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>EORNA DARTS 301 — BAR EORNA</title>
+<meta name="theme-color" content="#0C0A08">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%23B0281C%27/%3E%3Ctext x=%2732%27 y=%2746%27 font-family=%27Arial Black,sans-serif%27 font-size=%2740%27 font-weight=%27900%27 fill=%27%23EDE5D2%27 text-anchor=%27middle%27%3EE%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F4JBQ8GK16"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-F4JBQ8GK16');</script>
+<style>
+:root{--bg:#0C0A08;--panel:#15110D;--cream:#E9E3D3;--gold:#C9A96A;--red:#C1301F;--dim:#9a9081;--hair:rgba(233,227,211,.14);
+--disp:'Anton',sans-serif;--mono:'Space Mono',monospace;--sans:'Noto Sans JP',sans-serif}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--cream);font-family:var(--sans);display:flex;flex-direction:column;align-items:center;user-select:none;touch-action:none}
+header{width:100%;max-width:480px;display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem}
+.brand{font-family:var(--disp);font-size:1.05rem;letter-spacing:.1em}.brand b{color:var(--gold);font-weight:400}
+header a{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;color:var(--dim);text-decoration:none;border:1px solid var(--hair);padding:.45rem .7rem;border-radius:999px}
+.scores{width:100%;max-width:480px;display:flex;gap:8px;padding:0 1rem .3rem}
+.pl{flex:1;border:1px solid var(--hair);border-radius:10px;padding:.5rem .7rem;background:var(--panel);display:flex;align-items:center;gap:.5rem}
+.pl.turn{border-color:var(--gold)}
+.pl img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid var(--gold)}
+.pl .nm{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;color:var(--dim)}
+.pl.turn .nm{color:var(--gold)}
+.pl .sc{font-family:var(--disp);font-size:1.5rem;line-height:1}
+#stage{position:relative;flex:1;width:100%;max-width:480px;display:flex;align-items:center;justify-content:center;min-height:0;padding:.3rem}
+canvas{touch-action:none;max-height:100%}
+.msg{width:100%;max-width:480px;text-align:center;font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;color:var(--gold);min-height:1.4em;padding:.2rem 1rem}
+.throws{width:100%;max-width:480px;text-align:center;font-family:var(--mono);font-size:.6rem;color:var(--dim);padding-bottom:.7rem;min-height:1.4em}
+#over{position:fixed;inset:0;z-index:10;background:rgba(8,6,4,.93);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:2rem}
+#over.off{display:none}
+#over .k{font-family:var(--mono);font-size:.56rem;letter-spacing:.4em;color:var(--gold)}
+#over h1{font-family:var(--disp);font-size:clamp(2.4rem,12vw,4rem);margin:.4rem 0 1rem}
+#over h1 b{color:var(--gold);font-weight:400}
+.opt{margin:.6rem 0;font-family:var(--sans);font-size:.82rem;color:var(--dim)}
+.seg{display:flex;justify-content:center;border:1px solid var(--hair);border-radius:999px;overflow:hidden;margin-top:.35rem}
+.seg button{font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;color:var(--dim);background:none;border:0;padding:.55rem .9rem}
+.seg button.on{background:var(--gold);color:var(--bg)}
+#over .start{font-family:var(--disp);font-size:1.1rem;letter-spacing:.06em;color:var(--bg);background:var(--gold);border:0;padding:.9rem 2.4rem;border-radius:999px;margin-top:1.4rem}
+#over a{margin-top:1rem;font-family:var(--mono);font-size:.56rem;letter-spacing:.22em;color:var(--dim);text-decoration:none}
+.win img{width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);margin-bottom:12px}
+</style>
+</head>
+<body>
+<header><div class="brand">EORNA <b>DARTS 301</b></div><a href="arcade.html">← ARCADE</a></header>
+<div class="scores">
+  <div class="pl turn" id="plYou"><img src="tsumori%20wutang.png" alt=""><div><div class="nm">あなた</div><div class="sc" id="scYou">301</div></div></div>
+  <div class="pl" id="plCpu"><img src="nagata%20out.png" alt=""><div><div class="nm">永田</div><div class="sc" id="scCpu">301</div></div></div>
+</div>
+<div id="stage"><canvas id="c"></canvas></div>
+<div class="msg" id="msg">タップで狙いを決めて投げる</div>
+<div class="throws" id="throws"></div>
+
+<div id="over">
+  <div id="setup">
+    <div class="k">Bar Eorna — Darts</div>
+    <h1>DARTS <b>301</b></h1>
+    <div class="opt">フィニッシュ<div class="seg" id="segFin"><button data-v="any" class="on">0ぴったり</button><button data-v="double">ダブルアウト</button></div></div>
+    <div class="opt">永田の強さ<div class="seg" id="segLv"><button data-v="easy">弱め</button><button data-v="normal" class="on">互角</button><button data-v="hard">手強い</button></div></div>
+    <button class="start" id="start">対戦開始</button>
+    <a href="arcade.html">ゲーム一覧へ</a>
+  </div>
+  <div class="win" id="win" style="display:none">
+    <img id="winImg" src=""><div class="k" id="winK"></div><h1 id="winT"></h1>
+    <button class="start" id="again">もう一度</button>
+    <a href="arcade.html">ゲーム一覧へ</a>
+  </div>
+</div>
+<script>
+(function(){
+var canvas=document.getElementById('c'),ctx=canvas.getContext('2d'),DPR=Math.min(devicePixelRatio||1,2);
+var R,CX,CY,SIZE;
+var NUM=[20,1,18,4,13,6,10,15,2,17,3,19,7,16,8,11,14,9,12,5];
+var you=301,cpu=301,turn='you',dartsLeft=3,turnStart=301,playing=false;
+var finMode='any',level='normal';
+var phase='x',cross={x:0,y:0},sweep=0,dir=1,anim=null,darts=[];
+
+// ---- geometry / scoring ----
+function numAngle(n){var i=NUM.indexOf(n);return (i*18-90)*Math.PI/180;}
+function polar(n,rr){var a=numAngle(n);return {x:CX+Math.cos(a)*rr,y:CY+Math.sin(a)*rr};}
+function scoreAt(x,y){
+ var dx=x-CX,dy=y-CY,dist=Math.hypot(dx,dy)/R;
+ if(dist>1)return {v:0,lbl:'MISS',mult:0};
+ if(dist<0.05)return {v:50,lbl:'BULL',mult:2};
+ if(dist<0.11)return {v:25,lbl:'25',mult:1};
+ var ang=Math.atan2(dy,dx)*180/Math.PI;var a=(ang+90+360)%360;
+ var idx=Math.floor((a+9)/18)%20;var base=NUM[idx];
+ if(dist>0.58&&dist<0.63)return {v:base*3,lbl:'T'+base,mult:3};
+ if(dist>0.92&&dist<=1)return {v:base*2,lbl:'D'+base,mult:2};
+ return {v:base,lbl:''+base,mult:1};
+}
+// ---- draw ----
+function seg(a0,a1,r0,r1,col){ctx.fillStyle=col;ctx.beginPath();ctx.arc(CX,CY,r1,a0,a1);ctx.arc(CX,CY,r0,a1,a0,true);ctx.closePath();ctx.fill();}
+function resize(){
+ var s=document.getElementById('stage');SIZE=Math.min(s.clientWidth,s.clientHeight)-4;
+ canvas.style.width=SIZE+'px';canvas.style.height=SIZE+'px';canvas.width=SIZE*DPR;canvas.height=SIZE*DPR;
+ ctx.setTransform(DPR,0,0,DPR,0,0);R=SIZE/2*0.90;CX=SIZE/2;CY=SIZE/2;draw();
+}
+function draw(){
+ ctx.clearRect(0,0,SIZE,SIZE);
+ ctx.fillStyle='#080605';ctx.beginPath();ctx.arc(CX,CY,R*1.08,0,7);ctx.fill();
+ ctx.strokeStyle='#C9A96A';ctx.lineWidth=2;ctx.beginPath();ctx.arc(CX,CY,R*1.08,0,7);ctx.stroke();
+ for(var i=0;i<20;i++){
+  var a0=(i*18-9-90)*Math.PI/180,a1=(i*18+9-90)*Math.PI/180,even=i%2===0;
+  seg(a0,a1,R*0.11,R,even?'#241a10':'#0e0b08');
+  seg(a0,a1,R*0.58,R*0.63,even?'#8C2B22':'#3f5d3a');
+  seg(a0,a1,R*0.92,R,even?'#8C2B22':'#3f5d3a');
+ }
+ ctx.fillStyle='#3f5d3a';ctx.beginPath();ctx.arc(CX,CY,R*0.11,0,7);ctx.fill();
+ ctx.fillStyle='#8C2B22';ctx.beginPath();ctx.arc(CX,CY,R*0.05,0,7);ctx.fill();
+ ctx.fillStyle='#E9E3D3';ctx.font='bold '+(R*0.085)+"px 'Space Mono',monospace";ctx.textAlign='center';ctx.textBaseline='middle';
+ for(var n=0;n<20;n++){var a=(n*18-90)*Math.PI/180;ctx.fillText(NUM[n],CX+Math.cos(a)*R*1.0,CY+Math.sin(a)*R*1.0);}
+ // landed darts this turn
+ darts.forEach(function(d){ctx.fillStyle='#C9A96A';ctx.beginPath();ctx.arc(d.x,d.y,4,0,7);ctx.fill();ctx.strokeStyle='#000';ctx.stroke();});
+ // aim crosshair (player only)
+ if(playing&&turn==='you'&&anim){
+  ctx.strokeStyle='rgba(233,227,211,.5)';ctx.lineWidth=1;
+  if(phase==='x'){ctx.beginPath();ctx.moveTo(cross.x,CY-R*1.05);ctx.lineTo(cross.x,CY+R*1.05);ctx.stroke();}
+  else{ctx.beginPath();ctx.moveTo(cross.x,CY-R*1.05);ctx.lineTo(cross.x,CY+R*1.05);ctx.stroke();
+       ctx.strokeStyle='rgba(201,169,106,.9)';ctx.beginPath();ctx.moveTo(CX-R*1.05,cross.y);ctx.lineTo(CX+R*1.05,cross.y);ctx.stroke();
+       ctx.fillStyle='#C9A96A';ctx.beginPath();ctx.arc(cross.x,cross.y,5,0,7);ctx.fill();}
+ }
+}
+function aimSpeed(){return level==='easy'?0.5:level==='hard'?1.0:0.7;}
+function loop(){
+ if(!(playing&&turn==='you')){anim=null;return;}
+ sweep+=dir*(SIZE*0.0045)*aimSpeed();
+ if(phase==='x'){cross.x=CX+Math.sin(sweep*0.03)*R*1.05;}
+ else{cross.y=CY+Math.sin(sweep*0.035)*R*1.05;}
+ draw();anim=requestAnimationFrame(loop);
+}
+// ---- turn flow ----
+function setMsg(t){document.getElementById('msg').textContent=t;}
+function setThrows(){document.getElementById('throws').textContent='のこり '+dartsLeft+'投  ·  '+(finMode==='double'?'ダブルアウト':'0ぴったり');}
+function updScores(){document.getElementById('scYou').textContent=you;document.getElementById('scCpu').textContent=cpu;
+ document.getElementById('plYou').classList.toggle('turn',turn==='you');
+ document.getElementById('plCpu').classList.toggle('turn',turn==='cpu');}
+function startTurn(){
+ darts=[];dartsLeft=3;turnStart=(turn==='you'?you:cpu);updScores();setThrows();
+ if(turn==='you'){phase='x';sweep=0;setMsg('タップで横位置を決める');anim=requestAnimationFrame(loop);}
+ else{setMsg('永田が投げています…');setTimeout(cpuThrow,900);}
+}
+function applyDart(sc){
+ var who=turn, cur=(who==='you'?you:cpu);
+ var nv=cur-sc.v, bust=false, win=false;
+ if(finMode==='double'){
+  if(nv<0||nv===1)bust=true;
+  else if(nv===0){ if(sc.mult===2)win=true; else bust=true; }
+ }else{
+  if(nv<0)bust=true; else if(nv===0)win=true;
+ }
+ if(bust){ setMsg('バースト！ '+sc.lbl); if(who==='you')you=turnStart;else cpu=turnStart; updScores();
+   dartsLeft=0; endTurnSoon(); return; }
+ if(who==='you')you=nv;else cpu=nv; updScores();
+ if(win){ finish(who); return; }
+ dartsLeft--; setThrows();
+ if(dartsLeft<=0){ endTurnSoon(); }
+ else { if(who==='you'){phase='x';sweep=0;setMsg('タップで横位置を決める');anim=requestAnimationFrame(loop);} else setTimeout(cpuThrow,750); }
+}
+function endTurnSoon(){ setTimeout(function(){ turn=(turn==='you'?'cpu':'you'); startTurn(); }, 900); }
+
+// ---- player input ----
+canvas.addEventListener('pointerdown',function(){
+ if(!(playing&&turn==='you'))return;
+ if(phase==='x'){ phase='y';sweep=0;setMsg('タップで縦位置を決めて投げる'); }
+ else{
+  if(anim){cancelAnimationFrame(anim);anim=null;}
+  // small jitter
+  var jx=(Math.random()-0.5)*R*0.06, jy=(Math.random()-0.5)*R*0.06;
+  var x=cross.x+jx,y=cross.y+jy; var sc=scoreAt(x,y);
+  darts.push({x:x,y:y}); draw();
+  setMsg('あなた: '+sc.lbl+'（'+sc.v+'点）');
+  setTimeout(function(){applyDart(sc);},650);
+ }
+});
+// ---- CPU ----
+function cpuThrow(){
+ if(!playing)return;
+ var sc=cpu;var target;
+ if(finMode==='double'){
+  if(sc<=40&&sc%2===0)target=polar(sc/2,R*0.96);
+  else if(sc<=40)target=polar(20,R*0.4);
+  else if(sc>60)target=polar(20,R*0.605);
+  else target=polar(Math.min(sc-2,20),R*0.4);
+ }else{
+  if(sc<=20)target=polar(sc,R*0.4);
+  else if(sc<=60)target=polar(20,R*0.4);
+  else target=polar(20,R*0.605);
+ }
+ var sig=(level==='easy'?0.17:level==='hard'?0.055:0.10)*R;
+ var gx=target.x+gauss()*sig, gy=target.y+gauss()*sig;
+ var s=scoreAt(gx,gy); darts.push({x:gx,y:gy}); draw();
+ setMsg('永田: '+s.lbl+'（'+s.v+'点）');
+ setTimeout(function(){applyDart(s);},700);
+}
+function gauss(){var u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+
+function finish(who){
+ playing=false;if(anim)cancelAnimationFrame(anim);
+ document.getElementById('over').classList.remove('off');
+ document.getElementById('setup').style.display='none';
+ document.getElementById('win').style.display='block';
+ var youWin=(who==='you');
+ document.getElementById('winImg').src=youWin?'tsumori%20wutang.png':'nagata%20out.png';
+ document.getElementById('winK').textContent=youWin?'YOU WIN':'YOU LOSE';
+ document.getElementById('winT').innerHTML=youWin?'勝利<b>！</b>':'永田の <b>勝ち</b>';
+}
+// ---- setup UI ----
+function seghook(id,set){document.querySelectorAll('#'+id+' button').forEach(function(b){b.onclick=function(){document.querySelectorAll('#'+id+' button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');set(b.dataset.v);};});}
+seghook('segFin',function(v){finMode=v;});
+seghook('segLv',function(v){level=v;});
+function begin(){
+ you=301;cpu=301;turn='you';playing=true;
+ document.getElementById('over').classList.add('off');
+ document.getElementById('setup').style.display='block';
+ document.getElementById('win').style.display='none';
+ resize();startTurn();
+}
+document.getElementById('start').onclick=begin;
+document.getElementById('again').onclick=function(){document.getElementById('win').style.display='none';document.getElementById('setup').style.display='block';document.getElementById('over').classList.remove('off');};
+addEventListener('resize',resize);
+resize();
+})();
+</script>
+</body>
+</html>
