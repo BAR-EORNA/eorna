@@ -38,7 +38,7 @@ canvas{background:linear-gradient(180deg,#110D0A,#0A0705);border:1px solid var(-
 </head>
 <body>
 <header><div class="brand">EORNA <b>BREAK</b></div><a href="arcade.html">← ARCADE</a></header>
-<div class="hud"><div>SCORE <b id="score">0</b></div><div>BALL <b id="balls">3</b></div><div>BEST <b id="best">0</b></div></div>
+<div class="hud"><div>STAGE <b id="stage_n">1</b></div><div>SCORE <b id="score">0</b></div><div>BALL <b id="balls">3</b></div><div>BEST <b id="best">0</b></div></div>
 <div id="stage"><canvas id="c"></canvas></div>
 <div id="over">
   <div class="k">Bar Eorna — A Small Game</div>
@@ -53,7 +53,7 @@ canvas{background:linear-gradient(180deg,#110D0A,#0A0705);border:1px solid var(-
 var canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
 var W,H,DPR=Math.min(devicePixelRatio||1,2);
 var paddle,ball,bricks,cols,rows,score,balls,best,playing=false,launched=false;
-var speedMul=1,startTime=0;
+var speedMul=1,startTime=0,stage=1;
 var COLORS=['#C9A96A','#b9863b','#8C2B22','#3f5d3a','#7a3b1c','#a8842e'];
 best=parseInt(localStorage.getItem('eornaBreakBest')||'0');document.getElementById('best').textContent=best;
 
@@ -65,21 +65,39 @@ function resize(){
  canvas.width=W*DPR;canvas.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,1,1);
  if(paddle){paddle.w=W*0.2;paddle.y=H-30;}
 }
+function pattern(name,r,c,rows,cols){
+ switch(name){
+  case 'pyramid': return c>=Math.floor((cols-1)/2)-r && c<=Math.ceil((cols-1)/2)+r;
+  case 'checker': return (r+c)%2===0;
+  case 'fortress': return (r<2)||(c<1||c>cols-2)||(r>=rows-1);
+  case 'hollow': return r===0||r===rows-1||c===0||c===cols-1;
+  case 'diamond': var mc=(cols-1)/2, mr=(rows-1)/2; return Math.abs(c-mc)+Math.abs(r-mr)<=Math.max(mc,mr);
+  case 'gaps': return !((c%3===1)&&(r%2===1));
+  default: return true; // full
+ }
+}
+var PATS=['full','pyramid','checker','hollow','fortress','diamond','gaps'];
 function setupBricks(){
- cols=7; rows=5; bricks=[];
- var pad=6, bw=(W-pad*(cols+1))/cols, bh=Math.max(16,H*0.032), top=H*0.10;
+ var pname=PATS[(stage-1)%PATS.length];
+ rows=Math.min(5+Math.floor((stage-1)/2),9); cols=7; bricks=[];
+ var pad=6, bw=(W-pad*(cols+1))/cols, bh=Math.max(14,H*0.030), top=H*0.09;
+ var hardChance=Math.min(0.08*(stage-1),0.4);
  for(var r=0;r<rows;r++)for(var c=0;c<cols;c++){
-  bricks.push({x:pad+c*(bw+pad),y:top+r*(bh+pad),w:bw,h:bh,c:COLORS[r%COLORS.length],alive:true});
+  if(!pattern(pname,r,c,rows,cols))continue;
+  var hard = stage>=3 && Math.random()<hardChance;
+  bricks.push({x:pad+c*(bw+pad),y:top+r*(bh+pad),w:bw,h:bh,c:hard?'#C9A96A':COLORS[r%COLORS.length],alive:true,hp:hard?2:1,hard:hard});
  }
 }
 function reset(full){
  resize();
  paddle={w:W*0.2,h:12,x:W/2-W*0.1,y:H-30,speed:0};
- resetBall(); if(full){setupBricks();score=0;balls=3;startTime=0;speedMul=1;}
+ if(full){stage=1;score=0;balls=3;}
+ resetBall(); if(full){setupBricks();startTime=0;speedMul=1;}
+ document.getElementById("stage_n").textContent=stage;
  document.getElementById('score').textContent=score;
  document.getElementById('balls').textContent=balls;
 }
-function resetBall(){launched=false;ball={x:paddle.x+paddle.w/2,y:paddle.y-10,r:Math.max(6,W*0.016),vx:0,vy:0,sp:Math.max(4,W*0.011)};}
+function resetBall(){launched=false;var sp=Math.max(4,W*0.011)*(1+(stage-1)*0.06);ball={x:paddle.x+paddle.w/2,y:paddle.y-10,r:Math.max(6,W*0.016),vx:0,vy:0,sp:sp};}
 function launch(){if(launched)return;launched=true;if(!startTime)startTime=Date.now();var ang=(-Math.PI/2)+(Math.random()*0.6-0.3);ball.vx=Math.cos(ang)*ball.sp;ball.vy=Math.sin(ang)*ball.sp;}
 
 function step(){
@@ -103,6 +121,7 @@ function step(){
   // bricks
   for(var i=0;i<bricks.length;i++){var b=bricks[i];if(!b.alive)continue;
    if(ball.x+ball.r>b.x && ball.x-ball.r<b.x+b.w && ball.y+ball.r>b.y && ball.y-ball.r<b.y+b.h){
+    b.hp=(b.hp||1)-1; if(b.hp>0){ if(oy<ox)ball.vy*=-1;else ball.vx*=-1; flashes.push({x:ball.x,y:ball.y,a:1}); score+=2; document.getElementById('score').textContent=score; break; }
     b.alive=false;score+=10;document.getElementById('score').textContent=score;
     // bounce vertical mostly
     var ox=Math.min(Math.abs(ball.x-b.x),Math.abs(ball.x-(b.x+b.w)));
@@ -114,7 +133,7 @@ function step(){
   }
   if(ball.y-ball.r>H){ balls--;document.getElementById('balls').textContent=balls;
    if(balls<=0){gameOver(false);return;} resetBall(); }
-  if(bricks.every(function(b){return !b.alive;})){ gameOver(true); return; }
+  if(bricks.every(function(b){return !b.alive;})){ nextStage(); return; }
  }else{ ball.x=paddle.x+paddle.w/2;ball.y=paddle.y-10; }
  draw(); requestAnimationFrame(step);
 }
@@ -135,12 +154,23 @@ function draw(){
  ctx.fillStyle=bg;ctx.beginPath();ctx.arc(ball.x,ball.y,ball.r,0,7);ctx.fill();
  for(var f=flashes.length-1;f>=0;f--){var fl=flashes[f];ctx.fillStyle='rgba(201,169,106,'+(fl.a*.5)+')';ctx.beginPath();ctx.arc(fl.x,fl.y,ball.r*2*(1.4-fl.a),0,7);ctx.fill();fl.a-=.08;if(fl.a<=0)flashes.splice(f,1);}
  if(!launched){ctx.fillStyle='rgba(233,227,211,.5)';ctx.font='12px '+"'Space Mono',monospace";ctx.textAlign='center';ctx.fillText('タップで発射',W/2,paddle.y-30);}
+ if(banner.a>0){ctx.fillStyle='rgba(201,169,106,'+banner.a+')';ctx.font='bold '+(W*0.09)+"px 'Anton',sans-serif";ctx.textAlign='center';ctx.fillText(banner.t,W/2,H*0.5);banner.a-=0.015;}
 }
+function nextStage(){
+ stage++; balls=Math.min(balls+1,9); // reward: +1 ball
+ document.getElementById('stage_n').textContent=stage;
+ document.getElementById('balls').textContent=balls;
+ setupBricks(); resetBall(); startTime=0; speedMul=1;
+ // brief banner
+ msgFlash('STAGE '+stage);
+}
+var banner={t:'',a:0};
+function msgFlash(t){banner={t:t,a:1};}
 function gameOver(win){
  playing=false;
  if(score>best){best=score;localStorage.setItem('eornaBreakBest',best);document.getElementById('best').textContent=best;}
- document.querySelector('#over .sub').textContent=win?'棚を空にしました。お見事！':'また一杯、いかがですか。';
- document.querySelector('#over h1').innerHTML=win?'CLEAR<b>!</b>':'GAME <b>OVER</b>';
+ document.querySelector('#over .sub').textContent='STAGE '+stage+' まで到達。また一杯、いかがですか。';
+ document.querySelector('#over h1').innerHTML='GAME <b>OVER</b>';
  document.getElementById('finalScore').textContent='SCORE '+score+'  /  BEST '+best;
  document.getElementById('start').textContent='もう一度';
  document.getElementById('over').classList.remove('off');
